@@ -1,6 +1,5 @@
 <?php namespace App\Http\Controllers;
 
-use Illuminate\Routing\Controller as BaseController;
 use Input;
 use App;
 use Cache;
@@ -15,6 +14,20 @@ use Lang;
 
 class PageController extends BaseController
 {
+    var $search_type;
+
+    public function page(\Illuminate\Http\Request $request)
+    {
+        $url = $request->getRequestUri();
+        $page = App\Page::where('url', $url)->first();
+        $locale = $request->getLocale();
+        $blocks = json_decode($page->{'longread_' . $locale});
+
+        return $this->render('pages/page', [
+            'blocks' => (array) $blocks,
+        ]);
+    }
+
     public function home()
     {
         $last=null;
@@ -25,21 +38,22 @@ class PageController extends BaseController
         foreach(app('App\Http\Controllers\FormController')->get_status_data() as $one)
             $dataStatus[$one['id']]=$one['name'];
 
-        return view('pages/home')
-                ->with('html', $this->get_html())
-                ->with('search_type', 'tender')
-                ->with('dataStatus', $dataStatus)
-                ->with('auctions', $auctions_items)
-                ->with('numbers', $this->parseBiNumbers(Config::get('bi-numbers')))
-                ->with('last', json_decode($last))->render();
+        $data = [
+            'html' => $this->get_html(),
+            'search_type' => 'tender',
+            'dataStatus' => $dataStatus,
+            'auctions' => $auctions_items,
+            'numbers' => $this->parseBiNumbers(Config::get('bi-numbers')),
+            'last' => json_decode($last)
+        ];
+
+        return $this->render('pages/home', $data);
     }
     
     function search_redirect()
     {
         return Redirect::to(str_replace('/search', '/tender/search', Request::fullUrl()), 301);
     }
-    
-    var $search_type;
     
     public function search($search_type='tender')
     {

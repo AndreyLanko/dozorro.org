@@ -34,8 +34,9 @@
     @endif
 
     <div class="wrapper-main">
-        
-        @yield('html_header')
+
+
+        @include('partials.menu')
 
 		<div class="container lang-box hidden-xs">
 			<ul class="language-chooser language-chooser-text qtranxs_language_chooser" id="qtranslate-chooser">
