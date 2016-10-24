@@ -1,6 +1,5 @@
 <?php namespace App\Http\Controllers;
 
-use Illuminate\Routing\Controller as BaseController;
 use Input;
 use App;
 use Cache;
@@ -15,6 +14,20 @@ use Lang;
 
 class PageController extends BaseController
 {
+    var $search_type;
+
+    public function page(\Illuminate\Http\Request $request)
+    {
+        $url = $request->getRequestUri();
+        $page = App\Page::where('url', $url)->first();
+        $locale = $request->getLocale();
+        $blocks = json_decode($page->{'longread_' . $locale});
+
+        return $this->render('pages/page', [
+            'blocks' => (array) $blocks,
+        ]);
+    }
+
     public function home()
     {
         $last=null;
@@ -41,8 +54,6 @@ class PageController extends BaseController
     {
         return Redirect::to(str_replace('/search', '/tender/search', Request::fullUrl()), 301);
     }
-    
-    var $search_type;
     
     public function search($search_type='tender')
     {
