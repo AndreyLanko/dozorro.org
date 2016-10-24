@@ -25,13 +25,16 @@ class PageController extends BaseController
         foreach(app('App\Http\Controllers\FormController')->get_status_data() as $one)
             $dataStatus[$one['id']]=$one['name'];
 
+        $seo = new App\Components\Seo([]);
+
         return view('pages/home')
                 ->with('html', $this->get_html())
                 ->with('search_type', 'tender')
                 ->with('dataStatus', $dataStatus)
                 ->with('auctions', $auctions_items)
                 ->with('numbers', $this->parseBiNumbers(Config::get('bi-numbers')))
-                ->with('last', json_decode($last))->render();
+                ->with('last', json_decode($last))
+                ->with('seo', $seo->onRender())->render();
     }
     
     function search_redirect()
