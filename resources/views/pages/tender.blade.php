@@ -11,22 +11,6 @@
     @endif
 @endsection
 
-@section('html_header')
-    @if (!empty($html))
-        {!!$html['header']!!}
-        {!!$html['popup']!!}
-    @endif
-@endsection
-
-@section('html_footer')
-    @if (!empty($html))
-        {!!$html['footer']!!}
-    @endif
-    @if(!empty($item->__is_sign))
-        <script src="https://rawgit.com/openprocurement-crypto/common/master/js/index.js"></script>
-    @endif
-@endsection
-
 @section('content')
 
     @if ($item && !$error)

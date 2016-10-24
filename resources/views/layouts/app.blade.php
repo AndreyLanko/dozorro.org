@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
     <meta name="csrf-token" content="{{csrf_token()}}" />
-    <title>{{env('HTML_TITLE', '')}}Prozorro</title>
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="stylesheet" href="/assets/css/site.css">
     <link rel="stylesheet" href="/pz-wp/wp-content/themes/Prozzoro/css/search.css">
@@ -14,6 +13,8 @@
         <script src="/assets/js/legacy/respond.min.js"></script>
     <![endif]-->
     <link rel='shortcut icon' type='image/x-icon' href='/assets/images/favicon.ico' />
+    @include('partials.seo')
+
     @yield('head')
 </head>
 <body>
