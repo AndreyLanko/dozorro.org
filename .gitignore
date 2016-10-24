@@ -1,0 +1,12 @@
+/vendor
+/node_modules
+.env
+*.env
+composer.lock
+/resources/vendor
+/resources/assets/js/vendor
+/resources/assets/less/vendor
+/resources/assets/css/vendor
+/public/pz-wp
+/public/assets/css*
+/public/assets/js/app.js*

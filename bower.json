@@ -1,0 +1,24 @@
+{
+  "name": "prozorro",
+  "description": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "resources/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "datepair.js": "0.4.14",
+    "history.js": "~1.8.0",
+    "jquery": "~2.1.4",
+    "jquery-auto-grow-input": "*",
+    "jquery.inputmask": "~3.2.5",
+    "selectize": "~0.12.1",
+    "spin.js": "~2.3.2",
+    "jquery-highlight": "~3.3.0",
+    "jquery-sticky": "~1.0.3",
+    "slick-carousel": "~1.6.0"
+  }
+}
