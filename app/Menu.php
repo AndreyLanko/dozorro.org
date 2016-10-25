@@ -6,7 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'perevorot_page_menu';
+
+    /**
+     * @var bool
+     */
+    public $timestamps = true;
+
+    public $fillable = [
+        'alias',
+        'title',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

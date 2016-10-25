@@ -57,7 +57,7 @@ class FormController extends BaseController
             elseif(empty($data) || (property_exists($data, 'items') && is_array($data->items) && !sizeof($data->items)))
             {
                 $out = $this->render('pages.results', [
-                    'error', trans('form.no_results')
+                    'error' => trans('form.no_results')
                 ]);
             }
             elseif(!empty($data->error))
@@ -89,10 +89,10 @@ class FormController extends BaseController
         return $this->render('pages.results', [
             'total' => $data->total,
             'search_type' => $this->search_type,
-            'error', false,
-            'dataStatus', $dataStatus,
-            'start', ((int) Input::get('start') + Config::get('prozorro.page_limit')),
-            'items', $data->items
+            'error' => false,
+            'dataStatus' => $dataStatus,
+            'start' => ((int) Input::get('start') + Config::get('prozorro.page_limit')),
+            'items' => $data->items
         ]);
     }
 
