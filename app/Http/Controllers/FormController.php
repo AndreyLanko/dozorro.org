@@ -31,7 +31,7 @@ class FormController extends BaseController
         $html=$this->getSearchResultsHtml(Input::get('query'));
 
         return response()->json(($html ? [
-            'html'=>$html,
+            'html'=>(string) $html,
             'highlight'=>app('App\Http\Controllers\PageController')->getSearchResultsHightlightArray(implode('&', Input::get('query')))
         ] : []), 200, [
             'Content-Type' => 'application/json; charset=UTF-8',
@@ -161,9 +161,6 @@ class FormController extends BaseController
         }
 
         $query[]='start='.Input::get('start');
-
-//      if(!empty(Session::get('api_pmtype')))
-//          $query[]='proc_type='.Session::get('api_pmtype');
 
         $path=Session::get('api_'.$this->search_type, Config::get('api.'.$this->search_type)).'?'.implode('&', $query);
 

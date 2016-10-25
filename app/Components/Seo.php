@@ -46,7 +46,7 @@ class Seo
         }
 
         $seo->meta_tags = '';
-        $seo->meta_tags .= $this->seo->additional_tags;
+        //$seo->meta_tags .= $this->seo->additional_tags;
         $seo->og_url=app('url')->full();
 
         if(empty($seo->og_image)) {

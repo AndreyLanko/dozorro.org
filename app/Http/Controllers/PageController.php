@@ -39,7 +39,6 @@ class PageController extends BaseController
             $dataStatus[$one['id']]=$one['name'];
 
         $data = [
-            'html' => $this->get_html(),
             'dataStatus' => $dataStatus,
             'auctions' => $auctions_items,
             'numbers' => $this->parseBiNumbers(Config::get('bi-numbers')),
@@ -70,7 +69,6 @@ class PageController extends BaseController
         }
 
         $data = [
-            'html' => $this->get_html(),
             'search_type' => $this->search_type,
             'preselected_values' => json_encode($preselected_values, JSON_UNESCAPED_UNICODE),
             'highlight' => json_encode($this->getSearchResultsHightlightArray(trim(Request::server('QUERY_STRING'), '&')), JSON_UNESCAPED_UNICODE),
@@ -152,7 +150,6 @@ class PageController extends BaseController
             if($error)
             {
                 $data = [
-                    'html' => $this->get_html(),
                     'item' => false,
                     'error' => $error
                 ];
@@ -210,7 +207,6 @@ class PageController extends BaseController
 
         $data = [
             'item' => $item,
-            'html' => $this->get_html(),
             'error' => $error,
         ];
 
@@ -241,7 +237,6 @@ class PageController extends BaseController
 
         $data = [
             'item' => $item,
-            'html' => $this->get_html(),
             'back' => starts_with(Request::server('HTTP_REFERER'), env('ROOT_URL').'/search') ? Request::server('HTTP_REFERER') : false,
             'dataStatus' => $dataStatus,
             'error' => $this->error
@@ -279,7 +274,6 @@ class PageController extends BaseController
             if($this->error)
             {
                 $data = [
-                    'html', $this->get_html(),
                     'item', false,
                     'error', $this->error
                 ];
@@ -862,16 +856,16 @@ class PageController extends BaseController
         {
             $path=explode('/', $type);
 
-            if(!empty($item->$path[0]))
+            if(!empty($item->{$path[0]}))
             {
-                $array=$item->$path[0];
+                $array=$item->{$path[0]};
                 $found_claims=[];
 
                 if(sizeof($path)>1)
                 {
                     foreach($array as $item_claim)
                     {
-                        if(!empty($item_claim->$path[1]))
+                        if(!empty($item_claim->{$path[1]}))
                             $found_claims=array_merge($found_claims, $item_claim->complaints);
                     }
                 }
@@ -924,16 +918,16 @@ class PageController extends BaseController
         {
             $path=explode('/', $type);
 
-            if(!empty($item->$path[0]))
+            if(!empty($item->{$path[0]}))
             {
-                $array=$item->$path[0];
+                $array=$item->{$path[0]};
                 $found_complaints=[];
 
                 if(sizeof($path)>1)
                 {
                     foreach($array as $item_complaint)
                     {
-                        if(!empty($item_complaint->$path[1]))
+                        if(!empty($item_complaint->{$path[1]}))
                             $found_complaints=array_merge($found_complaints, $item_complaint->complaints);
                     }
                 }
@@ -1970,42 +1964,6 @@ class PageController extends BaseController
             $item->__yaml_documents=$yaml_files;
         }
     }
-    
-    public function get_html()
-    {
-        $html=Cache::remember('get_html_'.Config::get('locales.current'), 60, function()
-        {
-            $html=file_get_contents(storage_path().'/framework/views/for_menu_'.App::getLocale().'.html');
-
-            $header=substr($html, strpos($html, '<nav class="navbar navbar-default top-menu">'));
-            $header=substr($header, 0, strpos($header, '<div class="container switcher">'));
-            $header=str_replace('current-menu-item', '', $header);
-
-            $from_text='<ul class="language-chooser language-chooser-text qtranxs_language_chooser" id="qtranslate-chooser">';
-            $to_text='<div class="qtranxs_widget_end"></div>';
-
-            $from_pos=strpos($header, $from_text);
-            $to_pos=strpos($header, $to_text);
-
-            $header_nolangs=substr($header, 0, $from_pos).substr($header, $to_pos);
-            $header=$header_nolangs;
-
-			$footer=substr($html, strpos($html, '<nav class="navbar navbar-default footer">'));
-			$footer=substr($footer, 0, strpos($footer, '</body>'));
-			$footer=str_replace('current-menu-item', '', $footer);			 
-
-			$popup=substr($html, strpos($html, '<section class="startpopup">'));
-			$popup=substr($popup, 0, strpos($popup, '</section>')).'</section>';
-
-			return [
-				'header'=>$this->sanitize_html($header),
-				'footer'=>$this->sanitize_html($footer),
-				'popup'=>$this->sanitize_html($popup)
-			];
-		});
-		
-		return $html;
-	}
     
     private function get_open_title(&$item)
     {

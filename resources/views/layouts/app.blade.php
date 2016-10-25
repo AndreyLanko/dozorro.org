@@ -7,7 +7,6 @@
     <meta name="csrf-token" content="{{csrf_token()}}" />
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="stylesheet" href="/assets/css/site.css">
-    <link rel="stylesheet" href="/pz-wp/wp-content/themes/Prozzoro/css/search.css">
     <!--[if lt IE 9]>
         <script src="/assets/js/legacy/html5shiv.min.js"></script>
         <script src="/assets/js/legacy/respond.min.js"></script>
@@ -35,22 +34,10 @@
     @endif
 
     <div class="wrapper-main">
-
-
         @include('partials.menu')
 
-		<div class="container lang-box hidden-xs">
-			<ul class="language-chooser language-chooser-text qtranxs_language_chooser" id="qtranslate-chooser">
-				<li class="lang-en{{Config::get('locales.current')=='en'?' active':''}}">
-					<a href="/en/"><span>Eng</span></a>
-				</li>
-				<li class="lang-ua{{Config::get('locales.current')=='ua'?' active':''}}">
-					<a href="/"><span>Укр</span></a>
-				</li>
-			</ul>
-		</div>
-		
         @yield('content')
+
         <div class="last"></div>
 
         @include('forms/feedback')
@@ -60,6 +47,7 @@
     @yield('html_footer')
     
     <script src="/assets/js/app.js"></script>
+
     @if (env('YAMETRIC_CODE'))
         <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter{{env('YAMETRIC_CODE')}} = new Ya.Metrika({ id:{{env('YAMETRIC_CODE')}}, clickmap:true, trackLinks:true, accurateTrackBounce:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/{{env('YAMETRIC_CODE')}}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     @endif

@@ -1,7 +1,13 @@
 @if (isset($seo))
-    <title>{{ $seo->title }}</title>
-    <meta name="description" content="{{ $seo->description }}" />
-    <meta name="keywords" content="{{ $seo->keywords }}" />
+    @if(isset($seo->title))
+        <title>{{ $seo->title }}</title>
+    @endif
+    @if(isset($seo->description))
+        <meta name="description" content="{{ $seo->description }}" />
+    @endif
+    @if(isset($seo->keywords))
+        <meta name="keywords" content="{{ $seo->keywords }}" />
+    @endif
     @if(isset($seo->canonical) && $seo->canonical)
         <link href="{{$seo->canonical}}" rel="canonical" />
     @endif
