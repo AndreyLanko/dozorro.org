@@ -44,7 +44,8 @@ class Seo
         foreach (['title', 'description', 'keywords', 'canonical', 'og_title', 'og_image', 'og_description'] as $item) {
             $this->setTemplate($seo, $item);
         }
-        
+
+        $seo->meta_tags = '';
         $seo->meta_tags .= $this->seo->additional_tags;
         $seo->og_url=app('url')->full();
 
@@ -72,7 +73,7 @@ class Seo
      * @param $variable
      * @param $patternDefault
      */
-    private function processParseTemplate(&$seo, $variable, $patternDefault)
+    private function processParseTemplate($seo, $variable, $patternDefault)
     {
         $paramsDefault = $this->parseDefault($patternDefault, $seo->{$variable});
 

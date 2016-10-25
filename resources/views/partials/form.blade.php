@@ -3,8 +3,8 @@
 		<div class="container">		
 			<div class="search-form--category">
 				<ul class="nav navbar-nav inline-navbar">
-					<li><a @if ($search_type=='tender') class="active"@endif href="{{href('tender/search')}}">{{trans('form.tenders')}}</a></li>
-					<li><a @if ($search_type=='plan') class="active"@endif href="{{href('plan/search')}}">{{trans('form.plans')}}</a></li>
+					{{--<li><a @if ($search_type=='tender') class="active"@endif href="{{href('tender/search')}}">{{trans('form.tenders')}}</a></li>--}}
+					{{--<li><a @if ($search_type=='plan') class="active"@endif href="{{href('plan/search')}}">{{trans('form.plans')}}</a></li>--}}
 				</ul>
 				<div class="clearfix"></div>
 			</div>

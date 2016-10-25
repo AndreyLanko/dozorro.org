@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Components\Seo;
+use App\Menu;
 use App\Page;
 use Illuminate\Routing\Controller;
 
@@ -14,8 +16,13 @@ class BaseController extends Controller
      */
     public function render($template, $data)
     {
+        $seo = new Seo([]);
+
         $defaultData = [
-            'main_menu' => $this->getMainMenu(),
+            'main_menu' => $this->getTopMenu(),
+            'bottom_menu' => $this->getBottomMenu(),
+            'search_type' => 'tender',
+            'seo' => $seo->onRender()
         ];
 
         return view(
@@ -30,10 +37,46 @@ class BaseController extends Controller
     /**
      * @return mixed
      */
-    public function getMainMenu()
+    private function getTopMenu()
     {
-        $pages = Page::where('type', 1)->get();
+        $menu = Menu::where('alias', 'top-menu')->first();
 
-        return $pages;
+        if (!$menu) {
+            $menu = $this->createMenu('top-menu');
+        }
+
+        return $menu->pages;
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getBottomMenu()
+    {
+        $menu = Menu::where('alias', 'bottom-menu')->first();
+
+        if (!$menu) {
+            $menu = $this->createMenu('bottom-menu');
+        }
+
+        return $menu->pages;
+    }
+
+    /**
+     * @param $alias
+     */
+    private function createMenu($alias)
+    {
+        $defaultNames = [
+            'top-menu' => 'Главное меню',
+            'bottom-menu' => 'Нижнее меню'
+        ];
+
+        $menu = Menu::create([
+            'alias' => $alias,
+            'title' => $defaultNames[$alias],
+        ]);
+
+        return $menu;
     }
 }
