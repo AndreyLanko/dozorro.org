@@ -1,6 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php
 
-use Illuminate\Routing\Controller as BaseController;
+namespace App\Http\Controllers;
 
 class ErrorController extends BaseController
 {
@@ -11,9 +11,15 @@ class ErrorController extends BaseController
         ], 404);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function systemerror()
     {
-        return view('errors/500')
-                ->with('html', app('App\Http\Controllers\PageController')->get_html());
+        $data = [
+            'html' => app('App\Http\Controllers\PageController')->get_html(),
+        ];
+
+        return $this->render('errors/500', $data);
     }
 }

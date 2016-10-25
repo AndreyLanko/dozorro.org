@@ -1,13 +1,14 @@
-<?php namespace App\Http\Controllers;
+<?php
 
-use Illuminate\Routing\Controller as BaseController;
+namespace App\Http\Controllers;
+
 use Input;
 use Request;
 use App;
 
 class PrintController extends BaseController
 {
-    var $types=[
+    var $types = [
         'open',
         'limited',
         'limited-reporting',
@@ -120,11 +121,12 @@ class PrintController extends BaseController
             return in_array($item->__procedure, ['no', 'belowThreshold', 'reporting']);
         });
 
-        return view('pages/print/plan/list')
-                ->with('main', $main)
-                ->with('additional', $additional)
-                ->with('budget', head($items)->budget)
-                ->with('procuringEntity', head($items)->procuringEntity);
+        return $this->render('pages.print.plan.list', [
+            'main' => $main,
+            'additional' => $additional,
+            'budget' => head($items)->budget,
+            'procuringEntity' => head($items)->procuringEntity,
+        ]);;
 	}
 
 	public function one($tender_id, $type, $output='html', $lot_id=null)
@@ -151,9 +153,10 @@ class PrintController extends BaseController
 
             return $pdf->stream();
         }
-        
-        return view('pages/print/tender/'.$type)
-                ->with('item', $item)
-                ->with('lot_id', $lot_id);
+
+        return $this->render('pages.print.tender.' . $type, [
+            'item' => $item,
+            'lot_id' => $lot_id
+        ]);
 	}
 }

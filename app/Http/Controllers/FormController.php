@@ -1,11 +1,12 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace App\Http\Controllers;
 
 use Cache;
 use Input;
 use View;
 use Config;
 use Session;
-use Illuminate\Routing\Controller as BaseController;
 
 class FormController extends BaseController
 {
@@ -55,13 +56,15 @@ class FormController extends BaseController
             }
             elseif(empty($data) || (property_exists($data, 'items') && is_array($data->items) && !sizeof($data->items)))
             {
-                $out=View::make('pages.results')
-                    ->with('error', trans('form.no_results'))->render();
+                $out = $this->render('pages.results', [
+                    'error', trans('form.no_results')
+                ]);
             }
             elseif(!empty($data->error))
             {
-                $out=View::make('pages.results')
-                    ->with('error', !empty($data->error) ? $data->error : false)->render();
+                $out = $this->render('pages.results', [
+                    'error' => !empty($data->error) ? $data->error : false,
+                ]);
             }
         }
 
@@ -82,16 +85,15 @@ class FormController extends BaseController
         
         foreach($this->get_status_data() as $one)
             $dataStatus[$one['id']]=$one['name'];
-
-        $out=View::make('pages.results')
-            ->with('total', $data->total)
-            ->with('search_type', $this->search_type)
-            ->with('error', false)
-            ->with('dataStatus', $dataStatus)
-            ->with('start', ((int) Input::get('start') + Config::get('prozorro.page_limit')))
-            ->with('items', $data->items)->render();
         
-        return $out;
+        return $this->render('pages.results', [
+            'total' => $data->total,
+            'search_type' => $this->search_type,
+            'error', false,
+            'dataStatus', $dataStatus,
+            'start', ((int) Input::get('start') + Config::get('prozorro.page_limit')),
+            'items', $data->items
+        ]);
     }
 
     private function preparePlan($data)
@@ -101,14 +103,13 @@ class FormController extends BaseController
 	    foreach($data->items as $item)
             $page->plan_check_start_month($item);
 
-		$out=View::make('pages.results')
-			->with('total', $data->total)
-			->with('search_type', $this->search_type)
-			->with('error', false)
-			->with('start', ((int) Input::get('start') + Config::get('prozorro.page_limit')))
-			->with('items', $data->items)->render();
-
-        return $out;
+        return $this->render('pages.results', [
+            'total' => $data->total,
+            'search_type' => $this->search_type,
+            'error' => false,
+            'start' => ((int) Input::get('start') + Config::get('prozorro.page_limit')),
+            'items' => $data->items,
+        ]);
     }
 
     public function getSearchResults($query)
@@ -269,7 +270,7 @@ class FormController extends BaseController
 
 	private function json($source)
 	{
-        	$lang=Config::get('locales.current');
+        $lang=Config::get('locales.current');
         	
 		$data = Cache::remember('data_'.$source.'_'.$lang, 60, function() use ($lang, $source)
 		{

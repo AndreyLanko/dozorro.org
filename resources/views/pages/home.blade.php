@@ -7,9 +7,9 @@
 
 <div class="container">        
     <ul class="nav nav-justified sections">
-        <li class="green-bg notitle"><a href="{{href('postachalniku')}}"><i class="sprite-provider"></i> <span>{{trans('home.provider')}}</span></a></li>
-        <li class="gray-bg notitle"><a href="{{href('/')}}"><i class="sprite-tender-search"></i> <span>{{trans('home.tender_search')}}</span></a></li>
-        <li class="blue-bg notitle"><a href="{{href('zamovniku')}}"><i class="sprite-customer"></i> <span>{{trans('home.customer')}}</span></a></li>
+        {{--<li class="green-bg notitle"><a href="{{href('postachalniku')}}"><i class="sprite-provider"></i> <span>{{trans('home.provider')}}</span></a></li>--}}
+        {{--<li class="gray-bg notitle"><a href="{{href('/')}}"><i class="sprite-tender-search"></i> <span>{{trans('home.tender_search')}}</span></a></li>--}}
+        {{--<li class="blue-bg notitle"><a href="{{href('zamovniku')}}"><i class="sprite-customer"></i> <span>{{trans('home.customer')}}</span></a></li>--}}
     </ul>
 </div>
 

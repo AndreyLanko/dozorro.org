@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Menu;
 use App\Page;
+use App\Seo;
 use Illuminate\Routing\Controller;
 
 class BaseController extends Controller
@@ -14,8 +16,12 @@ class BaseController extends Controller
      */
     public function render($template, $data)
     {
+        $seo = new Seo([]);
+
         $defaultData = [
             'main_menu' => $this->getMainMenu(),
+            'search_type' => 'tender',
+            'seo' => $seo->onRender()
         ];
 
         return view(
@@ -32,8 +38,8 @@ class BaseController extends Controller
      */
     public function getMainMenu()
     {
-        $pages = Page::where('type', 1)->get();
+        $menu = Menu::where('alias', 'top-menu')->first();
 
-        return $pages;
+        return $menu->pages;
     }
 }

@@ -38,16 +38,15 @@ class PageController extends BaseController
         foreach(app('App\Http\Controllers\FormController')->get_status_data() as $one)
             $dataStatus[$one['id']]=$one['name'];
 
-        $seo = new App\Components\Seo([]);
+        $data = [
+            'html' => $this->get_html(),
+            'dataStatus' => $dataStatus,
+            'auctions' => $auctions_items,
+            'numbers' => $this->parseBiNumbers(Config::get('bi-numbers')),
+            'last' => json_decode($last),
+        ];
 
-        return view('pages/home')
-                ->with('html', $this->get_html())
-                ->with('search_type', 'tender')
-                ->with('dataStatus', $dataStatus)
-                ->with('auctions', $auctions_items)
-                ->with('numbers', $this->parseBiNumbers(Config::get('bi-numbers')))
-                ->with('last', json_decode($last))
-                ->with('seo', $seo->onRender())->render();
+        return $this->render('pages/home', $data);
     }
     
     function search_redirect()
@@ -70,12 +69,15 @@ class PageController extends BaseController
             $result=$FormController->getSearchResultsHtml($query_array);
         }
 
-        return view('pages/search')
-                ->with('html', $this->get_html())
-                ->with('search_type', $this->search_type)
-                ->with('preselected_values', json_encode($preselected_values, JSON_UNESCAPED_UNICODE))
-                ->with('highlight', json_encode($this->getSearchResultsHightlightArray(trim(Request::server('QUERY_STRING'), '&')), JSON_UNESCAPED_UNICODE))
-                ->with('result', $result);
+        $data = [
+            'html' => $this->get_html(),
+            'search_type' => $this->search_type,
+            'preselected_values' => json_encode($preselected_values, JSON_UNESCAPED_UNICODE),
+            'highlight' => json_encode($this->getSearchResultsHightlightArray(trim(Request::server('QUERY_STRING'), '&')), JSON_UNESCAPED_UNICODE),
+            'result' => $result,
+        ];
+
+        return $this->render('pages/search', $data);
     }
     
     public function parse_search_query()
@@ -149,10 +151,13 @@ class PageController extends BaseController
 
             if($error)
             {
-                return view('pages/plan')
-                    ->with('html', $this->get_html())
-                    ->with('item', false)
-                    ->with('error', $error);
+                $data = [
+                    'html' => $this->get_html(),
+                    'item' => false,
+                    'error' => $error
+                ];
+
+                return $this->render('pages/plan', $data);
             }
         }
 
@@ -203,10 +208,13 @@ class PageController extends BaseController
         if(isset($_GET['dump']) && getenv('APP_ENV')=='local')
             dd($item);
 
-        return view('pages/plan')
-                ->with('item', $item)
-                ->with('html', $this->get_html())
-                ->with('error', $error);
+        $data = [
+            'item' => $item,
+            'html' => $this->get_html(),
+            'error' => $error,
+        ];
+
+        return $this->render('pages/plan', $data);
     }
     
     public function plan_check_start_month(&$item)
@@ -231,12 +239,15 @@ class PageController extends BaseController
 
         $item=$this->tender_parse($id);
 
-        return view('pages/tender')
-                ->with('item', $item)
-                ->with('html', $this->get_html())
-                ->with('back', starts_with(Request::server('HTTP_REFERER'), env('ROOT_URL').'/search') ? Request::server('HTTP_REFERER') : false)
-                ->with('dataStatus', $dataStatus)
-                ->with('error', $this->error);
+        $data = [
+            'item' => $item,
+            'html' => $this->get_html(),
+            'back' => starts_with(Request::server('HTTP_REFERER'), env('ROOT_URL').'/search') ? Request::server('HTTP_REFERER') : false,
+            'dataStatus' => $dataStatus,
+            'error' => $this->error
+        ];
+
+        return $this->render('pages/tender', $data);
     }
 
     var $error;
@@ -267,10 +278,13 @@ class PageController extends BaseController
 
             if($this->error)
             {
-                return view('pages/tender')
-                    ->with('html', $this->get_html())
-                    ->with('item', false)
-                    ->with('error', $this->error);
+                $data = [
+                    'html', $this->get_html(),
+                    'item', false,
+                    'error', $this->error
+                ];
+
+                return $this->render('pages/tender', $data);
             }
         }
 
@@ -507,7 +521,7 @@ class PageController extends BaseController
         else
         {
             $result=json_encode([
-                'error'=>$header
+                'error' => $header
             ], JSON_UNESCAPED_UNICODE);
         }
 
