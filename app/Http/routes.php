@@ -34,7 +34,7 @@ Route::post('feedback', 'FeedbackController@store');
 Route::get('json/platforms/{type}', 'JsonController@platforms');
 Route::get('json/announced', 'JsonController@announced_tenders');
 
-$pages = \App\Page::get();
+$pages = \App\Page::where('is_disabled', false)->get();
 
 foreach ($pages as $page) {
     Route::get($page->url, 'PageController@page');
