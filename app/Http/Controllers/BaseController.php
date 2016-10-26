@@ -20,8 +20,8 @@ class BaseController extends Controller
         $seo = new Seo([]);
 
         $defaultData = [
-            'main_menu' => $this->getTopMenu(),
-            'bottom_menu' => $this->getBottomMenu(),
+            'main_menu' => $this->getMenu('top-menu'),
+            'bottom_menu' => $this->getMenu('bottom-menu'),
             'search_type' => 'tender',
             'seo' => $seo->onRender()
         ];
@@ -36,34 +36,19 @@ class BaseController extends Controller
     }
 
     /**
+     * @param $alias
      * @return mixed
      */
-    private function getTopMenu()
+    private function getMenu($alias)
     {
-        $menu = Menu::where('alias', 'top-menu')->first();
+        $menu = Menu::where('alias', $alias)->first();
 
         if (!$menu) {
-            $menu = $this->createMenu('top-menu');
+            $menu = $this->createMenu($alias);
         }
 
         return $menu->pages->sortBy('nest_left')->filter(function ($page) {
-            return $page->nest_depth === 0;
-        });
-    }
-
-    /**
-     * @return mixed
-     */
-    private function getBottomMenu()
-    {
-        $menu = Menu::where('alias', 'bottom-menu')->first();
-
-        if (!$menu) {
-            $menu = $this->createMenu('bottom-menu');
-        }
-
-        return $menu->pages->sortBy('nest_left')->filter(function ($page) {
-            return $page->nest_depth === 0;
+            return $page->nest_depth === 0 && !$page->is_hidden && !$page->is_disabled;
         });
     }
 
