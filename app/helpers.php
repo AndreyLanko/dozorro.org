@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 class Helpers
 {
@@ -180,4 +181,17 @@ class Helpers
         return $modelName;
     }
 
+    /**
+     * @param Collection $pages
+     */
+    public static function filterActivePages(Collection $pages)
+    {
+        return $pages->map(function (\App\Page $item) {
+            $path = '/' . trim(\Illuminate\Support\Facades\Request::path(), '/');
+
+            $item->setAttribute('active', $item->url === $path);
+
+            return $item;
+        });
+    }
 }
