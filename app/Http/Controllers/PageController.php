@@ -208,6 +208,7 @@ class PageController extends BaseController
         $data = [
             'item' => $item,
             'error' => $error,
+            'areas' => $this->getAreas(),
         ];
 
         return $this->render('pages/plan', $data);
@@ -239,7 +240,8 @@ class PageController extends BaseController
             'item' => $item,
             'back' => starts_with(Request::server('HTTP_REFERER'), env('ROOT_URL').'/search') ? Request::server('HTTP_REFERER') : false,
             'dataStatus' => $dataStatus,
-            'error' => $this->error
+            'error' => $this->error,
+            'areas' => $this->getAreas(),
         ];
 
         return $this->render('pages/tender', $data);
