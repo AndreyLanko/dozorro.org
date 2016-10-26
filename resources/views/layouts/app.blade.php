@@ -34,10 +34,12 @@
     @endif
 
     <div class="wrapper-main">
-        @include('partials.menu', [
-            'menu'  => $main_menu,
-            'depth' => 0,
-        ])
+        @if(!empty($main_menu))
+            @include('partials.menu', [
+                'menu'  => $main_menu,
+                'depth' => 0,
+            ])
+        @endif
 
         @yield('content')
 
@@ -45,10 +47,12 @@
 
         @include('forms/feedback')
 
-        @include('partials.menu', [
-            'menu'  => $bottom_menu,
-            'depth' => 0,
-        ])
+        @if(!empty($bottom_menu))
+            @include('partials.menu', [
+                'menu'  => $bottom_menu,
+                'depth' => 0,
+            ])
+        @endif
     </div>
 
     
