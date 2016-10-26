@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Area;
 use App\Components\Seo;
 use App\Menu;
 use App\Page;
@@ -78,5 +79,13 @@ class BaseController extends Controller
         ]);
 
         return $menu;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getAreas()
+    {
+        return Area::isEnabled()->get();
     }
 }

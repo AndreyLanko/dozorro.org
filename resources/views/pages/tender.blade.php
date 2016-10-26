@@ -286,4 +286,5 @@
         </div>
     @endif
 
+    @include('partials.areas')
 @endsection
