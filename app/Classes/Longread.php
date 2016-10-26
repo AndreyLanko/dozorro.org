@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Classes;
+use App\File;
 
 /**
  * Class Longread
  * @package App\Classes
  */
-class Longread implements \ArrayAccess
+class Longread
 {
     /**
      * @var array
@@ -57,47 +58,29 @@ class Longread implements \ArrayAccess
     {
         foreach ($block->files as $field => $file)
         {
-            $block->value->{$field} = File::where('attachment_type', $this->backendClassName)
-                ->where('attachment_id', $this->objectId)
-                ->where('field', $file)
-                ->orderBy('id', 'DESC')
-                ->first()
-            ;
+            if (ends_with($field, 's'))  {
+                $block->value->{$field} = File::where('attachment_type', $this->backendClassName)
+                    ->where('attachment_id', $this->objectId)
+                    ->where('field', $file)
+                    ->orderBy('id', 'DESC')
+                    ->get()
+                ;
+            } else {
+                $block->value->{$field} = File::where('attachment_type', $this->backendClassName)
+                    ->where('attachment_id', $this->objectId)
+                    ->where('field', $file)
+                    ->orderBy('id', 'DESC')
+                    ->first()
+                ;
+            }
         }
     }
 
     /**
-     * @param mixed $offset
-     * @param mixed $value
+     * @return array
      */
-    public function offsetSet($offset, $value) {
-        if (is_null($offset)) {
-            $this->blocks[] = $value;
-        } else {
-            $this->blocks[$offset] = $value;
-        }
-    }
-
-    /**
-     * @param mixed $offset
-     * @return bool
-     */
-    public function offsetExists($offset) {
-        return isset($this->blocks[$offset]);
-    }
-
-    /**
-     * @param mixed $offset
-     */
-    public function offsetUnset($offset) {
-        unset($this->blocks[$offset]);
-    }
-
-    /**
-     * @param mixed $offset
-     * @return null
-     */
-    public function offsetGet($offset) {
-        return isset($this->blocks[$offset]) ? $this->blocks[$offset] : null;
+    public function getBlocks()
+    {
+        return $this->blocks;
     }
 }

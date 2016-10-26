@@ -25,7 +25,7 @@ class PageController extends BaseController
         $blocks = new App\Classes\Longread($blocks, $page->id);
 
         return $this->render('pages/page', [
-            'blocks' => $blocks,
+            'blocks' => $blocks->getBlocks(),
         ]);
     }
 
