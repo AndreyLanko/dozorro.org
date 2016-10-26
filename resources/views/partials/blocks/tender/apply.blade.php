@@ -13,7 +13,9 @@
                                 </a>
                             </div>
                             <div class="border-hover">
-                                <div class="btn-wr"><a href="{{str_replace('{tenderID}', $item->tenderID, $platform['href'])}}" target="_blank" class="btn">{{trans('tender.apply_go')}}</a></div>
+                                <div class="btn-wr">
+                                    <a href="{{str_replace('{tenderID}', $item->tenderID, $platform['href'])}}" target="_blank" class="btn">{{trans('tender.apply_go')}}</a>
+                                </div>
                             </div>
                         </div>
                     @endforeach

@@ -1,6 +1,6 @@
 @if (isset($data->image))
     <div>
-        <img src="{{ env('BACKEND_URL') }}/{{ $data->image->path }}">
+        <img src="{{ env('BACKEND_URL') }}{{ $data->image->path }}">
     </div>
 @endif
 

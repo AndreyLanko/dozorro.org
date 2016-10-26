@@ -91,6 +91,8 @@ class BaseController extends Controller
      */
     protected function getAreas()
     {
-        return Area::isEnabled()->get();
+        $areas=Area::isEnabled()->orderByRaw("RAND()")->get();
+
+        return $areas;
     }
 }

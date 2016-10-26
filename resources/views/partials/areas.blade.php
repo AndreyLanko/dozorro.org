@@ -1,11 +1,3 @@
-@foreach ($areas as $item)
-    <div>
-        <h4>{{ $item->title }}</h4>
-        <p>{{ $item->description }}</p>
-        <a href="{{ $item->url }}">{{ $item->title }}</a>
-    </div>
-@endforeach
-
 @if($areas)
     <div class="container wide-table">
         <div class="">
@@ -16,13 +8,13 @@
                     @foreach ($areas as $item)
                         <div class="item">
                             <div class="img-wr">
-                                <a href="{{ $item->url }}" target="_blank">
-                                    <img src="{{ env('BACKEND_URL') }}/{{ $item->image()->path }}" alt="{{ $item->title }}" title="{{ $item->title }}">
+                                <a href="{{str_replace('{tenderID}', $item->tenderID, $item->url)}}" target="_blank">
+                                    <img src="{{ env('BACKEND_URL') }}{{ $item->image()->path }}" alt="{{ $item->title }}" title="{{ $item->title }}">
                                 </a>
                             </div>
                             <div class="border-hover">
                                 <div class="btn-wr">
-                                    <a href="{{ $item->url }}" target="_blank" class="btn">{{trans('tender.apply_go')}}</a>
+                                    <a href="{{str_replace('{tenderID}', $item->tenderID, $item->url)}}" target="_blank" class="btn">{{trans('tender.apply_go')}}</a>
                                 </div>
                             </div>
                         </div>
