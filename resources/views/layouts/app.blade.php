@@ -34,7 +34,10 @@
     @endif
 
     <div class="wrapper-main">
-        @include('partials.menu')
+        @include('partials.menu', [
+            'menu'  => $main_menu,
+            'depth' => 0,
+        ])
 
         @yield('content')
 
