@@ -271,8 +271,8 @@
                     @endif
     
                     {{--Подати пропозицію--}}
-                    @include('partials/blocks/tender/apply')
-    
+{{--                    @include('partials/blocks/tender/apply')--}}
+                    @include('partials.areas')
                 </div>
             </div>
         </div>
@@ -286,5 +286,4 @@
         </div>
     @endif
 
-    @include('partials.areas')
 @endsection
