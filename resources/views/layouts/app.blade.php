@@ -45,7 +45,10 @@
 
         @include('forms/feedback')
 
-        @include('partials.bottom_menu')
+        @include('partials.menu', [
+            'menu'  => $bottom_menu,
+            'depth' => 0,
+        ])
     </div>
 
     

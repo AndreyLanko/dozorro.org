@@ -1,6 +1,6 @@
 <ul>
     @foreach($menu as $item)
-        <li>
+        <li class="@if($item->active) active @endif">
             <a href="{{ $item->url }}">{{ $item->title }}</a>
             @if (sizeof($item->children()) > 0)
                 @include('partials.menu', [

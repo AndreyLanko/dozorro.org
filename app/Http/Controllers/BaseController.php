@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Area;
 use App\Components\Seo;
+use App\Helpers;
 use App\Menu;
 use App\Page;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Request;
 
 class BaseController extends Controller
 {
@@ -47,9 +49,11 @@ class BaseController extends Controller
             $menu = $this->createMenu($alias);
         }
 
-        return $menu->pages->sortBy('nest_left')->filter(function ($page) {
+        $pages = $menu->pages->sortBy('nest_left')->filter(function ($page) {
             return $page->nest_depth === 0 && !$page->is_hidden && !$page->is_disabled;
         });
+
+        return Helpers::filterActivePages($pages);
     }
 
     /**
