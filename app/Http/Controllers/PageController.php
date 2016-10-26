@@ -264,7 +264,7 @@ class PageController extends BaseController
             if(empty($data->error))
             {
                 $item=array_first($data->items, function($k, $one) use ($id) {
-                    return $one->tenderID===$id;
+                    return $one->tenderID===$id || env('API_PRETEND');
                 });
             }
             else
@@ -495,6 +495,9 @@ class PageController extends BaseController
     
     public function getSearchResults($query)
     {
+        if(env('API_PRETEND'))
+            return file_get_contents('./sources/pretend/tender.json');
+
         $url=Config::get('api.'.$this->search_type).'?'.implode('&', $query);
 
         if(isset($_GET['api']) && getenv('APP_ENV')=='local')

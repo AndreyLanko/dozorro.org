@@ -114,6 +114,9 @@ class FormController extends BaseController
 
     public function getSearchResults($query)
     {
+        if(env('API_PRETEND'))
+            return file_get_contents('./sources/pretend/results.json');
+
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
