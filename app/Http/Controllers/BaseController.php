@@ -46,7 +46,9 @@ class BaseController extends Controller
             $menu = $this->createMenu('top-menu');
         }
 
-        return $menu->pages;
+        return $menu->pages->sortBy('nest_left')->filter(function ($page) {
+            return $page->nest_depth === 0;
+        });
     }
 
     /**
@@ -60,11 +62,14 @@ class BaseController extends Controller
             $menu = $this->createMenu('bottom-menu');
         }
 
-        return $menu->pages;
+        return $menu->pages->sortBy('nest_left')->filter(function ($page) {
+            return $page->nest_depth === 0;
+        });
     }
 
     /**
      * @param $alias
+     * @return static
      */
     private function createMenu($alias)
     {
