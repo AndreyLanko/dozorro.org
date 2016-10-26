@@ -34,7 +34,7 @@ class Area extends Model
      */
     public function image()
     {
-        return Image::where('attachment_type', $this->backendNamespace)
+        return File::where('attachment_type', $this->backendNamespace)
             ->where('attachment_id', $this->id)
             ->where('field', 'image')
             ->orderBy('id', 'DESC')

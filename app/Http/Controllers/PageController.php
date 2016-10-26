@@ -21,10 +21,11 @@ class PageController extends BaseController
         $url = $request->getRequestUri();
         $page = App\Page::where('url', $url)->first();
         $locale = $request->getLocale();
-        $blocks = json_decode($page->{'longread_' . $locale});
+        $blocks = (array) json_decode($page->{'longread_' . $locale});
+        $blocks = new App\Classes\Longread($blocks, $page->id);
 
         return $this->render('pages/page', [
-            'blocks' => (array) $blocks,
+            'blocks' => $blocks->getBlocks(),
         ]);
     }
 

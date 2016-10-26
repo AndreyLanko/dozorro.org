@@ -41,6 +41,8 @@
         <div class="last"></div>
 
         @include('forms/feedback')
+
+        @include('partials.bottom_menu')
     </div>
 
     

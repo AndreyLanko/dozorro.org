@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class Area
  * @package App
  */
-class Image extends Model
+class File extends Model
 {
     /**
      * @var string
