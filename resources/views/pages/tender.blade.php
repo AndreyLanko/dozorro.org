@@ -30,6 +30,14 @@
                                     
                                 </div>
 
+                                @foreach ($reviews as $review)
+                                    <div>
+                                        <span>Дата добавления: {{ $review->created_at->format('d.m.Y H:i') }}</span> <br />
+                                        <span>Оценка: {{ $review->rating }}</span>
+                                        <p>{{ $review->comment }}</p>
+                                    </div>
+                                @endforeach
+
                                 @if(!empty($item->__open_name) && $item->__open_name!='hide')
                                     @if(!empty($item->__open_name))
                                         <h2>
@@ -84,7 +92,7 @@
                                         <div style="margin-top:-30px;margin-bottom:40px">Друкувати звіт про результати проведення процедури <a href="{{href('tender/'.$item->tenderID.'/print/report/pdf')}}" target="_blank">PDF</a> ● <a href="{{href('tender/'.$item->tenderID.'/print/report/html')}}" target="_blank">HTML</a></div>
                                     @endif
                                 @endif
-    
+
                                 {{--Інформація про замовника--}}
                                 @include('partials/blocks/tender/procuring-entity')
     
