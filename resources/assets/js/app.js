@@ -140,7 +140,13 @@ var APP,
                     						dataType: 'json',
                     						headers: APP.utils.csrf(),
                     						success: function(response){
-                    							alert(response);
+                                                if (response) {
+                                                    alert('Комментарий успешно добавлен');
+                                                    document.location.reload();
+                                                    return true;
+                                                }
+
+                                                alert('Во время отправки формы случилась ошибка');
                     						}
                     					});
                                 };

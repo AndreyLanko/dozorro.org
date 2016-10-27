@@ -237,11 +237,19 @@ class PageController extends BaseController
 
         $item=$this->tender_parse($id);
 
+        $reviews = App\JsonForm::where('tender_id', $item->id)
+            ->where('model', 'review')
+            ->orderBy('created_at', 'DESC')
+            ->limit(20)
+            ->get()
+        ;
+
         $data = [
             'item' => $item,
             'back' => starts_with(Request::server('HTTP_REFERER'), env('ROOT_URL').'/search') ? Request::server('HTTP_REFERER') : false,
             'dataStatus' => $dataStatus,
             'error' => $this->error,
+            'reviews' => $reviews,
             'areas' => $this->getAreas(),
         ];
 
