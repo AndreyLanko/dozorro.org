@@ -8,10 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 class Helpers
 {
     static $thumbs=[
-        'list'=>[456, 312],
-        'wide'=>[936, 354],
-        'large'=>[912, 624],
-        'header'=>[1280, 700]
+        'list'=>[456, 312]
     ];
     
     public static function urlize(&$object, $prefix='', $path=false, $switch=false)

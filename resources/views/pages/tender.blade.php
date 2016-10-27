@@ -23,6 +23,13 @@
                     <div class="margin-bottom-xl">
                         <div class="row">
                             <div class="col-sm-9">
+                                <form id="form" data-js="form_review" action="/jsonforms/review/" data-id="{{ $item->id }}">
+                                    <input type="submit" value="Submit">
+                                </form>
+                                <div id="res">
+                                    
+                                </div>
+
                                 @if(!empty($item->__open_name) && $item->__open_name!='hide')
                                     @if(!empty($item->__open_name))
                                         <h2>

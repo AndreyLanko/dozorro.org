@@ -70,8 +70,7 @@ gulp.task("copyfiles", function() {
 
   gulp.src("resources/vendor/slick-carousel/slick/slick.js")
     .pipe(gulp.dest("resources/assets/js/vendor/"));
-
-
+    
 });
 
 elixir(function(mix) {
@@ -91,6 +90,9 @@ elixir(function(mix) {
       'js/vendor/jquery.highlight.js',
       'js/vendor/jquery.sticky.js',
       'js/vendor/slick.js',
+      'js/vendor/json-forms/underscore.js',
+      'js/vendor/json-forms/jsv.js',
+      'js/vendor/json-forms/jsonform.js',
       'js/libs/selectize.js',
       'js/blocks/**/*.js',
       'js/app.js'

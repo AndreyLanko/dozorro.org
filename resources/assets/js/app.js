@@ -100,6 +100,65 @@ var APP,
             },
 
             js: {
+                form_review: function(_self){
+                    var findFormShema = function(top) {
+                        if ('form' in top && 'properties' in top) {
+                            top['schema'] = top['properties'];
+                            
+                            delete top['properties'];
+                            return top;
+                        }
+                        
+                        if (top && typeof top == 'object') {
+                            for (var key in top) {
+                                var res = null;
+                                if (typeof top[key] == 'object'){
+                                    if (res = findFormShema(top[key])){
+                                        return res;
+                                    }
+                                }
+                            }
+                        }
+                        
+                        return null;
+                    };
+
+                    $.ajax({
+                        url: '/sources/forms/F101.json',
+                        success: function(json){
+                            var form=findFormShema(json);
+
+                            if(form){
+                                form.onSubmitValid=function (values) {
+                                    $.ajax({
+                    						method: 'POST',
+                    						data: {
+                        						form: values,
+                        						tender_id: _self.data('id')
+                        				    },
+                    						url: _self.attr('action'),
+                    						dataType: 'json',
+                    						headers: APP.utils.csrf(),
+                    						success: function(response){
+                    							alert(response);
+                    						}
+                    					});
+                                };
+
+                                form.onSubmit=function(errors, values) {
+                                    if(errors){
+                                        console.log('Validation errors', errors);
+                                    }
+
+                                    return !errors;
+                                };
+
+                                _self.jsonForm(form);
+                            }
+                        },
+                        dataType: 'json'
+                    });
+                },
                 feedback_thanks: function(_self){
                     var send_more=_self.find('.send-more'),
                         close=_self.find('.close'),
@@ -1102,8 +1161,3 @@ var APP,
 String.prototype.trunc = String.prototype.trunc || function(n){
     return (this.length > n) ? this.substr(0, n-1)+'&hellip;' : this;
 };
-/*
-$.ajaxSetup({
-   headers : {'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')}
-});
-*/
