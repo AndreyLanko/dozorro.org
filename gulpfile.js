@@ -90,9 +90,9 @@ elixir(function(mix) {
       'js/vendor/jquery.highlight.js',
       'js/vendor/jquery.sticky.js',
       'js/vendor/slick.js',
-      'js/vendor/json-forms/underscore.js',
-      'js/vendor/json-forms/jsv.js',
-      'js/vendor/json-forms/jsonform.js',
+      'js/libs/json-forms/underscore.js',
+      'js/libs/json-forms/jsv.js',
+      'js/libs/json-forms/jsonform.js',
       'js/libs/selectize.js',
       'js/blocks/**/*.js',
       'js/app.js'
