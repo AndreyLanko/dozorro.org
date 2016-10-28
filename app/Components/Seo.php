@@ -105,6 +105,7 @@ class Seo
             if (count($matches) > 2) {
                 $first_key = ltrim($matches[1][$key], '{');
                 $second_key = rtrim($matches[2][$key], '}');
+
                 $text = array_key_exists($first_key, $parameters)?(array_key_exists($second_key, $parameters[$first_key])?$parameters[$first_key][$second_key]:false):false;
             } else {
                 $array_key = rtrim(ltrim($matches[1][$key], '{'), '}');

@@ -71,7 +71,7 @@ class Handler extends ExceptionHandler {
         }
 
         if ($e instanceof NotFoundHttpException) {
-            return app(BaseController::class)->render('errors.404', [], 404);
+            return app(ErrorController::class)->notfound();
         }
 
         if (app()->environment() == 'production') {
