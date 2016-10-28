@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Area;
+use App\Classes\Lang;
 use App\Components\Seo;
 use App\Helpers;
 use App\Menu;
 use App\Page;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 
 class BaseController extends Controller
@@ -25,7 +27,8 @@ class BaseController extends Controller
             'main_menu' => $this->getMenu('top-menu'),
             'bottom_menu' => $this->getMenu('bottom-menu'),
             'search_type' => 'tender',
-            'seo' => $seo->onRender()
+            'seo' => $seo->onRender(),
+            'locales' => Lang::getLocales(),
         ];
 
         return view(
@@ -58,7 +61,7 @@ class BaseController extends Controller
 
     /**
      * @param $alias
-     * @return static
+     * @return mixed
      */
     private function createMenu($alias)
     {
@@ -80,7 +83,11 @@ class BaseController extends Controller
      */
     protected function getAreas()
     {
-        $areas=Area::isEnabled()->orderByRaw("RAND()")->get();
+        $areas = Area::isEnabled()->orderByRaw("RAND()")->get();
+
+        foreach ($areas as $area) {
+            $area->getTranslations();
+        }
 
         return $areas;
     }

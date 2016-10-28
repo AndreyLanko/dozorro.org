@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\App;
 
 class Helpers
 {
@@ -191,4 +192,52 @@ class Helpers
             return $item;
         });
     }
+
+    /**
+     * @param $url
+     * @return mixed
+     */
+    public static function replaceLocales($url)
+    {
+        $url = preg_replace('/\/(ru|en)/', '', $url);
+        return empty($url) ? '/' : $url;
+    }
+
+    /**
+     * @param $url
+     * @return string
+     */
+    public static function getLocalizedUrl($url)
+    {
+        $defaultLocale = 'ua';
+        $locale = App::getLocale();
+        $url = trim(trim($url), '/');
+
+        if($locale != $defaultLocale)
+            $url = $locale.'/'.$url;
+
+        return '/'.$url;
+    }
+
+    /**
+     * @param $locale
+     * @return string
+     */
+//    public static function getTranslatedUrl($locale)
+//    {
+//        $locales = Locale::get(['code']);
+//
+//        if(!self::$defaultLocale)
+//            self::$defaultLocale=\RainLab\Translate\Models\Locale::getDefault();
+//
+//        $url = Request::path();
+//
+//        $url = trim(trim($url), '/');
+//        $url = preg_replace('/^(ru|en)\/?/', '', $url);
+//
+//        if($locale!=self::$defaultLocale->code)
+//            $url=$locale.'/'.$url;
+//
+//        return '/'.$url;
+//    }
 }
