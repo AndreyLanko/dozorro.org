@@ -32,6 +32,51 @@
   font-style:   normal;
   font-weight:  400;
 }*/
+@font-face {
+  font-family: 'ProximaNovaBold';
+  src: url('/assets/fonts/proxima-nova-bold/Proxima-Nova-Bold.eot'); /* IE9 Compat Modes */
+  src: url('/assets/fonts/proxima-nova-bold/Proxima-Nova-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/assets/fonts/proxima-nova-bold/Proxima-Nova-Bold.woff') format('woff'), /* Modern Browsers */
+       url('/assets/fonts/proxima-nova-bold/Proxima-Nova-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/assets/fonts/proxima-nova-bold/Proxima-Nova-Bold.svg#2c1459d58560f08b4b0586fbe80aa4cd') format('svg'); /* Legacy iOS */
+  font-style:   normal;
+  font-weight:  400;
+} 
+@font-face {
+  font-family: 'ProximaNovaLight';
+  src: url('/assets/fonts/proxima-nova-light/Proxima-Nova-Light.eot'); /* IE9 Compat Modes */
+  src: url('/assets/fonts/proxima-nova-light/Proxima-Nova-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/assets/fonts/proxima-nova-light/Proxima-Nova-Light.woff') format('woff'), /* Modern Browsers */
+       url('/assets/fonts/proxima-nova-light/Proxima-Nova-Light.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/assets/fonts/proxima-nova-light/Proxima-Nova-Light.svg#2c1459d58560f08b4b0586fbe80aa4cd') format('svg'); /* Legacy iOS */
+  font-style:   normal;
+  font-weight:  400;
+} 
+@font-face {
+  font-family: 'ProximaNova';
+  src: url('/assets/fonts/proxima-nova/Proxima-Nova-Regular.eot'); /* IE9 Compat Modes */
+  src: url('/assets/fonts/proxima-nova/Proxima-Nova-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/assets/fonts/proxima-nova/Proxima-Nova-Regular.woff') format('woff'), /* Modern Browsers */
+       url('/assets/fonts/proxima-nova/Proxima-Nova-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/assets/fonts/proxima-nova/Proxima-Nova-Regular.svg#2c1459d58560f08b4b0586fbe80aa4cd') format('svg'); /* Legacy iOS */
+  font-style:   normal;
+  font-weight:  400;
+} 
+@font-face {
+  font-family: 'ProximaNovaBlack';
+  src: url('/assets/fonts/proxima-nova-black/Proxima-Nova-Black.eot'); /* IE9 Compat Modes */
+  src: url('/assets/fonts/proxima-nova-black/Proxima-Nova-Black.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/assets/fonts/proxima-nova-black/Proxima-Nova-Black.woff') format('woff'), /* Modern Browsers */
+       url('/assets/fonts/proxima-nova-black/Proxima-Nova-Black.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/assets/fonts/proxima-nova-black/Proxima-Nova-Black.svg#5216c1cacb478b35a513d81c80dc8ad7') format('svg'); /* Legacy iOS */
+  font-style:   normal;
+  font-weight:  400;
+}
+
+body .tender {
+	font-family: 'ProximaNova';
+}
+
 
 body, .row .search-form--filter--show-type li a, .price-description {
 	font-family: /*'Agora_Sans_Pro_Regular',  */Helvetica, sans-serif;
@@ -3515,6 +3560,14 @@ actual styles
 ***********************/
 
 /* tender-tabs */
+.tender-tabs-wrapper {
+	width: 100%;
+	background: white;
+	z-index: 4000;
+	-webkit-box-shadow: 0px 8px 19px 0px rgba(255,255,255,1);
+	-moz-box-shadow: 0px 8px 19px 0px rgba(255,255,255,1);
+	box-shadow: 0px 8px 19px 0px rgba(255,255,255,1);
+}
 .tender-tabs__buttons {
 	padding-left: 0;
 	border-bottom: 2px solid #f0f0f0;
@@ -3741,6 +3794,14 @@ actual styles
 /* END reviews */
 
 /* tender-header */
+.tender-header-wrap {
+	width: 100%;
+	background: white;
+	z-index: 4000;
+	-webkit-box-shadow: 0px 8px 19px 0px rgba(255,255,255,1);
+	-moz-box-shadow: 0px 8px 19px 0px rgba(255,255,255,1);
+	box-shadow: 0px 8px 19px 0px rgba(255,255,255,1);
+}
 .tender-header .container {
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -3780,6 +3841,8 @@ actual styles
 }
 .tender-header__review-button {
 	padding-top: 10px;
+	text-align: center;
+  padding-right: 12px;
 }
 .tender-header__review-button:after {
 	content: '';
@@ -3799,9 +3862,17 @@ actual styles
   display: inline-block;
   padding: 15px 30px;
   float: right;
+  position: fixed;
+  top: 20px;
+  z-index: 5000;
 }
 .tender-header__link:hover {
 	color: white;
+  text-decoration: none;
+}
+.tender-header__link:focus {
+	outline: none;
+  color: white;
   text-decoration: none;
 }
 /* END tender-header */
@@ -3830,6 +3901,23 @@ actual styles
 	padding-right: 20px;
 }
 /* END tender-description */
+
+/* add-review-form */
+.add-review-form {
+	display: none;
+	font-family: 'ProximaNova';
+}
+.add-review-form__content {
+	background: white;
+	padding: 20px;
+}
+.add-review-form .control-group textarea {
+	padding: 20px;
+}
+#jsonform-0-elt-generalScore {
+	
+}
+/* END add-review-form */
 @media screen and (max-width: 991px) {
 	/* tender-header */
 	.tender-header__link {

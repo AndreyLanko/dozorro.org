@@ -39,7 +39,7 @@
             </div>
             <div class="col-md-4">
                 <div class="tender-header__review-button">
-                    <a href="" class="tender-header__link">Залишити відгук</a>
+                    <a href="" class="tender-header__link my_popup_open">Залишити відгук</a>
                 </div>
             </div>	
         </div>

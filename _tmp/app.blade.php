@@ -53,66 +53,19 @@
     @endif
 
 <script>
-
-var tenderHeader,
-    tenderTabsWrapper;
-
-setTimeout(function(){
-
-    tenderHeader = $('.tender-header').height();
-    tenderTabsWrapper = $('.tender-tabs-wrapper').height();
-
-    $(window).scroll(function(){
-    if ($(window).scrollTop() > (tenderTabsWrapper + tenderHeader + 118)) {
-        $('.tender-tabs-wrapper').css({
-            'position': 'fixed',
-            'top': '0'
-        });
-        $('.reviews').css({
-	          'padding-top': tenderTabsWrapper
-        });
-        $('.tender--description').css({
-	          'padding-top': tenderTabsWrapper
-        });
-    } else {
-	      $('.tender-tabs-wrapper').css({
-            'position': 'relative',
-            'top': 0
-        });
-        $('.reviews').css({
-	          'padding-top': 0
-        });
-        $('.tender--description').css({
-	          'padding-top': 0
-        });
-        
-    }
-
-});
-
-}, 300);
-
 $('.jsTenderTabs .tender-tabs__item').click(function() {
     if(!$(this).hasClass('is-show')) {
-        if(!$('.jsShowReviews').hasClass('is-show')) {
-            $('.tender--description').removeClass('is-show');
-	          $('.reviews').addClass('is-show');
-        } else if (!$('.jsShowDescription').hasClass('is-show')) {
-            $('.reviews').removeClass('is-show');
-	          $('.tender--description').addClass('is-show');
-        }
-        $('.jsTenderTabs .tender-tabs__item').removeClass('is-show');
-	      $(this).addClass('is-show');
+      if(!$('.jsShowReviews').hasClass('is-show')) {
+          $('.tender--description').removeClass('is-show');
+	        $('.reviews').addClass('is-show');
+      } else if (!$('.jsShowDescription').hasClass('is-show')) {
+          $('.reviews').removeClass('is-show');
+	        $('.tender--description').addClass('is-show');
+      }
+      $('.jsTenderTabs .tender-tabs__item').removeClass('is-show');
+	    $(this).addClass('is-show');
     }
 });
-
-$('.tender-header__link').click(function( event ) {
-    event.preventDefault();
-    $('.add-review-form').popup({
-        transition: 'all 0.3s'
-    });
-});
-
 </script>
 
 </body>
