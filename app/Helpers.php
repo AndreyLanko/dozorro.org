@@ -199,7 +199,8 @@ class Helpers
      */
     public static function replaceLocales($url)
     {
-        return preg_replace('/(ru|en)\//', '', $url);
+        $url = preg_replace('/\/(ru|en)/', '', $url);
+        return empty($url) ? '/' : $url;
     }
 
     /**
