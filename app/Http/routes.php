@@ -1,8 +1,14 @@
 <?php
 
-foreach(Config::get('locales.languages') as $language)
+//Get locales from database
+$locales = DB::table('rainlab_translate_locales')
+    ->where('is_enabled', true)
+    ->get()
+;
+
+foreach($locales as $language)
 {
-    $prefix=(Config::get('locales.default')==$language ? '' : $language.'/');
+    $prefix=($language->is_default ? '' : $language->code.'/');
 
     Route::group(['prefix' => $prefix], function()
     {
@@ -26,6 +32,12 @@ foreach(Config::get('locales.languages') as $language)
         #Route::get('{url}', 'ErrorController@notfound');
         Route::get('error/404', 'ErrorController@notfound');
         #Route::get('error/500', 'ErrorController@systemerror');
+
+        $pages = \App\Page::where('is_disabled', false)->get();
+
+        foreach ($pages as $page) {
+            Route::get($page->url, 'PageController@page');
+        }
     });
 }
 
@@ -33,11 +45,5 @@ Route::post('feedback', 'FeedbackController@store');
 
 Route::get('json/platforms/{type}', 'JsonController@platforms');
 Route::get('json/announced', 'JsonController@announced_tenders');
-
-$pages = \App\Page::where('is_disabled', false)->get();
-
-foreach ($pages as $page) {
-    Route::get($page->url, 'PageController@page');
-}
 
 Route::post('jsonforms/{slug}', 'JsonFormController@submit');

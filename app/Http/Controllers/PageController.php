@@ -18,9 +18,17 @@ class PageController extends BaseController
 
     public function page(\Illuminate\Http\Request $request)
     {
-        $url = $request->getRequestUri();
+        //Get current locale
+        $locale = (trim($request->route()->getPrefix(), '/'))?:Config::get('locales.default');
+
+        App::setLocale($locale);
+
+        //Replace locales from url
+        $url = App\Helpers::replaceLocales($request->getRequestUri());
+
+        //Find page by url
         $page = App\Page::where('url', $url)->first();
-        $locale = $request->getLocale();
+
         $blocks = (array) json_decode($page->{'longread_' . $locale});
         $blocks = new App\Classes\Longread($blocks, $page->id);
 

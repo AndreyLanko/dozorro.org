@@ -41,6 +41,8 @@
             ])
         @endif
 
+        @include('partials.lang')
+
         @yield('content')
 
         <div class="last"></div>

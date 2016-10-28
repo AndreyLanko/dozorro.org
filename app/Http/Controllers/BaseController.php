@@ -8,6 +8,7 @@ use App\Helpers;
 use App\Menu;
 use App\Page;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 
 class BaseController extends Controller
@@ -25,7 +26,8 @@ class BaseController extends Controller
             'main_menu' => $this->getMenu('top-menu'),
             'bottom_menu' => $this->getMenu('bottom-menu'),
             'search_type' => 'tender',
-            'seo' => $seo->onRender()
+            'seo' => $seo->onRender(),
+            'locales' => $this->getLocales(),
         ];
 
         return view(
@@ -83,5 +85,15 @@ class BaseController extends Controller
         $areas=Area::isEnabled()->orderByRaw("RAND()")->get();
 
         return $areas;
+    }
+
+    public function getLocales()
+    {
+        $locales = DB::table('rainlab_translate_locales')
+            ->where('is_enabled', true)
+            ->get()
+        ;
+
+        return $locales;
     }
 }
