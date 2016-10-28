@@ -34,12 +34,7 @@
     @endif
 
     <div class="wrapper-main">
-        @if(!empty($main_menu))
-            @include('partials.menu', [
-                'menu'  => $main_menu,
-                'depth' => 0,
-            ])
-        @endif
+        @include('partials.menu')
 
         @include('partials.lang')
 
@@ -48,13 +43,6 @@
         <div class="last"></div>
 
         @include('forms/feedback')
-
-        @if(!empty($bottom_menu))
-            @include('partials.menu', [
-                'menu'  => $bottom_menu,
-                'depth' => 0,
-            ])
-        @endif
     </div>
 
     
@@ -65,5 +53,22 @@
     @if (env('YAMETRIC_CODE'))
         <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter{{env('YAMETRIC_CODE')}} = new Ya.Metrika({ id:{{env('YAMETRIC_CODE')}}, clickmap:true, trackLinks:true, accurateTrackBounce:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/{{env('YAMETRIC_CODE')}}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     @endif
+
+<script>
+$('.jsTenderTabs .tender-tabs__item').click(function() {
+    if(!$(this).hasClass('is-show')) {
+      if(!$('.jsShowReviews').hasClass('is-show')) {
+          $('.tender--description').removeClass('is-show');
+	        $('.reviews').addClass('is-show');
+      } else if (!$('.jsShowDescription').hasClass('is-show')) {
+          $('.reviews').removeClass('is-show');
+	        $('.tender--description').addClass('is-show');
+      }
+      $('.jsTenderTabs .tender-tabs__item').removeClass('is-show');
+	    $(this).addClass('is-show');
+    }
+});
+</script>
+
 </body>
 </html>

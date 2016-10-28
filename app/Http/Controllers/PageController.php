@@ -50,7 +50,6 @@ class PageController extends BaseController
         $data = [
             'dataStatus' => $dataStatus,
             'auctions' => $auctions_items,
-            'numbers' => $this->parseBiNumbers(Config::get('bi-numbers')),
             'last' => json_decode($last),
         ];
 
@@ -602,30 +601,6 @@ class PageController extends BaseController
         return FALSE;
     }
     
-    private function parseBiNumbers($numbers)
-    {
-        $out=Cache::remember('bi_numbers', 60, function() use ($numbers)
-        {
-            foreach($numbers as $name=>$number)
-            {
-                $data=file_get_contents($number);
-    
-                if(!empty($data))
-                {
-                    $data=explode("\n", trim($data));
-
-                    $out[$name]=$data;
-                }
-                else
-                    $out[$name]=[0, ''];
-            }
-
-            return $out;
-        });
-
-        return $out;
-    }
-    
     private function get_initial_bids(&$item)
     {
         $bidders_by_lot=[];
@@ -967,31 +942,6 @@ class PageController extends BaseController
 
         if(sizeof($__complaints_complaints))
         {
-            foreach($__complaints_complaints as $key=>$claim)
-            {
-                if($cancelled_claim=DB::table('complaints_cancellation')->where('complaint_id', '=', $claim->id)->first())
-                    $claim->status=$cancelled_claim->complaint_status;
-
-                if($cancelled_claim_documents=DB::table('prozorro_claims_documents_cancellation')->where('claim_id', '=', $claim->id)->get())
-                {
-                    //if(in_array($item->status, ['unsuccessful', 'cancelled', 'stopped']))//&& !in_array($claim->status, ['invalid', 'stopped', 'accepted', 'declined'])
-                    //{
-                        foreach($cancelled_claim_documents as $document)
-                        {
-                            $doc=json_decode($document->json);
-                            $doc->author='reviewers';
-
-                            $document_exists=array_first($__complaints_complaints[$key]->documents, function($k, $check_document) use ($doc){
-                                return $check_document->url==$doc->url;
-                            });
-
-                            if(!$document_exists)
-                                array_push($__complaints_complaints[$key]->documents, $doc);
-                        }
-                    //}
-                }
-            }
-
             foreach($__complaints_complaints as $k=>$complaint)
             {
                 if(!empty($complaint->documents))

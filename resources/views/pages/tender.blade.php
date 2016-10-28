@@ -15,29 +15,216 @@
 
     @if ($item && !$error)
         <div class="tender" data-js="tender">
-    
             @include('partials/blocks/tender/header')
-    
+
+            <!-- tender-description -->
+            <div class="tender-description">
+                <div class="container">
+                    <div class="tender-description__table">
+                        <div class="tender-description__row">
+                            <div class="tender-description__cell">
+                                Найменування замовника:
+                            </div>
+                            <div class="tender-description__cell">
+                                КП КЗО ПАВЛОГРАДСЬКИЙ НАВЧАЛЬНО-РЕАБІЛІТАЦІЙНИЙ ЦЕНТР ДОР"
+                            </div>
+                        </div>
+                        <div class="tender-description__row">
+                            <div class="tender-description__cell">
+                                Код ЄДРПОУ:
+                            </div>
+                            <div class="tender-description__cell">
+                                23067389
+                            </div>
+                        </div>
+                        <div class="tender-description__row">
+                            <div class="tender-description__cell">
+                                Оцінка умов закупIв:
+                            </div>
+                            <div class="tender-description__cell">
+                                <ul class="tender-stars tender-stars--4">
+		                    			    <li></li><li></li><li></li><li></li><li></li>
+	                    			    </ul>	
+	                    			    <span class="text-gray text-small">(2 відгуки)</span>
+                            </div>
+                        </div>
+                        <div class="tender-description__row">
+                            <div class="tender-description__cell">
+                                Оцінка рішення щодо вибору переможця:
+                            </div>
+                            <div class="tender-description__cell">
+                                <ul class="tender-stars tender-stars--3">
+		                    			    <li></li><li></li><li></li><li></li><li></li>
+	                    			    </ul>	
+	                    				  <span class="text-gray text-small">(1 відгук)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END tender-description -->
+            
+            <!-- tender-tabs -->
+            <div class="tender-tabs jsTenderTabs">
+                <div class="container">
+	                  <div class="tender-tabs__wrap">
+	                      <ul class="tender-tabs__buttons">
+		                      <li><span class="tender-tabs__item jsShowReviews is-show">Відгуки</span></li>
+		                      <li><span class="tender-tabs__item jsShowDescription">Інформація про тендер</span></li>
+	                      </ul>
+	                  </div>
+                </div>
+            </div>
+            <!-- END tender-tabs -->
+            
+            <!-- reviews - Блок "Отзывы" 
+	            Повторяющийся блок - "reviews__item".
+	            Чтобы сделать ответ на отзыв, нужно к блоку "reviews__item" добавить один из классов:
+	               "reviews__item--deep-1" - отступ слева 60px,    "reviews__item reviews__item--deep-1"
+	               "reviews__item--deep-2" - отступ слева 120px    "reviews__item reviews__item--deep-2"
+	            У элемента reviews__author есть следующие состояния:
+	               "reviews__author" - автор без иконки
+	               "reviews__author reviews__author--confirmed" - автор подтвержден, зеленая иконка
+	               "reviews__author reviews__author--not-confirmed" - автор не подтвержден, серая иконка -->
+
+            <form id="form" data-js="form_review" action="/jsonforms/review/" data-id="{{ $item->id }}">
+                <input type="submit" value="Submit">
+            </form>
+
+            @foreach ($reviews as $review)
+                <div>
+                    <span>Дата добавления: {{ $review->created_at->format('d.m.Y H:i') }}</span> <br />
+                    <span>Оценка: {{ $review->rating }}</span>
+                    <p>{{ $review->comment }}</p>
+                </div>
+            @endforeach
+
+            <div class="reviews is-show">
+	            <div class="container">
+		            <!-- reviews__item -->
+		            <div class="reviews__item">
+			              <div class="reviews__header">
+				                <span class="reviews__author reviews__author--confirmed">(контактна інформація прихована)</span><span class="reveiw__date">15.08.2016</span>
+			              </div>
+			              <div class="reviews__body">
+				                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est. Lorem ipsum dolor sit amet.</p>
+			              </div>
+			              <div class="reviews__footer">
+				                <div class="reviews__stars">
+					                  <h3>Умови закупівлі:</h3>
+					                  
+					                  <ul class="tender-stars tender-stars--3">
+		                            <li></li><li></li><li></li><li></li><li></li>
+	                          </ul>
+					                  
+				                </div>
+				                <div class="reviews__stars">
+					                  <h3>Вибор переможця:</h3>
+					                  
+					                  <ul class="tender-stars tender-stars--3">
+		                            <li></li><li></li><li></li><li></li><li></li>
+	                          </ul>
+					                  
+				                </div>
+				                <div class="reviews__useful-rating">
+					                  <h3>Відгук корисний для вас?</h3>
+					                  
+					                  <div class="reviews__useful-wrap">
+						                    <span class="reviews__useful-moji"></span>
+						                    <span class="reviews__useful-moji-rating-count">(15 оцінок)</span>
+						                </div>
+					                  
+				                </div>
+			              </div>
+		            </div>
+		            <!-- END reviews__item -->
+		            <!-- reviews__item (answer) -->
+		            <div class="reviews__item reviews__item--deep-1">
+			              <div class="reviews__header">
+				                <span class="reviews__author">Замовник</span>
+			              </div>
+			              <div class="reviews__body">
+				                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est. Lorem ipsum dolor sit amet.</p>
+			              </div>
+			              <div class="reviews__footer">
+				                <a href="#" class="reviews__more-button">Інші коментарі (27)</a>
+			              </div>
+		            </div>
+		            <!-- END reviews__item (answer) -->
+		            <!-- reviews__item (answer) -->
+		            <div class="reviews__item reviews__item--deep-2">
+			              <div class="reviews__header">
+				                <span class="reviews__author">Замовник</span>
+			              </div>
+			              <div class="reviews__body">
+				                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est. Lorem ipsum dolor sit amet.</p>
+			              </div>
+			              <div class="reviews__footer">
+				                <a href="#" class="reviews__more-button">Інші коментарі (27)</a>
+			              </div>
+		            </div>
+		            <!-- END reviews__item (answer) -->
+		            <!-- reviews__item (answer) -->
+		            <div class="reviews__item reviews__item--deep-1">
+			              <div class="reviews__header">
+				                <span class="reviews__author">Замовник</span>
+			              </div>
+			              <div class="reviews__body">
+				                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est. Lorem ipsum dolor sit amet.</p>
+			              </div>
+			              <div class="reviews__footer">
+				                <a href="#" class="reviews__more-button">Інші коментарі (27)</a>
+			              </div>
+		            </div>
+		            <!-- END reviews__item (answer) -->
+		            <!-- reviews__item -->
+		            <div class="reviews__item">
+			              <div class="reviews__header">
+				                <span class="reviews__author reviews__author--not-confirmed">(контактна інформація прихована)</span><span class="reveiw__date">15.08.2016</span>
+			              </div>
+			              <div class="reviews__body">
+				                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est. Lorem ipsum dolor sit amet.</p>
+			              </div>
+			              <div class="reviews__footer">
+				                <div class="reviews__stars">
+					                  <h3>Умови закупівлі:</h3>
+					                  
+					                  <ul class="tender-stars tender-stars--3">
+		                            <li></li><li></li><li></li><li></li><li></li>
+	                          </ul>
+					                  
+				                </div>
+				                <div class="reviews__stars">
+					                  <h3>Вибор переможця:</h3>
+					                  
+					                  <ul class="tender-stars tender-stars--3">
+		                            <li></li><li></li><li></li><li></li><li></li>
+	                          </ul>
+					                  
+				                </div>
+				                <div class="reviews__useful-rating">
+					                  <h3>Відгук корисний для вас?</h3>
+					                  
+					                  <div class="reviews__useful-wrap">
+						                    <span class="reviews__useful-moji"></span>
+						                    <span class="reviews__useful-moji-rating-count">(15 оцінок)</span>
+						                </div>
+					                  
+				                </div>
+			              </div>
+		            </div>
+		            <!-- END reviews__item -->
+	            </div>
+            </div>
+            <!-- END reviews -->
+            
+            
+            
+            
             <div class="tender--description">
                 <div class="container">
-                    <div class="margin-bottom-xl">
-                        <div class="row">
+                            <div class="row">
                             <div class="col-sm-9">
-                                <form id="form" data-js="form_review" action="/jsonforms/review/" data-id="{{ $item->id }}">
-                                    <input type="submit" value="Submit">
-                                </form>
-                                <div id="res">
-                                    
-                                </div>
-
-                                @foreach ($reviews as $review)
-                                    <div>
-                                        <span>Дата добавления: {{ $review->created_at->format('d.m.Y H:i') }}</span> <br />
-                                        <span>Оценка: {{ $review->rating }}</span>
-                                        <p>{{ $review->comment }}</p>
-                                    </div>
-                                @endforeach
-
                                 @if(!empty($item->__open_name) && $item->__open_name!='hide')
                                     @if(!empty($item->__open_name))
                                         <h2>
@@ -62,17 +249,17 @@
                                             @if(empty($item->__active_award))
                                                 <div style="margin-top:-30px;margin-bottom:40px">Для друку форми необхідно завершити дії на майданчику</div>
                                             @else
-                                                <div style="margin-top:-30px;margin-bottom:40px">Друкувати форму оголошення <a href="{{href('tender/'.$item->tenderID.'/print/'.$item->__print_href.'/pdf')}}" target="_blank">PDF</a> ● <a href="{{href('tender/'.$item->tenderID.'/print/'.$item->__print_href.'/html')}}" target="_blank">HTML</a></div>
+                                                <div style="margin-top:-30px;margin-bottom:40px">Друкувати форму оголошення <a href="{{('tender/'.$item->tenderID.'/print/'.$item->__print_href.'/pdf')}}" target="_blank">PDF</a> ● <a href="{{('tender/'.$item->tenderID.'/print/'.$item->__print_href.'/html')}}" target="_blank">HTML</a></div>
                                             @endif
                                         @else
-                                            <div style="margin-top:-30px;margin-bottom:40px">Друкувати форму оголошення <a href="{{href('tender/'.$item->tenderID.'/print/'.$item->__print_href.'/pdf')}}" target="_blank">PDF</a> ● <a href="{{href('tender/'.$item->tenderID.'/print/'.$item->__print_href.'/html')}}" target="_blank">HTML</a></div>
+                                            <div style="margin-top:-30px;margin-bottom:40px">Друкувати форму оголошення <a href="{{('tender/'.$item->tenderID.'/print/'.$item->__print_href.'/pdf')}}" target="_blank">PDF</a> ● <a href="{{('tender/'.$item->tenderID.'/print/'.$item->__print_href.'/html')}}" target="_blank">HTML</a></div>
                                         @endif
                                     @endif
                                     @if(!empty($item->__stage2TenderID))
-                                        <div style="margin-top:-30px;margin-bottom:40px">Друкувати форму оголошення 2-го етапу <a href="{{href('tender/'.$item->__stage2TenderID.'/print/'.$item->__print_href.'/pdf')}}" target="_blank">PDF</a> ● <a href="{{href('tender/'.$item->__stage2TenderID.'/print/'.$item->__print_href.'/html')}}" target="_blank">HTML</a></div>
+                                        <div style="margin-top:-30px;margin-bottom:40px">Друкувати форму оголошення 2-го етапу <a href="{{('tender/'.$item->__stage2TenderID.'/print/'.$item->__print_href.'/pdf')}}" target="_blank">PDF</a> ● <a href="{{('tender/'.$item->__stage2TenderID.'/print/'.$item->__print_href.'/html')}}" target="_blank">HTML</a></div>
                                     @endif
                                     @if(!empty($item->__stage1TenderID))
-                                        <div style="margin-top:-30px;margin-bottom:40px">Друкувати форму оголошення 1-го етапу <a href="{{href('tender/'.$item->__stage1TenderID.'/print/'.$item->__print_href.'/pdf')}}" target="_blank">PDF</a> ● <a href="{{href('tender/'.$item->__stage1TenderID.'/print/'.$item->__print_href.'/html')}}" target="_blank">HTML</a></div>
+                                        <div style="margin-top:-30px;margin-bottom:40px">Друкувати форму оголошення 1-го етапу <a href="{{('tender/'.$item->__stage1TenderID.'/print/'.$item->__print_href.'/pdf')}}" target="_blank">PDF</a> ● <a href="{{('tender/'.$item->__stage1TenderID.'/print/'.$item->__print_href.'/html')}}" target="_blank">HTML</a></div>
                                     @endif
                                 @else
                                     @if ($item->procurementMethod == 'open' && in_array($item->procurementMethodType, ['aboveThresholdEU', 'competitiveDialogueEU', 'aboveThresholdUA.defense']))
@@ -86,13 +273,13 @@
 
                                 @if ($item->__isSingleLot)
                                     @if(in_array($item->status, ['complete', 'unsuccessful', 'cancelled']) && $item->procurementMethod=='open' && in_array($item->procurementMethodType, ['aboveThresholdUA', 'aboveThresholdEU', 'aboveThresholdUA.defense']))
-                                        <div style="margin-top:-30px;margin-bottom:40px">Друкувати звіт про результати проведення процедури <a href="{{href('tender/'.$item->tenderID.'/print/report/pdf')}}" target="_blank">PDF</a> ● <a href="{{href('tender/'.$item->tenderID.'/print/report/html')}}" target="_blank">HTML</a></div>
+                                        <div style="margin-top:-30px;margin-bottom:40px">Друкувати звіт про результати проведення процедури <a href="{{('tender/'.$item->tenderID.'/print/report/pdf')}}" target="_blank">PDF</a> ● <a href="{{('tender/'.$item->tenderID.'/print/report/html')}}" target="_blank">HTML</a></div>
                                     @endif
                                     @if(in_array($item->status, ['complete', 'cancelled']) && $item->procurementMethod=='limited' && in_array($item->procurementMethodType, ['negotiation', 'negotiation.quick']))
-                                        <div style="margin-top:-30px;margin-bottom:40px">Друкувати звіт про результати проведення процедури <a href="{{href('tender/'.$item->tenderID.'/print/report/pdf')}}" target="_blank">PDF</a> ● <a href="{{href('tender/'.$item->tenderID.'/print/report/html')}}" target="_blank">HTML</a></div>
+                                        <div style="margin-top:-30px;margin-bottom:40px">Друкувати звіт про результати проведення процедури <a href="{{('tender/'.$item->tenderID.'/print/report/pdf')}}" target="_blank">PDF</a> ● <a href="{{('tender/'.$item->tenderID.'/print/report/html')}}" target="_blank">HTML</a></div>
                                     @endif
                                 @endif
-
+    
                                 {{--Інформація про замовника--}}
                                 @include('partials/blocks/tender/procuring-entity')
     
@@ -160,8 +347,9 @@
                                 @endif
                             </div>
                         </div>
-                    </div>
-    
+                    
+                        </div>
+                   
                     @if($item->__isMultiLot)
                         <h2>Лоти</h2>
                         <div class="bs-example bs-example-tabs lots-tabs wide-table" data-js="lot_tabs" data-tab-class="tab-lot-content">
@@ -183,10 +371,10 @@
                                     ])
 
                                     @if(in_array($lot->status, ['complete', 'unsuccessful', 'cancelled']) && $item->procurementMethod=='open' && in_array($item->procurementMethodType, ['aboveThresholdUA', 'aboveThresholdEU', 'aboveThresholdUA.defense']))
-                                        <div style="margin-top:-20px;margin-bottom:40px">Друкувати звіт про результати проведення процедури <a href="{{href('tender/'.$item->tenderID.'/print/report/pdf/'.$lot->id)}}" target="_blank">PDF</a> ● <a href="{{href('tender/'.$item->tenderID.'/print/report/html/'.$lot->id)}}" target="_blank">HTML</a></div>
+                                        <div style="margin-top:-20px;margin-bottom:40px">Друкувати звіт про результати проведення процедури <a href="{{('tender/'.$item->tenderID.'/print/report/pdf/'.$lot->id)}}" target="_blank">PDF</a> ● <a href="{{('tender/'.$item->tenderID.'/print/report/html/'.$lot->id)}}" target="_blank">HTML</a></div>
                                     @endif
                                     @if(in_array($lot->status, ['complete', 'cancelled']) && $item->procurementMethod=='limited' && in_array($item->procurementMethodType, ['negotiation', 'negotiation.quick']))
-                                        <div style="margin-top:-20px;margin-bottom:40px">Друкувати звіт про результати проведення процедури <a href="{{href('tender/'.$item->tenderID.'/print/report/pdf/'.$lot->id)}}" target="_blank">PDF</a> ● <a href="{{href('tender/'.$item->tenderID.'/print/report/html/'.$lot->id)}}" target="_blank">HTML</a></div>
+                                        <div style="margin-top:-20px;margin-bottom:40px">Друкувати звіт про результати проведення процедури <a href="{{('tender/'.$item->tenderID.'/print/report/pdf/'.$lot->id)}}" target="_blank">PDF</a> ● <a href="{{('tender/'.$item->tenderID.'/print/report/html/'.$lot->id)}}" target="_blank">HTML</a></div>
                                     @endif
     
                                     {{--Позиції--}}
