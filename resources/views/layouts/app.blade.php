@@ -34,7 +34,17 @@
     @endif
 
     <div class="wrapper-main">
-        @include('partials.menu')
+        @include('partials.menu', [
+            'menu' => $main_menu,
+        ])
+
+				<hr>
+
+        @include('partials.lang', [
+            'locales' => $locales,
+        ])
+
+				<hr>
 
         @yield('content')
 

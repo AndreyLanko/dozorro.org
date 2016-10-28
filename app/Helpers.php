@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Classes\Lang;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\App;
@@ -199,7 +200,15 @@ class Helpers
      */
     public static function replaceLocales($url)
     {
-        $url = preg_replace('/\/(ru|en)/', '', $url);
+        $locales = [];
+
+        foreach (Lang::getLocales() as $lang) {
+            $locales[] = $lang->code;
+        }
+
+        $locales = implode('|', $locales);
+
+        $url = preg_replace('/\/(' . $locales . ')/', '', $url);
         return empty($url) ? '/' : $url;
     }
 
@@ -209,7 +218,7 @@ class Helpers
      */
     public static function getLocalizedUrl($url)
     {
-        $defaultLocale = 'ua';
+        $defaultLocale = Lang::getDefault();
         $locale = App::getLocale();
         $url = trim(trim($url), '/');
 

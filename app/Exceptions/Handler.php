@@ -1,9 +1,12 @@
 <?php namespace App\Exceptions;
 
+use App\Http\Controllers\BaseController;
+use App\Http\Controllers\ErrorController;
 use Exception;
 use Request;
 use Log;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler {
 
@@ -26,7 +29,7 @@ class Handler extends ExceptionHandler {
 	 */
 	public function report(Exception $e)
 	{
-        	$url=Request::url();
+        $url=Request::url();
 
         Log::info(Request::method().' '.$url);
 
@@ -61,16 +64,20 @@ class Handler extends ExceptionHandler {
             $statusCode = 500;
         }
 
-        if(($e instanceof NotFoundHttpException || $e instanceof MethodNotAllowedHttpException) && view()->exists('errors.'.$e->getStatusCode())) {
+        if(($e instanceof MethodNotAllowedHttpException) && view()->exists('errors.'.$e->getStatusCode())) {
             $statusCode=$e->getStatusCode();
             
             return response()->view('errors.'.$e->getStatusCode(), [], $statusCode);
         }
 
+        if ($e instanceof NotFoundHttpException) {
+            return app(BaseController::class)->render('errors.404', [], 404);
+        }
+
         if (app()->environment() == 'production') {
             return response()->view('errors.500', [], 200);
         }
-        
+
         return parent::render($request, $e);
 	}
 }
