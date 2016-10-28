@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Area;
+use App\Classes\Lang;
 use App\Components\Seo;
 use App\Helpers;
 use App\Menu;
@@ -27,7 +28,7 @@ class BaseController extends Controller
             'bottom_menu' => $this->getMenu('bottom-menu'),
             'search_type' => 'tender',
             'seo' => $seo->onRender(),
-            'locales' => $this->getLocales(),
+            'locales' => Lang::getLocales(),
         ];
 
         return view(
@@ -60,7 +61,7 @@ class BaseController extends Controller
 
     /**
      * @param $alias
-     * @return static
+     * @return mixed
      */
     private function createMenu($alias)
     {
@@ -82,18 +83,12 @@ class BaseController extends Controller
      */
     protected function getAreas()
     {
-        $areas=Area::isEnabled()->orderByRaw("RAND()")->get();
+        $areas = Area::isEnabled()->orderByRaw("RAND()")->get();
+
+        foreach ($areas as $area) {
+            $area->getTranslations();
+        }
 
         return $areas;
-    }
-
-    public function getLocales()
-    {
-        $locales = DB::table('rainlab_translate_locales')
-            ->where('is_enabled', true)
-            ->get()
-        ;
-
-        return $locales;
     }
 }

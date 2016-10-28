@@ -1,10 +1,7 @@
 <?php
 
 //Get locales from database
-$locales = DB::table('rainlab_translate_locales')
-    ->where('is_enabled', true)
-    ->get()
-;
+$locales = \App\Classes\Lang::getLocales();
 
 foreach($locales as $language)
 {

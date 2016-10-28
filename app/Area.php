@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\ModelTranslation;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -10,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Area extends Model
 {
+    use ModelTranslation;
+
     /**
      * @var string
      */
@@ -19,6 +22,11 @@ class Area extends Model
      * @var string
      */
     protected $backendNamespace = 'Perevorot\Dozorro\Models\Area';
+
+    protected $translations = [
+        'title',
+        'description',
+    ];
 
     /**
      * @param $query
