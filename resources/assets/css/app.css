@@ -3563,7 +3563,7 @@ actual styles
 .tender-tabs-wrapper {
 	width: 100%;
 	background: white;
-	z-index: 4000;
+	z-index: 7;
 	-webkit-box-shadow: 0px 8px 19px 0px rgba(255,255,255,1);
 	-moz-box-shadow: 0px 8px 19px 0px rgba(255,255,255,1);
 	box-shadow: 0px 8px 19px 0px rgba(255,255,255,1);
@@ -3708,14 +3708,17 @@ actual styles
 	top: 2px;
 	position: relative;
 	display: none;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
 }
 .reviews__author--confirmed:before {
 	display: block;
-	background: #1cd434;
+	background-image: url('/assets/images/t-check-circle-icon.svg');
 }
 .reviews__author--not-confirmed:before {
 	display: block;
-	background: #bdbdbd;
+	background-image: url('/assets/images/t-error-circle-icon.svg');
 }
 .reveiw__date {
 	font-size: 12px;
@@ -3728,7 +3731,10 @@ actual styles
 	display: block;
 	width: 18px;
 	height: 18px;
-	background: rgba(0, 0, 0, 0.2);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-image: url('/assets/images/t-date-icon.svg');
 	border-radius: 3px;
 	float: left;
 	margin-right: 5px;
@@ -3773,7 +3779,10 @@ actual styles
 	display: block;
 	width: 18px;
 	height: 18px;
-	background: rgba(0, 0, 0, 0.2);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-image: url('/assets/images/t-smile-icon.svg');
 	border-radius: 20px;
 	float: left;
 	margin-right: 5px;
@@ -3864,7 +3873,7 @@ actual styles
   float: right;
   position: fixed;
   top: 20px;
-  z-index: 5000;
+  z-index: 8;
 }
 .tender-header__link:hover {
 	color: white;
