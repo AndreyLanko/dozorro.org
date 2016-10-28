@@ -38,7 +38,9 @@
             'menu' => $main_menu,
         ])
 
-        @include('partials.lang')
+        @include('partials.lang', [
+            'locales' => $locales,
+        ])
 
         @yield('content')
 
