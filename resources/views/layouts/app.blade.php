@@ -34,13 +34,21 @@
     @endif
 
     <div class="wrapper-main">
-        @include('partials.menu')
+        @include('partials.menu', [
+            'menu' => $main_menu,
+        ])
+
+        @include('partials.lang')
 
         @yield('content')
 
         <div class="last"></div>
 
         @include('forms/feedback')
+
+        @include('partials.menu', [
+            'menu' => $bottom_menu,
+        ])
     </div>
 
     
