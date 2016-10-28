@@ -47,7 +47,7 @@ final class Lang
                     continue;
                 }
 
-                self::$defaultLocale = $locale;
+                self::$defaultLocale = $locale->code;
             }
         }
 
