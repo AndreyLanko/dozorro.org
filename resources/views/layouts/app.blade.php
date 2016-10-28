@@ -35,11 +35,11 @@
 
     <div class="wrapper-main">
         @include('partials.menu', [
-            'menu' => isset($main_menu)?$main_menu:[],
+            'menu' => $main_menu,
         ])
 
         @include('partials.lang', [
-            'locales' => (isset($locales))?$locales:\App\Classes\Lang::getLocales(),
+            'locales' => $locales,
         ])
 
         @yield('content')
@@ -49,7 +49,7 @@
         @include('forms/feedback')
 
         @include('partials.menu', [
-            'menu' => isset($bottom_menu)?$bottom_menu:[],
+            'menu' => $bottom_menu,
         ])
     </div>
 

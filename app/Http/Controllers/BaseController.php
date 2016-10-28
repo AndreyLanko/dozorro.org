@@ -19,7 +19,7 @@ class BaseController extends Controller
      * @param $data
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function render($template, $data)
+    public function render($template, $data, $statusCode = 200)
     {
         $seo = new Seo([]);
 
@@ -31,12 +31,13 @@ class BaseController extends Controller
             'locales' => Lang::getLocales(),
         ];
 
-        return view(
+        return response()->view(
             $template,
             array_merge(
                 $defaultData,
                 $data
-            )
+            ),
+            $statusCode
         );
     }
 
