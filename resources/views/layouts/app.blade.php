@@ -7,6 +7,8 @@
     <meta name="csrf-token" content="{{csrf_token()}}" />
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="stylesheet" href="/assets/css/site.css">
+    <link rel="stylesheet" href="/assets/css/sb.css">
+    <link rel="stylesheet" href="/assets/css/blocks.css">
     <!--[if lt IE 9]>
         <script src="/assets/js/legacy/html5shiv.min.js"></script>
         <script src="/assets/js/legacy/respond.min.js"></script>
@@ -121,6 +123,19 @@ $('.tender-header__link').click(function( event ) {
     $('.add-review-form').popup({
         transition: 'all 0.3s'
     });
+});
+
+$('.jsMainSlider').slick({
+	dots: true
+});
+
+$('.jsGetInputVal').change(function() {
+	
+	if($(this).val().length >= 1) {
+		$(this).addClass('with-text');
+	} else {
+		$(this).removeClass('with-text');
+	}
 });
 
 </script>
