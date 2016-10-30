@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Request;
 
 class BaseController extends Controller
 {
+    public $seoData = [];
+
     /**
      * @param $template
      * @param $data
@@ -21,7 +23,9 @@ class BaseController extends Controller
      */
     public function render($template, $data, $statusCode = 200)
     {
-        $seo = new Seo([]);
+        $seo = new Seo([
+            'page' => $this->seoData,
+        ]);
 
         $defaultData = [
             'main_menu' => $this->getMenu('top-menu'),
@@ -91,5 +95,13 @@ class BaseController extends Controller
         }
 
         return $areas;
+    }
+
+    /**
+     * @param $data
+     */
+    public function setSeoData($data)
+    {
+        $this->seoData = $data;
     }
 }

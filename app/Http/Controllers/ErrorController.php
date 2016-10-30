@@ -6,7 +6,11 @@ class ErrorController extends BaseController
 {
     public function notfound()
     {
-        return $this->render('errors.404', []);
+        $this->setSeoData([
+            'title' => 'page not found',
+        ]);
+
+        return $this->render('errors.404', [], 404);
     }
 
     /**
