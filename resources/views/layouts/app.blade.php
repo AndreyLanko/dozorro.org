@@ -7,8 +7,6 @@
     <meta name="csrf-token" content="{{csrf_token()}}" />
     <link rel="stylesheet" href="/assets/css/app.css">
     <link rel="stylesheet" href="/assets/css/site.css">
-    <link rel="stylesheet" href="/assets/css/sb.css">
-    <link rel="stylesheet" href="/assets/css/blocks.css">
     <!--[if lt IE 9]>
         <script src="/assets/js/legacy/html5shiv.min.js"></script>
         <script src="/assets/js/legacy/respond.min.js"></script>
@@ -36,27 +34,26 @@
     @endif
 
     <div class="wrapper-main">
-        @include('partials.menu', [
-            'menu' => $main_menu,
-        ])
-
-				<hr>
-
-        @include('partials.lang', [
-            'locales' => $locales,
-        ])
-
-				<hr>
+        <div class="c-header">
+            <div class="container">
+                <a href="/" class="c-header__logo"></a>
+                @include('partials.lang', [
+                    'locales' => $locales,
+                ])
+                @include('partials.menu', [
+                    'menu' => $main_menu,
+                ])
+            </div>
+        </div>
 
         @yield('content')
 
         <div class="last"></div>
-
-        @include('forms/feedback')
     </div>
 
-    
-    @yield('html_footer')
+    @include('partials.footer', [
+        'menu' => $main_menu
+    ])
     
     <script src="/assets/js/app.js"></script>
 

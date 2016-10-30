@@ -104,6 +104,8 @@ elixir(function(mix) {
 
 	  mix.styles([
 	    "libs/bootstrap-datepicker.standalone.css",
+	    "sb.css",
+	    "blocks.css",
 	    "app.css",
 	  ],'public/assets/css/site.css');
 

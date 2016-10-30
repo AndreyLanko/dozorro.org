@@ -15,8 +15,18 @@ use Lang;
 class PageController extends BaseController
 {
     var $search_type;
+    var $blocks;
 
     public function page(\Illuminate\Http\Request $request)
+    {
+        $this->getPage($request);
+        
+        return $this->render('pages/page', [
+            'blocks' => $this->blocks->getBlocks(),
+        ]);
+    }
+    
+    public function getPage($request)
     {
         //Get current locale
         $locale = (trim($request->route()->getPrefix(), '/'))?:App\Classes\Lang::getDefault();
@@ -30,23 +40,21 @@ class PageController extends BaseController
         $page = App\Page::where('url', $url)->first();
 
         if (!$page) {
+            abort(404);
             return $this->render('errors/404', []);
         }
 
         $blocks = (array) json_decode($page->{'longread_' . $locale});
-        $blocks = new App\Classes\Longread($blocks, $page->id);
-
-        return $this->render('pages/page', [
-            'blocks' => $blocks->getBlocks(),
-        ]);
+        $this->blocks = new App\Classes\Longread($blocks, $page->id);        
     }
 
-    public function home()
+    public function home(\Illuminate\Http\Request $request)
     {
         $last=null;
         $auctions_items=null;
         
         $dataStatus=[];
+        $this->getPage($request);
 
         foreach(app('App\Http\Controllers\FormController')->get_status_data() as $one)
             $dataStatus[$one['id']]=$one['name'];
@@ -54,6 +62,7 @@ class PageController extends BaseController
         $data = [
             'dataStatus' => $dataStatus,
             'auctions' => $auctions_items,
+            'blocks' => $this->blocks->getBlocks(),
             'last' => json_decode($last),
         ];
 
@@ -254,6 +263,12 @@ class PageController extends BaseController
             ->limit(20)
             ->get()
         ;
+        
+        $rating1=0;
+
+        if($reviews){
+            $rating1=round(array_sum(array_pluck($reviews, 'rating'))/sizeof($reviews));
+        }
 
         $data = [
             'item' => $item,
@@ -261,6 +276,7 @@ class PageController extends BaseController
             'dataStatus' => $dataStatus,
             'error' => $this->error,
             'reviews' => $reviews,
+            'rating1' => $rating1,
             'areas' => $this->getAreas(),
         ];
 
