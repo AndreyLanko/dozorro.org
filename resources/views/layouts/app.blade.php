@@ -34,27 +34,26 @@
     @endif
 
     <div class="wrapper-main">
-        @include('partials.menu', [
-            'menu' => $main_menu,
-        ])
-
-				<hr>
-
-        @include('partials.lang', [
-            'locales' => $locales,
-        ])
-
-				<hr>
+        <div class="c-header">
+            <div class="container">
+                <a href="/" class="c-header__logo"></a>
+                @include('partials.lang', [
+                    'locales' => $locales,
+                ])
+                @include('partials.menu', [
+                    'menu' => $main_menu,
+                ])
+            </div>
+        </div>
 
         @yield('content')
 
         <div class="last"></div>
-
-        @include('forms/feedback')
     </div>
 
-    
-    @yield('html_footer')
+    @include('partials.footer', [
+        'menu' => $main_menu
+    ])
     
     <script src="/assets/js/app.js"></script>
 
@@ -121,6 +120,19 @@ $('.tender-header__link').click(function( event ) {
     $('.add-review-form').popup({
         transition: 'all 0.3s'
     });
+});
+
+$('.jsMainSlider').slick({
+	dots: true
+});
+
+$('.jsGetInputVal').change(function() {
+	
+	if($(this).val().length >= 1) {
+		$(this).addClass('with-text');
+	} else {
+		$(this).removeClass('with-text');
+	}
 });
 
 </script>
