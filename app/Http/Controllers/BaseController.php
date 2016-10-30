@@ -58,7 +58,7 @@ class BaseController extends Controller
         }
 
         $pages = $menu->pages->sortBy('nest_left')->filter(function ($page) {
-            return $page->nest_depth === 0 && !$page->is_hidden && !$page->is_disabled;
+            return $page->nest_depth == 0 && !$page->is_hidden && !$page->is_disabled;
         });
 
         return Helpers::filterActivePages($pages);

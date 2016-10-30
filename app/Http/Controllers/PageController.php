@@ -266,7 +266,7 @@ class PageController extends BaseController
         
         $rating1=0;
 
-        if($reviews){
+        if($reviews && sizeof($reviews)>0){
             $rating1=round(array_sum(array_pluck($reviews, 'rating'))/sizeof($reviews));
         }
 

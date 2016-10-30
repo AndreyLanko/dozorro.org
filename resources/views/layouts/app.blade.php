@@ -135,6 +135,10 @@ $('.jsGetInputVal').change(function() {
 	}
 });
 
+$(document).ready(function(){
+    $(".tender-header__review-button").sticky({topSpacing:20});
+});
+
 </script>
 
 </body>
