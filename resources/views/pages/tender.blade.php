@@ -140,6 +140,9 @@
                     @endif
                     @foreach ($reviews as $review)
                         <div class="reviews__item">
+                            <div>
+                                {{ $review->user_name }}|{{ $review->user_email }}|{{ $review->user_social }}
+                            </div>
                             <div class="reviews__header">
                                 <span class="reviews__author reviews__author--not-confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->created_at->format('d.m.Y H:i') }}</span>
                             </div>
