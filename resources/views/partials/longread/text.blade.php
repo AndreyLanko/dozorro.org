@@ -1,8 +1,10 @@
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h3>{{ $data->text_title }}</h3>
-            <p>{!! $data->text_text !!}</p>
+@if(!empty($data->text_title) || !empty($data->text_text))
+    <div class="c-text">
+        <div class="container">
+            @if(!empty($data->text_title))
+                <h2>{{ $data->text_title }}</h2>
+            @endif
+            {!! $data->text_text !!}
         </div>
     </div>
-</div>
+@endif

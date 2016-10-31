@@ -93,7 +93,7 @@ class PageController extends BaseController
             'search_type' => $this->search_type,
             'preselected_values' => json_encode($preselected_values, JSON_UNESCAPED_UNICODE),
             'highlight' => json_encode($this->getSearchResultsHightlightArray(trim(Request::server('QUERY_STRING'), '&')), JSON_UNESCAPED_UNICODE),
-            'result' => $result,
+            'result' => $result->content(),
         ];
 
         return $this->render('pages/search', $data);

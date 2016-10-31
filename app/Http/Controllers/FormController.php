@@ -31,7 +31,7 @@ class FormController extends BaseController
         $html=$this->getSearchResultsHtml(Input::get('query'));
 
         return response()->json(($html ? [
-            'html'=>(string) $html,
+            'html'=>$html->content(),
             'highlight'=>app('App\Http\Controllers\PageController')->getSearchResultsHightlightArray(implode('&', Input::get('query')))
         ] : []), 200, [
             'Content-Type' => 'application/json; charset=UTF-8',

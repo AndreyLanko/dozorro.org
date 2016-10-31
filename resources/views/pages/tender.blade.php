@@ -97,6 +97,11 @@
                    "reviews__author reviews__author--not-confirmed" - автор не подтвержден, серая иконка -->
             <div class="reviews is-show">
                 <div class="container">
+                    @if(!sizeof($reviews))
+                        <div class="reviews__item">
+                            Жодного відгуку не залишено
+                        </div>
+                    @endif
                     @foreach ($reviews as $review)
                         <div class="reviews__item">
                             <div class="reviews__header">
