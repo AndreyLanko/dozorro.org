@@ -55,16 +55,31 @@ class JsonFormController extends BaseController
                 
                 if($response)
                 {
-                    $form=new JsonForm();
-                    
-                    $form->object_id=null;
-                    $form->tender_id=Input::get('tender_id');
-                    $form->model=$slug;
-                    $form->thread_id=Input::get('form.thread_id');
-                    $form->created_at=Carbon::now();
-                    $form->data=$this->data();
+                    $PageController=app('App\Http\Controllers\PageController');
+                    $PageController->search_type='tender';
 
-                    $form->save();
+                    $data=$PageController->getSearchResults(['tid='.Input::get('tender_public_id')]);
+
+                    if(!empty($data->items[0]))
+                    {
+                        $tender=$data->items[0];
+                        
+                        $form=new JsonForm();
+                        
+                        $form->object_id=null;
+                        $form->tender_id=Input::get('tender_id');
+                        $form->model=$slug;
+                        $form->thread_id=Input::get('form.thread_id');
+                        $form->created_at=Carbon::now();
+                        $form->data=$this->data();
+    
+                        $form->tender_public_id=$tender->tenderID;
+                        $form->tender_name=$tender->title;
+                        $form->procuring_entity_name=!empty($tender->procuringEntity->identifier->legalName) ? $tender->procuringEntity->identifier->legalName : $tender->procuringEntity->name;
+                        $form->procuring_entity_code=$tender->procuringEntity->identifier->id;
+    
+                        $form->save();
+                    }
                 }
             }
         }
