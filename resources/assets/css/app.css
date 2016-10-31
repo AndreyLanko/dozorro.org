@@ -3988,7 +3988,7 @@ actual styles
   margin-right: 2px;
   margin: 0;
 }
-#jsonform-0-elt-generalScore label.on-star {
+#jsonform-0-elt-generalScore label.active {
     background-image: url(/assets/images/star-fill.svg);
 }
 #jsonform-0-elt-generalScore label input {

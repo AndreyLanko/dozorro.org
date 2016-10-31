@@ -209,6 +209,7 @@ body {
 	top: 0;
 	left: 0;
 	transition: all 0.1s;
+	pointer-events: none;
 }
 .c-find-form__input-group input:focus + label,
 .c-find-form__input-group input.with-text + label {
@@ -704,7 +705,11 @@ body {
 }
 /* END c-bgimg */
 
-
+@media screen and (max-width: 991px) {
+	.tender-header__review-button {
+		display: none;
+	}
+}
 /*  */
 
 /* END  */
