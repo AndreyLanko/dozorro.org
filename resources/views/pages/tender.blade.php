@@ -103,13 +103,14 @@
                             <div class="error hidden">
                                 Під час відправки форми сталася помилка
                             </div>
-
-                            <a href="/auth/facebook">Facebook</a>
                         @else
                             <div>
                                 <ul>
                                     <li>
                                         <a href="/auth/facebook">Facebook</a>
+                                    </li>
+                                    <li>
+                                        <a href="/auth/twitter">Twitter</a>
                                     </li>
                                 </ul>
                             </div>

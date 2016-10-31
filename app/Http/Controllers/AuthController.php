@@ -10,6 +10,7 @@ class AuthController extends BaseController
 {
     private $availableProviders = [
         'facebook',
+        'twitter'
     ];
 
     /**
@@ -42,7 +43,28 @@ class AuthController extends BaseController
         }
 
         $user = Socialite::driver($provider)->user();
-        $userData = User::store($user, $provider);
+
+        $data = [];
+
+        switch ($provider) {
+            case 'facebook': {
+                $data = [
+                    'email' => $user->email,
+                    'full_name' => $user->full_name,
+                ];
+            }
+                break;
+
+            case 'twitter': {
+                $data = [
+                    'email' => $user->email,
+                    'full_name' => $user->name,
+                ];
+            }
+                break;
+        }
+
+        $userData = User::store((object) $data, $provider);
 
         $request->session()->put('user', $userData);
 

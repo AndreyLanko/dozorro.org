@@ -35,7 +35,7 @@ class User
     public static function store($data, $social)
     {
         return [
-            'full_name' => $data->name,
+            'full_name' => $data->full_name,
             'email'     => $data->email,
             'social'    => $social,
         ];

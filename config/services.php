@@ -41,9 +41,9 @@ return [
     ],
 
     'twitter' => [
-        'client_id' => 'your-github-app-id',
-        'client_secret' => 'your-github-app-secret',
-        'redirect' => 'http://your-callback-url',
+        'client_id' => env('TWITTER_CLIENT_ID', ''),
+        'client_secret' => env('TWITTER_CLIENT_SECRET', ''),
+        'redirect' => env('TWITTER_REDIRECT', ''),
     ],
 
     'google' => [
