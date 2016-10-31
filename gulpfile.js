@@ -96,6 +96,7 @@ elixir(function(mix) {
       'js/libs/json-forms/jsonform.js',
       'js/libs/selectize.js',
       'js/blocks/**/*.js',
+      'js/stars.js',
       'js/app.js'
     ],
     'public/assets/js/app.js',

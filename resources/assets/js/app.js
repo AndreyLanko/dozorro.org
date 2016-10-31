@@ -141,12 +141,24 @@ var APP,
                     						headers: APP.utils.csrf(),
                     						success: function(response){
                                                 if (response) {
-                                                    alert('Комментарий успешно добавлен');
-                                                    document.location.reload();
-                                                    return true;
-                                                }
+                                                    $('#my_popup .success').removeClass('hidden');
+                                                    $('#my_popup form').addClass('hidden');
 
-                                                alert('Во время отправки формы случилась ошибка');
+                                                    setTimeout(function () {
+                                                        $('.my_popup_close').trigger('click');
+
+                                                        $('#my_popup .success').addClass('hidden');
+                                                        $('#my_popup form').trigger('reset').removeClass('hidden');
+                                                    }, 3000);
+                                                } else {
+                                                    $('#my_popup .error').removeClass('hidden');
+                                                    $('#my_popup form').addClass('hidden');
+
+                                                    setTimeout(function () {
+                                                        $('#my_popup .error').addClass('hidden');
+                                                        $('#my_popup form').trigger('reset').removeClass('hidden');
+                                                    }, 3000);
+                                                }
                     						}
                     					});
                                 };
