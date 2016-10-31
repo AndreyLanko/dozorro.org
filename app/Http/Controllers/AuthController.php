@@ -10,7 +10,8 @@ class AuthController extends BaseController
 {
     private $availableProviders = [
         'facebook',
-        'twitter'
+        'twitter',
+        'google',
     ];
 
     /**
@@ -56,6 +57,14 @@ class AuthController extends BaseController
                 break;
 
             case 'twitter': {
+                $data = [
+                    'email' => $user->email,
+                    'full_name' => $user->name,
+                ];
+            }
+                break;
+
+            case 'google': {
                 $data = [
                     'email' => $user->email,
                     'full_name' => $user->name,

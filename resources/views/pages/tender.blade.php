@@ -112,6 +112,9 @@
                                     <li>
                                         <a href="/auth/twitter">Twitter</a>
                                     </li>
+                                    <li>
+                                        <a href="/auth/google">Google</a>
+                                    </li>
                                 </ul>
                             </div>
                         @endif
