@@ -51,7 +51,7 @@ class AuthController extends BaseController
             case 'facebook': {
                 $data = [
                     'email' => $user->email,
-                    'full_name' => $user->full_name,
+                    'full_name' => $user->name,
                 ];
             }
                 break;

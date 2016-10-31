@@ -14,18 +14,6 @@
 @section('content')
 
     @if ($item && !$error)
-        @if (\App\Classes\User::isAuth())
-            <div>
-                Имя: {{ \App\Classes\User::data()->full_name }}
-            </div>
-            <div>
-                Email: {{ \App\Classes\User::data()->email }}
-            </div>
-            <div>
-                Social: {{ \App\Classes\User::data()->social }}
-            </div>
-        @endif
-
         <div class="tender" data-js="tender">
             <div class="tender-header-wrap">
                 @include('partials/blocks/tender/header')
@@ -97,7 +85,7 @@
                             </form>
 
                             <div class="success hidden">
-                                Форма успішно відправлена
+                                Дякуємо за відгук
                             </div>
 
                             <div class="error hidden">
@@ -105,17 +93,17 @@
                             </div>
                         @else
                             <div>
-                                <ul>
-                                    <li>
-                                        <a href="/auth/facebook">Facebook</a>
-                                    </li>
-                                    <li>
-                                        <a href="/auth/twitter">Twitter</a>
-                                    </li>
-                                    <li>
-                                        <a href="/auth/google">Google</a>
-                                    </li>
-                                </ul>
+                                <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook">
+                                    <span class="fa fa-facebook"></span> Увійти через Facebook
+                                </a>
+                                <a class="btn btn-block btn-social btn-google" href="/auth/google">
+                                    <span class="fa fa-google"></span> Увійти через Google
+                                </a>
+                                {{--
+                                <a class="btn btn-block btn-social btn-twitter" href="/auth/twitter">
+                                    <span class="fa fa-twitter"></span> Увійти через Twitter
+                                </a>
+                                --}}
                             </div>
                         @endif
                     </div>
@@ -140,11 +128,8 @@
                     @endif
                     @foreach ($reviews as $review)
                         <div class="reviews__item">
-                            <div>
-                                {{ $review->user_name }}|{{ $review->user_email }}|{{ $review->user_social }}
-                            </div>
                             <div class="reviews__header">
-                                <span class="reviews__author reviews__author--not-confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->created_at->format('d.m.Y H:i') }}</span>
+                                <span class="reviews__author reviews__author--{{ $review->user_name ? '':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->created_at->format('d.m.Y H:i') }}</span>
                             </div>
                             <div class="reviews__body">
                                 <p>{{ nl2br(trim($review->comment)) }}</p>
