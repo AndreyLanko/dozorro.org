@@ -9,7 +9,8 @@
 		"symfony/yaml": "^3.0",
 		"barryvdh/laravel-dompdf": "0.6.*",
 		"predis/predis": "^1.0",
-		"greggilbert/recaptcha": "dev-master"
+		"greggilbert/recaptcha": "dev-master",
+		"laravel/socialite": "^2.0"
 	},
 	"require-dev": {
         "fzaninotto/faker": "~1.4",

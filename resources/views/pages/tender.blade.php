@@ -77,19 +77,35 @@
             <div class="add-review-form" id="my_popup">
                 <div class="container">
                     <div class="add-review-form__content">
-                        <button class="add-review-form__close-button my_popup_close"></button>
-                        <h2 class="add-review-form__h2">Ваш відгук</h2>
-                        <form id="form" data-js="form_review" action="/jsonforms/review/" data-id="{{ $item->id }}">
-                            <input type="submit" value="Залишити відгук">
-                        </form>
+                        @if (\App\Classes\User::isAuth())
+                            <button class="add-review-form__close-button my_popup_close"></button>
+                            <h2 class="add-review-form__h2">Ваш відгук</h2>
+                            <form id="form" data-js="form_review" action="/jsonforms/review/" data-id="{{ $item->id }}">
+                                <input type="submit" value="Залишити відгук">
+                            </form>
 
-                        <div class="success hidden">
-                            Форма успішно відправлена
-                        </div>
+                            <div class="success hidden">
+                                Дякуємо за відгук
+                            </div>
 
-                        <div class="error hidden">
-                            Під час відправки форми сталася помилка
-                        </div>
+                            <div class="error hidden">
+                                Під час відправки форми сталася помилка
+                            </div>
+                        @else
+                            <div>
+                                <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook">
+                                    <span class="fa fa-facebook"></span> Увійти через Facebook
+                                </a>
+                                <a class="btn btn-block btn-social btn-google" href="/auth/google">
+                                    <span class="fa fa-google"></span> Увійти через Google
+                                </a>
+                                {{--
+                                <a class="btn btn-block btn-social btn-twitter" href="/auth/twitter">
+                                    <span class="fa fa-twitter"></span> Увійти через Twitter
+                                </a>
+                                --}}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -113,7 +129,7 @@
                     @foreach ($reviews as $review)
                         <div class="reviews__item">
                             <div class="reviews__header">
-                                <span class="reviews__author reviews__author--not-confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->created_at->format('d.m.Y H:i') }}</span>
+                                <span class="reviews__author reviews__author--{{ $review->user_name ? '':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->created_at->format('d.m.Y H:i') }}</span>
                             </div>
                             <div class="reviews__body">
                                 <p>{{ nl2br(trim($review->comment)) }}</p>

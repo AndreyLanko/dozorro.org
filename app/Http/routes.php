@@ -38,6 +38,9 @@ foreach($locales as $language)
     });
 }
 
+Route::get('auth/{provider}', 'AuthController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'AuthController@handleProviderCallback');
+
 Route::post('feedback', 'FeedbackController@store');
 
 Route::get('json/platforms/{type}', 'JsonController@platforms');

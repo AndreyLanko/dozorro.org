@@ -149,6 +149,7 @@ return [
 		
 		Barryvdh\DomPDF\ServiceProvider::class,
 		Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
 	],
 
@@ -199,6 +200,7 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 		'PDF'       => Barryvdh\DomPDF\Facade::class,
 		'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 	],
 
 ];

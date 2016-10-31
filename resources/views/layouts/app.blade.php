@@ -40,6 +40,13 @@
                 @include('partials.lang', [
                     'locales' => $locales,
                 ])
+                @if (\App\Classes\User::isAuth())
+                    <div class="c-header__nav-wrap">
+                        <div style="font-size: 14px;color: #e55166;font-family: 'ProximaNovaBold';text-transform: uppercase;padding: 47px 0 48px 0;display: block;">
+                            {{ \App\Classes\User::data()->full_name }}
+                        </div>
+                    </div>
+                @endif
                 @include('partials.menu', [
                     'menu' => $main_menu,
                 ])
