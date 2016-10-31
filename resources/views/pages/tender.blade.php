@@ -79,7 +79,7 @@
                     <div class="add-review-form__content">
                         <button class="add-review-form__close-button my_popup_close"></button>
                         <h2 class="add-review-form__h2">Ваш відгук</h2>
-                        <form id="form" data-js="form_review" action="/jsonforms/review/" data-id="{{ $item->id }}">
+                        <form id="form" data-js="form_review" action="/jsonforms/review/" data-id="{{ $item->id }}" data-public-id="{{ $item->tenderID }}">
                             <input type="submit" value="Залишити відгук">
                         </form>
 

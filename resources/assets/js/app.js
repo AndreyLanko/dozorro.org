@@ -134,7 +134,8 @@ var APP,
                     						method: 'POST',
                     						data: {
                         						form: values,
-                        						tender_id: _self.data('id')
+                        						tender_id: _self.data('id'),
+                        						tender_public_id: _self.data('public-id')
                         				    },
                     						url: _self.attr('action'),
                     						dataType: 'json',

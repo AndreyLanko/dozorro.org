@@ -58,7 +58,8 @@ class JsonFormController extends BaseController
                     $PageController=app('App\Http\Controllers\PageController');
                     $PageController->search_type='tender';
 
-                    $data=$PageController->getSearchResults(['tid='.Input::get('tender_public_id')]);
+                    $json=$PageController->getSearchResults(['tid='.Input::get('tender_public_id')]);
+                    $data=json_decode($json);
 
                     if(!empty($data->items[0]))
                     {
@@ -80,6 +81,8 @@ class JsonFormController extends BaseController
     
                         $form->save();
                     }
+                    else
+                        $response=false;
                 }
             }
         }
