@@ -34,26 +34,17 @@
     @endif
 
     <div class="wrapper-main">
-        <div class="c-header">
-            <div class="container">
-                <a href="/" class="c-header__logo"></a>
-                @include('partials.lang', [
-                    'locales' => $locales,
-                ])
-                @include('partials.menu', [
-                    'menu' => $main_menu,
-                ])
-            </div>
-        </div>
+        @include('partials.menu')
 
         @yield('content')
 
         <div class="last"></div>
+
+        @include('forms/feedback')
     </div>
 
-    @include('partials.footer', [
-        'menu' => $main_menu
-    ])
+    
+    @yield('html_footer')
     
     <script src="/assets/js/app.js"></script>
 
@@ -62,83 +53,19 @@
     @endif
 
 <script>
-
-var tenderHeader,
-    tenderTabsWrapper;
-
-setTimeout(function(){
-
-    tenderHeader = $('.tender-header').height();
-    tenderTabsWrapper = $('.tender-tabs-wrapper').height();
-
-    $(window).scroll(function(){
-    if ($(window).scrollTop() > (tenderTabsWrapper + tenderHeader + 118)) {
-        $('.tender-tabs-wrapper').css({
-            'position': 'fixed',
-            'top': '0'
-        });
-        $('.reviews').css({
-	          'padding-top': tenderTabsWrapper
-        });
-        $('.tender--description').css({
-	          'padding-top': tenderTabsWrapper
-        });
-    } else {
-	      $('.tender-tabs-wrapper').css({
-            'position': 'relative',
-            'top': 0
-        });
-        $('.reviews').css({
-	          'padding-top': 0
-        });
-        $('.tender--description').css({
-	          'padding-top': 0
-        });
-        
-    }
-
-});
-
-}, 300);
-
 $('.jsTenderTabs .tender-tabs__item').click(function() {
     if(!$(this).hasClass('is-show')) {
-        if(!$('.jsShowReviews').hasClass('is-show')) {
-            $('.tender--description').removeClass('is-show');
-	          $('.reviews').addClass('is-show');
-        } else if (!$('.jsShowDescription').hasClass('is-show')) {
-            $('.reviews').removeClass('is-show');
-	          $('.tender--description').addClass('is-show');
-        }
-        $('.jsTenderTabs .tender-tabs__item').removeClass('is-show');
-	      $(this).addClass('is-show');
+      if(!$('.jsShowReviews').hasClass('is-show')) {
+          $('.tender--description').removeClass('is-show');
+	        $('.reviews').addClass('is-show');
+      } else if (!$('.jsShowDescription').hasClass('is-show')) {
+          $('.reviews').removeClass('is-show');
+	        $('.tender--description').addClass('is-show');
+      }
+      $('.jsTenderTabs .tender-tabs__item').removeClass('is-show');
+	    $(this).addClass('is-show');
     }
 });
-
-$('.tender-header__link').click(function( event ) {
-    event.preventDefault();
-    $('.add-review-form').popup({
-        transition: 'all 0.3s'
-    });
-});
-
-$('.jsMainSlider').slick({
-	dots: true
-});
-
-$('.jsGetInputVal').change(function() {
-	
-	if($(this).val().length >= 1) {
-		$(this).addClass('with-text');
-	} else {
-		$(this).removeClass('with-text');
-	}
-});
-
-$(document).ready(function(){
-    $(".tender-header__review-button").sticky({topSpacing:20});
-});
-
 </script>
 
 </body>

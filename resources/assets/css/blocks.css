@@ -1,0 +1,288 @@
+/* c-header */
+.c-header { 
+	background-color: #ededed;
+}
+.c-header__logo {
+	display: block;
+	width: 115px;
+	height: 26px;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-image: url('/assets/images/t-logo.svg');
+	float: left;
+	margin-top: 40px;
+	position: relative;
+}
+.c-header__nav-wrap {
+	float: right;
+	padding-right: 20px;
+}
+.c-header__nav-list {
+	margin: 0;
+}
+.c-header__nav-list li {
+	display: inline-block;
+	padding: 0 33px;
+}
+.c-header__nav-list li a {
+	font-size: 14px;
+	color: black;
+	font-family: 'ProximaNovaBold';
+	text-transform: uppercase;
+	padding: 43px 0 48px 0;
+	display: block;
+	border-top: 5px solid rgba(229, 81, 102, 0);
+	box-sizing: border-box;
+	transition: all 0.1s;
+}
+.c-header__nav-list li a.is-active {
+	border-top: 5px solid rgba(229, 81, 102, 1);
+	color: rgba(0, 0, 0, 0.3);
+}
+.c-header__nav-list li a:hover {
+	text-decoration: none;
+	border-top: 5px solid rgba(229, 81, 102, 1);
+	color: rgba(0, 0, 0, 0.7);
+	transition: all 0.3s;
+}
+.c-header__nav-list li a:active,.c-header__nav-list li a:focus {
+	text-decoration: none;
+}
+.c-header__lang-selector {
+	float: right;
+	margin-top: 36px;
+}
+/* END c-header */
+
+/* c-main-slider */
+.c-main-slider {
+	font-family: 'ProximaNova';
+	position: relative;
+	width: 100%;
+	height: 390px;
+	overflow: hidden;
+}
+.c-main-slider__slider {
+	position: absolute;
+	left: 0;
+	right: 0;
+	overflow: hidden;
+	width: 100%;
+}
+.c-main-slider__slider .slick-arrow {
+	display: none !important;
+}
+.c-main-slider__slider .slick-dots {
+	position: absolute;
+	bottom: 15px;
+	width: 100%;
+	padding: 0 20px;
+	text-align: center;
+}
+.c-main-slider__slider .slick-dots li {
+	display: inline-block;
+	width: 7px;
+	height: 7px;
+	border-radius: 10px;
+	margin-right: 13px;
+	background: rgba(256, 256, 256, 0.3); 
+}
+.c-main-slider__slider .slick-dots li.slick-active {
+	background-color: white;
+}
+.c-main-slider__slider .slick-dots li:last-child {
+	margin-right: 0;
+}
+.c-main-slider__slider .slick-dots li button {
+	background: none;
+}
+.c-main-slider__slide {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: bottom center;
+	float: left;
+}
+.c-main-slider__slide-bgcolor--opacity-05 {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+.c-main-slider__table {
+	display: table;
+	width: 100%;
+}
+.c-main-slider__cell {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	height: 390px;
+	width: 100%;
+}
+.c-main-slider h1 {
+	font-family: 'ProximaNovaBlack';
+	font-size: 36px;
+	line-height: 1;
+	color: white;
+}
+.c-main-slider p {
+	font-size: 24px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.33;
+  max-width: 640px;
+  margin: 0 auto;
+  color: white;
+}
+/* END c-main-slider */
+
+/* c-find-form */
+.c-find-form {
+	background-color: #e55166;
+	font-family: 'ProximaNova';
+}
+.c-find-form .container {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.c-find-form form {
+	margin: 0;
+}
+.c-find-form input:active,
+.c-find-form input:focus,
+.c-find-form button:active,
+.c-find-form button:focus {
+	outline: none;
+}
+.c-find-form__inputs-wrap {
+	padding-top: 20px;
+}
+.c-find-form__input-group {
+	float: left;
+	width: 43%;
+	color: white;
+	position: relative;
+}
+.c-find-form__input-group label {
+	font-size: 16px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	transition: all 0.1s;
+}
+.c-find-form__input-group input:focus + label,
+.c-find-form__input-group input.with-text + label {
+	top: -20px;
+	transition: all 0.3s;
+	color: rgba(256, 256, 256, 0.5);
+}
+.c-find-form__or-word {
+	float: left;
+	width: 14%;
+	text-align: center;
+	font-size: 16px;
+	color: rgba(256, 256, 256, 0.5);
+}
+.c-find-form__input-group input {
+	width: 100%;
+	background: none;
+	border: none;
+	border-bottom: 2px solid white;
+	font-size: 16px;
+}
+.c-find-form h2 {
+	font-family: 'ProximaNovaBold';
+	font-size: 20px;
+	line-height: 1.4;
+  color: #ffffff;
+  margin: 0;
+  margin-top: 20px;
+}
+.c-find-form input[type="submit"]{
+	font-family: 'ProximaNovaBold';
+	width: auto;
+	padding: 0 30px;
+  height: 64px;
+  border-radius: 2px;
+  background-color: #ffffff;
+  border: none;
+  font-size: 16px;
+  color: #000000;
+  line-height: 1.25;
+  float: right;
+  min-width: 150px;
+}
+/* END c-find-form */
+
+/* c-top-items */
+.c-top-items .container {
+	padding-top: 60px;
+	padding-bottom: 60px;
+}
+.c-top-items__col h2 {
+	font-family: 'ProximaNovaBlack';
+	font-size: 20px;
+	line-height: 1.7;
+  color: #000000;
+  border-bottom: solid 3px #000000;
+  margin: 0;
+}
+.c-top-items__col--right-padding {
+	padding-right: 80px;
+}
+.c-top-items__col--left-padding {
+	padding-left: 80px;
+}
+/* END c-top-items */
+
+/* c-footer */
+.c-footer {
+	font-family: 'ProximaNova';
+	background-color: #ededed;
+}
+.c-footer .container {
+	padding-top: 22px;
+	padding-bottom: 80px;
+}
+.c-footer__copy {
+	font-size: 14px;
+	color: #000000;
+	margin: 0;
+}
+.c-footer__nav-col {
+	text-align: center;
+}
+.c-footer__nav-list {
+	list-style: none;
+	margin: 0;
+}
+.c-footer__nav-list li {
+	display: inline-block;
+	margin: 0 15px;
+	position: relative;
+}
+.c-footer__nav-list li:last-child:after {
+	display: none;
+}
+.c-footer__nav-list li:after {
+	content: '';
+	display: block;
+	width: 1px;
+	height: 10px;
+	background: black;
+	position: absolute;
+	top: 5px;
+  right: -17px;
+}
+.c-footer__nav-list li a {
+	color: #000000;
+	text-decoration: none;
+}
+.c-footer__nav-list li a:hover {
+	color: #000000;
+	text-decoration: none;
+}
+/* END c-footer */
+
+/*  */
+
+/* END  */

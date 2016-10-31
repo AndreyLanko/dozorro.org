@@ -2,10 +2,12 @@
 
 @section('content')
 
-@include('partials/form')
-
-<div class="container" homepage>
-
+<div homepage>
+    @foreach($blocks as $block)
+        @include('partials.longread.' . $block->alias, [
+            'data' => $block->value
+        ])
+    @endforeach
 </div>
 
 @endsection

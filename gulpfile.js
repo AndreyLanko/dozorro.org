@@ -90,6 +90,7 @@ elixir(function(mix) {
       'js/vendor/jquery.highlight.js',
       'js/vendor/jquery.sticky.js',
       'js/vendor/slick.js',
+      'js/libs/jquery.popupoverlay.js',
       'js/libs/json-forms/underscore.js',
       'js/libs/json-forms/jsv.js',
       'js/libs/json-forms/jsonform.js',
@@ -103,6 +104,8 @@ elixir(function(mix) {
 
 	  mix.styles([
 	    "libs/bootstrap-datepicker.standalone.css",
+	    "sb.css",
+	    "blocks.css",
 	    "app.css",
 	  ],'public/assets/css/site.css');
 
