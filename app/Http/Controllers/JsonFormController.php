@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Classes\User;
 use Illuminate\Routing\Controller as BaseController;
 use App\JsonForm;
 use Carbon\Carbon;
@@ -56,6 +57,7 @@ class JsonFormController extends BaseController
                 if($response)
                 {
                     $form=new JsonForm();
+                    $user = User::data();
                     
                     $form->object_id=null;
                     $form->tender_id=Input::get('tender_id');
@@ -63,6 +65,9 @@ class JsonFormController extends BaseController
                     $form->thread_id=Input::get('form.thread_id');
                     $form->created_at=Carbon::now();
                     $form->data=$this->data();
+                    $form->user_name = $user->full_name;
+                    $form->user_email = $user->email;
+                    $form->user_social = $user->social;
 
                     $form->save();
                 }

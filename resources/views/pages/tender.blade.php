@@ -14,6 +14,18 @@
 @section('content')
 
     @if ($item && !$error)
+        @if (\App\Classes\User::isAuth())
+            <div>
+                Имя: {{ \App\Classes\User::data()->full_name }}
+            </div>
+            <div>
+                Email: {{ \App\Classes\User::data()->email }}
+            </div>
+            <div>
+                Social: {{ \App\Classes\User::data()->social }}
+            </div>
+        @endif
+
         <div class="tender" data-js="tender">
             <div class="tender-header-wrap">
                 @include('partials/blocks/tender/header')
@@ -77,19 +89,31 @@
             <div class="add-review-form" id="my_popup">
                 <div class="container">
                     <div class="add-review-form__content">
-                        <button class="add-review-form__close-button my_popup_close"></button>
-                        <h2 class="add-review-form__h2">Ваш відгук</h2>
-                        <form id="form" data-js="form_review" action="/jsonforms/review/" data-id="{{ $item->id }}">
-                            <input type="submit" value="Залишити відгук">
-                        </form>
+                        @if (\App\Classes\User::isAuth())
+                            <button class="add-review-form__close-button my_popup_close"></button>
+                            <h2 class="add-review-form__h2">Ваш відгук</h2>
+                            <form id="form" data-js="form_review" action="/jsonforms/review/" data-id="{{ $item->id }}">
+                                <input type="submit" value="Залишити відгук">
+                            </form>
 
-                        <div class="success hidden">
-                            Форма успішно відправлена
-                        </div>
+                            <div class="success hidden">
+                                Форма успішно відправлена
+                            </div>
 
-                        <div class="error hidden">
-                            Під час відправки форми сталася помилка
-                        </div>
+                            <div class="error hidden">
+                                Під час відправки форми сталася помилка
+                            </div>
+
+                            <a href="/auth/facebook">Facebook</a>
+                        @else
+                            <div>
+                                <ul>
+                                    <li>
+                                        <a href="/auth/facebook">Facebook</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
