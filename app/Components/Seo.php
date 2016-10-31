@@ -17,6 +17,10 @@ class Seo
     private $seo;
     private $isNotFound;
 
+    private $regexpSingle = '/(\{[A-Za-z\_]+\})/';
+    private $regexpDouble = '/(\{[A-Za-z\_]+)\.([A-Za-z\_]+\})/';
+    private $regexpDefault = '/\{default\.([0-9A-Za-z\_]+)\}/';
+
     /**
      * Seo constructor.
      */
@@ -63,27 +67,30 @@ class Seo
     private function setTemplate($seo, $variable)
     {
         if (isset($seo->{$variable})) {
-            $patternDefault = "/\{default\.([0-9A-Za-z\_]+)\}/";
-            $this->processParseTemplate($seo, $variable, $patternDefault);
+            $seo->{$variable} = $this->processParseTemplate($seo->{$variable});
         }
     }
 
     /**
-     * @param $seo
-     * @param $variable
-     * @param $patternDefault
+     * @param $template
+     * @param int $depth
+     * @return mixed
      */
-    private function processParseTemplate($seo, $variable, $patternDefault)
+    private function processParseTemplate($template, $depth = 0)
     {
-        $paramsDefault = $this->parseDefault($patternDefault, $seo->{$variable});
+        if ($depth > 4) {
+            return $template;
+        }
+
+        $paramsDefault = $this->parseDefault($this->regexpDefault, $template);
 
         $parameters = array_merge((array) $this->seoData, (array) $paramsDefault);
 
-        $regexpSingle = '/(\{[A-Za-z\_]+\})/';
-        $regexpDouble = '/(\{[A-Za-z\_]+)\.([A-Za-z\_]+\})/';
+        $regexpSingle = $this->regexpSingle;
+        $regexpDouble = $this->regexpDouble;
 
-        $seo->{$variable} = $this->compileTemplate($regexpSingle, $seo->{$variable}, $parameters);
-        $seo->{$variable} = $this->compileTemplate($regexpDouble, $seo->{$variable}, $parameters);
+        $template = $this->compileTemplate($regexpSingle, $template, $parameters);
+        return $this->compileTemplate($regexpDouble, $template, $parameters);
     }
 
     /**
@@ -91,7 +98,7 @@ class Seo
      * @param $parameters
      * @return mixed
      */
-    private function compileTemplate($pattern, $template, $parameters)
+    private function compileTemplate($pattern, $template, $parameters, $depth = 0)
     {
         $matches = [];
 
@@ -116,6 +123,7 @@ class Seo
                 continue;
             }
 
+            $text = $this->processParseTemplate($text, $depth + 1);
             $template = str_replace($match, $text, $template);
         }
 

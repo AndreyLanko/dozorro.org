@@ -29,6 +29,8 @@ class PageController extends BaseController
         //Find page by url
         $page = App\Page::where('url', $url)->first();
 
+        $this->setSeoData((array) $page->getAttributes());
+
         if (!$page) {
             return $this->render('errors/404', []);
         }
