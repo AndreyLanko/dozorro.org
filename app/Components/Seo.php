@@ -89,8 +89,8 @@ class Seo
         $regexpSingle = $this->regexpSingle;
         $regexpDouble = $this->regexpDouble;
 
-        $template = $this->compileTemplate($regexpSingle, $template, $parameters);
-        return $this->compileTemplate($regexpDouble, $template, $parameters);
+        $template = $this->compileTemplate($regexpSingle, $template, $parameters, $depth);
+        return $this->compileTemplate($regexpDouble, $template, $parameters, $depth);
     }
 
     /**

@@ -82,6 +82,14 @@
                         <form id="form" data-js="form_review" action="/jsonforms/review/" data-id="{{ $item->id }}">
                             <input type="submit" value="Залишити відгук">
                         </form>
+
+                        <div class="success hidden">
+                            Форма успішно відправлена
+                        </div>
+
+                        <div class="error hidden">
+                            Під час відправки форми сталася помилка
+                        </div>
                     </div>
                 </div>
             </div>
