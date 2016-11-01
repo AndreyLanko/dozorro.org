@@ -67,24 +67,29 @@ class JsonFormController extends BaseController
                         $tender=$data->items[0];
                         
                         $form=new JsonForm();
+                        $user = User::data();
 
-                        $form->object_id=null;
-                        $form->tender_id=Input::get('tender_id');
-                        $form->model=$slug;
-                        $form->thread_id=Input::get('form.thread_id');
-                        $form->created_at=Carbon::now();
-                        $form->data=$this->data();
-    
-                        $form->user_name = $user->full_name;
-                        $form->user_email = $user->email;
-                        $form->user_social = $user->social;
-    
-                        $form->tender_public_id=$tender->tenderID;
-                        $form->tender_name=$tender->title;
-                        $form->procuring_entity_name=!empty($tender->procuringEntity->identifier->legalName) ? $tender->procuringEntity->identifier->legalName : $tender->procuringEntity->name;
-                        $form->procuring_entity_code=$tender->procuringEntity->identifier->id;
-    
-                        $form->save();
+                        if ($user) {
+                            $form->object_id=null;
+                            $form->tender_id=Input::get('tender_id');
+                            $form->model=$slug;
+                            $form->thread_id=Input::get('form.thread_id');
+                            $form->created_at=Carbon::now();
+                            $form->data=$this->data();
+
+                            $form->user_name = $user->full_name;
+                            $form->user_email = $user->email;
+                            $form->user_social = $user->social;
+
+                            $form->tender_public_id=$tender->tenderID;
+                            $form->tender_name=$tender->title;
+                            $form->procuring_entity_name=!empty($tender->procuringEntity->identifier->legalName) ? $tender->procuringEntity->identifier->legalName : $tender->procuringEntity->name;
+                            $form->procuring_entity_code=$tender->procuringEntity->identifier->id;
+
+                            $form->save();
+                        } else {
+                            $response = false;
+                        }
                     }
                     else
                         $response=false;
