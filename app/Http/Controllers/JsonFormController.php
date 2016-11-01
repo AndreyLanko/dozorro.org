@@ -56,6 +56,8 @@ class JsonFormController extends BaseController
                 
                 if($response)
                 {
+                    $user = User::data();
+
                     $PageController=app('App\Http\Controllers\PageController');
                     $PageController->search_type='tender';
 

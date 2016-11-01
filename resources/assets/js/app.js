@@ -150,7 +150,9 @@ var APP,
 
                                                         $('#my_popup .success').addClass('hidden');
                                                         $('#my_popup form').trigger('reset').removeClass('hidden');
-                                                    }, 3000);
+
+                                                        window.location.reload();
+                                                    }, 4000);
                                                 } else {
                                                     $('#my_popup .error').removeClass('hidden');
                                                     $('#my_popup form').addClass('hidden');
@@ -158,7 +160,7 @@ var APP,
                                                     setTimeout(function () {
                                                         $('#my_popup .error').addClass('hidden');
                                                         $('#my_popup form').trigger('reset').removeClass('hidden');
-                                                    }, 3000);
+                                                    }, 4000);
                                                 }
                     						}
                     					});

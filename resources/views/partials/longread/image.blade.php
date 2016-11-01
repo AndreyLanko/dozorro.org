@@ -7,7 +7,7 @@
             <figure>
                 <img src="{{ env('BACKEND_URL') }}{{ $data->image->path }}" width="100%">
                 @if(!empty($data->image_text))
-                    <figcaption>{{ $data->image_text }}</figcaption>
+                    <figcaption><p>{{ $data->image_text }}</p></figcaption>
                 @endif
             </figure>
         </div>

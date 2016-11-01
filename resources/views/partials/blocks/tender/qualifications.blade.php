@@ -4,7 +4,7 @@
             <h3>Протокол розгляду</h3>
 
             @if(1!=1 && in_array($item->status, ['active.pre-qualification.stand-still', 'active.auction', 'active.qualification', 'active.awarded', 'active', 'cancelled', 'unsuccessful', 'complete']))
-                <div style="margin-top:-10px;margin-bottom:40px">Друкувати реєстр отриманих тендерних пропозицій <a href="{{href('tender/'.$item->tenderID.'/print/qualifications/pdf')}}" target="_blank">PDF</a> ● <a href="{{href('tender/'.$item->tenderID.'/print/qualifications/html')}}" target="_blank">HTML</a></div>
+                <div style="margin-top:-10px;margin-bottom:40px">Друкувати реєстр отриманих тендерних пропозицій <a href="{{('tender/'.$item->tenderID.'/print/qualifications/pdf')}}" target="_blank">PDF</a> ● <a href="{{('tender/'.$item->tenderID.'/print/qualifications/html')}}" target="_blank">HTML</a></div>
             @endif
 
             <table class="table table-striped margin-bottom small-text">

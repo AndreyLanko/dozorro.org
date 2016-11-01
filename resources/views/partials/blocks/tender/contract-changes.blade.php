@@ -40,7 +40,7 @@
                                     Друкувати повідомлення про внесення змін до договору:
 	                            </td>
 	                            <td class="col-sm-4">
-    	                                <a href="{{href('tender/'.$item->tenderID.'/print/contract-changes/pdf/'.(!empty($item->lots) && sizeof($item->lots)==1 ? $item->lots[0]->id : $item->id).'?contract='.$document->id)}}" target="_blank">PDF</a> ● <a href="{{href('tender/'.$item->tenderID.'/print/contract-changes/html/'.(!empty($item->lots) && sizeof($item->lots)==1 ? $item->lots[0]->id : $item->id).'?contract='.$document->id)}}" target="_blank">HTML</a>
+    	                                <a href="{{('tender/'.$item->tenderID.'/print/contract-changes/pdf/'.(!empty($item->lots) && sizeof($item->lots)==1 ? $item->lots[0]->id : $item->id).'?contract='.$document->id)}}" target="_blank">PDF</a> ● <a href="{{('tender/'.$item->tenderID.'/print/contract-changes/html/'.(!empty($item->lots) && sizeof($item->lots)==1 ? $item->lots[0]->id : $item->id).'?contract='.$document->id)}}" target="_blank">HTML</a>
 	                            </td>
 	                        </tr>
 	                    </tbody>
