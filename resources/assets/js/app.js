@@ -175,10 +175,6 @@ var APP,
                                         return false;
                                     }
 
-                                    if(errors){
-                                        console.log('Validation errors', errors);
-                                    }
-
                                     return !errors;
                                 };
 
