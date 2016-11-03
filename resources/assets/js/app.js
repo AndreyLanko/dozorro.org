@@ -148,8 +148,12 @@ var APP,
                                                     setTimeout(function () {
                                                         $('.my_popup_close').trigger('click');
 
-                                                        $('#my_popup .success').addClass('hidden');
-                                                        $('#my_popup form').trigger('reset').removeClass('hidden');
+                                                        //Костыль, что-бы убрать моргание
+                                                        setTimeout(function () {
+                                                            $('#my_popup .success').addClass('hidden');
+                                                            $('#jsonform-0-elt-generalScore .radio').removeClass('active');
+                                                            $('#my_popup form').trigger('reset').removeClass('hidden');
+                                                        }, 1000);
                                                     }, 3000);
                                                 } else {
                                                     $('#my_popup .error').removeClass('hidden');
@@ -165,6 +169,12 @@ var APP,
                                 };
 
                                 form.onSubmit=function(errors, values) {
+                                    if (!values.generalComment || values.generalComment.length < 30) {
+                                        $('[name=generalComment]').next().removeAttr('style').text('Поле обов`язкове до заповнення, та повине мати довжину більше 30 символів');
+
+                                        return false;
+                                    }
+
                                     if(errors){
                                         console.log('Validation errors', errors);
                                     }
