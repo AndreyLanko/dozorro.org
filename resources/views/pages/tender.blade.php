@@ -131,7 +131,7 @@
                                 <span class="reviews__author reviews__author--{{ $review->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->created_at->format('d.m.Y H:i') }}</span>
                             </div>
                             <div class="reviews__body">
-                                <p>{!! nl2br(trim($review->comment)) !!}</p>
+                                <p>{!! nl2br(trim(strip_tags($review->comment))) !!}</p>
                             </div>
                             <div class="reviews__footer">
                                 <div class="reviews__stars">
