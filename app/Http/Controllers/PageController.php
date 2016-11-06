@@ -76,20 +76,21 @@ class PageController extends BaseController
         return Redirect::to(str_replace('/search', '/tender/search', Request::fullUrl()), 301);
     }
     
-    public function search($search_type='tender')
+    public function search(\Illuminate\Http\Request $request, $search_type='tender')
     {
         $this->search_type=$this->get_search_type($search_type);
         list($query_array, $preselected_values)=$this->parse_search_query();
 
         $result='';
 
-        if(!empty($query_array))
-        {
-            $FormController=app('App\Http\Controllers\FormController');
-            $FormController->search_type=$this->search_type;
-
-            $result=$FormController->getSearchResultsHtml($query_array);
+        if(empty($query_array)) {
+            return redirect($request->fullUrl() . '?tid=&query=');
         }
+
+        $FormController=app('App\Http\Controllers\FormController');
+        $FormController->search_type=$this->search_type;
+
+        $result = $FormController->getSearchResultsHtml($query_array);
 
         $data = [
             'search_type' => $this->search_type,
@@ -106,7 +107,6 @@ class PageController extends BaseController
         $preselected_values=[];
         $query_array=[];
         $query_string=trim(Request::server('QUERY_STRING'), '&');
-
         $result='';
 
         if($query_string)
