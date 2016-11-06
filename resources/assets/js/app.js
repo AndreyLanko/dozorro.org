@@ -141,34 +141,36 @@ var APP,
                     						dataType: 'json',
                     						headers: APP.utils.csrf(),
                     						success: function(response){
-                                                if (response) {
-                                                    $('#my_popup .success').removeClass('hidden');
-                                                    $('#my_popup form').addClass('hidden');
+                                            if (response) {
+                                                $('#my_popup .success').removeClass('hidden');
+                                                $('#my_popup form').addClass('hidden');
 
-                                                    setTimeout(function () {
-                                                        $('.my_popup_close').trigger('click');
+                                                setTimeout(function () {
+                                                    $('.my_popup_close').trigger('click');
 
-                                                        $('#my_popup .success').addClass('hidden');
-                                                        $('#my_popup form').trigger('reset').removeClass('hidden');
+                                                    $('#my_popup .success').addClass('hidden');
+                                                    $('#my_popup form').trigger('reset').removeClass('hidden');
 
-                                                        window.location.reload();
-                                                    }, 4000);
-                                                } else {
-                                                    $('#my_popup .error').removeClass('hidden');
-                                                    $('#my_popup form').addClass('hidden');
+                                                    window.location.reload();
+                                                }, 3000);
+                                            } else {
+                                                $('#my_popup .error').removeClass('hidden');
+                                                $('#my_popup form').addClass('hidden');
 
-                                                    setTimeout(function () {
-                                                        $('#my_popup .error').addClass('hidden');
-                                                        $('#my_popup form').trigger('reset').removeClass('hidden');
-                                                    }, 4000);
-                                                }
+                                                setTimeout(function () {
+                                                    $('#my_popup .error').addClass('hidden');
+                                                    $('#my_popup form').trigger('reset').removeClass('hidden');
+                                                }, 4000);
+                                            }
                     						}
                     					});
                                 };
 
                                 form.onSubmit=function(errors, values) {
-                                    if(errors){
-                                        console.log('Validation errors', errors);
+                                    if (!values.generalComment || values.generalComment.length < 30) {
+                                        $('[name=generalComment]').closest('.controls').find('.jsonform-errortext').removeAttr('style').text('Поле обов`язкове до заповнення, та повине мати довжину більше 30 символів');
+
+                                        return false;
                                     }
 
                                     return !errors;
