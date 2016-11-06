@@ -128,10 +128,10 @@
                     @foreach ($reviews as $review)
                         <div class="reviews__item">
                             <div class="reviews__header">
-                                <span class="reviews__author reviews__author--{{ $review->user_name ? '':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->created_at->format('d.m.Y H:i') }}</span>
+                                <span class="reviews__author reviews__author--{{ $review->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->created_at->format('d.m.Y H:i') }}</span>
                             </div>
                             <div class="reviews__body">
-                                <p>{{ nl2br(trim($review->comment)) }}</p>
+                                <p>{!! nl2br(trim($review->comment)) !!}</p>
                             </div>
                             <div class="reviews__footer">
                                 <div class="reviews__stars">
