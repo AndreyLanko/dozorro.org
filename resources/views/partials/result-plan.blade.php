@@ -1,6 +1,6 @@
 <tr>
     <td>
-        <a href="{{href('plan/'.$item->planID)}}">
+        <a href="/plan/{{ $item->planID }}">
             @if(!empty($item->procuringEntity->identifier->legalName))
                 {{$item->procuringEntity->identifier->legalName}}<br>
             @elseif(!empty($item->procuringEntity->name))
