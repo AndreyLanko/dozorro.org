@@ -100,6 +100,16 @@ var APP,
             },
 
             js: {
+                disableSearchButton: function (_self) {
+                    $('input[id="btn-find"]').prop('disabled', true);
+                    $('input[id="tender-number"], input[id="tender-customer"]').keyup(function () {
+                        if ($(this).val() != '') {
+                            $('input[id="btn-find"]').prop('disabled', false);
+                        } else {
+                            $('input[id="btn-find"]').prop('disabled', true);
+                        }
+                    });
+                },
                 imageSlider: function(_self){
                     _self.slick({
                         dots: true,
@@ -1188,17 +1198,17 @@ var APP,
     /**
      * Check values of text inputs and disable button
      */
-    $(function()
-    {
-        $('input[id="btn-find"]').prop('disabled', true);
-        $('input[id="tender-number"], input[id="tender-customer"]').keyup(function () {
-            if ($(this).val() != '') {
-                $('input[id="btn-find"]').prop('disabled', false);
-            } else {
-                $('input[id="btn-find"]').prop('disabled', true);
-            }
-        });
-    });
+    // $(function()
+    // {
+    //     $('input[id="btn-find"]').prop('disabled', true);
+    //     $('input[id="tender-number"], input[id="tender-customer"]').keyup(function () {
+    //         if ($(this).val() != '') {
+    //             $('input[id="btn-find"]').prop('disabled', false);
+    //         } else {
+    //             $('input[id="btn-find"]').prop('disabled', true);
+    //         }
+    //     });
+    // });
 
 })(window);
 

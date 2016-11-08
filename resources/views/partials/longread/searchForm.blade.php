@@ -9,7 +9,7 @@
                         @endif
                     </div>
                     <div class="col-md-6">
-                        <div class="c-find-form__inputs-wrap">
+                        <div class="c-find-form__inputs-wrap" data-js="disableSearchButton">
                             <div class="c-find-form__input-group">
                                 <input id="tender-number" type="text" name="tid" class="jsGetInputVal">
                                 <label for="tenderNumber">Номер тендеру</label>
