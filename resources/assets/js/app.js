@@ -58,7 +58,7 @@ var APP,
             return {width: e[a + 'Width'], height: e[a + 'Height']};
         };
 
-        return {
+        var methods =  {
             common: function(){
                 $('html').removeClass('no-js');
 
@@ -97,73 +97,94 @@ var APP,
                         }
                     }
                 });
-            },
 
-            js: {
-                form_review: function(_self){
-                    var findFormShema = function(top) {
-                        if ('form' in top && 'properties' in top) {
-                            top['schema'] = top['properties'];
-                            
-                            delete top['properties'];
-                            return top;
+                $('.form-review').on('submit', function (e) {
+                    var is_main_form = $(this).data('is-main');
+                    var values = $(this).serializeArray();
+                    var result = {};
+
+                    console.log($(this));
+
+                    if (!is_main_form) {
+                        e.preventDefault();
+                    }
+
+                    for (var item in values) {
+                        result[values[item]['name']] = values[item]['value']
+                    }
+
+                    $.ajax({
+                        method: 'POST',
+                        data: {
+                            form: result,
+                            tender_id: $(this).data('id'),
+                            tender_public_id: $(this).data('public-id')
+                        },
+                        url: $(this).attr('action'),
+                        dataType: 'json',
+                        headers: APP.utils.csrf(),
+                        success: function(response){
+                            if (response && is_main_form) {
+                                $('#form-f102').find('input[type=submit]').trigger('click');
+                                $('#form-f103').find('input[type=submit]').trigger('click');
+
+                                $('#my_popup .success').removeClass('hidden');
+                                $('#my_popup form').addClass('hidden');
+
+                                setTimeout(function () {
+                                    $('.my_popup_close').trigger('click');
+
+                                    $('#my_popup .success').addClass('hidden');
+                                    $('#my_popup form').trigger('reset').removeClass('hidden');
+
+                                    // window.location.reload();
+                                }, 3000);
+                            } else {
+                                $('#my_popup .error').removeClass('hidden');
+                                $('#my_popup form').addClass('hidden');
+
+                                setTimeout(function () {
+                                    $('#my_popup .error').addClass('hidden');
+                                    $('#my_popup form').trigger('reset').removeClass('hidden');
+                                }, 4000);
+                            }
                         }
-                        
-                        if (top && typeof top == 'object') {
-                            for (var key in top) {
-                                var res = null;
-                                if (typeof top[key] == 'object'){
-                                    if (res = findFormShema(top[key])){
-                                        return res;
-                                    }
+                    });
+                });
+            },
+            forms: {
+                findFormShema: function(top) {
+                    if ('form' in top && 'properties' in top) {
+                        top['schema'] = top['properties'];
+
+                        delete top['properties'];
+                        return top;
+                    }
+
+                    if (top && typeof top == 'object') {
+                        for (var key in top) {
+                            var res = null;
+                            if (typeof top[key] == 'object'){
+                                if (res = methods.forms.findFormShema(top[key])){
+                                    return res;
                                 }
                             }
                         }
-                        
-                        return null;
-                    };
+                    }
 
+                    return null;
+                },
+                getSchema: function (_self, url, is_main) {
                     $.ajax({
-                        url: '/sources/forms/F101.json',
+                        url: url,
                         success: function(json){
-                            var form=findFormShema(json);
+                            var form = methods.forms.findFormShema(json);
 
-                            if(form){
+
+                            if(form && is_main){
+                                console.log('in');
+
                                 form.onSubmitValid=function (values) {
-                                    $.ajax({
-                    						method: 'POST',
-                    						data: {
-                        						form: values,
-                        						tender_id: _self.data('id'),
-                        						tender_public_id: _self.data('public-id')
-                        				    },
-                    						url: _self.attr('action'),
-                    						dataType: 'json',
-                    						headers: APP.utils.csrf(),
-                    						success: function(response){
-                                            if (response) {
-                                                $('#my_popup .success').removeClass('hidden');
-                                                $('#my_popup form').addClass('hidden');
-
-                                                setTimeout(function () {
-                                                    $('.my_popup_close').trigger('click');
-
-                                                    $('#my_popup .success').addClass('hidden');
-                                                    $('#my_popup form').trigger('reset').removeClass('hidden');
-
-                                                    window.location.reload();
-                                                }, 3000);
-                                            } else {
-                                                $('#my_popup .error').removeClass('hidden');
-                                                $('#my_popup form').addClass('hidden');
-
-                                                setTimeout(function () {
-                                                    $('#my_popup .error').addClass('hidden');
-                                                    $('#my_popup form').trigger('reset').removeClass('hidden');
-                                                }, 4000);
-                                            }
-                    						}
-                    					});
                                 };
 
                                 form.onSubmit=function(errors, values) {
@@ -175,12 +196,25 @@ var APP,
 
                                     return !errors;
                                 };
+                            }
 
+                            if (form) {
                                 _self.jsonForm(form);
                             }
                         },
                         dataType: 'json'
                     });
+                }
+            },
+            js: {
+                F101: function(_self){
+                    methods.forms.getSchema(_self, '/sources/forms/' + _self.data('js') + ".json", true);
+                },
+                F102: function(_self){
+                    methods.forms.getSchema(_self, '/sources/forms/' + _self.data('js') + ".json", false);
+                },
+                F103: function(_self){
+                    methods.forms.getSchema(_self, '/sources/forms/' + _self.data('js') + ".json", false);
                 },
                 feedback_thanks: function(_self){
                     var send_more=_self.find('.send-more'),
@@ -1163,6 +1197,8 @@ var APP,
                 }
             }
         };
+
+        return methods;
     }());
 
     APP.common();
