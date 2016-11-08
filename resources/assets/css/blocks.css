@@ -79,6 +79,37 @@ body {
 	overflow: hidden;
 	width: 100%;
 }
+.c-main-slider__link-wrap {
+	padding-top: 20px;
+}
+.c-main-slider__link {
+	font-family: 'ProximaNovaBold';
+  width: auto;
+  padding: 0 30px;
+  height: 64px;
+  display: inline-block;
+  border-radius: 2px;
+  background-color: #e55166;
+  border: none;
+  font-size: 16px;
+  color: #000000;
+  line-height: 64px;
+  min-width: 150px;
+  color: white;
+  transition: 0.1s;
+}
+.c-main-slider__link:hover {
+	background: #b14555;
+	transition: 0.3s;
+}
+.c-main-slider__link,
+.c-main-slider__link:hover,
+.c-main-slider__link:focus,
+.c-main-slider__link:active {
+	outline: none;
+	text-decoration: none;
+	color: white;
+}
 .c-main-slider__slider .slick-arrow {
 	display: none !important;
 }
@@ -157,6 +188,8 @@ body {
 	text-align: center;
 	height: 390px;
 	width: 100%;
+	padding-top: 40px;
+	padding-bottom: 40px;
 }
 .c-main-slider h1 {
 	font-family: 'ProximaNovaBlack';
@@ -252,6 +285,11 @@ body {
   line-height: 1.25;
   float: right;
   min-width: 150px;
+  transition: 0.1s;
+}
+.c-find-form input[type="submit"]:hover {
+  background-color: rgba(256, 256, 256, 0.8);
+	transition: 0.3s;
 }
 /* END c-find-form */
 
@@ -281,6 +319,9 @@ body {
 	font-family: 'ProximaNova';
 	background-color: #ededed;
 }
+.c-footer__nav-list {
+	text-align: left;
+}
 .c-footer .container {
 	padding-top: 22px;
 	padding-bottom: 80px;
@@ -295,6 +336,7 @@ body {
 }
 .c-footer__nav-list {
 	list-style: none;
+	padding-left: 0;
 	margin: 0;
 }
 .c-footer__nav-list li {
@@ -447,6 +489,9 @@ body {
 	margin: 0 auto;
 	text-align: left;
 }
+.c-text .container > ul {
+	max-width: 800px;
+}
 .c-text h1 {
 	font-family: 'ProximaNovaBlack';
 	color: black;
@@ -540,7 +585,7 @@ body {
 .c-text ul li {
 	display: block;
 	position: relative;
-	padding-left: 80px;
+	padding-left: 50px;
 } 
 .c-text ul li:before {
 	content: '';
@@ -704,12 +749,20 @@ body {
 	background-color: rgba(0, 0, 0, 1);
 }
 /* END c-bgimg */
-
+@media screen and (max-width: 1199px) {
+	.c-header__nav-list {
+		padding-left: 20px;
+	}
+	.c-header__nav-list li {
+		padding: 0 15px;
+	}
+}
 @media screen and (max-width: 991px) {
 	.tender-header__review-button {
 		display: none;
 	}
 }
+
 /*  */
 
 /* END  */

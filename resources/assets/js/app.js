@@ -29,7 +29,7 @@ var APP,
     KEY_CMD = IS_MAC ? 91 : 17,
     
     spin_options={
-        color:'#6dc8eb',
+        color:'#e55166',
         lines: 15,
         width: 2
     },
@@ -103,7 +103,6 @@ var APP,
                     var values = $(this).serializeArray();
                     var result = {};
 
-                    console.log($(this));
 
                     if (!is_main_form) {
                         e.preventDefault();
@@ -123,7 +122,7 @@ var APP,
                         url: $(this).attr('action'),
                         dataType: 'json',
                         headers: APP.utils.csrf(),
-                        success: function(response){
+                        success: function (response) {
                             if (response && is_main_form) {
                                 $('#form-f102').find('input[type=submit]').trigger('click');
                                 $('#form-f103').find('input[type=submit]').trigger('click');
@@ -150,7 +149,7 @@ var APP,
                             }
                         }
                     });
-                });
+                })
             },
             forms: {
                 findFormShema: function(top) {
@@ -182,7 +181,6 @@ var APP,
 
 
                             if(form && is_main){
-                                console.log('in');
 
                                 form.onSubmitValid=function (values) {
                                 };
@@ -207,6 +205,32 @@ var APP,
                 }
             },
             js: {
+                disableSearchButton: function (_self) {
+                    $('input[id="btn-find"]').prop('disabled', true);
+                    $('input[id="tender-number"], input[id="tender-customer"]').keyup(function () {
+                        if ($(this).val() != '') {
+                            $('input[id="btn-find"]').prop('disabled', false);
+                        } else {
+                            $('input[id="btn-find"]').prop('disabled', true);
+                        }
+                    });
+                },
+                imageSlider: function(_self){
+                    _self.slick({
+                        dots: true,
+                        autoplay: _self.data('autoplay')
+                    });
+                },
+                form_review: function(_self) {
+                    var findFormShema = function (top) {
+                        if ('form' in top && 'properties' in top) {
+                            top['schema'] = top['properties'];
+
+                            delete top['properties'];
+                            return top;
+                        }
+                    }
+                },
                 F101: function(_self){
                     methods.forms.getSchema(_self, '/sources/forms/' + _self.data('js') + ".json", true);
                 },
@@ -1214,6 +1238,21 @@ var APP,
             }
         });
     });
+
+    /**
+     * Check values of text inputs and disable button
+     */
+    // $(function()
+    // {
+    //     $('input[id="btn-find"]').prop('disabled', true);
+    //     $('input[id="tender-number"], input[id="tender-customer"]').keyup(function () {
+    //         if ($(this).val() != '') {
+    //             $('input[id="btn-find"]').prop('disabled', false);
+    //         } else {
+    //             $('input[id="btn-find"]').prop('disabled', true);
+    //         }
+    //     });
+    // });
 
 })(window);
 

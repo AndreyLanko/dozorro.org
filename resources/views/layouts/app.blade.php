@@ -129,10 +129,6 @@ $('.tender-header__link').click(function( event ) {
     });
 });
 
-$('.jsMainSlider').slick({
-	dots: true
-});
-
 $('.jsGetInputVal').change(function() {
 	
 	if($(this).val().length >= 1) {
