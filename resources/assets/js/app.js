@@ -100,6 +100,22 @@ var APP,
             },
 
             js: {
+                disableSearchButton: function (_self) {
+                    $('input[id="btn-find"]').prop('disabled', true);
+                    $('input[id="tender-number"], input[id="tender-customer"]').keyup(function () {
+                        if ($(this).val() != '') {
+                            $('input[id="btn-find"]').prop('disabled', false);
+                        } else {
+                            $('input[id="btn-find"]').prop('disabled', true);
+                        }
+                    });
+                },
+                imageSlider: function(_self){
+                    _self.slick({
+                        dots: true,
+                        autoplay: _self.data('autoplay')
+                    });
+                },
                 form_review: function(_self){
                     var findFormShema = function(top) {
                         if ('form' in top && 'properties' in top) {
@@ -1178,6 +1194,21 @@ var APP,
             }
         });
     });
+
+    /**
+     * Check values of text inputs and disable button
+     */
+    // $(function()
+    // {
+    //     $('input[id="btn-find"]').prop('disabled', true);
+    //     $('input[id="tender-number"], input[id="tender-customer"]').keyup(function () {
+    //         if ($(this).val() != '') {
+    //             $('input[id="btn-find"]').prop('disabled', false);
+    //         } else {
+    //             $('input[id="btn-find"]').prop('disabled', true);
+    //         }
+    //     });
+    // });
 
 })(window);
 
