@@ -22,3 +22,12 @@
         </div>
     </div>
 @endif
+
+<script>
+    window.onload = function () {
+        $('.jsMainSlider').slick({
+            dots: true,
+            autoplay: '{{ $data->is_autoplay }}'
+        });
+    }
+</script>
