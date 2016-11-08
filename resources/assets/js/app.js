@@ -100,6 +100,12 @@ var APP,
             },
 
             js: {
+                imageSlider: function(_self){
+                    _self.slick({
+                        dots: true,
+                        autoplay: _self.data('autoplay')
+                    });
+                },
                 form_review: function(_self){
                     var findFormShema = function(top) {
                         if ('form' in top && 'properties' in top) {
