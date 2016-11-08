@@ -253,6 +253,9 @@ body {
   float: right;
   min-width: 150px;
 }
+.c-find-form input[type="submit"][disabled]{
+    opacity: .5;
+}
 /* END c-find-form */
 
 /* c-top-items */
