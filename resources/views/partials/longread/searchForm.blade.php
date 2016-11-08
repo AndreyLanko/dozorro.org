@@ -11,18 +11,18 @@
                     <div class="col-md-6">
                         <div class="c-find-form__inputs-wrap">
                             <div class="c-find-form__input-group">
-                                <input type="text" name="tid" class="jsGetInputVal">
+                                <input id="tender-number" type="text" name="tid" class="jsGetInputVal">
                                 <label for="tenderNumber">Номер тендеру</label>
                             </div>
                             <span class="c-find-form__or-word">або</span>
                             <div class="c-find-form__input-group">
-                                <input type="text" name="query" class="jsGetInputVal">
+                                <input id="tender-customer" type="text" name="query" class="jsGetInputVal">
                                 <label for="tenderCustomer">Замовник</label>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <input type="submit" value="Шукати">
+                        <input id="btn-find" type="submit" value="Шукати">
                     </div>
                 </div>
             </form>

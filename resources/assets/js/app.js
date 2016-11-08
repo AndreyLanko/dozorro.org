@@ -1185,6 +1185,21 @@ var APP,
         });
     });
 
+    /**
+     * Check values of text inputs and disable button
+     */
+    $(function()
+    {
+        $('input[id="btn-find"]').prop('disabled', true);
+        $('input[id="tender-number"], input[id="tender-customer"]').keyup(function () {
+            if ($(this).val() != '') {
+                $('input[id="btn-find"]').prop('disabled', false);
+            } else {
+                $('input[id="btn-find"]').prop('disabled', true);
+            }
+        });
+    });
+
 })(window);
 
 String.prototype.trunc = String.prototype.trunc || function(n){
