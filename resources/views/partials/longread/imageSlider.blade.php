@@ -1,6 +1,6 @@
 @if (!empty($data->images))
     <div class="c-main-slider">
-        <div class="c-main-slider__slider jsMainSlider">
+        <div class="c-main-slider__slider jsMainSlider" data-js="imageSlider" data-autoplay="{{ !empty($data->is_autoplay) ? $data->is_autoplay : false }}">
             @foreach($data->images as $image)
                 <div class="c-main-slider__slide" style="background-image: url('{{env('BACKEND_URL')}}{{ $image->path }}');">
                     <div class="c-main-slider__slide-bgcolor c-main-slider__slide-bgcolor--opacity-05">
@@ -22,12 +22,3 @@
         </div>
     </div>
 @endif
-
-<script>
-    window.onload = function () {
-        $('.jsMainSlider').slick({
-            dots: true,
-            autoplay: '{{ $data->is_autoplay }}'
-        });
-    }
-</script>
