@@ -15,7 +15,7 @@
                                     @endif
                                 </div>
                             </div>
-                        </div>data-autoplay
+                        </div>
                     </div>
                 </div>
             @endforeach
