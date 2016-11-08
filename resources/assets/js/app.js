@@ -29,7 +29,7 @@ var APP,
     KEY_CMD = IS_MAC ? 91 : 17,
     
     spin_options={
-        color:'#6dc8eb',
+        color:'#e55166',
         lines: 15,
         width: 2
     },

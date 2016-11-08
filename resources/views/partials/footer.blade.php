@@ -4,7 +4,7 @@
             <div class="col-md-3">
                 <p class="c-footer__copy">© 2016 Dozorro. Всі права захищено.</p>
             </div>
-            <div class="col-md-6 c-footer__nav-col">
+            <div class="col-md-9 c-footer__nav-col">
                 @if(!empty($menu))
                     <ul class="c-footer__nav-list">
                         @foreach($menu as $item)
@@ -14,9 +14,6 @@
                         @endforeach
                     </ul>
                 @endif
-            </div>
-            <div class="col-md-3">
-                
             </div>
         </div>
     </div>

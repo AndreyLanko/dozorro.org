@@ -89,7 +89,10 @@ body, .row .search-form--filter--show-type li a, .price-description {
 	font-family: /*'Agora_Sans_Pro_Light', */Helvetica, sans-serif;
 }
 a {
-    color: #0099cc;
+    color: #e55166;
+}
+a:hover {
+    color: #e55166;
 }
 .none{
 	display: none;
@@ -1001,7 +1004,7 @@ a:hover .sprite-pen-icon, .active .sprite-pen-icon, .sprite-pen-icon-a {
 	opacity: 1;
 }
 .show-more.loading {
-	color: #6DC8EB;
+	color: #e55166;
 }
 .show-more.loading:before {
 	-webkit-opacity: 0;

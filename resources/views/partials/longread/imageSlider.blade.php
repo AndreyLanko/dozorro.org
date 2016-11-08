@@ -13,6 +13,11 @@
                                     @if(!empty($image->description))                                    
                                         <p>{{ $image->description }}</p>
                                     @endif
+                                    @if(!empty($image->button_title))
+                                        <div class="c-main-slider__link-wrap">
+                                            <a href="#" class="c-main-slider__link">Перейти</a>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
