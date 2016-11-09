@@ -291,6 +291,9 @@ body {
   background-color: rgba(256, 256, 256, 0.8);
 	transition: 0.3s;
 }
+.c-find-form input[type="submit"][disabled]{
+    opacity: .5;
+}
 /* END c-find-form */
 
 /* c-top-items */
