@@ -54,4 +54,12 @@ class JsonForm extends Model
 
         return $data->generalComment;
     }
+
+    /**
+     * @return objetc
+     */
+    public function getJsonAttribute()
+    {
+        return json_decode($this->data);
+    }
 }

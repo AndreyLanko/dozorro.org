@@ -58,7 +58,7 @@ var APP,
             return {width: e[a + 'Width'], height: e[a + 'Height']};
         };
 
-        return {
+        var methods =  {
             common: function(){
                 $('html').removeClass('no-js');
 
@@ -98,7 +98,6 @@ var APP,
                     }
                 });
             },
-
             js: {
                 disableSearchButton: function (_self) {
                     $('input[id="btn-find"]').prop('disabled', true);
@@ -114,88 +113,6 @@ var APP,
                     _self.slick({
                         dots: true,
                         autoplay: _self.data('autoplay')
-                    });
-                },
-                form_review: function(_self){
-                    var findFormShema = function(top) {
-                        if ('form' in top && 'properties' in top) {
-                            top['schema'] = top['properties'];
-                            
-                            delete top['properties'];
-                            return top;
-                        }
-                        
-                        if (top && typeof top == 'object') {
-                            for (var key in top) {
-                                var res = null;
-                                if (typeof top[key] == 'object'){
-                                    if (res = findFormShema(top[key])){
-                                        return res;
-                                    }
-                                }
-                            }
-                        }
-                        
-                        return null;
-                    };
-
-                    $.ajax({
-                        url: '/sources/forms/F101.json',
-                        success: function(json){
-                            var form=findFormShema(json);
-
-                            if(form){
-                                form.onSubmitValid=function (values) {
-                                    $.ajax({
-                    						method: 'POST',
-                    						data: {
-                        						form: values,
-                        						tender_id: _self.data('id'),
-                        						tender_public_id: _self.data('public-id')
-                        				    },
-                    						url: _self.attr('action'),
-                    						dataType: 'json',
-                    						headers: APP.utils.csrf(),
-                    						success: function(response){
-                                            if (response) {
-                                                $('#my_popup .success').removeClass('hidden');
-                                                $('#my_popup form').addClass('hidden');
-
-                                                setTimeout(function () {
-                                                    $('.my_popup_close').trigger('click');
-
-                                                    $('#my_popup .success').addClass('hidden');
-                                                    $('#my_popup form').trigger('reset').removeClass('hidden');
-
-                                                    window.location.reload();
-                                                }, 3000);
-                                            } else {
-                                                $('#my_popup .error').removeClass('hidden');
-                                                $('#my_popup form').addClass('hidden');
-
-                                                setTimeout(function () {
-                                                    $('#my_popup .error').addClass('hidden');
-                                                    $('#my_popup form').trigger('reset').removeClass('hidden');
-                                                }, 4000);
-                                            }
-                    						}
-                    					});
-                                };
-
-                                form.onSubmit=function(errors, values) {
-                                    if (!values.generalComment || values.generalComment.length < 30) {
-                                        $('[name=generalComment]').closest('.controls').find('.jsonform-errortext').removeAttr('style').text('Поле обов`язкове до заповнення, та повине мати довжину більше 30 символів');
-
-                                        return false;
-                                    }
-
-                                    return !errors;
-                                };
-
-                                _self.jsonForm(form);
-                            }
-                        },
-                        dataType: 'json'
                     });
                 },
                 feedback_thanks: function(_self){
@@ -1179,6 +1096,8 @@ var APP,
                 }
             }
         };
+
+        return methods;
     }());
 
     APP.common();

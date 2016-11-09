@@ -3918,6 +3918,8 @@ actual styles
 .add-review-form {
 	display: none;
 	font-family: 'ProximaNova';
+	width:100%;
+	height:100%;
 }
 .add-review-form__h2 {
 	margin: 0;

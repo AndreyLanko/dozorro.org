@@ -75,19 +75,48 @@
             </div>
 
             <div class="add-review-form" id="my_popup">
-                <div class="container">
+                <div style="width:100%;height:100%;position:absolute; z-index:1; top:0px; left:0px;display:none; background-color: rgba(255,255,255,.7)" loader></div>
+                <div class="container" style="position:relative">
                     <div class="add-review-form__content">
                         @if (\App\Classes\User::isAuth())
                             <button class="add-review-form__close-button my_popup_close"></button>
-                            <h2 class="add-review-form__h2">Ваш відгук</h2>
-                            <form id="form" data-js="form_review" action="/jsonforms/review/" data-id="{{ $item->id }}" data-public-id="{{ $item->tenderID }}">
-                                <input type="submit" value="Залишити відгук">
-                            </form>
+                            <h1 class="tender-header__h1">Ваш відгук</h1>
+                            <div form-selector>
+                                <div class="form-selector-button">
+                                    <a href="" class="form-selector-button__link" data-formjs="jsonForm" data-form="F101" data-validate="formF101" data-generate="formF101">Умови закупівлі</a>
+                                </div>
+                                <div class="form-selector-button">
+                                    <a href="" class="form-selector-button__link" data-formjs="jsonForm" data-form="F102+F103+F104+F105">Рішення по вибору переможця</a>
+                                </div>
+                            </div>
 
-                            <div class="success hidden">
+                            <div form-container data-tender-id="{{ $item->id }}" data-tender-public-id="{{ $item->tenderID }}">
+                            </div>
+
+                            <br>
+                            {{--
+                            <div class="tender-form-button">
+                                <a href="" class="tender-header__link">Виконання договору з переможцем</a>
+                            </div>
+                            --}}
+                            
+                            
+                            {{--
+                            <form id="form-f101" class="" data-js="F101" data-is-main="true" action="/jsonforms/form101/" data-id="{{ $item->id }}" data-public-id="{{ $item->tenderID }}">
+                            </form>
+                            <form id="form-f102" class="form-review" data-js="F102" data-is-main="false" action="/jsonforms/form102/" data-id="{{ $item->id }}" data-public-id="{{ $item->tenderID }}">
+                                <input type="submit" id="submit-f102" class="hidden" value="Залишити відгук">
+                            </form>
+                            <form id="form-f103" class="form-review" data-js="F103" data-is-main="false" action="/jsonforms/form103/" data-id="{{ $item->id }}" data-public-id="{{ $item->tenderID }}">
+                                <input type="submit" id="submit-f103" class="hidden"  value="Залишити відгук">
+                            </form>
+                            <input type="submit" id="submit-f101" form="form-f101" value="Залишити відгук">
+                            --}}
+                            
+                            <div class="success" form-success>
                                 Дякуємо за відгук
                             </div>
-                            <div class="error hidden">
+                            <div class="error" form-error>
                                 Під час відправки форми сталася помилка
                             </div>
                         @else
@@ -130,27 +159,7 @@
                             <div class="reviews__header">
                                 <span class="reviews__author reviews__author--{{ $review->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->created_at->format('d.m.Y H:i') }}</span>
                             </div>
-                            <div class="reviews__body">
-                                <p>{!! nl2br(trim(strip_tags($review->comment))) !!}</p>
-                            </div>
-                            <div class="reviews__footer">
-                                <div class="reviews__stars">
-                                    <h3>Умови закупівлі:</h3>
-                                    <ul class="tender-stars tender-stars--{{ $review->rating }}">
-                                        <li></li><li></li><li></li><li></li><li></li>
-                                    </ul>
-                                </div>
-                                {{--
-                                <div class="reviews__useful-rating">
-                                    <h3>Відгук корисний для вас?</h3>
-                                      
-                                    <div class="reviews__useful-wrap">
-                                        <span class="reviews__useful-moji"></span>
-                                        <span class="reviews__useful-moji-rating-count">(15 оцінок)</span>
-                                    </div>
-                                </div>
-                                --}}
-                            </div>
+                            @include('partials/reviews/'.$review->model)
                         </div>
                     @endforeach
 

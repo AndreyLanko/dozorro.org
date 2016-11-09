@@ -97,6 +97,7 @@ elixir(function(mix) {
       'js/libs/selectize.js',
       'js/blocks/**/*.js',
       'js/stars.js',
+      'js/forms.js',
       'js/app.js'
     ],
     'public/assets/js/app.js',
