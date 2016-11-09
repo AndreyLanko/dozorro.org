@@ -75,11 +75,33 @@
             </div>
 
             <div class="add-review-form" id="my_popup">
-                <div class="container">
+                <div style="width:100%;height:100%;position:absolute; z-index:1; top:0px; left:0px;display:none; background-color: rgba(255,255,255,.7)" loader></div>
+                <div class="container" style="position:relative">
                     <div class="add-review-form__content">
                         @if (\App\Classes\User::isAuth())
                             <button class="add-review-form__close-button my_popup_close"></button>
-                            <h2 class="add-review-form__h2">Ваш відгук</h2>
+                            <h1 class="tender-header__h1">Ваш відгук</h1>
+                            <div form-selector>
+                                <div class="form-selector-button">
+                                    <a href="" class="form-selector-button__link" data-formjs="jsonForm" data-form="F101" data-validate="formF101" data-generate="formF101">Умови закупівлі</a>
+                                </div>
+                                <div class="form-selector-button">
+                                    <a href="" class="form-selector-button__link" data-formjs="jsonForm" data-form="F102+F103+F104+F105">Рішення по вибору переможця</a>
+                                </div>
+                            </div>
+
+                            <div form-container data-tender-id="{{ $item->id }}" data-tender-public-id="{{ $item->tenderID }}">
+                            </div>
+
+                            <br>
+                            {{--
+                            <div class="tender-form-button">
+                                <a href="" class="tender-header__link">Виконання договору з переможцем</a>
+                            </div>
+                            --}}
+                            
+                            
+                            {{--
                             <form id="form-f101" class="" data-js="F101" data-is-main="true" action="/jsonforms/form101/" data-id="{{ $item->id }}" data-public-id="{{ $item->tenderID }}">
                             </form>
                             <form id="form-f102" class="form-review" data-js="F102" data-is-main="false" action="/jsonforms/form102/" data-id="{{ $item->id }}" data-public-id="{{ $item->tenderID }}">
@@ -89,11 +111,12 @@
                                 <input type="submit" id="submit-f103" class="hidden"  value="Залишити відгук">
                             </form>
                             <input type="submit" id="submit-f101" form="form-f101" value="Залишити відгук">
-
-                            <div class="success hidden">
+                            --}}
+                            
+                            <div class="success" form-success>
                                 Дякуємо за відгук
                             </div>
-                            <div class="error hidden">
+                            <div class="error" form-error>
                                 Під час відправки форми сталася помилка
                             </div>
                         @else

@@ -8,6 +8,7 @@
             <li></li><li></li><li></li><li></li><li></li>
         </ul>
     </div>
+    {{--
     <div class="reviews__useful-rating">
         <h3>Відгук корисний для вас?</h3>
 
@@ -16,4 +17,5 @@
             <span class="reviews__useful-moji-rating-count">(? оцінок)</span>
         </div>
     </div>
+    --}}
 </div>

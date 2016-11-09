@@ -10,15 +10,20 @@ class JsonFormController extends BaseController
 {
     var $folder = '/sources/forms';
     var $forms = [
-        'form101' => 'F101.json',
-        'form102' => 'F102.json',
-        'form103' => 'F103.json',
+        'F101' => 'F101.json',
+        'F102' => 'F102.json',
+        'F103' => 'F103.json',
+        'F104' => 'F104.json',
+        'F105' => 'F105.json',
+        'F106' => 'F106.json',
     ];
 
     var $form;
     
-	public function submit($slug)
+	public function submit()
 	{
+        	$slug=Input::get('form_code');
+
 		if(!in_array($slug, array_keys($this->forms)))
 			abort(404);
 
@@ -98,6 +103,9 @@ class JsonFormController extends BaseController
             $user = User::data();
 
             if ($user) {
+                if(!Input::get('form'))
+                    return true;
+
                 $data = $this->data($jsonForm->getJsonContent(), $slug);
 
                 if (in_array($slug, ['form102', 'form103'])) {

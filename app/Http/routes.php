@@ -46,4 +46,4 @@ Route::post('feedback', 'FeedbackController@store');
 Route::get('json/platforms/{type}', 'JsonController@platforms');
 Route::get('json/announced', 'JsonController@announced_tenders');
 
-Route::post('jsonforms/{slug}', 'JsonFormController@submit');
+Route::post('jsonforms', 'JsonFormController@submit');

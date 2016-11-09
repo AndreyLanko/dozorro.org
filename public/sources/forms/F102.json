@@ -1,3 +1,4 @@
+
 {
   "type": "object",
   "title": "Procurement subject F102",
@@ -123,7 +124,7 @@
           "title": "Якість продукту",
           "items": [
             {
-              "key": "maxCompetition",
+              "key": "productQuality",
               "title": "Чи зрозуміло потенційному постачальнику товар якої якості очікує придбати замовник?",
               "type": "radios",
               "inline": true,
@@ -133,7 +134,7 @@
               }
             },
             {
-              "key": "maxCompetitionComment",
+              "key": "productQualityComment",
               "title": "Ваш коментар",
               "type": "textarea"
             }

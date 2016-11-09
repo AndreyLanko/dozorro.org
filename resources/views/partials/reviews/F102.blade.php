@@ -1,5 +1,5 @@
 <div class="reviews__body">
-    <h4>Чіткість/зрозумілість вимог до предмету закупівліі</h4>
+    <h4>Чіткість/зрозумілість вимог до предмету закупівлі</h4>
     @if(!empty($review->json->bestPriceComment) || !empty($review->json->bestPrice))
         <div class="reviews__body__one">
             <p><strong>Опис вимог</strong></p>
@@ -10,7 +10,6 @@
                 <p><em>Вимоги до предмету закупівлі дозволяють придбати якісний товар за оптимальну ціну</em></p>
             @endif
         </div>
-        <hr>
     @endif
     @if(!empty($review->json->maxCompetitionComment) || !empty($review->json->maxCompetition))
         <div class="reviews__body__one">
@@ -22,17 +21,17 @@
                 <p><em>Вимоги здатні забезпечити максимальну конкуренцію серед учасників</em></p>
             @endif
         </div>
-        <hr>
     @endif
-    @if(!empty($review->json->qualitativeComment))
+    @if(!empty($review->json->productQualityComment) || !empty($review->json->productQuality))
         <div class="reviews__body__one">
             <p><strong>Якість продукту</strong></p>
-            <p>{!! nl2br(trim(strip_tags($review->json->qualitativeComment))) !!}</p>
-            @if(!empty($review->json->qualitativeUnderstand))
+            @if(!empty($review->json->productQualityComment))
+                <p>{!! nl2br(trim(strip_tags($review->json->productQualityComment))) !!}</p>
+            @endif
+            @if(!empty($review->json->productQuality))
                 <p><em>Потенційному постачальнику зрозуміло товар якої якості очікує придбати замовник</em></p>
             @endif
         </div>
-        <hr>
     @endif
     @if(!empty($review->json->qualitativeCriteriaComment) || !empty($review->json->qualitativeCriteria))
         <div class="reviews__body__one">
@@ -46,6 +45,7 @@
         </div>
     @endif
 </div>
+{{--
 <div class="reviews__footer">
     <div class="reviews__useful-rating">
         <h3>Відгук корисний для вас?</h3>
@@ -56,3 +56,4 @@
         </div>
     </div>
 </div>
+--}}
