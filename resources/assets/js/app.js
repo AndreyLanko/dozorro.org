@@ -97,58 +97,17 @@ var APP,
                         }
                     }
                 });
-
+                
                 $('.form-review').on('submit', function (e) {
-                    var is_main_form = $(this).data('is-main');
+                    e.preventDefault();
                     var values = $(this).serializeArray();
                     var result = {};
-
-
-                    if (!is_main_form) {
-                        e.preventDefault();
-                    }
 
                     for (var item in values) {
                         result[values[item]['name']] = values[item]['value']
                     }
 
-                    $.ajax({
-                        method: 'POST',
-                        data: {
-                            form: result,
-                            tender_id: $(this).data('id'),
-                            tender_public_id: $(this).data('public-id')
-                        },
-                        url: $(this).attr('action'),
-                        dataType: 'json',
-                        headers: APP.utils.csrf(),
-                        success: function (response) {
-                            if (response && is_main_form) {
-                                $('#form-f102').find('input[type=submit]').trigger('click');
-                                $('#form-f103').find('input[type=submit]').trigger('click');
-
-                                $('#my_popup .success').removeClass('hidden');
-                                $('#my_popup form').addClass('hidden');
-
-                                setTimeout(function () {
-                                    $('.my_popup_close').trigger('click');
-
-                                    $('#my_popup .success').addClass('hidden');
-                                    $('#my_popup form').trigger('reset').removeClass('hidden');
-
-                                    window.location.reload();
-                                }, 3000);
-                            } else {
-                                $('#my_popup .error').removeClass('hidden');
-                                $('#my_popup form').addClass('hidden');
-
-                                setTimeout(function () {
-                                    $('#my_popup .error').addClass('hidden');
-                                    $('#my_popup form').trigger('reset').removeClass('hidden');
-                                }, 4000);
-                            }
-                        }
-                    });
+                    methods.forms.submitReviewForm($(this), result);
                 })
             },
             forms: {
@@ -183,6 +142,7 @@ var APP,
                             if(form && is_main){
 
                                 form.onSubmitValid=function (values) {
+                                    methods.forms.submitReviewForm(_self, values);
                                 };
 
                                 form.onSubmit=function(errors, values) {
@@ -201,6 +161,49 @@ var APP,
                             }
                         },
                         dataType: 'json'
+                    });
+                },
+                submitReviewForm: function (_self, values) {
+                    var is_main_form = _self.data('is-main');
+
+                    console.log(is_main_form);
+
+                    $.ajax({
+                        method: 'POST',
+                        data: {
+                            form: values,
+                            tender_id: _self.data('id'),
+                            tender_public_id: _self.data('public-id')
+                        },
+                        url: _self.attr('action'),
+                        dataType: 'json',
+                        headers: APP.utils.csrf(),
+                        success: function (response) {
+                            if (response && is_main_form) {
+                                $('#form-f102').find('input[type=submit]').trigger('click');
+                                $('#form-f103').find('input[type=submit]').trigger('click');
+
+                                $('#my_popup .success').removeClass('hidden');
+                                $('#my_popup form').addClass('hidden');
+
+                                setTimeout(function () {
+                                    $('.my_popup_close').trigger('click');
+
+                                    $('#my_popup .success').addClass('hidden');
+                                    $('#my_popup form').trigger('reset').removeClass('hidden');
+
+                                    window.location.reload();
+                                }, 3000);
+                            } else {
+                                $('#my_popup .error').removeClass('hidden');
+                                $('#my_popup form').addClass('hidden');
+
+                                setTimeout(function () {
+                                    $('#my_popup .error').addClass('hidden');
+                                    $('#my_popup form').trigger('reset').removeClass('hidden');
+                                }, 4000);
+                            }
+                        }
                     });
                 }
             },

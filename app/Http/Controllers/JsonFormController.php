@@ -98,40 +98,61 @@ class JsonFormController extends BaseController
             $user = User::data();
 
             if ($user) {
-                $form->object_id=null;
-                $form->tender_id=Input::get('tender_id');
-                $form->model=$slug;
-                $form->thread_id=Input::get('form.thread_id');
-                $form->created_at=Carbon::now();
-                $form->data=$this->data($jsonForm->getJsonContent());
+                $data = $this->data($jsonForm->getJsonContent(), $slug);
 
-                $form->user_name = $user->full_name;
-                $form->user_email = $user->email;
-                $form->user_social = $user->social;
+                if (in_array($slug, ['form102', 'form103'])) {
+                    $data = array_filter($data);
+                }
 
-                $form->tender_public_id=$tender->tenderID;
-                $form->tender_name=$tender->title;
-                $form->procuring_entity_name=!empty($tender->procuringEntity->identifier->legalName) ? $tender->procuringEntity->identifier->legalName : $tender->procuringEntity->name;
-                $form->procuring_entity_code=$tender->procuringEntity->identifier->id;
+                if (!empty($data)) {
+                    $data = json_encode($data, JSON_UNESCAPED_UNICODE);
 
-                $form->save();
+                    $form->object_id=null;
+                    $form->tender_id=Input::get('tender_id');
+                    $form->model=$slug;
+                    $form->thread_id=Input::get('form.thread_id');
+                    $form->created_at=Carbon::now();
+                    $form->data = $data;
+
+                    $form->user_name = $user->full_name;
+                    $form->user_email = $user->email;
+                    $form->user_social = $user->social;
+
+                    $form->tender_public_id=$tender->tenderID;
+                    $form->tender_name=$tender->title;
+                    $form->procuring_entity_name=!empty($tender->procuringEntity->identifier->legalName) ? $tender->procuringEntity->identifier->legalName : $tender->procuringEntity->name;
+                    $form->procuring_entity_code=$tender->procuringEntity->identifier->id;
+
+                    $form->save();
+                }
+
+                $response = true;
             } else {
                 $response = false;
             }
         } else {
             $response = false;
         }
+
+        return $response;
     }
 
 	protected function check()
 	{
     }
     	
-	protected function data($form)
+	protected function data($form, $slug)
 	{
-	    $form = json_decode($form, 1)['properties']['userForm'];
-        $data=!empty($form['properties']) ? array_intersect_key(Input::get('form'), $form['properties']) : [];
+        $form = json_decode($form, 1);
 
-        return json_encode($data, JSON_UNESCAPED_UNICODE);
+	    if (!array_key_exists('properties', $form) || !array_key_exists('userForm', $form['properties'])) {
+            throw Exception('Случилась какая-то ошибка');
+        }
+
+        $form = $form['properties']['userForm'];
+
+        $data =! empty($form['properties']) ? array_intersect_key(Input::get('form'), $form['properties']) : [];
+
+        return $data;
     }
 }

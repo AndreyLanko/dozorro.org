@@ -80,7 +80,7 @@
                         @if (\App\Classes\User::isAuth())
                             <button class="add-review-form__close-button my_popup_close"></button>
                             <h2 class="add-review-form__h2">Ваш відгук</h2>
-                            <form id="form-f101" class="form-review" data-js="F101" data-is-main="true" action="/jsonforms/form101/" data-id="{{ $item->id }}" data-public-id="{{ $item->tenderID }}">
+                            <form id="form-f101" class="" data-js="F101" data-is-main="true" action="/jsonforms/form101/" data-id="{{ $item->id }}" data-public-id="{{ $item->tenderID }}">
                             </form>
                             <form id="form-f102" class="form-review" data-js="F102" data-is-main="false" action="/jsonforms/form102/" data-id="{{ $item->id }}" data-public-id="{{ $item->tenderID }}">
                                 <input type="submit" id="submit-f102" class="hidden" value="Залишити відгук">
