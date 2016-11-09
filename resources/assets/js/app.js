@@ -136,7 +136,7 @@ var APP,
                                     $('#my_popup .success').addClass('hidden');
                                     $('#my_popup form').trigger('reset').removeClass('hidden');
 
-                                    // window.location.reload();
+                                    window.location.reload();
                                 }, 3000);
                             } else {
                                 $('#my_popup .error').removeClass('hidden');

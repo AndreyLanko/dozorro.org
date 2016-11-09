@@ -133,35 +133,11 @@
                         </div>
                     @endif
                     @foreach ($reviews as $review)
-
                         <div class="reviews__item">
                             <div class="reviews__header">
                                 <span class="reviews__author reviews__author--{{ $review->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->created_at->format('d.m.Y H:i') }}</span>
                             </div>
-                            <div class="reviews__body">
-                                <p>{!! nl2br(trim(strip_tags($review->comment))) !!}</p>
-                            </div>
-                            <div class="reviews__footer">
-                                <div class="reviews__stars">
-                                    <h3>Умови закупівлі:</h3>
-                                    <ul class="tender-stars tender-stars--{{ $review->rating }}">
-                                        <li></li><li></li><li></li><li></li><li></li>
-                                    </ul>
-                                </div>
-
-                                <div class="reviews__useful-rating">
-                                    <h3>Відгук корисний для вас?</h3>
-
-                                    <div class="reviews__useful-wrap">
-                                        <span class="reviews__useful-moji"></span>
-                                        <span class="reviews__useful-moji-rating-count">(15 оцінок)</span>
-                                    </div>
-                                </div>
-                                <br />
-                                <br />
-                                <div>Тип: {{ $review->model }}</div>
-                                <div>Інформація про відгук {{ $review->data }}</div>
-                            </div>
+                            @include('partials/reviews/'.$review->model)
                         </div>
                     @endforeach
 
