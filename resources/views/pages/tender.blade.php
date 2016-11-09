@@ -133,6 +133,7 @@
                         </div>
                     @endif
                     @foreach ($reviews as $review)
+
                         <div class="reviews__item">
                             <div class="reviews__header">
                                 <span class="reviews__author reviews__author--{{ $review->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->created_at->format('d.m.Y H:i') }}</span>
@@ -147,16 +148,19 @@
                                         <li></li><li></li><li></li><li></li><li></li>
                                     </ul>
                                 </div>
-                                {{--
+
                                 <div class="reviews__useful-rating">
                                     <h3>Відгук корисний для вас?</h3>
-                                      
+
                                     <div class="reviews__useful-wrap">
                                         <span class="reviews__useful-moji"></span>
                                         <span class="reviews__useful-moji-rating-count">(15 оцінок)</span>
                                     </div>
                                 </div>
-                                --}}
+                                <br />
+                                <br />
+                                <div>Тип: {{ $review->model }}</div>
+                                <div>Інформація про відгук {{ $review->data }}</div>
                             </div>
                         </div>
                     @endforeach

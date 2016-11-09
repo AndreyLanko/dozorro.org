@@ -260,7 +260,7 @@ class PageController extends BaseController
         $item=$this->tender_parse($id);
 
         $reviews = App\JsonForm::where('tender_id', $item->id)
-            ->where('model', 'review')
+            ->whereIn('model', ['review', 'form101', 'form102', 'form103'])
             ->orderBy('created_at', 'DESC')
             ->limit(20)
             ->get()
