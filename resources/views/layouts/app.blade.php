@@ -47,9 +47,13 @@
                         </div>
                     </div>
                 @endif
-                @include('partials.menu', [
-                    'menu' => $main_menu,
-                ])
+
+                <div class="c-header__nav-wrap nav-header">
+                    @include('partials.menu', [
+                        'menu' => $main_menu,
+                        'depth' => 0,
+                    ])
+                </div>
             </div>
         </div>
 

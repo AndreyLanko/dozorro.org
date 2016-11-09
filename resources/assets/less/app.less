@@ -3,3 +3,77 @@
 body{
 	background: #EEE;
 }
+@main-color: #e55166;
+
+
+.nav-header {
+
+	.menu-header {
+		li {
+
+			&.parent {
+				position: relative;
+				a{
+
+					&:before {
+						content: "";
+						height: 5px;
+						width: 2px;
+						position: absolute;
+						right: 15px;
+						top: 54px;
+						background: #000;
+						transform: rotate(-45deg);
+					}
+					&:after {
+						content: "";
+						height: 5px;
+						width: 2px;
+						position: absolute;
+						right: 12px;
+						top: 54px;
+						background: #000;
+						transform: rotate(45deg);
+					}
+				}
+				&:hover{
+					a{
+						color: @main-color;
+						text-decoration: none;
+						border-top: 5px solid rgba(229, 81, 102, 1);
+						transition: all 0.3s;
+						&:before, &:after{
+							background: @main-color;
+						}
+					}
+					.drop-menu{
+						display: block;
+					}
+				}
+				.drop-menu {
+					display: none;
+					position: absolute;
+					top: 80px;
+					left: 0;
+					width: 100%;
+					background: @main-color;
+					z-index: 11;
+					padding: 20px 33px;
+					li {
+						width: 100%;
+						padding: 0;
+						display: block;
+						a {
+							color: #fff;
+							padding: 10px 0;
+							text-transform: none;
+							&.is-active {
+
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
