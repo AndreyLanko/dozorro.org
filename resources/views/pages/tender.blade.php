@@ -88,7 +88,6 @@
                             <form id="form-f103" class="form-review" data-js="F103" data-is-main="false" action="/jsonforms/form103/" data-id="{{ $item->id }}" data-public-id="{{ $item->tenderID }}">
                                 <input type="submit" id="submit-f103" class="hidden"  value="Залишити відгук">
                             </form>
-
                             <input type="submit" id="submit-f101" form="form-f101" value="Залишити відгук">
 
                             <div class="success hidden">

@@ -100,6 +100,7 @@ var APP,
                 
                 $('.form-review').on('submit', function (e) {
                     e.preventDefault();
+
                     var values = $(this).serializeArray();
                     var result = {};
 
@@ -185,6 +186,7 @@ var APP,
 
                                 $('#my_popup .success').removeClass('hidden');
                                 $('#my_popup form').addClass('hidden');
+                                $('#my_popup #submit-f101').addClass('hidden');
 
                                 setTimeout(function () {
                                     $('.my_popup_close').trigger('click');
@@ -194,9 +196,10 @@ var APP,
 
                                     window.location.reload();
                                 }, 3000);
-                            } else {
+                            } else if (!response && is_main_form) {
                                 $('#my_popup .error').removeClass('hidden');
                                 $('#my_popup form').addClass('hidden');
+                                $('#my_popup #submit-f101').removeClass('hidden');
 
                                 setTimeout(function () {
                                     $('#my_popup .error').addClass('hidden');
