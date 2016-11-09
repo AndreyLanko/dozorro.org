@@ -185,10 +185,21 @@ class Helpers
      */
     public static function filterActivePages(Collection $pages)
     {
-        return $pages->map(function (\App\Page $item) {
+        return $pages->map(function (\App\Page $item) use ($pages) {
             $path = '/' . trim(\Illuminate\Support\Facades\Request::path(), '/');
 
-            $item->setAttribute('active', $item->url === $path);
+            $item->setAttribute('active', ($item->url === $path));
+
+            $pages = $item->children();
+            if (sizeof($pages) > 0) {
+                $active = $pages->filter(function ($value) {
+                    return $value->active;
+                });
+
+                if (sizeof($active) > 0) {
+                    $item->setAttribute('active', true);
+                }
+            }
 
             return $item;
         });
