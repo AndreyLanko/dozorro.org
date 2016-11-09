@@ -6,7 +6,7 @@
                 @if (sizeof($item->children()) > 0)
                     @include('partials.menu', [
                         'menu' => $item->children(),
-                        'depth' => ($item->nest_depth + 1),
+                        'depth' => ($depth + 1),
                     ])
                 @endif
             </li>
