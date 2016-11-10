@@ -76,23 +76,25 @@
 
             <div class="add-review-form" id="my_popup">
                 <div style="width:100%;height:100%;position:absolute; z-index:1; top:0px; left:0px;display:none; background-color: rgba(255,255,255,.7)" loader></div>
+                <div class="add-review-toolbar" form-toolbar></div>
                 <div class="container" style="position:relative">
                     <div class="add-review-form__content">
                         @if (\App\Classes\User::isAuth())
                             <button class="add-review-form__close-button my_popup_close"></button>
-                            <h1 class="tender-header__h1">Ваш відгук</h1>
+                            <h1 class="tender-header__h1" form-title>Ваш відгук</h1>
                             <div form-selector>
                                 <div class="form-selector-button">
-                                    <a href="" class="form-selector-button__link" data-formjs="jsonForm" data-form="F101" data-validate="formF101" data-generate="formF101">Умови закупівлі</a>
+                                    <a href="" class="form-selector-button__link" data-formjs="jsonForm" data-form="F101" data-form-title="Ваш відгук" data-next="F102-105" data-validate="formF101" data-generate="formF101">Умови закупівлі</a>
+                                </div>
+                                <div class="form-selector-button" F102-105>
+                                    <a href="" class="form-selector-button__link" data-formjs="jsonForm" data-form="F102+F103+F104+F105" data-form-title="Будь ласка, деталізуйте Вашу оцінку">Умови закупівлі</a>
                                 </div>
                                 <div class="form-selector-button">
-                                    <a href="" class="form-selector-button__link" data-formjs="jsonForm" data-form="F102+F103+F104+F105">Рішення по вибору переможця</a>
+                                    <a href="" class="form-selector-button__link disabled">Рішення по вибору переможця</a>
                                 </div>
                             </div>
 
-                            <div form-container data-tender-id="{{ $item->id }}" data-tender-public-id="{{ $item->tenderID }}">
-                            </div>
-
+                            <div form-container data-tender-id="{{ $item->id }}" data-tender-public-id="{{ $item->tenderID }}"></div>
                             <br>
                             {{--
                             <div class="tender-form-button">

@@ -23,6 +23,8 @@ var FORMS,
             formContainer=$('[form-container]'),
             formSuccess=$('[form-success]'),
             formError=$('[form-error]'),
+            formTitle=$('[form-title]'),
+            formTitleDefault=formTitle.text(),
             loader=$('[loader]'),
             _params={
                 tenderId: formContainer.data('tender-id'),
@@ -141,13 +143,14 @@ var FORMS,
                             if(typeof successCallback == 'function'){
                                 successCallback();
                             }
-    
-                            formSuccess.show();
-                            formContainer.empty();
-                            
-                            setTimeout(function(){
-                                window.location.reload();
-                            }, 4000);
+
+                            if(_params.next && $('['+_params.next+']').length){
+                                formContainer.empty();
+                                $('['+_params.next+'] a').click();
+                            }else{
+                                formSuccess.show();
+                                formContainer.empty();
+                            }
                         }
                     } else {
                         loader.spin(false).hide();
@@ -200,6 +203,7 @@ var FORMS,
                         var generateCounter=0;
 
                         _params=$.extend(_params, _self.data());
+                        formTitle.html(_params.formTitle ? _params.formTitle : formTitleDefault);
                         submitCounter=0;
                         
                         generateForms(function(formSchema, form){
@@ -228,7 +232,6 @@ var FORMS,
                                 }
                             }
 
-
                             if(_params.generate && typeof generators[_params.generate]=='function'){
                                 generators[_params.generate]();
                             }
@@ -243,6 +246,7 @@ var FORMS,
                             transition: 'all 0.3s'
                         });
 
+                        formTitle.html(formTitleDefault);
                         formSelector.show();
                         formContainer.empty();
                         formError.hide();
