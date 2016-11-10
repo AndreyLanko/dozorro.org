@@ -4016,7 +4016,6 @@ actual styles
   padding: 15px 30px;
   z-index: 5000;
   border: none !important;
-  margin-top: 10px;
 }
 .add-review-form input[type="submit"]:focus {
   outline: none !important;

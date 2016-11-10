@@ -397,7 +397,10 @@ body {
     color:#FFF;
     text-decoration: none;
 }
-
+.form-selector-button__link.disabled{
+    opacity: .3;
+    pointer-events: none;
+}
 .form-selector-button__link {
 	font-family: 'ProximaNovaBold';
   font-size: 16px;

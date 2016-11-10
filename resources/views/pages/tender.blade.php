@@ -48,7 +48,7 @@
                         </div>
                         <div class="tender-description__row">
                             <div class="tender-description__cell">
-                                Оцінка умов закупIв:
+                                Оцінка умов закупівлі:
                             </div>
                             <div class="tender-description__cell">
                                 <ul class="tender-stars tender-stars--{{ $rating1 }}">
@@ -79,20 +79,38 @@
                 <div class="container" style="position:relative">
                     <div class="add-review-form__content">
                         @if (\App\Classes\User::isAuth())
+                            <div class="overflow">
+                                <div class="add-review-toolbar" form-toolbar></div>
+                            </div>
                             <button class="add-review-form__close-button my_popup_close"></button>
-                            <h1 class="tender-header__h1">Ваш відгук</h1>
-                            <div form-selector>
+                            <h1 class="tender-header__h1" form-title>Ваш відгук</h1>
+                            <div class="form-selector" form-selector>
                                 <div class="form-selector-button">
-                                    <a href="" class="form-selector-button__link" data-formjs="jsonForm" data-form="F101" data-validate="formF101" data-generate="formF101">Умови закупівлі</a>
+                                    <a href="" class="form-selector-button__link"
+                                        data-formjs="jsonForm"
+                                        data-form="F101"
+                                        data-form-title="Ваш відгук"
+                                        data-submit-button="Далі"
+                                        data-next="F102-105"
+                                        data-validate="formF101"
+                                        data-generate="formF101">
+                                            Умови закупівлі
+                                    </a>
+                                </div>
+                                <div class="form-selector-button" F102-105>
+                                    <a href="" class="form-selector-button__link"
+                                        data-formjs="jsonForm"
+                                        data-form="F102+F103+F104+F105"
+                                        data-submit-button="Залишити відгук"
+                                        data-form-title="Будь ласка, деталізуйте Вашу оцінку">
+                                    </a>
                                 </div>
                                 <div class="form-selector-button">
-                                    <a href="" class="form-selector-button__link" data-formjs="jsonForm" data-form="F102+F103+F104+F105">Рішення по вибору переможця</a>
+                                    <a href="" class="form-selector-button__link disabled">Рішення по вибору переможця</a>
                                 </div>
                             </div>
 
-                            <div form-container data-tender-id="{{ $item->id }}" data-tender-public-id="{{ $item->tenderID }}">
-                            </div>
-
+                            <div form-container data-tender-id="{{ $item->id }}" data-tender-public-id="{{ $item->tenderID }}"></div>
                             <br>
                             {{--
                             <div class="tender-form-button">
@@ -100,7 +118,7 @@
                             </div>
                             --}}
                             
-                            
+
                             {{--
                             <form id="form-f101" class="" data-js="F101" data-is-main="true" action="/jsonforms/form101/" data-id="{{ $item->id }}" data-public-id="{{ $item->tenderID }}">
                             </form>

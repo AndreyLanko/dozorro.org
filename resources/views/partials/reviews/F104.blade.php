@@ -5,8 +5,8 @@
             @if(!empty($review->json->impartialParticipantRequirementsComment))
                 <p>{!! nl2br(trim(strip_tags($review->json->impartialParticipantRequirementsComment))) !!}</p>
             @endif
-            @if(!empty($review->json->impartialParticipantRequirements) && $review->json->impartialParticipantRequirements!='no')
-                <p><em>вимоги до учасника доцільними і неупередженими – такими, що не створюють переваги окремим учасникам</em></p>
+            @if(!empty($review->json->impartialParticipantRequirements))
+                <p><em>Чи є вимоги до учасника доцільними і неупередженими – такими, що не створюють переваги окремим учасникам?</em><br><span class="{{ $review->json->impartialParticipantRequirements }}">{{ $review->json->impartialParticipantRequirements=='yes'?'ТАК':'НІ' }}</span></p>
             @endif
         </div>
     @endif

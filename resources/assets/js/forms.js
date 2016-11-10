@@ -21,10 +21,14 @@ var FORMS,
     FORMS = (function(){
         var formSelector=$('[form-selector]'),
             formContainer=$('[form-container]'),
+            formToolbar=$('[form-toolbar]'),
             formSuccess=$('[form-success]'),
             formError=$('[form-error]'),
+            formTitle=$('[form-title]'),
+            formTitleDefault=formTitle.text(),
             loader=$('[loader]'),
-            _params={
+            _params,
+            _paramsDefault={
                 tenderId: formContainer.data('tender-id'),
                 tenderPublicId: formContainer.data('tender-public-id')
             };
@@ -96,7 +100,8 @@ var FORMS,
         var checkButton=function(){
             var hidden=formContainer.find('form:visible').length==0;
 
-            formContainer.find('[type="submit"]')[hidden?'hide':'show']();
+            formToolbar.find('[type="submit"]')[hidden?'hide':'show']();
+            $('.add-review-form__content')[hidden?'removeClass':'addClass']('toolbar');
         }
 
         var generateForms=function(callback){
@@ -141,13 +146,17 @@ var FORMS,
                             if(typeof successCallback == 'function'){
                                 successCallback();
                             }
-    
-                            formSuccess.show();
-                            formContainer.empty();
-                            
-                            setTimeout(function(){
-                                window.location.reload();
-                            }, 4000);
+
+                            if(_params.next && $('['+_params.next+']').length){
+                                formContainer.empty();
+                                formToolbar.empty();
+
+                                $('['+_params.next+'] a').click();
+                            }else{
+                                formSuccess.show();
+                                formContainer.empty();
+                                formToolbar.empty();
+                            }
                         }
                     } else {
                         loader.spin(false).hide();
@@ -199,7 +208,10 @@ var FORMS,
 
                         var generateCounter=0;
 
-                        _params=$.extend(_params, _self.data());
+                        _params=_self.data();
+                        _params=$.extend(_params, _paramsDefault);
+
+                        formTitle.html(_params.formTitle ? _params.formTitle : formTitleDefault);
                         submitCounter=0;
                         
                         generateForms(function(formSchema, form){
@@ -210,10 +222,10 @@ var FORMS,
                             form.jsonForm(formSchema);
 
                             if(!isMultiForm()){
-                                form.append('<input type="submit" value="Залишити відгук">');
+                                form.append('<input type="submit" value="'+_params.submitButton+'">');
                             }else{
                                 if(generateCounter==formsCount()){
-                                    var multiSumbit=$('<input>').attr('type', 'submit').attr('value', 'Залишити відгук');
+                                    var multiSumbit=$('<input>').attr('type', 'submit').attr('value', _params.submitButton);
                                     
                                     multiSumbit.click(function(e){
                                         e.preventDefault();
@@ -223,11 +235,10 @@ var FORMS,
 
                                     initMultiFormAccordeon();
 
-                                    formContainer.append(multiSumbit);
+                                    formToolbar.append(multiSumbit);
                                     multiSumbit.hide();
                                 }
                             }
-
 
                             if(_params.generate && typeof generators[_params.generate]=='function'){
                                 generators[_params.generate]();
@@ -243,8 +254,10 @@ var FORMS,
                             transition: 'all 0.3s'
                         });
 
+                        formTitle.html(formTitleDefault);
                         formSelector.show();
                         formContainer.empty();
+                        formToolbar.empty();
                         formError.hide();
                         formSuccess.hide();
                     });                    
