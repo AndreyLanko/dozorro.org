@@ -86,6 +86,30 @@ body{
 	left: 50%!important;
 	top: 50% !important;
 	background: #fff;
+	.add-review-form.popup_content{
+		overflow: auto;
+	}
+	.add-review-form__content{
+		.add-review-toolbar{
+			position: fixed;
+			width: 100%;
+			bottom: 0;
+			left: 0;
+			padding: 10px 35px 10px 35px;
+			box-sizing: border-box;
+			z-index: 10;
+			height: 70px;
+			background: #fff;
+            display: none;
+		}
+		&.toolbar{
+        		padding-bottom: 70px;
+        		.add-review-toolbar{
+            		display: inherit;
+            }
+    		}
+	}
+
 }
 
 textarea{
@@ -99,4 +123,20 @@ textarea{
 }
 .controls{
     clear: both;
+}
+.overflow{
+    overflow: hidden;
+}
+.yes{
+	font-family: 'ProximaNovaBold';
+    color: green;
+    font-weight: bold;
+}
+.no{
+	font-family: 'ProximaNovaBold';
+    color:#e55166;
+    font-weight: bold;
+}
+.reviews__body__one{
+    margin-bottom: 20px
 }
