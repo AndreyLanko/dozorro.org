@@ -16,6 +16,9 @@ class JsonFormController extends BaseController
         'F104' => 'F104.json',
         'F105' => 'F105.json',
         'F106' => 'F106.json',
+        'F107' => 'F107.json',
+        'F108' => 'F108.json',
+        'F109' => 'F109.json',
     ];
 
     var $form;
