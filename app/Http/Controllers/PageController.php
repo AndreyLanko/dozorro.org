@@ -265,12 +265,9 @@ class PageController extends BaseController
         ;
 
         $rating1=0;
-        $filteredReviews = array_filter(
-            array_pluck($reviews, 'rating'),
-            function($var) {
-                return $var > 0;
-            }
-        );
+        $filteredReviews= array_where(array_pluck($reviews, 'rating'), function($key, $value){
+            return !empty($value);
+        });
 
         if($reviews && sizeof($reviews)>0){
             $rating1=round(
