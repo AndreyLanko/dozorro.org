@@ -11,12 +11,12 @@
                     <div class="col-md-6">
                         <div class="c-find-form__inputs-wrap" data-js="disableSearchButton">
                             <div class="c-find-form__input-group">
-                                <input id="tender-number" type="text" name="tid" class="jsGetInputVal">
+                                <input id="tender-number" type="text" name="tid" class="jsGetInputVal" autocomplete="off">
                                 <label for="tenderNumber">Номер тендеру</label>
                             </div>
                             <span class="c-find-form__or-word">або</span>
                             <div class="c-find-form__input-group">
-                                <input id="tender-customer" type="text" name="query" class="jsGetInputVal">
+                                <input id="tender-customer" type="text" name="query" class="jsGetInputVal" autocomplete="off">
                                 <label for="tenderCustomer">Замовник</label>
                             </div>
                         </div>
