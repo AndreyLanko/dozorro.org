@@ -173,12 +173,27 @@
                         </div>
                     @endif
                     @foreach ($reviews as $review)
-                        <div class="reviews__item">
+                        <div class="reviews__item" data-email="{{ $review->user_email }}" data-form="{{ $review->model }}" data-date="{{ $review->created_at->format('d.m.Y H:i') }}">
                             <div class="reviews__header">
                                 <span class="reviews__author reviews__author--{{ $review->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->created_at->format('d.m.Y H:i') }}</span>
                             </div>
                             @include('partials/reviews/'.$review->model)
+
+                            @if (sizeof($review->reviews) > 0)
+                                <a href="" data-parent="{{ $review->id }}" class="open-reviews__button">Показати всі відгуки користувача</a>
+                            @endif
                         </div>
+
+                        @if (sizeof($review->reviews) > 0)
+                            @foreach ($review->reviews as $innerReview)
+                                <div class="reviews__item review__parent-{{ $review->id }} hide" data-email="{{ $innerReview->user_email }}" data-form="{{ $innerReview->model }}" data-date="{{ $innerReview->created_at->format('d.m.Y H:i') }}">
+                                    <div class="reviews__header">
+                                        <span class="reviews__author reviews__author--{{ $innerReview->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $innerReview->created_at->format('d.m.Y H:i') }}</span>
+                                    </div>
+                                    @include('partials/reviews/' . $innerReview->model)
+                                </div>
+                            @endforeach
+                        @endif
                     @endforeach
 
                     {{--

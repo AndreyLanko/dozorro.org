@@ -264,8 +264,8 @@ class PageController extends BaseController
             ->get()
         ;
 
-        $rating1=0;
-        $filteredReviews= array_where(array_pluck($reviews, 'rating'), function($key, $value){
+        $rating1 = 0;
+        $filteredReviews = array_where(array_pluck($reviews, 'rating'), function($key, $value){
             return !empty($value);
         });
 
@@ -278,6 +278,8 @@ class PageController extends BaseController
                 )
             );
         }
+
+        $reviews = (new App\Classes\Reviews($reviews))->getReviews();
 
         $data = [
             'item' => $item,
