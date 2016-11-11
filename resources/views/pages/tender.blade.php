@@ -190,7 +190,9 @@
                                     <div class="reviews__header">
                                         <span class="reviews__author reviews__author--{{ $innerReview->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $innerReview->created_at->format('d.m.Y H:i') }}</span>
                                     </div>
-                                    @include('partials/reviews/' . $innerReview->model)
+                                    @include('partials/reviews/' . $innerReview->model, [
+                                        'review' => $innerReview,
+                                    ])
                                 </div>
                             @endforeach
                         @endif
