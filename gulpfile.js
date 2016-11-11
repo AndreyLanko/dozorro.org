@@ -98,6 +98,7 @@ elixir(function(mix) {
       'js/blocks/**/*.js',
       'js/stars.js',
       'js/forms.js',
+      'js/reviews.js',
       'js/app.js'
     ],
     'public/assets/js/app.js',
