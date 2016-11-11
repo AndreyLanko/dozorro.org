@@ -7,8 +7,8 @@
             @endif
             @if(!empty($review->json->correctExpectedCost))
                 <p><em>Чи правильно замовник визначив очікувану вартість? Наскільки така вартість відповідає ринковим цінам?</em><br>
-                    <span class="{{ $review->json->correctClassifiersCodes }}">
-                        {{ $review->json->correctClassifiersCodes=='yes'?'ТАК':'НІ' }}
+                    <span class="{{ $review->json->correctExpectedCost }}">
+                        {{ $review->json->correctExpectedCost=='yes'?'ТАК':'НІ' }}
                     </span>
                 </p>
             @endif
