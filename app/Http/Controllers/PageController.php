@@ -263,11 +263,23 @@ class PageController extends BaseController
             ->orderBy('created_at', 'DESC')
             ->get()
         ;
-        
+
         $rating1=0;
+        $filteredReviews = array_filter(
+            array_pluck($reviews, 'rating'),
+            function($var) {
+                return $var > 0;
+            }
+        );
 
         if($reviews && sizeof($reviews)>0){
-            $rating1=round(array_sum(array_pluck($reviews, 'rating'))/sizeof($reviews));
+            $rating1=round(
+                array_sum(
+                    $filteredReviews
+                ) / sizeof(
+                    $filteredReviews
+                )
+            );
         }
 
         $data = [
