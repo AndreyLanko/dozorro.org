@@ -86,7 +86,7 @@
                             <h1 class="tender-header__h1" form-title>Ваш відгук</h1>
                             <div class="form-selector" form-selector>
                                 <div class="form-selector-button">
-                                    <a href="" class="form-selector-button__link"
+                                    <a href="" class="form-selector-button__link outline"
                                         data-formjs="jsonForm"
                                         data-form="F101"
                                         data-form-title="Ваш відгук"
@@ -97,7 +97,7 @@
                                             Умови закупівлі
                                     </a>
                                 </div>
-                                <div class="form-selector-button" F102-105>
+                                <div class="form-selector-button hidden" F102-105>
                                     <a href="" class="form-selector-button__link"
                                         data-formjs="jsonForm"
                                         data-form="F102+F103+F104+F105"
@@ -106,7 +106,7 @@
                                     </a>
                                 </div>
                                 <div class="form-selector-button">
-                                    <a href="" class="form-selector-button__link disabled">Рішення по вибору переможця</a>
+                                    <a href="" class="form-selector-button__link outline disabled">Рішення по вибору переможця</a>
                                 </div>
                             </div>
 

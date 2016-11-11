@@ -402,7 +402,7 @@ body {
     pointer-events: none;
 }
 .form-selector-button__link {
-	font-family: 'ProximaNovaBold';
+  font-family: 'ProximaNovaBold';
   font-size: 16px;
   font-weight: bold;
   font-style: normal;
@@ -416,7 +416,15 @@ body {
   width:100%;
   margin-top: 20px;
 }
-
+.form-selector-button__link.outline {
+  background-color: #fff;
+  color: #e55166;
+  border: 2px solid #e55166;
+}
+.form-selector-button__link.outline:hover {
+    background-color: #e55166;
+    color: #ffffff;
+}
 
 .tender-header__link {
 	position: relative;
