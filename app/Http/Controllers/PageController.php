@@ -264,11 +264,13 @@ class PageController extends BaseController
             ->get()
         ;
         
-        $rating1=0;
+        $rating1 = 0;
 
         if($reviews && sizeof($reviews)>0){
             $rating1=round(array_sum(array_pluck($reviews, 'rating'))/sizeof($reviews));
         }
+
+        $reviews = (new App\Classes\Reviews($reviews))->getReviews();
 
         $data = [
             'item' => $item,
