@@ -43,7 +43,7 @@ var FORMS,
         var initializers={
             comment: function(_self){
                 _self.click(function(){
-                    _extraValues.thread_id=_self.data('parent');
+                    _extraValues.thread=_self.data('thread');
                     
                     formTitle.html(formTitleDefault);
                     formSelector.show();
@@ -151,19 +151,23 @@ var FORMS,
         }
         
         var submitReviewForm=function(values, formCode, successCallback){
-            loader.show().spin(spin_options);
+            //loader.show().spin(spin_options);
 
             values=$.extend(values, _extraValues);
+
+            if(!_params.model){
+                _params.model='form';
+            }
 
             $.ajax({
                 method: 'POST',
                 data: {
                     form: values,
-                    tender_id: _params.tenderId,
-                    form_code: formCode,
+                    tender: _params.tenderId,
+                    schema: formCode,
                     tender_public_id: _params.tenderPublicId
                 },
-                url: '/jsonforms',
+                url: '/jsonforms/'+_params.model,
                 dataType: 'json',
                 headers: csrf(),
                 success: function (response) {

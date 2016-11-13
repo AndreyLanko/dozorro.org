@@ -51,7 +51,7 @@
                                 Оцінка умов закупівлі:
                             </div>
                             <div class="tender-description__cell">
-                                <ul class="tender-stars tender-stars--{{ $rating1 }}">
+                                <ul class="tender-stars tender-stars--{{ $rating }}">
                                     <li></li><li></li><li></li><li></li><li></li>
                                 </ul>    
                                 <span class="text-gray text-small">(відгуків: {{ sizeof($reviews) }})</span>
@@ -89,6 +89,7 @@
                                     <a href="" class="form-selector-button__link outline"
                                         data-formjs="jsonForm"
                                         data-form="F101"
+                                        data-model="form"
                                         data-form-title="Ваш відгук"
                                         data-submit-button="Далі"
                                         data-next="F102-105"
@@ -100,6 +101,7 @@
                                 <div class="form-selector-button hidden" F102-105>
                                     <a href="" class="form-selector-button__link"
                                         data-formjs="jsonForm"
+                                        data-model="form"
                                         data-form="F102+F103+F104+F105+F106+F107+F108+F109"
                                         data-submit-button="Залишити відгук"
                                         data-form-title="Будь ласка, деталізуйте Вашу оцінку">
@@ -173,21 +175,22 @@
                         </div>
                     @endif
                     @foreach ($reviews as $review)
-                        <div class="reviews__item" data-email="{{ $review->user_email }}" data-form="{{ $review->model }}" data-date="{{ $review->created_at->format('d.m.Y H:i') }}">
+                        <div class="reviews__item" data-email="{{ $review->user_email }}" data-form="{{ $review->model }}" data-date="{{ $review->date->format('d.m.Y H:i') }}">
                             <div class="reviews__header">
-                                <span class="reviews__author reviews__author--{{ $review->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->created_at->format('d.m.Y H:i') }}</span>
+                                <span class="reviews__author reviews__author--{{ $review->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->date->format('d.m.Y H:i') }}</span>
                             </div>
 
-                            @include('partials/reviews/'.$review->model)
+                            @include('partials/reviews/'.$review->schema)
 
                             @if (\App\Classes\User::isAuth())
                                 <a href=""
-                                    data-parent="{{ $review->id }}"
                                     class="open-comment__button"
+                                    data-thread="{{ $review->object_id }}"
                                     data-formjs="jsonForm"
                                     data-form="comment"
                                     data-form-title="Ваш коментар"
                                     data-submit-button="Додати коментар"
+                                    data-model="comment"
                                     data-validate="comment"
                                     data-init="comment">
                                         Залишити коментар
@@ -201,9 +204,10 @@
 
                         @if (sizeof($review->reviews) > 0)
                             @foreach ($review->reviews as $innerReview)
-                                <div class="reviews__item review__parent-{{ $review->id }} hide" data-email="{{ $innerReview->user_email }}" data-form="{{ $innerReview->model }}" data-date="{{ $innerReview->created_at->format('d.m.Y H:i') }}">
+                            {{dump($innerReview->payload)}}
+                                <div class="reviews__item review__parent-{{ $review->id }} hide" data-email="{{ $innerReview->payload }}" data-form="{{ $innerReview->model }}" data-date="{{ $innerReview->date->format('d.m.Y H:i') }}">
                                     <div class="reviews__header">
-                                        <span class="reviews__author reviews__author--{{ $innerReview->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $innerReview->created_at->format('d.m.Y H:i') }}</span>
+                                        <span class="reviews__author reviews__author--{{ $innerReview->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $innerReview->date->format('d.m.Y H:i') }}</span>
                                     </div>
                                     @include('partials/reviews/' . $innerReview->model, [
                                         'review' => $innerReview,

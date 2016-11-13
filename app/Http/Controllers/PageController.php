@@ -259,23 +259,24 @@ class PageController extends BaseController
 
         $item=$this->tender_parse($id);
 
-        $reviews = App\JsonForm::where('tender_id', $item->id)
-            ->orderBy('created_at', 'DESC')
-            ->get()
-        ;
+        $reviews = App\JsonForm::where('tender', $item->id)
+            ->where('model', '=', 'form')
+            ->orderBy('date', 'DESC')
+            ->get();
 
-        $rating1 = 0;
-        $filteredReviews = array_where(array_pluck($reviews, 'rating'), function($key, $value){
-            return !empty($value);
+        $generalReviews = array_where($reviews, function($key, $review){
+            return $review->schema=='F101';
         });
+        
+        $score=0;
 
-        if($reviews && sizeof($reviews)>0){
-            $rating1=round(
-                array_sum(
-                    $filteredReviews
-                ) / sizeof(
-                    $filteredReviews
-                )
+        foreach($generalReviews as $review) {
+            $score+=$review->json->generalScore;
+        };
+
+        if($generalReviews && sizeof($generalReviews)>0){
+            $rating=round(
+                $score / sizeof($generalReviews)
             );
         }
 
@@ -287,7 +288,7 @@ class PageController extends BaseController
             'dataStatus' => $dataStatus,
             'error' => $this->error,
             'reviews' => $reviews,
-            'rating1' => $rating1,
+            'rating' => $rating,
             'areas' => $this->getAreas(),
         ];
 

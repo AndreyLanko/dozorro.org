@@ -39,7 +39,7 @@
       "description": "Comment form",
       "properties": {
         "text": {
-          "description": "Comment text",
+          "title": "Comment text",
           "minLength": 1,
           "maxLength": 10000,
           "type": "string"

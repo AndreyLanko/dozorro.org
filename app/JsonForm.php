@@ -24,42 +24,33 @@ class JsonForm extends Model
      * @var array
      */
     public $dates = [
-        'created_at'
+        'date'
     ];
 
     /**
-     * @return string
-     */
-    public function getRatingAttribute()
-    {
-        $data = json_decode($this->data);
-
-        if (!isset($data->generalScore)) {
-            return '';
-        }
-
-        return $data->generalScore;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCommentAttribute()
-    {
-        $data = json_decode($this->data);
-
-        if (!isset($data->generalComment)) {
-            return '';
-        }
-
-        return $data->generalComment;
-    }
-
-    /**
-     * @return objetc
+     * @return object
      */
     public function getJsonAttribute()
     {
-        return json_decode($this->data);
+        $data=json_decode($this->payload);
+
+        return $data->userForm;
+    }
+
+    /**
+     * @return object
+     */
+    public function getAuthorAttribute()
+    {
+        $data=json_decode($this->payload);
+
+        return $data->author;
+    }
+    
+    private function parsePayload()
+    {
+        if(!$this->data){
+            $this->data=json_decode($this->data);
+        }
     }
 }

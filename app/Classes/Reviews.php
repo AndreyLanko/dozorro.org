@@ -32,11 +32,8 @@ class Reviews
     {
         $groupedReviews = $this->groupReviews($reviews);
 
-        /**
-         * @var Collection $reviews
-         */
         $reviews = $reviews->filter(function ($review) {
-            return empty($review->user_email);
+            return empty($review->author->email);
         });
 
         return $reviews->merge($groupedReviews)->sortByDesc('created_at');
@@ -48,20 +45,19 @@ class Reviews
      */
     private function groupReviews($reviews)
     {
+        return $reviews;
+
         $groupedReviews = new Collection();
 
-        /**
-         * @var Collection $item Collection of grouped reviews
-         */
         foreach ($reviews->groupBy('user_email') as $key => $item) {
             if (empty($key)) {
                 continue;
             }
 
-            $filteredReviews = $item->where('model', 'F101')->sortBy('created_at')->first();
+            $filteredReviews = $item->where('schema', 'F101')->sortBy('date')->first();
 
             if (empty($filteredReviews)) {
-                $filteredReviews = $item->sortBy('created_at')->first();
+                $filteredReviews = $item->sortBy('date')->first();
             }
 
             $groupedReviews->add($this->handleGroupedReviews($filteredReviews, $item));
