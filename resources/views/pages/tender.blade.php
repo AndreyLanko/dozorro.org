@@ -177,7 +177,22 @@
                             <div class="reviews__header">
                                 <span class="reviews__author reviews__author--{{ $review->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->created_at->format('d.m.Y H:i') }}</span>
                             </div>
+
                             @include('partials/reviews/'.$review->model)
+
+                            @if (\App\Classes\User::isAuth())
+                                <a href=""
+                                    data-parent="{{ $review->id }}"
+                                    class="open-comment__button"
+                                    data-formjs="jsonForm"
+                                    data-form="comment"
+                                    data-form-title="Ваш коментар"
+                                    data-submit-button="Додати коментар"
+                                    data-validate="comment"
+                                    data-init="comment">
+                                        Залишити коментар
+                                </a>
+                            @endif
 
                             @if (sizeof($review->reviews) > 0)
                                 <a href="" data-parent="{{ $review->id }}" class="open-reviews__button">Показати всі відгуки користувача</a>

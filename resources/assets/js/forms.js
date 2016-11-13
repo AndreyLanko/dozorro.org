@@ -27,18 +27,46 @@ var FORMS,
             formTitle=$('[form-title]'),
             formTitleDefault=formTitle.text(),
             loader=$('[loader]'),
+            submitCounter,        
             _params,
             _paramsDefault={
                 tenderId: formContainer.data('tender-id'),
                 tenderPublicId: formContainer.data('tender-public-id')
-            };
+            },
+            _extraValues={};
 
         var generators={
-            formF101: function(){
+            comment: function(){
+            }
+        };
+
+        var initializers={
+            comment: function(_self){
+                _self.click(function(){
+                    _extraValues.thread_id=_self.data('parent');
+                    
+                    formTitle.html(formTitleDefault);
+                    formSelector.show();
+                    formContainer.empty();
+                    formToolbar.empty();
+                    formError.hide();
+                    formSuccess.hide();
+
+                    $('#my_popup').popup('show');
+                });
             }
         };
 
         var validators={
+            comment: function(errors, values){
+                if (!values.text || values.text.length < 30) {
+                    $('[name=text]').closest('.controls').find('.jsonform-errortext').removeAttr('style').text('Поле обов`язкове до заповнення, та повине мати довжину більше 30 символів');
+    
+                    return false;
+                }
+    
+                return !errors;
+            },
             formF101: function(errors, values) {
                 if (!values.generalScore){
                     return false;
@@ -72,7 +100,9 @@ var FORMS,
                         if(typeof callback == 'function'){
                             var form=$('<form>').attr('action', '/jsonforms').attr('novalidate', true);
 
-                            formContainer.append('<h3>' + formSchema.title + '</h3>');
+                            if(formSchema.title){
+                                formContainer.append('<h3>' + formSchema.title + '</h3>');
+                            }
                             
                             callback(formSchema, form);
                         }
@@ -120,10 +150,10 @@ var FORMS,
             return _params.form.split('+').length;
         }
         
-        var submitCounter;
-        
         var submitReviewForm=function(values, formCode, successCallback){
             loader.show().spin(spin_options);
+
+            values=$.extend(values, _extraValues);
 
             $.ajax({
                 method: 'POST',
@@ -203,6 +233,10 @@ var FORMS,
         var methods={
             js: {
                 jsonForm: function (_self) {
+                    if(_self.data('init') && typeof initializers[_self.data('init')]=='function'){
+                        initializers[_self.data('init')](_self);
+                    }
+
                     _self.click(function(e){
                         e.preventDefault();
 

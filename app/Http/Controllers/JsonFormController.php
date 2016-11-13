@@ -1,9 +1,10 @@
 <?php namespace App\Http\Controllers;
 
-use App\Classes\User;
 use Illuminate\Routing\Controller as BaseController;
-use App\JsonForm;
+use App\Classes\User;
 use Carbon\Carbon;
+use App\JsonForm;
+use Exception;
 use Input;
 
 class JsonFormController extends BaseController
@@ -19,6 +20,7 @@ class JsonFormController extends BaseController
         'F107' => 'F107.json',
         'F108' => 'F108.json',
         'F109' => 'F109.json',
+        'comment' => 'comment.json',
     ];
 
     var $form;
