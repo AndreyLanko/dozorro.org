@@ -166,7 +166,7 @@
                    "reviews__author reviews__author--confirmed" - автор подтвержден, зеленая иконка
                    "reviews__author reviews__author--not-confirmed" - автор не подтвержден, серая иконка -->
             <div class="reviews is-show">
-                <div class="container">
+                <div id="reviews" class="container">
                     @if(!sizeof($reviews))
                         <div class="reviews__item">
                             Жодного відгуку не залишено
