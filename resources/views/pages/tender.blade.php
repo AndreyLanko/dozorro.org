@@ -50,7 +50,7 @@
                             <div class="tender-description__cell">
                                 Оцінка умов закупівлі:
                             </div>
-                            <div class="tender-description__cell">
+                            <div id="stars" class="tender-description__cell">
                                 <ul class="tender-stars tender-stars--{{ $rating1 }}">
                                     <li></li><li></li><li></li><li></li><li></li>
                                 </ul>    

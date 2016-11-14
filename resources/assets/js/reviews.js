@@ -4,7 +4,7 @@
     var Reviews = function () {
         var methods = {
             init: function () {
-                $('.reviews .open-reviews__button').on('click', function (e) {
+                $(document).on('click', '.reviews .open-reviews__button', function (e) {
                     e.preventDefault();
 
                     var parent_id = $(this).data('parent');
