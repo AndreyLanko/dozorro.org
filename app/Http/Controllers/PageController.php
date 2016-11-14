@@ -265,10 +265,11 @@ class PageController extends BaseController
             ->get();
 
         $generalReviews = array_where($reviews, function($key, $review){
-            return $review->schema=='F101';
+            return $review->schema == 'F101';
         });
         
-        $score=0;
+        $score = 0;
+        $rating = 0;
 
         foreach($generalReviews as $review) {
             $score+=$review->json->generalScore;

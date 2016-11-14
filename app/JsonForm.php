@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -28,6 +29,11 @@ class JsonForm extends Model
     ];
 
     /**
+     * @var array
+     */
+    private $comments = [];
+
+    /**
      * @return object
      */
     public function getJsonAttribute()
@@ -49,8 +55,41 @@ class JsonForm extends Model
     
     private function parsePayload()
     {
-        if(!$this->data){
-            $this->data=json_decode($this->data);
+        if (!$this->data) {
+            $this->data = json_decode($this->data);
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPayload()
+    {
+        return json_decode($this->payload);
+    }
+
+    /**
+     * @return string
+     */
+    public function getKey()
+    {
+        return (isset($this->getPayload()->author->uniqueKey))?$this->getPayload()->author->uniqueKey:md5($this->getPayload()->author->email . $this->getPayload()->author->social);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function comments()
+    {
+        if (!$this->comments) {
+            $comments = JsonForm::where('schema', 'comment')
+                ->where('thread', $this->object_id)
+                ->get()
+            ;
+
+            $this->comments = $comments;
+        }
+
+        return $this->comments;
     }
 }

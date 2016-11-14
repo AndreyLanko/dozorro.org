@@ -45,11 +45,20 @@ class Reviews
      */
     private function groupReviews($reviews)
     {
-        return $reviews;
+//        return $reviews;
 
+        $reviewsResult = [];
         $groupedReviews = new Collection();
 
-        foreach ($reviews->groupBy('user_email') as $key => $item) {
+        foreach ($reviews as $item => $review) {
+            if (!array_key_exists($review->getPayload()->author->email, $reviewsResult)) {
+                $reviewsResult[$review->getPayload()->author->email] = new Collection();
+            }
+
+            $reviewsResult[$review->getPayload()->author->email]->add($review);
+        }
+
+        foreach ($reviewsResult as $key => $item) {
             if (empty($key)) {
                 continue;
             }

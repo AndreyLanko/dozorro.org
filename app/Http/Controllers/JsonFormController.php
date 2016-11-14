@@ -114,12 +114,13 @@ class JsonFormController extends BaseController
 	{
         	$user = User::data();
         	
-        	$payload=[
-            	'author'=>[
-                	'authBy'=>'internal',
-                	'name'=>$user->full_name,
-                	'email'=>$user->email,
-                	'social'=>$user->social
+        	$payload = [
+            	'author' => [
+                	'authBy' => 'internal',
+                	'name' => $user->full_name,
+                	'email' => $user->email,
+                	'social' => $user->social,
+                    'uniqueKey' => md5($user->email . $user->social),
             	],
             	'tender'=>Input::get('tender'),
             	'userForm'=>$formData
@@ -127,7 +128,7 @@ class JsonFormController extends BaseController
 
         $this->recursive_sort($payload);
 
-        	return json_encode($payload, $this->json_options);
+        return json_encode($payload, $this->json_options);
     }
 
     private function hash_id($data)

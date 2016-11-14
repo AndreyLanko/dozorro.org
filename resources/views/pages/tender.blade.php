@@ -175,44 +175,17 @@
                         </div>
                     @endif
                     @foreach ($reviews as $review)
-                        <div class="reviews__item" data-email="{{ $review->user_email }}" data-form="{{ $review->model }}" data-date="{{ $review->date->format('d.m.Y H:i') }}">
-                            <div class="reviews__header">
-                                <span class="reviews__author reviews__author--{{ $review->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->date->format('d.m.Y H:i') }}</span>
-                            </div>
-
-                            @include('partials/reviews/'.$review->schema)
-
-                            @if (\App\Classes\User::isAuth())
-                                <a href=""
-                                    class="open-comment__button"
-                                    data-thread="{{ $review->object_id }}"
-                                    data-formjs="jsonForm"
-                                    data-form="comment"
-                                    data-form-title="Ваш коментар"
-                                    data-submit-button="Додати коментар"
-                                    data-model="comment"
-                                    data-validate="comment"
-                                    data-init="comment">
-                                        Залишити коментар
-                                </a>
-                            @endif
-
-                            @if (sizeof($review->reviews) > 0)
-                                <a href="" data-parent="{{ $review->id }}" class="open-reviews__button">Показати всі відгуки користувача</a>
-                            @endif
-                        </div>
+                        @include('partials/review', [
+                            'show_related' => true,
+                        ])
 
                         @if (sizeof($review->reviews) > 0)
                             @foreach ($review->reviews as $innerReview)
-                            {{dump($innerReview->payload)}}
-                                <div class="reviews__item review__parent-{{ $review->id }} hide" data-email="{{ $innerReview->payload }}" data-form="{{ $innerReview->model }}" data-date="{{ $innerReview->date->format('d.m.Y H:i') }}">
-                                    <div class="reviews__header">
-                                        <span class="reviews__author reviews__author--{{ $innerReview->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $innerReview->date->format('d.m.Y H:i') }}</span>
-                                    </div>
-                                    @include('partials/reviews/' . $innerReview->model, [
-                                        'review' => $innerReview,
-                                    ])
-                                </div>
+                                @include('partials/review', [
+                                    'review' => $innerReview,
+                                    'parent' => $review,
+                                    'show_related' => true,
+                                ])
                             @endforeach
                         @endif
                     @endforeach
