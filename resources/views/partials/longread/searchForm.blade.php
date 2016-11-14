@@ -1,7 +1,7 @@
 @if(!empty($data->search_is_short))
     <div class="c-find-form">
         <div class="container">
-            <form action="/tender/search/">
+            <form id="c-find-form" action="/tender/search/">
                 <div class="row">
                     <div class="col-md-3">
                         @if (!empty($data->search_form_title))
