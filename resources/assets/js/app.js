@@ -100,6 +100,45 @@ var APP,
             },
             js: {
                 disableSearchButton: function (_self) {
+                    $('#c-find-form').validate({
+                        messages: {
+                            tid: 'Invalid tender number format.'
+                        },
+                        rules: {
+                            tid: {
+                                required: false,
+                                pattern: /^UA\-20\d{2}\-\d{2}\-\d{2}\-\d{6}$/
+                            }
+                        },
+                        submitHandler: function(form) {
+                            alert('Success: Valid form submitted!');
+                            return false;
+                        }
+                    });
+
+                    jQuery.extend(jQuery.validator.messages, {
+                        required: "This field is required.",
+                        remote: "Please fix this field.",
+                        // Example customize text of default message for email
+                        email: "Invalid email format.",
+                        // Add custom text message for pattern
+                        pattern: "Invalid pattern format for tender number.",
+                        url: "Please enter a valid URL.",
+                        date: "Please enter a valid date.",
+                        dateISO: "Please enter a valid date (ISO).",
+                        number: "Please enter a valid number.",
+                        digits: "Please enter only digits.",
+                        creditcard: "Please enter a valid credit card number.",
+                        equalTo: "Please enter the same value again.",
+                        accept: "Please enter a value with a valid extension.",
+                        maxlength: jQuery.validator.format("Please enter no more than {0} characters."),
+                        minlength: jQuery.validator.format("Please enter at least {0} characters."),
+                        rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
+                        range: jQuery.validator.format("Please enter a value between {0} and {1}."),
+                        max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
+                        min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+                    });
+
                     $('input[id="btn-find"]').prop('disabled', true);
                     $('input[id="tender-number"], input[id="tender-customer"]').keyup(function () {
                         if ($(this).val() != '') {
@@ -1113,21 +1152,6 @@ var APP,
             }
         });
     });
-
-    /**
-     * Check values of text inputs and disable button
-     */
-    // $(function()
-    // {
-    //     $('input[id="btn-find"]').prop('disabled', true);
-    //     $('input[id="tender-number"], input[id="tender-customer"]').keyup(function () {
-    //         if ($(this).val() != '') {
-    //             $('input[id="btn-find"]').prop('disabled', false);
-    //         } else {
-    //             $('input[id="btn-find"]').prop('disabled', true);
-    //         }
-    //     });
-    // });
 
 })(window);
 
