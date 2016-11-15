@@ -222,23 +222,15 @@ var FORMS,
                             formContainer.append(form);
                             form.jsonForm(formSchema);
 
-                            if(!isMultiForm()){
-                                form.append('<input type="submit" value="'+_params.submitButton+'">');
-                            }else{
-                                if(generateCounter==formsCount()){
-                                    var multiSumbit=$('<input>').attr('type', 'submit').attr('value', _params.submitButton);
-                                    
-                                    multiSumbit.click(function(e){
-                                        e.preventDefault();
+                            form.append('<input type="submit" value="'+_params.submitButton+'">');
 
-                                        formContainer.find('form').submit();
-                                    });
+                            form.on('submit', function () {
+                                $(this).prev().remove();
+                                $(this).remove();
+                            });
 
-                                    initMultiFormAccordeon();
-
-                                    formToolbar.append(multiSumbit);
-                                    multiSumbit.hide();
-                                }
+                            if(generateCounter==formsCount() && isMultiForm()){
+                                initMultiFormAccordeon();
                             }
 
                             if(_params.generate && typeof generators[_params.generate]=='function'){
