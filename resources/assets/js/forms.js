@@ -143,6 +143,7 @@ var FORMS,
                         if(submitCounter==formsCount()){
                             loader.spin(false).hide();
                             $("#reviews").load(window.location.href+" #reviews");
+                            $("#stars").load(window.location.href+" #stars");
 
                             if(typeof successCallback == 'function'){
                                 successCallback();

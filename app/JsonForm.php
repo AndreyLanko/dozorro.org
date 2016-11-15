@@ -62,4 +62,11 @@ class JsonForm extends Model
     {
         return json_decode($this->data);
     }
+
+    public static function getF112Enum($key)
+    {
+        $data = json_decode(file_get_contents(public_path() . '/sources/forms/F112.json'), true);
+    
+        return array_get($data, 'properties.userForm.form.1.items.0.titleMap.' . $key);
+    }
 }

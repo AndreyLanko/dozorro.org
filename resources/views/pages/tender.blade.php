@@ -50,7 +50,7 @@
                             <div class="tender-description__cell">
                                 Оцінка умов закупівлі:
                             </div>
-                            <div class="tender-description__cell">
+                            <div id="stars" class="tender-description__cell">
                                 <ul class="tender-stars tender-stars--{{ $rating1 }}">
                                     <li></li><li></li><li></li><li></li><li></li>
                                 </ul>    
@@ -100,7 +100,7 @@
                                 <div class="form-selector-button hidden" F102-105>
                                     <a href="" class="form-selector-button__link"
                                         data-formjs="jsonForm"
-                                        data-form="F102+F103+F104+F105+F106+F107+F108+F109"
+                                        data-form="F102+F103+F104+F105+F106+F107+F108+F109+F111+F112"
                                         data-submit-button="Залишити відгук"
                                         data-form-title="Будь ласка, деталізуйте Вашу оцінку">
                                     </a>
