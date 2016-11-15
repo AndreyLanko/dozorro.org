@@ -100,6 +100,23 @@ var APP,
             },
             js: {
                 disableSearchButton: function (_self) {
+                    $('#c-find-form').validate({
+                        messages: {
+                            tid: 'Невірний формат'
+                        },
+                        rules: {
+                            tid: {
+                                required: false,
+                                pattern: /^UA\-20\d{2}\-\d{2}\-\d{2}\-\d{6}$/
+                            }
+                        }
+                    });
+
+                    jQuery.extend(jQuery.validator.messages, {
+                        // Add custom text message for pattern
+                        pattern: "Invalid pattern format for tender number.",
+                    });
+
                     $('input[id="btn-find"]').prop('disabled', true);
                     $('input[id="tender-number"], input[id="tender-customer"]').keyup(function () {
                         if ($(this).val() != '') {
@@ -1113,21 +1130,6 @@ var APP,
             }
         });
     });
-
-    /**
-     * Check values of text inputs and disable button
-     */
-    // $(function()
-    // {
-    //     $('input[id="btn-find"]').prop('disabled', true);
-    //     $('input[id="tender-number"], input[id="tender-customer"]').keyup(function () {
-    //         if ($(this).val() != '') {
-    //             $('input[id="btn-find"]').prop('disabled', false);
-    //         } else {
-    //             $('input[id="btn-find"]').prop('disabled', true);
-    //         }
-    //     });
-    // });
 
 })(window);
 

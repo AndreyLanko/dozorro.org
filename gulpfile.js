@@ -71,6 +71,11 @@ gulp.task("copyfiles", function() {
   gulp.src("resources/vendor/slick-carousel/slick/slick.js")
     .pipe(gulp.dest("resources/assets/js/vendor/"));
     
+  gulp.src("resources/vendor/jquery-validation/dist/jquery.validate.js")
+    .pipe(gulp.dest("resources/assets/js/vendor/"));
+    
+  gulp.src("resources/vendor/jquery-validation/dist/additional-methods.js")
+    .pipe(gulp.dest("resources/assets/js/vendor/"));
 });
 
 elixir(function(mix) {
@@ -99,6 +104,8 @@ elixir(function(mix) {
       'js/stars.js',
       'js/forms.js',
       'js/reviews.js',
+      'js/vendor/jquery.validate.js',
+      'js/vendor/additional-methods.js',
       'js/app.js'
     ],
     'public/assets/js/app.js',

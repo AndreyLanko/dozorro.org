@@ -102,7 +102,7 @@
                                     <a href="" class="form-selector-button__link"
                                         data-formjs="jsonForm"
                                         data-model="form"
-                                        data-form="F102+F103+F104+F105+F106+F107+F108+F109"
+                                        data-form="F102+F103+F104+F105+F106+F107+F108+F109+F111+F112"
                                         data-submit-button="Залишити відгук"
                                         data-form-title="Будь ласка, деталізуйте Вашу оцінку">
                                     </a>
@@ -168,7 +168,7 @@
                    "reviews__author reviews__author--confirmed" - автор подтвержден, зеленая иконка
                    "reviews__author reviews__author--not-confirmed" - автор не подтвержден, серая иконка -->
             <div class="reviews is-show">
-                <div class="container">
+                <div id="reviews" class="container">
                     @if(!sizeof($reviews))
                         <div class="reviews__item">
                             Жодного відгуку не залишено
