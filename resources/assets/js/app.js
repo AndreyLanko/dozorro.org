@@ -102,7 +102,10 @@ var APP,
                 disableSearchButton: function (_self) {
                     $('#c-find-form').validate({
                         messages: {
-                            tid: 'Невірний формат'
+                            tid: 'Формат: UA-2016-01-01-000001'
+                        },
+                        errorPlacement: function(error, element) {
+                            error.appendTo('#errordiv');
                         },
                         rules: {
                             tid: {

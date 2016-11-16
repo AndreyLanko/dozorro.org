@@ -26,19 +26,36 @@ var FORMS,
             formError=$('[form-error]'),
             formTitle=$('[form-title]'),
             formTitleDefault=formTitle.text(),
+            formCurrent = '',
             loader=$('[loader]'),
+            submitCounter,        
             _params,
             _paramsDefault={
                 tenderId: formContainer.data('tender-id'),
                 tenderPublicId: formContainer.data('tender-public-id')
-            };
+            },
+            _extraValues={};
 
         var generators={
-            formF101: function(){
+            comment: function(){
+            }
+        };
+
+        var initializers={
+            comment: function(_self){
             }
         };
 
         var validators={
+            comment: function(errors, values){
+                if (!values.comment || values.comment.length < 30) {
+                    $('[name=comment]').closest('.controls').find('.jsonform-errortext').removeAttr('style').text('Поле обов`язкове до заповнення, та повине мати довжину більше 30 символів');
+    
+                    return false;
+                }
+    
+                return !errors;
+            },
             formF101: function(errors, values) {
                 if (!values.generalScore){
                     return false;
@@ -72,7 +89,9 @@ var FORMS,
                         if(typeof callback == 'function'){
                             var form=$('<form>').attr('action', '/jsonforms').attr('novalidate', true);
 
-                            formContainer.append('<h3>' + formSchema.title + '</h3>');
+                            if(formSchema.title){
+                                formContainer.append('<h3>' + formSchema.title + '</h3>');
+                            }
                             
                             callback(formSchema, form);
                         }
@@ -91,6 +110,8 @@ var FORMS,
                 e.preventDefault();
 
                 formContainer.find('form').slideUp();
+                formCurrent = $(this).closest('h3').next();
+
                 $(this).parent().next().stop(true).slideToggle(checkButton);
 
                 return false;
@@ -120,30 +141,38 @@ var FORMS,
             return _params.form.split('+').length;
         }
         
-        var submitCounter;
-        
         var submitReviewForm=function(values, formCode, successCallback){
             loader.show().spin(spin_options);
+
+            values=$.extend(values, _extraValues);
+
+            if(!_params.model){
+                _params.model='form';
+            }
 
             $.ajax({
                 method: 'POST',
                 data: {
                     form: values,
-                    tender_id: _params.tenderId,
-                    form_code: formCode,
+                    tender: _params.tenderId,
+                    schema: formCode,
                     tender_public_id: _params.tenderPublicId
                 },
-                url: '/jsonforms',
+                url: '/jsonforms/'+_params.model,
                 dataType: 'json',
                 headers: csrf(),
                 success: function (response) {
                     submitCounter++;
 
                     if (response) {
+
                         if(submitCounter==formsCount()){
                             loader.spin(false).hide();
-                            $("#reviews").load(window.location.href+" #reviews");
-                            $("#stars").load(window.location.href+" #stars");
+
+                            $.get(window.location.href, function(html){
+                                $("[reviews]").html($(html).find('[reviews]').html());
+                                $("[stars]").html($(html).find('[stars]').html());
+                            });                           
 
                             if(typeof successCallback == 'function'){
                                 successCallback();
@@ -154,10 +183,17 @@ var FORMS,
                                 formToolbar.empty();
 
                                 $('['+_params.next+'] a').click();
-                            }else{
+                            } else {
                                 formSuccess.show();
                                 formContainer.empty();
                                 formToolbar.empty();
+                            }
+                        } else {
+                            loader.spin(false).hide();
+
+                            if (isMultiForm()) {
+                                formCurrent.prev().fadeOut();
+                                formCurrent.fadeOut();
                             }
                         }
                     } else {
@@ -205,12 +241,48 @@ var FORMS,
         var methods={
             js: {
                 jsonForm: function (_self) {
-                    _self.click(function(e){
+                    if(_self.data('init') && typeof initializers[_self.data('init')]=='function'){
+                        initializers[_self.data('init')](_self);
+                    }
+                },
+                open: function(_self){
+                    _self.click(function(e) {
+                        e.preventDefault();
+
+                        $('.add-review-form').popup({
+                            transition: 'all 0.3s'
+                        });
+
+                        _extraValues={};
+
+                        formSelector.show();
+                        formContainer.empty();
+                        formToolbar.empty();
+                        formError.hide();
+                        formSuccess.hide();
+                    });
+
+                    $(document).on('click', '[form-comment]', function(e){
+                        e.preventDefault();
+
+                        _extraValues={};
+                        _extraValues.thread=$(this).data('thread');
+
+                        formSelector.show();
+                        formContainer.empty();
+                        formToolbar.empty();
+                        formError.hide();
+                        formSuccess.hide();
+    
+                        $('#my_popup').popup('show');
+                    });
+
+                    $(document).on('click', '[data-formjs="jsonForm"]', function(e){
                         e.preventDefault();
 
                         var generateCounter=0;
 
-                        _params=_self.data();
+                        _params=$(this).data();
                         _params=$.extend(_params, _paramsDefault);
 
                         formTitle.html(_params.formTitle ? _params.formTitle : formTitleDefault);
@@ -225,11 +297,6 @@ var FORMS,
 
                             form.append('<input type="submit" value="'+_params.submitButton+'">');
 
-                            form.on('submit', function () {
-                                $(this).prev().remove();
-                                $(this).remove();
-                            });
-
                             if(generateCounter==formsCount() && isMultiForm()){
                                 initMultiFormAccordeon();
                             }
@@ -238,22 +305,6 @@ var FORMS,
                                 generators[_params.generate]();
                             }
                         });
-                    });
-                },
-                open: function(_self){
-                    _self.click(function(e) {
-                        e.preventDefault();
-
-                        $('.add-review-form').popup({
-                            transition: 'all 0.3s'
-                        });
-
-                        formTitle.html(formTitleDefault);
-                        formSelector.show();
-                        formContainer.empty();
-                        formToolbar.empty();
-                        formError.hide();
-                        formSuccess.hide();
                     });                    
                 }
             }

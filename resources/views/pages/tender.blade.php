@@ -50,11 +50,11 @@
                             <div class="tender-description__cell">
                                 Оцінка умов закупівлі:
                             </div>
-                            <div id="stars" class="tender-description__cell">
-                                <ul class="tender-stars tender-stars--{{ $rating1 }}">
+                            <div class="tender-description__cell" stars>
+                                <ul class="tender-stars tender-stars--{{ $rating }}">
                                     <li></li><li></li><li></li><li></li><li></li>
                                 </ul>    
-                                <span class="text-gray text-small">(відгуків: {{ sizeof($reviews) }})</span>
+                                <span class="text-gray text-small">(відгуків: {{ $reviews_total }})</span>
                             </div>
                         </div>
                     </div>
@@ -79,9 +79,6 @@
                 <div class="container" style="position:relative">
                     <div class="add-review-form__content">
                         @if (\App\Classes\User::isAuth())
-                            <div class="overflow">
-                                <div class="add-review-toolbar" form-toolbar></div>
-                            </div>
                             <button class="add-review-form__close-button my_popup_close"></button>
                             <h1 class="tender-header__h1" form-title>Ваш відгук</h1>
                             <div class="form-selector" form-selector>
@@ -89,6 +86,7 @@
                                     <a href="" class="form-selector-button__link outline"
                                         data-formjs="jsonForm"
                                         data-form="F101"
+                                        data-model="form"
                                         data-form-title="Ваш відгук"
                                         data-submit-button="Далі"
                                         data-next="F102-105"
@@ -97,10 +95,31 @@
                                             Умови закупівлі
                                     </a>
                                 </div>
+                                <div class="form-selector-button">
+                                    <a href="" class="form-selector-button__link outline"
+                                        data-formjs="jsonForm"
+                                        data-form="F111"
+                                        data-model="form"
+                                        data-form-title="Ваш відгук"
+                                        data-submit-button="Залишити відгук">
+                                            Оцінка процесу кваліфікації
+                                    </a>
+                                </div>
+                                <div class="form-selector-button">
+                                    <a href="" class="form-selector-button__link outline"
+                                        data-formjs="jsonForm"
+                                        data-form="F112"
+                                        data-model="form"
+                                        data-form-title="Ваш відгук"
+                                        data-submit-button="Залишити відгук">
+                                            Оцінка виконання замовником умов договору
+                                    </a>
+                                </div>
                                 <div class="form-selector-button hidden" F102-105>
                                     <a href="" class="form-selector-button__link"
                                         data-formjs="jsonForm"
-                                        data-form="F102+F103+F104+F105+F106+F107+F108+F109+F111+F112"
+                                        data-model="form"
+                                        data-form="F102+F103+F104+F105+F106+F107+F108+F109"
                                         data-submit-button="Залишити відгук"
                                         data-form-title="Будь ласка, деталізуйте Вашу оцінку">
                                     </a>
@@ -166,34 +185,24 @@
                    "reviews__author reviews__author--confirmed" - автор подтвержден, зеленая иконка
                    "reviews__author reviews__author--not-confirmed" - автор не подтвержден, серая иконка -->
             <div class="reviews is-show">
-                <div id="reviews" class="container">
+                <div class="container" reviews>
                     @if(!sizeof($reviews))
                         <div class="reviews__item">
                             Жодного відгуку не залишено
                         </div>
                     @endif
                     @foreach ($reviews as $review)
-                        <div class="reviews__item" data-email="{{ $review->user_email }}" data-form="{{ $review->model }}" data-date="{{ $review->created_at->format('d.m.Y H:i') }}">
-                            <div class="reviews__header">
-                                <span class="reviews__author reviews__author--{{ $review->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $review->created_at->format('d.m.Y H:i') }}</span>
-                            </div>
-                            @include('partials/reviews/'.$review->model)
-
-                            @if (sizeof($review->reviews) > 0)
-                                <a href="" data-parent="{{ $review->id }}" class="open-reviews__button">Показати всі відгуки користувача</a>
-                            @endif
-                        </div>
+                        @include('partials/review', [
+                            'show_related' => true,
+                        ])
 
                         @if (sizeof($review->reviews) > 0)
                             @foreach ($review->reviews as $innerReview)
-                                <div class="reviews__item review__parent-{{ $review->id }} hide" data-email="{{ $innerReview->user_email }}" data-form="{{ $innerReview->model }}" data-date="{{ $innerReview->created_at->format('d.m.Y H:i') }}">
-                                    <div class="reviews__header">
-                                        <span class="reviews__author reviews__author--{{ $innerReview->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $innerReview->created_at->format('d.m.Y H:i') }}</span>
-                                    </div>
-                                    @include('partials/reviews/' . $innerReview->model, [
-                                        'review' => $innerReview,
-                                    ])
-                                </div>
+                                @include('partials/review', [
+                                    'review' => $innerReview,
+                                    'parent' => $review,
+                                    'show_related' => true,
+                                ])
                             @endforeach
                         @endif
                     @endforeach
@@ -250,7 +259,7 @@
                                 <div class="reviews__stars">
                                       <h3>Умови закупівлі:</h3>
                                       
-                                      <ul class="tender-stars tender-stars--3">
+                                    <ul class="tender-stars tender-stars--3">
                                     <li></li><li></li><li></li><li></li><li></li>
                               </ul>
                                       
