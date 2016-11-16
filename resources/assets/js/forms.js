@@ -59,8 +59,8 @@ var FORMS,
 
         var validators={
             comment: function(errors, values){
-                if (!values.text || values.text.length < 30) {
-                    $('[name=text]').closest('.controls').find('.jsonform-errortext').removeAttr('style').text('Поле обов`язкове до заповнення, та повине мати довжину більше 30 символів');
+                if (!values.comment || values.comment.length < 30) {
+                    $('[name=comment]').closest('.controls').find('.jsonform-errortext').removeAttr('style').text('Поле обов`язкове до заповнення, та повине мати довжину більше 30 символів');
     
                     return false;
                 }
@@ -151,7 +151,7 @@ var FORMS,
         }
         
         var submitReviewForm=function(values, formCode, successCallback){
-            //loader.show().spin(spin_options);
+            loader.show().spin(spin_options);
 
             values=$.extend(values, _extraValues);
 
@@ -176,8 +176,11 @@ var FORMS,
                     if (response) {
                         if(submitCounter==formsCount()){
                             loader.spin(false).hide();
-                            $("#reviews").load(window.location.href+" #reviews");
-                            $("#stars").load(window.location.href+" #stars");
+
+                            $.get(window.location.href, function(html){
+                                $("[reviews]").html($(html).find('[reviews]').html());
+                                $("[stars]").html($(html).find('[stars]').html());
+                            });
 
                             if(typeof successCallback == 'function'){
                                 successCallback();

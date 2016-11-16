@@ -1,6 +1,6 @@
 {
   "type": "object",
-  "title": "Comments schema",
+  "title": "Comments schema C1",
   "description": "Hint: Comment schema does not have userForm schema inside",
   "properties": {
     "author": {
@@ -34,20 +34,21 @@
         "name"
       ]
     },
-    "comment": {
+    "userForm": {
       "type": "object",
-      "description": "Comment form",
       "properties": {
-        "text": {
-          "title": "Comment text",
+        "comment": {
           "minLength": 1,
           "maxLength": 10000,
           "type": "string"
         }
       },
+      "required": [
+        "comment"
+      ],
       "form": [
         {
-          "key": "text",
+          "key": "comment",
           "type": "textarea"
         }
       ]

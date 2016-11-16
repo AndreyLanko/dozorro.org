@@ -50,11 +50,11 @@
                             <div class="tender-description__cell">
                                 Оцінка умов закупівлі:
                             </div>
-                            <div class="tender-description__cell">
+                            <div class="tender-description__cell" stars>
                                 <ul class="tender-stars tender-stars--{{ $rating }}">
                                     <li></li><li></li><li></li><li></li><li></li>
                                 </ul>    
-                                <span class="text-gray text-small">(відгуків: {{ sizeof($reviews) }})</span>
+                                <span class="text-gray text-small">(відгуків: {{ $reviews_total }})</span>
                             </div>
                         </div>
                     </div>
@@ -168,7 +168,7 @@
                    "reviews__author reviews__author--confirmed" - автор подтвержден, зеленая иконка
                    "reviews__author reviews__author--not-confirmed" - автор не подтвержден, серая иконка -->
             <div class="reviews is-show">
-                <div id="reviews" class="container">
+                <div class="container" reviews>
                     @if(!sizeof($reviews))
                         <div class="reviews__item">
                             Жодного відгуку не залишено
@@ -242,7 +242,7 @@
                                 <div class="reviews__stars">
                                       <h3>Умови закупівлі:</h3>
                                       
-                                      <ul class="tender-stars tender-stars--3">
+                                    <ul class="tender-stars tender-stars--3">
                                     <li></li><li></li><li></li><li></li><li></li>
                               </ul>
                                       

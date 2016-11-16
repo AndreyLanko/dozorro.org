@@ -264,6 +264,8 @@ class PageController extends BaseController
             ->orderBy('date', 'DESC')
             ->get();
 
+        $reviews_total=sizeof($reviews);
+        
         $generalReviews = array_where($reviews, function($key, $review){
             return $review->schema == 'F101';
         });
@@ -289,6 +291,7 @@ class PageController extends BaseController
             'dataStatus' => $dataStatus,
             'error' => $this->error,
             'reviews' => $reviews,
+            'reviews_total' => $reviews_total,
             'rating' => $rating,
             'areas' => $this->getAreas(),
         ];
