@@ -26,6 +26,7 @@ var FORMS,
             formError=$('[form-error]'),
             formTitle=$('[form-title]'),
             formTitleDefault=formTitle.text(),
+            formCurrent = '',
             loader=$('[loader]'),
             submitCounter,        
             _params,
@@ -109,6 +110,8 @@ var FORMS,
                 e.preventDefault();
 
                 formContainer.find('form').slideUp();
+                formCurrent = $(this).closest('h3').next();
+
                 $(this).parent().next().stop(true).slideToggle(checkButton);
 
                 return false;
@@ -162,6 +165,7 @@ var FORMS,
                     submitCounter++;
 
                     if (response) {
+
                         if(submitCounter==formsCount()){
                             loader.spin(false).hide();
 
@@ -179,10 +183,17 @@ var FORMS,
                                 formToolbar.empty();
 
                                 $('['+_params.next+'] a').click();
-                            }else{
+                            } else {
                                 formSuccess.show();
                                 formContainer.empty();
                                 formToolbar.empty();
+                            }
+                        } else {
+                            loader.spin(false).hide();
+
+                            if (isMultiForm()) {
+                                formCurrent.prev().fadeOut();
+                                formCurrent.fadeOut();
                             }
                         }
                     } else {
@@ -256,8 +267,6 @@ var FORMS,
 
                         _extraValues={};
                         _extraValues.thread=$(this).data('thread');
-
-                        console.log(_extraValues);
 
                         formSelector.show();
                         formContainer.empty();
