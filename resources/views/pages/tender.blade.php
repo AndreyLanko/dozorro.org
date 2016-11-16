@@ -98,11 +98,31 @@
                                             Умови закупівлі
                                     </a>
                                 </div>
+                                <div class="form-selector-button">
+                                    <a href="" class="form-selector-button__link outline"
+                                        data-formjs="jsonForm"
+                                        data-form="F111"
+                                        data-model="form"
+                                        data-form-title="Ваш відгук"
+                                        data-submit-button="Залишити відгук">
+                                            Оцінка процесу кваліфікації
+                                    </a>
+                                </div>
+                                <div class="form-selector-button">
+                                    <a href="" class="form-selector-button__link outline"
+                                        data-formjs="jsonForm"
+                                        data-form="F112"
+                                        data-model="form"
+                                        data-form-title="Ваш відгук"
+                                        data-submit-button="Залишити відгук">
+                                            Оцінка виконання замовником умов договору
+                                    </a>
+                                </div>
                                 <div class="form-selector-button hidden" F102-105>
                                     <a href="" class="form-selector-button__link"
                                         data-formjs="jsonForm"
                                         data-model="form"
-                                        data-form="F102+F103+F104+F105+F106+F107+F108+F109+F111+F112"
+                                        data-form="F102+F103+F104+F105+F106+F107+F108+F109"
                                         data-submit-button="Залишити відгук"
                                         data-form-title="Будь ласка, деталізуйте Вашу оцінку">
                                     </a>
