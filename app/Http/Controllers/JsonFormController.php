@@ -81,7 +81,7 @@ class JsonFormController extends BaseController
                 if($model=='form') {
                     $data = $this->data($jsonForm->getJsonContent());
                 } else {
-                    $data = ['text'=>Input::get('form.text')];
+                    $data = ['comment'=>Input::get('form.comment')];
                 }
 
                 if (in_array($slug, ['form102', 'form103'])) {

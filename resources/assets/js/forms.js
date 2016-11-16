@@ -42,18 +42,6 @@ var FORMS,
 
         var initializers={
             comment: function(_self){
-                _self.click(function(){
-                    _extraValues.thread=_self.data('thread');
-                    
-                    formTitle.html(formTitleDefault);
-                    formSelector.show();
-                    formContainer.empty();
-                    formToolbar.empty();
-                    formError.hide();
-                    formSuccess.hide();
-
-                    $('#my_popup').popup('show');
-                });
             }
         };
 
@@ -180,7 +168,7 @@ var FORMS,
                             $.get(window.location.href, function(html){
                                 $("[reviews]").html($(html).find('[reviews]').html());
                                 $("[stars]").html($(html).find('[stars]').html());
-                            });
+                            });                           
 
                             if(typeof successCallback == 'function'){
                                 successCallback();
@@ -245,13 +233,47 @@ var FORMS,
                     if(_self.data('init') && typeof initializers[_self.data('init')]=='function'){
                         initializers[_self.data('init')](_self);
                     }
+                },
+                open: function(_self){
+                    _self.click(function(e) {
+                        e.preventDefault();
 
-                    _self.click(function(e){
+                        $('.add-review-form').popup({
+                            transition: 'all 0.3s'
+                        });
+
+                        _extraValues={};
+
+                        formSelector.show();
+                        formContainer.empty();
+                        formToolbar.empty();
+                        formError.hide();
+                        formSuccess.hide();
+                    });
+
+                    $(document).on('click', '[form-comment]', function(e){
+                        e.preventDefault();
+
+                        _extraValues={};
+                        _extraValues.thread=$(this).data('thread');
+
+                        console.log(_extraValues);
+
+                        formSelector.show();
+                        formContainer.empty();
+                        formToolbar.empty();
+                        formError.hide();
+                        formSuccess.hide();
+    
+                        $('#my_popup').popup('show');
+                    });
+
+                    $(document).on('click', '[data-formjs="jsonForm"]', function(e){
                         e.preventDefault();
 
                         var generateCounter=0;
 
-                        _params=_self.data();
+                        _params=$(this).data();
                         _params=$.extend(_params, _paramsDefault);
 
                         formTitle.html(_params.formTitle ? _params.formTitle : formTitleDefault);
@@ -266,11 +288,6 @@ var FORMS,
 
                             form.append('<input type="submit" value="'+_params.submitButton+'">');
 
-                            form.on('submit', function () {
-                                $(this).prev().remove();
-                                $(this).remove();
-                            });
-
                             if(generateCounter==formsCount() && isMultiForm()){
                                 initMultiFormAccordeon();
                             }
@@ -279,22 +296,6 @@ var FORMS,
                                 generators[_params.generate]();
                             }
                         });
-                    });
-                },
-                open: function(_self){
-                    _self.click(function(e) {
-                        e.preventDefault();
-
-                        $('.add-review-form').popup({
-                            transition: 'all 0.3s'
-                        });
-
-                        formTitle.html(formTitleDefault);
-                        formSelector.show();
-                        formContainer.empty();
-                        formToolbar.empty();
-                        formError.hide();
-                        formSuccess.hide();
                     });                    
                 }
             }

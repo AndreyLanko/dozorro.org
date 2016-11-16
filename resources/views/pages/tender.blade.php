@@ -79,9 +79,6 @@
                 <div class="container" style="position:relative">
                     <div class="add-review-form__content">
                         @if (\App\Classes\User::isAuth())
-                            <div class="overflow">
-                                <div class="add-review-toolbar" form-toolbar></div>
-                            </div>
                             <button class="add-review-form__close-button my_popup_close"></button>
                             <h1 class="tender-header__h1" form-title>Ваш відгук</h1>
                             <div class="form-selector" form-selector>
