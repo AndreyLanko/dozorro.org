@@ -19,6 +19,7 @@
                                 <input id="tender-customer" type="text" name="query" class="jsGetInputVal" autocomplete="off">
                                 <label for="tenderCustomer">Замовник</label>
                             </div>
+                            <div id="errordiv"></div>
                         </div>
                     </div>
                     <div class="col-md-3">
