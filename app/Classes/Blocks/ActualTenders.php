@@ -2,6 +2,7 @@
 
 namespace App\Classes\Blocks;
 
+use App\ActualTender;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -18,7 +19,7 @@ class ActualTenders implements IBlock
         /**
          * @var array $tenders
          */
-        $tenders = DB::table('perevorot_dozorro_actual_tenders')->get();
+        $tenders = ActualTender::get();
 
         foreach ($tenders as $tender) {
             $tender->data = json_decode($tender->data);
