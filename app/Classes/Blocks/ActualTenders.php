@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
  * Class ActualTenders
  * @package App\Classes\Blocks
  */
-class ActualTenders implements IBlock
+class ActualTenders extends IBlock
 {
     /**
      * @return array

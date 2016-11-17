@@ -6,10 +6,25 @@ namespace App\Classes\Blocks;
  * Interface IBlock
  * @package App\Classes\Blocks
  */
-interface IBlock
+abstract class IBlock
 {
+    /**
+     * @var array
+     */
+    protected $block = [];
+
+    /**
+     * IBlock constructor.
+     *
+     * @param $block
+     */
+    public function __construct($block)
+    {
+        $this->block = $block;
+    }
+
     /**
      * @return mixed
      */
-    public function get();
+    abstract public function get();
 }
