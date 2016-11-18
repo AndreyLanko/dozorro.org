@@ -23,6 +23,13 @@ class ActualTendersAndReviews extends IBlock
 
         foreach ($tenders as $tender) {
             $tender->data = json_decode($tender->data);
+
+            if(isset($tender->data)) {
+                $tender->count_reviews = JsonForm::where('schema', 'F101')
+                    ->where('tender', $tender->data->id)
+                    ->get()
+                    ->count();
+            }
         }
 
         return $tenders;
@@ -53,6 +60,6 @@ class ActualTendersAndReviews extends IBlock
         return [
             'reviews' => $this->getReviews(),
             'tenders' => $this->getTenders(),
-        ];   
+        ];
     }
 }
