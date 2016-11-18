@@ -72,7 +72,9 @@
   font-style:   normal;
   font-weight:  400;
 }
-
+.pt2 {
+	padding-top: 20px;
+}
 body .tender {
 	font-family: 'ProximaNova';
 }
@@ -3676,9 +3678,12 @@ actual styles
 .reviews.is-show {
 	display: block;
 }
-.reviews__item {
+.reviews__item:last-child .reviews__item-inner {
+	border-bottom: 0;	
+}
+.reviews__item-inner {
 	border-bottom: 1px solid #e0e0e0;
-	padding: 40px 0 30px 0;
+	padding: 40px 0 40px 0;
 }
 .reviews__item:last-child {
 	border-bottom: 0;
@@ -3694,6 +3699,26 @@ actual styles
 	content: '';
 	display: block;
 	clear: both;
+}
+.reviews__read-reviews {
+	font-size:12px;
+	font-family: 'ProximaNovaBold';
+}
+.reviews__read-comments {
+	float:right;
+	margin-right:30px;
+	font-size:12px;
+	font-family: 'ProximaNovaBold';
+	margin-top: 2px;
+}
+.reviews__read-comments,
+.reviews__read-comments:hover,
+.reviews__read-comments:focus {
+	text-decoration: none;
+}
+.reviews__read-comments:hover,
+.reviews__read-reviews:hover {
+	text-decoration: underline;
 }
 .reviews__author {
 	font-family: 'ProximaNovaBold';
@@ -4079,9 +4104,42 @@ actual styles
     color: rgba(255,255,255,.5);
     margin-top: 4px;
 }
-.open-reviews__button{
+.open-reviews__button {
     font-family: 'ProximaNovaBold', Helvetica, arial;
     font-size: 12px;
+    text-decoration: none;
+}
+
+.open-reviews__button:hover,
+.open-reviews__button:focus,
+.open-reviews__button span {
+	  text-decoration: none !important;
+}
+
+.open-reviews__button span:before {
+	  content: '';
+    width: 16px;
+    height: 16px;
+    border-radius: 20px;
+    float: left;
+    margin-right: 8px;
+    top: 0;
+    position: relative;
+    display: none;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.open-reviews__button span:first-child:before {
+    display: block;
+    background-image: url(/assets/images/show-icon-plus.svg);
+}
+.open-reviews__button span:last-child:before {
+    display: block;
+    background-image: url(/assets/images/hide-icon-minus.svg);
+}
+.open-reviews__button:hover span {
+	  text-decoration: underline !important;
 }
 .open-reviews__button span:first-child{
     display:block!important;
@@ -4095,7 +4153,25 @@ actual styles
 .open-reviews__button.clicked span:last-child{
     display: block!important;
 }
-.open-comment__button{
+.open-comment__button {
     font-family: 'ProximaNovaBold', Helvetica, arial;
     font-size: 12px;
+    border: 2px solid #e55166;
+    border-radius: 2px;
+    color: black !important;
+    padding: 7px 30px;
+    transition: 0.1s;
 }
+.open-comment__button:hover {
+	background-color: #e55166;
+	transition: 0.3s;
+	color: white !important;
+}
+.open-comment__button,
+.open-comment__button:hover,
+.open-comment__button:focus,
+.open-comment__button:active {
+	text-decoration: none;
+	outline: none;
+}
+

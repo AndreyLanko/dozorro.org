@@ -550,51 +550,18 @@
                 <div class="container" comments>
                     @foreach ($all_reviews as $review)
                         <div class="reviews__item" data-object-id="{{ $review->object_id }}">
-                            <div class="reviews__header">
-                                <span class="reviews__author reviews__author--{{ $review->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span>
-                                <span class="reveiw__date">{{ $review->date->format('d.m.Y H:i') }}</span>
-                            </div>
-
-                            @include('partials/reviews/'.$review->schema)
-
-                            <a href="" data-formjs="back">Дивитися всі відгуки</a>
-
-                            <div class="reviews__footer">
-                                <div data-thread="{{ $review->object_id }}" form-comment style="float:right">
-                                    <a href=""
-                                        class="open-comment__button"
-                                        data-formjs="jsonForm"
-                                        data-form="comment"
-                                        data-form-title="Ваш коментар"
-                                        data-submit-button="Додати коментар"
-                                        data-model="comment"
-                                        data-validate="comment"
-                                        data-init="comment">
-                                           Додати коментар
-                                    </a>
+                            <div class="reviews__item-inner">
+                                <div class="reviews__header">
+                                    <span class="reviews__author reviews__author--{{ $review->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span>
+                                    <span class="reveiw__date">{{ $review->date->format('d.m.Y H:i') }}</span>
                                 </div>
-                            </div>
-                            
-                            @if (sizeof($review->comments()))
-                                <div class="reviews__item reviews__item--deep-2">
-                                    <h3>Коментарі ({{ sizeof($review->comments()) }}):</h3>
-                                </div>
-                                @foreach ($review->comments() as $comment)
-                                    @if(!empty($comment->json->comment))
-                                        <div class="reviews__item reviews__item--deep-2">
-                                            <div class="reviews__header">
-                                                <span class="reviews__author reviews__author--{{ $comment->author->name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $comment->date->format('d.m.Y H:i') }}</span>
-                                            </div>
-                                            <div class="reviews__body">
-                                                <p>{!! nl2br(trim(strip_tags($comment->json->comment))) !!}</p>
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endforeach
-                            @endif
-
-                            @if (sizeof($review->comments())>2)
+														    
+                                @include('partials/reviews/'.$review->schema)
+														    
+                                
+														    
                                 <div class="reviews__footer">
+                                    <a href="" data-formjs="back" class="reviews__read-reviews">Дивитися всі відгуки</a>
                                     <div data-thread="{{ $review->object_id }}" form-comment style="float:right">
                                         <a href=""
                                             class="open-comment__button"
@@ -609,7 +576,45 @@
                                         </a>
                                     </div>
                                 </div>
-                            @endif
+                                
+                                @if (sizeof($review->comments()))
+                                    <div class="reviews__item reviews__item--deep-2 pt2">
+                                        <h3>Коментарі ({{ sizeof($review->comments()) }}):</h3>
+                                    </div>
+                                    @foreach ($review->comments() as $comment)
+                                        @if(!empty($comment->json->comment))
+                                            <div class="reviews__item reviews__item--deep-2">
+                                                <div class="reviews__item-inner">
+                                                    <div class="reviews__header">
+                                                        <span class="reviews__author reviews__author--{{ $comment->author->name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $comment->date->format('d.m.Y H:i') }}</span>
+                                                    </div>
+                                                    <div class="reviews__body">
+                                                        <p>{!! nl2br(trim(strip_tags($comment->json->comment))) !!}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endif
+														    
+                                @if (sizeof($review->comments())>2)
+                                    <div class="reviews__footer">
+                                        <div data-thread="{{ $review->object_id }}" form-comment style="float:right">
+                                            <a href=""
+                                                class="open-comment__button"
+                                                data-formjs="jsonForm"
+                                                data-form="comment"
+                                                data-form-title="Ваш коментар"
+                                                data-submit-button="Додати коментар"
+                                                data-model="comment"
+                                                data-validate="comment"
+                                                data-init="comment">
+                                                   Додати коментар
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     @endforeach
                 </div>

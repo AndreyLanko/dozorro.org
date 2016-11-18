@@ -74,44 +74,6 @@
 
 <script>
 
-var tenderHeader,
-    tenderTabsWrapper;
-
-setTimeout(function(){
-
-    tenderHeader = $('.tender-header').height();
-    tenderTabsWrapper = $('.tender-tabs-wrapper').height();
-
-    $(window).scroll(function(){
-    if ($(window).scrollTop() > (tenderTabsWrapper + tenderHeader + 118)) {
-        $('.tender-tabs-wrapper').css({
-            'position': 'fixed',
-            'top': '0'
-        });
-        $('.reviews').css({
-	          'padding-top': tenderTabsWrapper
-        });
-        $('.tender--description').css({
-	          'padding-top': tenderTabsWrapper
-        });
-    } else {
-	      $('.tender-tabs-wrapper').css({
-            'position': 'relative',
-            'top': 0
-        });
-        $('.reviews').css({
-	          'padding-top': 0
-        });
-        $('.tender--description').css({
-	          'padding-top': 0
-        });
-        
-    }
-
-});
-
-}, 300);
-
 $('.jsTenderTabs .tender-tabs__item').click(function() {
     var index=$(this).index('.tender-tabs__item');
     $('[tab-content]').hide();
@@ -139,6 +101,7 @@ $('.jsGetInputVal').change(function() {
 
 $(document).ready(function(){
     $(".tender-header__review-button").sticky({topSpacing:20});
+    $(".tender-tabs-wrapper").sticky({topSpacing:0});
 });
 
 </script>
