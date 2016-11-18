@@ -19,12 +19,14 @@ class ActualTendersAndReviews extends IBlock
         /**
          * @var array $tenders
          */
-        $tenders = ActualTender::get();
+        $tenders = ActualTender::limit($this->block->value->actual_tenders_limit)->get();
 
         foreach ($tenders as $tender) {
             $tender->data = json_decode($tender->data);
 
             if(isset($tender->data)) {
+                $tender->count_all_reviews = JsonForm::where('tender', $tender->data->id)->get()->count();
+
                 $tender->count_reviews = JsonForm::where('schema', 'F101')
                     ->where('tender', $tender->data->id)
                     ->get()

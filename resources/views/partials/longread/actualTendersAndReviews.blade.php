@@ -25,7 +25,9 @@
                                                 Статус:
                                             </div>
                                             <div class="sb-top-item__cell">
-                                                {{ $dataStatuses[$item->data->status] }}
+                                                @if(isset($dataStatuses))
+                                                    {{ $dataStatuses[$item->data->status] }}
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="sb-top-item__row">
@@ -51,10 +53,22 @@
                         @foreach($block->data['tenders'] as $item)
                             @if(isset($item->data))
                                 <div class="sb-top-item">
-                                    <a href="/tender/{{ $item->data->id }}">
-                                        {{ $item->data->procuringEntity->name }}
+                                    <h3>
+                                        <a href="/tender/{{ $item->data->id }}">
+                                            {{ $item->data->procuringEntity->name }}
 {{--                                        {{ $item->payload->userForm->generalComment }}--}}
-                                    </a>
+                                        </a>
+                                    </h3>
+                                    <div class="sb-top-item__table">
+                                        <div class="sb-top-item__row">
+                                            <div class="sb-top-item__cell">
+                                                Вiдгукiв:
+                                            </div>
+                                            <div class="sb-top-item__cell">
+                                                {{ $item->count_all_reviews }}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             @endif
                         @endforeach
