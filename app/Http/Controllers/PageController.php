@@ -289,6 +289,8 @@ class PageController extends BaseController
             );
         }
 
+        $all_reviews=$reviews;
+
         $reviews = (new App\Classes\Reviews($reviews))->getReviews();
 
         $data = [
@@ -297,6 +299,7 @@ class PageController extends BaseController
             'dataStatus' => $dataStatus,
             'error' => $this->error,
             'reviews' => $reviews,
+            'all_reviews' => $all_reviews,
             'reviews_total' => $reviews_total,
             'rating' => $rating,
             'areas' => $this->getAreas(),

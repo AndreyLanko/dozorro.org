@@ -9,6 +9,8 @@
 
                     var parent_id = $(this).data('parent');
 
+                    $(this).toggleClass('clicked');
+
                     var $elements = $('.review__parent-' + parent_id)
 
                     if ($elements.hasClass('hide')) {

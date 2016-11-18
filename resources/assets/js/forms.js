@@ -172,6 +172,10 @@ var FORMS,
                             $.get(window.location.href, function(html){
                                 $("[reviews]").html($(html).find('[reviews]').html());
                                 $("[stars]").html($(html).find('[stars]').html());
+
+                                if(values.thread){
+                                    $('.reviews__item[data-object-id='+values.thread+']').html($(html).find('.reviews__item[data-object-id='+values.thread+']').html());
+                                }
                             });                           
 
                             if(typeof successCallback == 'function'){
@@ -244,6 +248,29 @@ var FORMS,
                     if(_self.data('init') && typeof initializers[_self.data('init')]=='function'){
                         initializers[_self.data('init')](_self);
                     }
+                },
+                back: function(_self){
+                    $(document).on('click', '[data-formjs="back"]', function(e){
+                        e.preventDefault();;
+
+                        $('.tender-tabs__item:first').click();
+                        $('.tender-tabs__item:last').hide();
+                    });
+                },
+                comments: function(_self){
+                    var obj=$('.reviews__item[data-object-id]');
+                                        
+                    $(document).on('click', '[data-formjs="comments"]', function(e){
+                        e.preventDefault();;
+
+                        var self=$(this);
+                        
+                        $('.tender-tabs__item:last').show();
+                        $('.tender-tabs__item:last').click();
+
+                        obj.hide();
+                        $('.reviews__item[data-object-id='+self.data('object-id')+']').show();
+                    });
                 },
                 open: function(_self){
                     _self.click(function(e) {

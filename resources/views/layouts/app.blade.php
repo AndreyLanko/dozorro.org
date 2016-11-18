@@ -113,17 +113,12 @@ setTimeout(function(){
 }, 300);
 
 $('.jsTenderTabs .tender-tabs__item').click(function() {
-    if(!$(this).hasClass('is-show')) {
-        if(!$('.jsShowReviews').hasClass('is-show')) {
-            $('.tender--description').removeClass('is-show');
-	          $('.reviews').addClass('is-show');
-        } else if (!$('.jsShowDescription').hasClass('is-show')) {
-            $('.reviews').removeClass('is-show');
-	          $('.tender--description').addClass('is-show');
-        }
-        $('.jsTenderTabs .tender-tabs__item').removeClass('is-show');
-	      $(this).addClass('is-show');
-    }
+    var index=$(this).index('.tender-tabs__item');
+    $('[tab-content]').hide();
+    $('[tab-content]').eq(index).show();
+    $('.jsTenderTabs .tender-tabs__item').removeClass('is-show');
+
+    $(this).addClass('is-show');
 });
 
 $('.tender-header__link').click(function( event ) {

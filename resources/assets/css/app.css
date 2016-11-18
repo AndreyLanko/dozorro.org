@@ -3756,11 +3756,11 @@ actual styles
 }
 .reviews__stars {
 	float: left;
-	padding-right: 20px;
+	padding-top: 10px;
 }
 .reviews__stars, 
 .reviews__useful-rating {
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 }
 .reviews__stars h3,
 .reviews__useful-rating h3 {
@@ -4078,4 +4078,24 @@ actual styles
 #errordiv{
     color: rgba(255,255,255,.5);
     margin-top: 4px;
+}
+.open-reviews__button{
+    font-family: 'ProximaNovaBold', Helvetica, arial;
+    font-size: 12px;
+}
+.open-reviews__button span:first-child{
+    display:block!important;
+}
+.open-reviews__button span:last-child{
+    display:none!important;
+}
+.open-reviews__button.clicked span:first-child{
+    display:none!important;
+}
+.open-reviews__button.clicked span:last-child{
+    display: block!important;
+}
+.open-comment__button{
+    font-family: 'ProximaNovaBold', Helvetica, arial;
+    font-size: 12px;
 }
