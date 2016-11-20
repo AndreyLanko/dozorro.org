@@ -190,6 +190,7 @@
             <div class="reviews is-show" tab-content>
                 <div class="container" reviews>
                     @if(!sizeof($reviews))
+                        <br>
                         <div class="reviews__item">
                             Жодного відгуку не залишено
                         </div>

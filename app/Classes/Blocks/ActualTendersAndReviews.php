@@ -4,6 +4,8 @@ namespace App\Classes\Blocks;
 
 use App\ActualTender;
 use App\JsonForm;
+use Carbon\Carbon;
+use DB;
 
 /**
  * Class ActualTendersAndReviews
@@ -20,18 +22,22 @@ class ActualTendersAndReviews extends IBlock
          * @var array $tenders
          */
         $tenders = ActualTender::limit($this->block->value->actual_tenders_limit)->get();
+        $tender_ids = [];
 
         foreach ($tenders as $tender) {
             $tender->data = json_decode($tender->data);
 
             if(isset($tender->data)) {
-                $tender->count_all_reviews = JsonForm::where('tender', $tender->data->id)->get()->count();
-
-                $tender->count_reviews = JsonForm::where('schema', 'F101')
-                    ->where('tender', $tender->data->id)
-                    ->get()
-                    ->count();
+                array_push($tender_ids, $tender->data->id);
             }
+        }
+        
+        $forms = JsonForm::whereIn('tender', $tender_ids)->get();
+        
+        foreach ($tenders as $tender) {
+            $tender->reviews=array_where($forms, function($key, $form) use ($tender){
+                return $form->tender==$tender->data->id;
+            });
         }
 
         return $tenders;
@@ -45,13 +51,15 @@ class ActualTendersAndReviews extends IBlock
         /**
          * @var array $comments
          */
-        $comments = JsonForm::where('schema', 'F101')->limit($this->block->value->last_reviews_limit)->get();
-
-        foreach ($comments as $comment) {
-            $comment->payload = json_decode($comment->payload);
+        $reviews = DB::table('perevorot_dozorro_review_rating')->limit($this->block->value->last_reviews_limit)->get();
+        Carbon::setLocale('uk');
+        
+        foreach ($reviews as $review) {
+            $review->data = json_decode($review->data);
+            $review->data->last_review_date=new Carbon($review->data->last_review_date);
         }
 
-        return $comments;
+        return $reviews;
     }
     
     /**
