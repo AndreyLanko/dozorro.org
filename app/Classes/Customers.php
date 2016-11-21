@@ -2,27 +2,25 @@
 
 namespace app\Classes;
 
-class Costumers
+class Customers
 {
-
-//    private $costumers;
-
-//    public function __construct($costumers)
-//    {
-//        $this->costumers = file_get_contents(public_path().'/sources/ua/edrpou.json');
-//    }
-
-    public static function getCostumerByName($customerName)
+    public static function getCustomers()
     {
-        $custumers = json_decode(file_get_contents(public_path().'/sources/ua/edrpou.json'));
-        
-        $result = array_where($costumers, function ($key, $value) use ($customerName) {
-            return !empty($value) && ($value == $customerName);
-        });
+        $customers = json_decode(file_get_contents(public_path().'/sources/ua/edrpou.json'), true);
+
+//        $result = array_search($customerName, $customers);
+//        $result = array_where($customers, function ($key, $value) use ($customerName) {
+//            return !empty($value) && $value $customerName);
+//            !empty($value) && ($value == $customerName);
+//            if(!empty($value) && strpos($value, $customerName)) {
+//                return $value;
+//            }
+//});
+//        });
         
         
 //        array_slice()
 
-        return $result;
+        return $customers;
     }
 }
