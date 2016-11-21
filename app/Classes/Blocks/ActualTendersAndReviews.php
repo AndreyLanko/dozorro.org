@@ -21,7 +21,7 @@ class ActualTendersAndReviews extends IBlock
         /**
          * @var array $tenders
          */
-        $tenders = ActualTender::limit($this->block->value->actual_tenders_limit)->get();
+        $tenders = ActualTender::limit($this->block->value->actual_tenders_limit)->orderBy('sort_order', 'asc')->get();
         $tender_ids = [];
 
         foreach ($tenders as $tender) {
