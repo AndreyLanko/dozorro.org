@@ -4,8 +4,13 @@
             @if(!empty($review->json->impartialParticipantRequirements))
                 <p><em>Чи є вимоги до учасника доцільними і неупередженими – такими, що не створюють переваги окремим учасникам?</em></p>
             @endif
+            @if(!empty($review->json->impartialParticipantRequirements))
+                <span class="{{ $review->json->impartialParticipantRequirements }}">
+                {{ $review->json->impartialParticipantRequirements=='yes'?'ТАК':'НІ' }}
+            </span>
+            @endif
             @if(!empty($review->json->impartialParticipantRequirementsComment))
-                <p><span class="{{ $review->json->impartialParticipantRequirements }}">{{ $review->json->impartialParticipantRequirements=='yes'?'ТАК':'НІ' }}</span>, {!! nl2br(trim(strip_tags($review->json->impartialParticipantRequirementsComment))) !!}</p>
+                <p>{!! nl2br(trim(strip_tags($review->json->impartialParticipantRequirementsComment))) !!}</p>
             @endif
         </div>
     @endif
