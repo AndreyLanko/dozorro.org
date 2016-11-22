@@ -38,6 +38,13 @@ class JsonForm extends Model
      */
     public function getJsonAttribute()
     {
+        if(is_string(json_decode($this->payload)))
+        {
+            $data=json_decode(json_decode($this->payload));
+            $this->payload=json_encode($data, JSON_UNESCAPED_UNICODE);
+            $this->save();
+        }
+        
         $data=json_decode($this->payload);
 
         return $data->userForm;
