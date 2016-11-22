@@ -20,9 +20,15 @@ class PageController extends BaseController
     public function page(\Illuminate\Http\Request $request)
     {
         $this->getPage($request);
+
+        $dataStatus = [];
+
+        foreach(app('App\Http\Controllers\FormController')->get_status_data() as $one)
+            $dataStatus[$one['id']]=$one['name'];
         
         return $this->render('pages/page', [
             'blocks' => $this->blocks->getBlocks(),
+            'dataStatuses' => $dataStatus,
         ]);
     }
     
@@ -283,6 +289,8 @@ class PageController extends BaseController
             );
         }
 
+        $all_reviews=$reviews;
+
         $reviews = (new App\Classes\Reviews($reviews))->getReviews();
 
         $data = [
@@ -291,6 +299,7 @@ class PageController extends BaseController
             'dataStatus' => $dataStatus,
             'error' => $this->error,
             'reviews' => $reviews,
+            'all_reviews' => $all_reviews,
             'reviews_total' => $reviews_total,
             'rating' => $rating,
             'areas' => $this->getAreas(),

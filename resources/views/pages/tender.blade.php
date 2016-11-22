@@ -68,6 +68,7 @@
                               <ul class="tender-tabs__buttons">
                                   <li><span class="tender-tabs__item jsShowReviews is-show">Відгуки</span></li>
                                   <li><span class="tender-tabs__item jsShowDescription">Інформація про тендер</span></li>
+                                  <li><span class="tender-tabs__item" style="display:none">Обговорення</span></li>
                               </ul>
                           </div>
                     </div>
@@ -175,7 +176,8 @@
                 </div>
             </div>
             
-            <!-- reviews - Блок "Отзывы" 
+            {{--
+                reviews - Блок "Отзывы" 
                 Повторяющийся блок - "reviews__item".
                 Чтобы сделать ответ на отзыв, нужно к блоку "reviews__item" добавить один из классов:
                    "reviews__item--deep-1" - отступ слева 60px,    "reviews__item reviews__item--deep-1"
@@ -183,10 +185,12 @@
                 У элемента reviews__author есть следующие состояния:
                    "reviews__author" - автор без иконки
                    "reviews__author reviews__author--confirmed" - автор подтвержден, зеленая иконка
-                   "reviews__author reviews__author--not-confirmed" - автор не подтвержден, серая иконка -->
-            <div class="reviews is-show">
+                   "reviews__author reviews__author--not-confirmed" - автор не подтвержден, серая иконка 
+            --}}
+            <div class="reviews is-show" tab-content>
                 <div class="container" reviews>
                     @if(!sizeof($reviews))
+                        <br>
                         <div class="reviews__item">
                             Жодного відгуку не залишено
                         </div>
@@ -289,7 +293,7 @@
             </div>
             <!-- END reviews -->
 
-            <div class="tender--description">
+            <div class="tender--description" tab-content>
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-9">
@@ -542,6 +546,79 @@
 
                 {{--Подати пропозицію--}}
                 @include('partials.areas')
+            </div>
+            <div style="display:none" tab-content>
+                <div class="container" comments>
+                    @foreach ($all_reviews as $review)
+                        <div class="reviews__item" data-object-id="{{ $review->object_id }}">
+                            <div class="reviews__item-inner">
+                                <div class="reviews__header">
+                                    <span class="reviews__author reviews__author--{{ $review->user_name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span>
+                                    <span class="reveiw__date">{{ $review->date->format('d.m.Y H:i') }}</span>
+                                </div>
+														    
+                                @include('partials/reviews/'.$review->schema)
+														    
+                                
+														    
+                                <div class="reviews__footer">
+                                    <a href="" data-formjs="back" class="reviews__read-reviews">Дивитися всі відгуки</a>
+                                    <div data-thread="{{ $review->object_id }}" form-comment style="float:right">
+                                        <a href=""
+                                            class="open-comment__button"
+                                            data-formjs="jsonForm"
+                                            data-form="comment"
+                                            data-form-title="Ваш коментар"
+                                            data-submit-button="Додати коментар"
+                                            data-model="comment"
+                                            data-validate="comment"
+                                            data-init="comment">
+                                               Додати коментар
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                @if (sizeof($review->comments()))
+                                    <div class="reviews__item reviews__item--deep-2 pt2">
+                                        <h3>Коментарі ({{ sizeof($review->comments()) }}):</h3>
+                                    </div>
+                                    @foreach ($review->comments() as $comment)
+                                        @if(!empty($comment->json->comment))
+                                            <div class="reviews__item reviews__item--deep-2">
+                                                <div class="reviews__item-inner">
+                                                    <div class="reviews__header">
+                                                        <span class="reviews__author reviews__author--{{ $comment->author->name ? 'not-':'not-'}}confirmed">(контактна інформація прихована)</span><span class="reveiw__date">{{ $comment->date->format('d.m.Y H:i') }}</span>
+                                                    </div>
+                                                    <div class="reviews__body">
+                                                        <p>{!! nl2br(trim(strip_tags($comment->json->comment))) !!}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endif
+														    
+                                @if (sizeof($review->comments())>2)
+                                    <div class="reviews__footer">
+                                        <div data-thread="{{ $review->object_id }}" form-comment style="float:right">
+                                            <a href=""
+                                                class="open-comment__button"
+                                                data-formjs="jsonForm"
+                                                data-form="comment"
+                                                data-form-title="Ваш коментар"
+                                                data-submit-button="Додати коментар"
+                                                data-model="comment"
+                                                data-validate="comment"
+                                                data-init="comment">
+                                                   Додати коментар
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

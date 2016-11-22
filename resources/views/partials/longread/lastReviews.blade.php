@@ -1,3 +1,14 @@
+@foreach($block->data as $item)
+    @if(isset($item->tender))
+        <div>
+            <a href="/tender/{{ $item->tender }}">
+                {{ $item->payload->userForm->generalComment }}
+            </a>
+        </div>
+        <br />
+    @endif
+@endforeach
+
 {{--
 <div class="c-top-items">
     <div class="container">
