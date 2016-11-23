@@ -99,6 +99,41 @@ var APP,
                 });
             },
             js: {
+                customer_search: function () {
+                    $('#tender-customer').selectize({
+                        valueField: 'key',
+                        labelField: 'value',
+                        searchField: 'value',
+                        create: false,
+                        render: {
+                            option: function(item, escape) {
+                                return '<div>' + escape(item.value) + '</div>';
+                            }
+                        },
+                        load: function(query, callback) {
+                            $.ajax({
+                                url: '/sources/ua/edrpou.json',
+                                type: 'GET',
+                                error: function() {
+                                    callback();
+                                },
+                                success: function(res) {
+                                    var arrayOfEdrpou = [];
+
+                                    for (var item in res) {
+                                        arrayOfEdrpou.push({
+                                            key: item,
+                                            value: res[item]
+                                        });
+                                    }
+                                    // Debug
+                                    // console.log(arrayOfEdrpou);
+                                    callback(arrayOfEdrpou.slice(0, 250));
+                                }
+                            });
+                        }
+                    });
+                },
                 disableSearchButton: function (_self) {
                     $('#c-find-form').validate({
                         messages: {
