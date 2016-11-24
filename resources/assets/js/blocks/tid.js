@@ -4,7 +4,7 @@
  
 	var BLOCK = function(){
 		var _input,
-			pattern=/^UA\-20\d{2}\-\d{2}\-\d{2}\-\d{6}$/,			
+			pattern=/^UA\-20\d{2}\-\d{2}\-\d{2}\-\d{6}\-\w{1}$/,
 			_value;
 	
 		var query_types={

@@ -107,7 +107,7 @@ var APP,
                         rules: {
                             tid: {
                                 required: false,
-                                pattern: /^UA\-20\d{2}\-\d{2}\-\d{2}\-\d{6}$/
+                                pattern: /^UA\-20\d{2}\-\d{2}\-\d{2}\-\d{6}\-\w{1}$/
                             }
                         }
                     });
