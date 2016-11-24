@@ -26,6 +26,6 @@ class CustomerController extends Controller
             $result[$key] = $customer;
         }
 
-        return new JsonResponse($result);
+        return new JsonResponse(array_slice($result, 0, 20));
     }
 }

@@ -127,7 +127,7 @@ var APP,
                                             value: res[item]
                                         });
                                     }
-                                    callback(arrayOfEdrpou.slice(0, 20));
+                                    callback(arrayOfEdrpou);
                                 }
                             });
                         }
