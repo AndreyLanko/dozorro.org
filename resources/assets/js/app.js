@@ -144,7 +144,7 @@ var APP,
                         rules: {
                             tid: {
                                 required: false,
-                                pattern: /^UA\-20\d{2}\-\d{2}\-\d{2}\-\d{6}$|^UA\-20\d{2}\-\d{2}\-\d{2}\-\d{6}\-([a-z])$/
+                                pattern: /^UA\-20\d{2}\-\d{2}\-\d{2}\-\d{6}(\-([a-z]))?$/
                             }
                         }
                     });
