@@ -127,7 +127,7 @@ var APP,
                                             value: res[item]
                                         });
                                     }
-                                    callback(arrayOfEdrpou.slice(1, 20));
+                                    callback(arrayOfEdrpou.slice(0, 20));
                                 }
                             });
                         }
@@ -155,7 +155,7 @@ var APP,
                     });
 
                     $('input[id="btn-find"]').prop('disabled', true);
-                    $('input[id="tender-number"], input[id="tender-customer"]').keyup(function () {
+                    $('input[id="tender-number"], input[id="tender-customer"]').change(function () {
                         if ($(this).val() != '') {
                             $('input[id="btn-find"]').prop('disabled', false);
                         } else {
