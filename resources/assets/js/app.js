@@ -105,6 +105,7 @@ var APP,
                         labelField: 'value',
                         searchField: 'value',
                         create: false,
+                        maxItems: 1,
                         render: {
                             option: function(item, escape) {
                                 return '<div>' + escape(item.value) + '</div>';
