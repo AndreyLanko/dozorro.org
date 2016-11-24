@@ -99,10 +99,46 @@ var APP,
                 });
             },
             js: {
+                customer_search: function () {
+                    $('#tender-customer').selectize({
+                        valueField: 'key',
+                        labelField: 'value',
+                        searchField: 'value',
+                        create: false,
+                        render: {
+                            option: function(item, escape) {
+                                return '<div>' + escape(item.value) + '</div>';
+                            }
+                        },
+                        load: function(query, callback) {
+                            $.ajax({
+                                url: '/customers/search?query=' + encodeURIComponent(query),
+                                type: 'GET',
+                                error: function() {
+                                    callback();
+                                },
+                                success: function(res) {
+                                    var arrayOfEdrpou = [];
+
+                                    for (var item in res) {
+                                        arrayOfEdrpou.push({
+                                            key: item,
+                                            value: res[item]
+                                        });
+                                    }
+                                    callback(arrayOfEdrpou.slice(1, 20));
+                                }
+                            });
+                        }
+                    });
+                },
                 disableSearchButton: function (_self) {
                     $('#c-find-form').validate({
                         messages: {
-                            tid: 'Невірний формат'
+                            tid: 'Формат: UA-2016-01-01-000001'
+                        },
+                        errorPlacement: function(error, element) {
+                            error.appendTo('#errordiv');
                         },
                         rules: {
                             tid: {

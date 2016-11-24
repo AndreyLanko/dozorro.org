@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -24,43 +25,79 @@ class JsonForm extends Model
      * @var array
      */
     public $dates = [
-        'created_at'
+        'date'
     ];
 
     /**
-     * @return string
+     * @var array
      */
-    public function getRatingAttribute()
-    {
-        $data = json_decode($this->data);
-
-        if (!isset($data->generalScore)) {
-            return '';
-        }
-
-        return $data->generalScore;
-    }
+    private $comments = [];
 
     /**
-     * @return string
-     */
-    public function getCommentAttribute()
-    {
-        $data = json_decode($this->data);
-
-        if (!isset($data->generalComment)) {
-            return '';
-        }
-
-        return $data->generalComment;
-    }
-
-    /**
-     * @return objetc
+     * @return object
      */
     public function getJsonAttribute()
     {
-        return json_decode($this->data);
+        if(is_string(json_decode($this->payload)))
+        {
+            $data=json_decode(json_decode($this->payload));
+            $this->payload=json_encode($data, JSON_UNESCAPED_UNICODE);
+            $this->save();
+        }
+        
+        $data=json_decode($this->payload);
+
+        return $data->userForm;
+    }
+
+    /**
+     * @return object
+     */
+    public function getAuthorAttribute()
+    {
+        $data=json_decode($this->payload);
+
+        return $data->author;
+    }
+    
+    private function parsePayload()
+    {
+        if (!$this->data) {
+            $this->data = json_decode($this->data);
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPayload()
+    {
+        return json_decode($this->payload);
+    }
+
+    /**
+     * @return string
+     */
+    public function getKey()
+    {
+        return (isset($this->getPayload()->author->uniqueKey))?$this->getPayload()->author->uniqueKey:md5($this->getPayload()->author->email . $this->getPayload()->author->social);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function comments()
+    {
+        if (!$this->comments) {
+            $comments = JsonForm::where('schema', 'comment')
+                ->where('thread', $this->object_id)
+                ->get()
+            ;
+
+            $this->comments = $comments;
+        }
+
+        return $this->comments;
     }
 
     public static function getF112Enum($key)

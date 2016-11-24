@@ -16,9 +16,10 @@
                             </div>
                             <span class="c-find-form__or-word">або</span>
                             <div class="c-find-form__input-group">
-                                <input id="tender-customer" type="text" name="query" class="jsGetInputVal" autocomplete="off">
+                                <input id="tender-customer" type="text" name="query" class="jsGetInputVal" autocomplete="off" data-js="customer_search">
                                 <label for="tenderCustomer">Замовник</label>
                             </div>
+                            <div id="errordiv"></div>
                         </div>
                     </div>
                     <div class="col-md-3">

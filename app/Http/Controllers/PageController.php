@@ -20,9 +20,15 @@ class PageController extends BaseController
     public function page(\Illuminate\Http\Request $request)
     {
         $this->getPage($request);
+
+        $dataStatus = [];
+
+        foreach(app('App\Http\Controllers\FormController')->get_status_data() as $one)
+            $dataStatus[$one['id']]=$one['name'];
         
         return $this->render('pages/page', [
             'blocks' => $this->blocks->getBlocks(),
+            'dataStatuses' => $dataStatus,
         ]);
     }
     
@@ -259,25 +265,31 @@ class PageController extends BaseController
 
         $item=$this->tender_parse($id);
 
-        $reviews = App\JsonForm::where('tender_id', $item->id)
-            ->orderBy('created_at', 'DESC')
-            ->get()
-        ;
+        $reviews = App\JsonForm::where('tender', $item->id)
+            ->where('model', '=', 'form')
+            ->orderBy('date', 'DESC')
+            ->get();
 
-        $rating1 = 0;
-        $filteredReviews = array_where(array_pluck($reviews, 'rating'), function($key, $value){
-            return !empty($value);
+        $reviews_total=sizeof($reviews);
+        
+        $generalReviews = array_where($reviews, function($key, $review){
+            return $review->schema == 'F101';
         });
+        
+        $score = 0;
+        $rating = 0;
 
-        if($reviews && sizeof($reviews)>0){
-            $rating1=round(
-                array_sum(
-                    $filteredReviews
-                ) / sizeof(
-                    $filteredReviews
-                )
+        foreach($generalReviews as $review) {
+            $score+=$review->json->generalScore;
+        };
+
+        if($generalReviews && sizeof($generalReviews)>0){
+            $rating=round(
+                $score / sizeof($generalReviews)
             );
         }
+
+        $all_reviews=$reviews;
 
         $reviews = (new App\Classes\Reviews($reviews))->getReviews();
 
@@ -287,7 +299,9 @@ class PageController extends BaseController
             'dataStatus' => $dataStatus,
             'error' => $this->error,
             'reviews' => $reviews,
-            'rating1' => $rating1,
+            'all_reviews' => $all_reviews,
+            'reviews_total' => $reviews_total,
+            'rating' => $rating,
             'areas' => $this->getAreas(),
         ];
 

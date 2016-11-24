@@ -40,15 +40,38 @@ class Longread
     }
 
     /**
-     *
+     * @return void
      */
     private function proccessData()
     {
         foreach ($this->blocks as $block) {
+            $block->data = $this->processBlockClass($block);
+
             if (isset($block->files)) {
                 $this->proccessFiles($block);
             }
         }
+    }
+
+    /**
+     * @param $block
+     *
+     * @return array|mixed
+     */
+    private function processBlockClass($block)
+    {
+        $namespace = '\App\Classes\Blocks\\' . ucfirst($block->alias);
+
+        if (!class_exists($namespace)) {
+            return [];
+        }
+
+        /**
+         * @var \App\Classes\Blocks\IBlock $block
+         */
+        $block = new $namespace($block);
+
+        return $block->get();
     }
 
     /**

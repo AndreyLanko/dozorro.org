@@ -11,6 +11,8 @@ foreach($locales as $language)
     {
         Route::get('/', 'PageController@home');
 
+        Route::get('customers/search', 'CustomerController@search');
+
         Route::get('search', 'PageController@search_redirect');
         Route::get('{search}/search', 'PageController@search');
         Route::get('plan/search/print/{print}', 'PrintController@plan_list')->where('print', '(html)');;
@@ -46,4 +48,4 @@ Route::post('feedback', 'FeedbackController@store');
 Route::get('json/platforms/{type}', 'JsonController@platforms');
 Route::get('json/announced', 'JsonController@announced_tenders');
 
-Route::post('jsonforms', 'JsonFormController@submit');
+Route::post('jsonforms/{model}', 'JsonFormController@submit')->where('model', '(form|comment)');
