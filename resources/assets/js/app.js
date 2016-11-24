@@ -112,7 +112,7 @@ var APP,
                         },
                         load: function(query, callback) {
                             $.ajax({
-                                url: '/sources/ua/edrpou.json',
+                                url: '/customers/search?query=' + encodeURIComponent(query),
                                 type: 'GET',
                                 error: function() {
                                     callback();
@@ -126,9 +126,7 @@ var APP,
                                             value: res[item]
                                         });
                                     }
-                                    // Debug
-                                    // console.log(arrayOfEdrpou);
-                                    callback(arrayOfEdrpou.slice(0, 250));
+                                    callback(arrayOfEdrpou.slice(1, 20));
                                 }
                             });
                         }
