@@ -1040,7 +1040,11 @@ var APP,
                         $('#buttons').append(button);
                     }
                 },
-                suggest: {
+
+				getFocusStatus: function(){
+                    
+                },
+				suggest: {
                     show: function(input_query){
                         var blocks=APP.utils.detect_query_block(input_query),
                             row,
@@ -1173,3 +1177,14 @@ var APP,
 String.prototype.trunc = String.prototype.trunc || function(n){
     return (this.length > n) ? this.substr(0, n-1)+'&hellip;' : this;
 };
+
+$('body').click(function() {
+	if ( $('.selectize-input').hasClass('focus')) {
+		$('.c-find-form__input-group-transp').addClass('is-focus');
+		
+	} else if ($('.selectize-input').hasClass('has-items')) {
+        $('.c-find-form__input-group-transp').addClass('is-focus');
+    } else {
+    	$('.c-find-form__input-group-transp').removeClass('is-focus');
+	}
+});
