@@ -19,13 +19,16 @@ class CustomerController extends Controller
         $result = array();
 
         foreach ($customers as $key => $customer){
-            if(stripos($customer, $request->get('query')) === false){
+            if(stripos($customer, $request->get('query')) === false || count($result) === 20){
                 continue;
             }
-            
-            $result[$key] = $customer;
+
+            $result[] = [
+                'value' => $customer,
+                'key' => $key,
+            ];
         }
 
-        return new JsonResponse(array_slice($result, 0, 20));
+        return new JsonResponse($result);
     }
 }

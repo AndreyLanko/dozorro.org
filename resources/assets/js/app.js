@@ -119,15 +119,7 @@ var APP,
                                     callback();
                                 },
                                 success: function(res) {
-                                    var arrayOfEdrpou = [];
-
-                                    for (var item in res) {
-                                        arrayOfEdrpou.push({
-                                            key: item,
-                                            value: res[item]
-                                        });
-                                    }
-                                    callback(arrayOfEdrpou);
+                                    callback(res);
                                 }
                             });
                         }
@@ -1042,9 +1034,9 @@ var APP,
                 },
 
 				getFocusStatus: function(){
-                    
+                   
                 },
-				suggest: {
+                suggest: {
                     show: function(input_query){
                         var blocks=APP.utils.detect_query_block(input_query),
                             row,
@@ -1179,12 +1171,12 @@ String.prototype.trunc = String.prototype.trunc || function(n){
 };
 
 $('body').click(function() {
-	if ( $('.selectize-input').hasClass('focus')) {
-		$('.c-find-form__input-group-transp').addClass('is-focus');
-		
-	} else if ($('.selectize-input').hasClass('has-items')) {
+    if ( $('.selectize-input').hasClass('focus')) {
+        $('.c-find-form__input-group-transp').addClass('is-focus');
+        
+    } else if ($('.selectize-input').hasClass('has-items')) {
         $('.c-find-form__input-group-transp').addClass('is-focus');
     } else {
-    	$('.c-find-form__input-group-transp').removeClass('is-focus');
-	}
+        $('.c-find-form__input-group-transp').removeClass('is-focus');
+    }
 });
