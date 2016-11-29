@@ -556,12 +556,16 @@ body {
 .c-text .container > h6,
 .c-text .container > p,
 .c-text .container > figure,
-.c-text .container > table {
+.c-text .container > table,
+.c-text .container > blockquote {
 	width: 100%;
 	max-width: 800px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: left;
+}
+.c-text .container > blockquote {
+    margin-bottom: 0;
 }
 .c-text .container > ul,
 .c-text .container > ol
