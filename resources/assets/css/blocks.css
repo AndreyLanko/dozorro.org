@@ -294,7 +294,7 @@ body {
 	font-size: 16px;
 	color: #fff;
 }
-.c-find-form__input-group input.with-text {
+.c-find-form__input-group-transp input.with-text {
     color: transparent;
 }
 .c-find-form__input-group .has-items .item {
