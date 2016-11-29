@@ -11,6 +11,8 @@ foreach($locales as $language)
     {
         Route::get('/', 'PageController@home');
 
+        Route::get('customers/search', 'CustomerController@search');
+
         Route::get('search', 'PageController@search_redirect');
         Route::get('{search}/search', 'PageController@search');
         Route::get('plan/search/print/{print}', 'PrintController@plan_list')->where('print', '(html)');;

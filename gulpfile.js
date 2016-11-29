@@ -125,4 +125,6 @@ elixir(function(mix) {
 		'vendor/selectize/selectize.default.less',
 		'app.less'
 	], 'public/assets/css/app.css');
+	
+    mix.version(['public/assets/css/site.css', 'public/assets/css/app.css', 'public/assets/js/app.js']);
 });

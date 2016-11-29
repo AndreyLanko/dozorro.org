@@ -99,6 +99,32 @@ var APP,
                 });
             },
             js: {
+                customer_search: function () {
+                    $('#tender-customer').selectize({
+                        valueField: 'key',
+                        labelField: 'value',
+                        searchField: 'value',
+                        create: false,
+                        maxItems: 1,
+                        render: {
+                            option: function(item, escape) {
+                                return '<div>' + escape(item.value) + '</div>';
+                            }
+                        },
+                        load: function(query, callback) {
+                            $.ajax({
+                                url: '/customers/search?query=' + encodeURIComponent(query),
+                                type: 'GET',
+                                error: function() {
+                                    callback();
+                                },
+                                success: function(res) {
+                                    callback(res);
+                                }
+                            });
+                        }
+                    });
+                },
                 disableSearchButton: function (_self) {
                     $('#c-find-form').validate({
                         messages: {
@@ -110,7 +136,7 @@ var APP,
                         rules: {
                             tid: {
                                 required: false,
-                                pattern: /^UA\-20\d{2}\-\d{2}\-\d{2}\-\d{6}$/
+                                pattern: /^UA\-20\d{2}\-\d{2}\-\d{2}\-\d{6}(\-([a-z]))?$/
                             }
                         }
                     });
@@ -121,7 +147,7 @@ var APP,
                     });
 
                     $('input[id="btn-find"]').prop('disabled', true);
-                    $('input[id="tender-number"], input[id="tender-customer"]').keyup(function () {
+                    $('input[id="tender-number"], input[id="tender-customer"]').change(function () {
                         if ($(this).val() != '') {
                             $('input[id="btn-find"]').prop('disabled', false);
                         } else {
@@ -1006,6 +1032,10 @@ var APP,
                         $('#buttons').append(button);
                     }
                 },
+
+				getFocusStatus: function(){
+                   
+                },
                 suggest: {
                     show: function(input_query){
                         var blocks=APP.utils.detect_query_block(input_query),
@@ -1139,3 +1169,14 @@ var APP,
 String.prototype.trunc = String.prototype.trunc || function(n){
     return (this.length > n) ? this.substr(0, n-1)+'&hellip;' : this;
 };
+
+$('body').click(function() {
+    if ( $('.selectize-input').hasClass('focus')) {
+        $('.c-find-form__input-group-transp').addClass('is-focus');
+        
+    } else if ($('.selectize-input').hasClass('has-items')) {
+        $('.c-find-form__input-group-transp').addClass('is-focus');
+    } else {
+        $('.c-find-form__input-group-transp').removeClass('is-focus');
+    }
+});

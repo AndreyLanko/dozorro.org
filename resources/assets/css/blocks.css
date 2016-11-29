@@ -236,6 +236,30 @@ body {
 	color: white;
 	position: relative;
 }
+.c-find-form__input-group-transp input {
+    width: 100%;
+    border-bottom: 2px solid white;
+    font-size: 16px;
+    display: block!important;
+}
+.c-find-form__input-group-transp .selectize-control {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.c-find-form__input-group-transp .selectize-control.single .selectize-input {
+    background: transparent;
+    border: none;
+    box-shadow: none; 
+    color: #fff;
+    margin-top: -5px;
+    padding-left: 0;
+    padding-right: 0;
+}
+.c-find-form__input-group-transp .selectize-control.single .selectize-input:after {
+    display: none;
+}
 .c-find-form__input-group label {
 	font-size: 16px;
 	position: absolute;
@@ -245,10 +269,15 @@ body {
 	pointer-events: none;
 }
 .c-find-form__input-group input:focus + label,
-.c-find-form__input-group input.with-text + label {
+.c-find-form__input-group input.with-text + label,
+.c-find-form__input-group-transp.is-focus label {
 	top: -20px;
 	transition: all 0.3s;
 	color: rgba(256, 256, 256, 0.5);
+}
+.c-find-form__input-group-transp .selectize-input input {
+    color: #fff;
+    font-size: 16px;
 }
 .c-find-form__or-word {
 	float: left;
@@ -263,6 +292,17 @@ body {
 	border: none;
 	border-bottom: 2px solid white;
 	font-size: 16px;
+	color: #fff;
+}
+.c-find-form__input-group-transp input.with-text {
+    color: transparent;
+}
+.c-find-form__input-group .has-items .item {
+    display: block;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .c-find-form h2 {
 	font-family: 'ProximaNovaBold';
