@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
     <meta name="csrf-token" content="{{csrf_token()}}" />
-    <link rel="stylesheet" href="/assets/css/app.css">
-    <link rel="stylesheet" href="/assets/css/site.css">
+    <link rel="stylesheet" href="{{ elixir('assets/css/app.css') }}">
+    <link rel="stylesheet" href="{{ elixir('assets/css/site.css') }}">
     <!--[if lt IE 9]>
         <script src="/assets/js/legacy/html5shiv.min.js"></script>
         <script src="/assets/js/legacy/respond.min.js"></script>
@@ -66,7 +66,7 @@
         'menu' => $main_menu
     ])
     
-    <script src="/assets/js/app.js"></script>
+    <script src="{{ elixir('assets/js/app.js') }}"></script>
 
     @if (env('YAMETRIC_CODE'))
         <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter{{env('YAMETRIC_CODE')}} = new Ya.Metrika({ id:{{env('YAMETRIC_CODE')}}, clickmap:true, trackLinks:true, accurateTrackBounce:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/{{env('YAMETRIC_CODE')}}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>

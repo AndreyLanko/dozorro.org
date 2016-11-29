@@ -43,6 +43,13 @@ class AuthController extends BaseController
             abort(404);
         }
 
+        $state = $request->get('state');
+        $request->session()->put('state', $state);
+
+        if(\Auth::check()==false) {
+            session()->regenerate();
+        }
+        
         $user = Socialite::driver($provider)->user();
 
         $data = [];
