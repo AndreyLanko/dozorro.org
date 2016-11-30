@@ -188,10 +188,12 @@ var FORMS,
 
                                 var selector = _params.thanks;
 
-                                $(selector).show();
-                                setTimeout(function() {
-                                    $(selector).hide();
-                                }, 2000);
+                                if (selector !== null) {
+                                    $(selector).show();
+                                    setTimeout(function () {
+                                        $(selector).hide();
+                                    }, 2000);
+                                }
 
                                 $('['+_params.next+'] a').click();
                             } else {
