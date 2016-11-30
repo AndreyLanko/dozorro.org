@@ -186,6 +186,13 @@ var FORMS,
                                 formContainer.empty();
                                 formToolbar.empty();
 
+                                var selector = _params.thanks;
+
+                                $(selector).show();
+                                setTimeout(function() {
+                                    $(selector).hide();
+                                }, 2000);
+
                                 $('['+_params.next+'] a').click();
                             } else {
                                 formSuccess.show();
