@@ -1,5 +1,5 @@
 @if (!empty($data->image))
-    <div class="c-bgimg" style="background-image: url('{{ env('BACKEND_URL') }}{{ $data->image->path }}');">
+    <div class="c-bgimg" style="background-image: url('{{ \App\Helpers::getStoragePath($data->image->disk_name) }}');">
         <div class="c-bgimg__bgcolor c-bgimg__bgcolor--opacity-0{{ !empty($data->image_block_opacity) ? (9-$data->image_block_opacity) : 6 }}"></div>
         <div class="container">
             <div class="c-bgimg__table">
