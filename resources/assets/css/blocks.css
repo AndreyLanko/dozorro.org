@@ -543,6 +543,12 @@ body {
 }
 /* END search-form */
 
+.c-customers{
+    margin: 20px 0px 20px 0px;
+}
+.c-customers h2{
+    margin-bottom: 20px;
+}
 /* c-text */
 .c-text .container {
 	text-align: center;
