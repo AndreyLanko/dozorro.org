@@ -19,7 +19,7 @@ class EdrpouController extends BaseController
         }
 
         $codes=explode(',', Input::get('code'));
-        $forms=JsonForm::whereIn('entity_id', $codes)->orderBy('date', 'DESC')->get();
+        $forms=JsonForm::whereIn('entity_id', $codes)->groupBy('tender')->orderBy('date', 'DESC')->get();
         $items=[];
         
         foreach($forms as $form){
