@@ -38,6 +38,16 @@ foreach($locales as $language)
         foreach ($pages as $page) {
             Route::get($page->url, 'PageController@page');
         }
+
+        Route::get('/blog', [
+            'as' => 'page.blog',
+            'uses' => 'BlogController@index'
+        ])->where(['id' => '[0-9]+']);
+
+        Route::get('/blog/{slug}', [
+            'as' => 'page.blog.post',
+            'uses' => 'BlogController@show'
+        ]);
     });
 }
 
