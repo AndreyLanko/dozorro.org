@@ -40,7 +40,7 @@ class Area extends Model
     /**
      * @return mixed
      */
-    public function image()
+    public function photo()
     {
         return File::where('attachment_type', $this->backendNamespace)
             ->where('attachment_id', $this->id)

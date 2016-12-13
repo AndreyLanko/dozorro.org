@@ -19,7 +19,11 @@ foreach($locales as $language)
         
         Route::get('plan/search/print/{print}', 'PrintController@plan_list')->where('print', '(html)');;
 
-        Route::get('tender/{id}', 'PageController@tender');
+        Route::get('/tender/{id}', [
+            'as' => 'page.tender_by_id',
+            'uses' => 'PageController@tender'
+        ]);
+
         Route::get('plan/{id}', 'PageController@plan');
 
         Route::post('form/data/{type}', 'FormController@data');
@@ -42,7 +46,7 @@ foreach($locales as $language)
         Route::get('/blog', [
             'as' => 'page.blog',
             'uses' => 'BlogController@index'
-        ])->where(['id' => '[0-9]+']);
+        ]);
 
         Route::get('/blog/{slug}', [
             'as' => 'page.blog.post',
