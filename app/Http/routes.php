@@ -15,6 +15,8 @@ foreach($locales as $language)
 
         Route::get('search', 'PageController@search_redirect');
         Route::get('{search}/search', 'PageController@search');
+        Route::get('edrpou', 'EdrpouController@results');
+        
         Route::get('plan/search/print/{print}', 'PrintController@plan_list')->where('print', '(html)');;
 
         Route::get('tender/{id}', 'PageController@tender');
@@ -28,7 +30,6 @@ foreach($locales as $language)
         Route::get('tender/{id}/print/{type}/{print}', 'PrintController@one')->where('print', '(pdf|html)');
         Route::get('tender/{id}/print/{type}/{print}/{lot_id?}', 'PrintController@one')->where('print', '(pdf|html)');
 
-        #Route::get('{url}', 'ErrorController@notfound');
         Route::get('error/404', 'ErrorController@notfound');
         #Route::get('error/500', 'ErrorController@systemerror');
 

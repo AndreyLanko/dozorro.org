@@ -90,6 +90,7 @@
                                         data-model="form"
                                         data-form-title="Ваш відгук"
                                         data-submit-button="Далі"
+                                        data-thanks=".thanks"
                                         data-next="F102-105"
                                         data-validate="formF101"
                                         data-generate="formF101">
@@ -150,7 +151,9 @@
                             </form>
                             <input type="submit" id="submit-f101" form="form-f101" value="Залишити відгук">
                             --}}
-                            
+                            <div class="thanks" hidden>
+                                Дякуємо! Ваш відгук зараховано.
+                            </div>
                             <div class="success" form-success>
                                 Дякуємо за відгук
                             </div>
