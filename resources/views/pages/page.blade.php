@@ -1,14 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+
     @foreach($blocks as $block)
         @include('partials.longread.' . $block->alias, [
             'data' => $block->value,
             'block' => $block
         ])
     @endforeach
+
 @endsection
 
+<!--
 <div class="c-header">
     <div class="container">
         <a href="/" class="c-header__logo"></a>
@@ -1426,3 +1429,5 @@
 		</div>
 	</div>
 </div>
+
+-->
