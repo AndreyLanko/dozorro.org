@@ -8,9 +8,9 @@ class ActualTender extends Model
 {
     protected $table = 'perevorot_dozorro_actual_tenders';
 
-    public function getDataAttribute($data)
+    public function get_format_data()
     {
-        return current(json_decode($data)->items);
+        return current(json_decode($this->data)->items);
     }
 
     public function scopeLimit($query, $limit)

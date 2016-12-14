@@ -42,8 +42,8 @@
                     @foreach($tenders AS $tender)
                     <div class="sb-list-item">
                         <div class="sb-list-item__row">
-                            <h2><a href="{{ route('page.tender_by_id', ['id' => $tender->data->tenderID]) }}">{{ str_limit($tender->data->title, 50) }}</a></h2>
-                            <h3>{{ str_limit($tender->data->description, 50) }}</h3>
+                            <h2><a href="{{ route('page.tender_by_id', ['id' => $tender->get_format_data()->tenderID]) }}">{{ str_limit($tender->get_format_data()->title, 50) }}</a></h2>
+                            <h3>{{ str_limit($tender->get_format_data()->description, 50) }}</h3>
                         </div>
                         <div class="sb-list-item__row">
                             <a href="#" class="sb-list-item__stat">@lang('blog.qualification')</a>
