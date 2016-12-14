@@ -10,15 +10,13 @@
                     <div class="c-blog__left">
 
                         @if($main)
-                            @include('partials.blog.post', ['post' => $main])
+                            @include('partials.blog.main_post', ['post' => $main])
                         @endif
 
                         <div class="c-blog__news-list">
 
                             @foreach($posts as $post)
-                                @if(!$post->is_main)
-                                    @include('partials.blog.post')
-                                @endif
+                                @include('partials.blog.post')
                             @endforeach
 
                         </div>

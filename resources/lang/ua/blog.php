@@ -7,4 +7,7 @@ return [
     'active_tenders' => 'Актуальнi тендери',
     'all_tenders' => 'Всі тендери',
     'qualification' => 'Кваліфікація переможця',
+    'budget' => 'Бюджет: :budget',
+    'sum' => 'Сума договору: :sum',
+    'saving' => 'Економія: <span>:saving</span>',
 ];
