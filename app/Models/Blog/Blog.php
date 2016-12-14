@@ -94,7 +94,14 @@ class Blog extends Model
             ->orderBy('id', 'DESC')
             ->first();
 
-        return $file = env('BACKEND_URL') . $file->getPath();
+        if($file)
+        {
+            return $file = env('BACKEND_URL') . $file->getPath();
+        }
+        else
+        {
+            return '';
+        }
     }
 
     public function getPublishedPosts($params = [])
