@@ -14,10 +14,10 @@
         <div class="sb-new-card__content-wrap">
 
             <div class="sb-new-card__row">
-                <a href="#{{ $post->author->slug }}" class="sb-new-card__author">{{ $post->author->full_name }}</a>
+                <a href="{{ route('page.blog.by_author', ['slug' => $post->author->slug]) }}" class="sb-new-card__author">{{ $post->author->full_name }}</a>
                 <ul class="sb-new-card__tags-list">
                     @foreach($post->tags as $tag)
-                        <li><a href="#{{ $tag->slug }}">{{ $tag->name }}</a></li>
+                        <li><a href="{{ route('page.blog.by_tag', ['slug' => $tag->slug ]) }}">{{ $tag->name }}</a></li>
                     @endforeach
                 </ul>
             </div>
@@ -29,7 +29,7 @@
 
             <div class="sb-new-card__row">
                 <div class="sb-new-card__date">@datetime($post->published_at)</div>
-                <a href="#" class="sb-new-card__comments"></a>
+                <a href="#" class="sb-new-card__comments">0</a>
             </div>
 
         </div>

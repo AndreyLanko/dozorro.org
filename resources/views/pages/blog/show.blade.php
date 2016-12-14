@@ -7,14 +7,17 @@
             <div class="row">
                 <div class="col-md-9">
                     <div class="c-blog__left">
-                        <div class="c-blog__news-list">
+                        <div class="c-one-new">
 
                             @include('partials.blog.full_post')
-                            @foreach($blocks as $block)
-                                @include('partials.longread.' . $block->alias, [
-                                    'data' => $block->value
-                                ])
-                            @endforeach
+
+                            <div class="c-one-new__content">
+                                @foreach($blocks as $block)
+                                    @include('partials.longread.' . $block->alias, [
+                                        'data' => $block->value
+                                    ])
+                                @endforeach
+                            </div>
 
                         </div>
 

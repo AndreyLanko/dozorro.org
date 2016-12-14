@@ -24,7 +24,7 @@ class Blog extends Model
     protected $casts = ['is_enabled', 'is_main'];
     protected $dates = ['published_at'];
 
-    protected $backendNamespace = 'Perevorot\Blog\Models\Blog';
+    public $backendNamespace = 'Perevorot\Blog\Models\Blog';
 
     public function author()
     {
@@ -38,14 +38,35 @@ class Blog extends Model
 
     public function scopeIsEnabled($query)
     {
-        return $query->where('is_enabled', true);
+        return $query->where($this->table . '.is_enabled', true);
     }
 
     public function scopeIsMain($query, $data)
     {
         if($data !== null)
         {
-            return $query->where('is_main', $data);
+            return $query->where($this->table . '.is_main', $data);
+        }
+    }
+
+    public function scopeByTag($query, $data)
+    {
+        if($data !== null)
+        {
+            return $query
+                ->join('perevorot_blog_tag_to_post', 'perevorot_blog_posts.id', '=', 'perevorot_blog_tag_to_post.post_id')
+                ->join('perevorot_blog_tags', 'perevorot_blog_tag_to_post.tag_id', '=', 'perevorot_blog_tags.id')
+                ->where('perevorot_blog_tags.slug', $data);
+        }
+    }
+
+    public function scopeByAuthor($query, $data)
+    {
+        if($data !== null)
+        {
+            return $query
+                ->join('perevorot_blog_authors', 'perevorot_blog_posts.author_id', '=', 'perevorot_blog_authors.id')
+                ->where('perevorot_blog_authors.slug', $data);
         }
     }
 
@@ -78,9 +99,11 @@ class Blog extends Model
 
     public function getPublishedPosts($params = [])
     {
-        return self::select('*')
+        return self::select($this->table . '.*')
             ->isEnabled()
             ->isMain(@$params['is_main'])
+            ->byTag(@$params['tag'])
+            ->byAuthor(@$params['author'])
             ->orderBy('created_at', 'desc')
             ->limit(@$params['limit']);
     }

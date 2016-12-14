@@ -52,6 +52,16 @@ foreach($locales as $language)
             'as' => 'page.blog.post',
             'uses' => 'BlogController@show'
         ]);
+
+        Route::get('/blog/tag/{slug}', [
+            'as' => 'page.blog.by_tag',
+            'uses' => 'BlogController@byTag'
+        ]);
+
+        Route::get('/blog/author/{slug}', [
+            'as' => 'page.blog.by_author',
+            'uses' => 'BlogController@byAuthor'
+        ]);
     });
 }
 

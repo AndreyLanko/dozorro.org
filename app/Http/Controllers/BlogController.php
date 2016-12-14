@@ -16,26 +16,28 @@ class BlogController extends BaseController
         $this->blog = new Blog();
     }
 
-    public function index()
+    public function byAuthor($slug = null)
     {
-        $posts = $this->blog->getPublishedPosts();
-        $banner = null;
+        return $this->index(null, $slug);
+    }
 
-        foreach($posts AS $post)
-        {
-            if($post->is_main)
-            {
-                $banner = $post;
-                break;
-            }
-        }
+    public function byTag($slug = null)
+    {
+        return $this->index($slug, null);
+    }
 
+    public function index($tag = null, $author = null)
+    {
+        $posts = $this->blog->getPublishedPosts(['tag' => $tag, 'author' => $author, 'is_main' => false]);
+        $main = $this->blog->getPublishedPosts(['limit' => 1, 'is_main' => true]);
+        $latest_posts = $this->blog->getPublishedPosts(['limit' => 3, 'is_main' => false]);
         $tenders = ActualTender::getAllActualTenders(['limit' => 3]);
 
         return $this->render('pages/blog/index', [
             'posts' => $posts,
-            'banner' => $banner,
+            'main' => $main,
             'tenders' => $tenders,
+            'latest_posts' => $latest_posts,
         ]);
     }
 
@@ -56,7 +58,7 @@ class BlogController extends BaseController
 
         $locale = (trim($request->route()->getPrefix(), '/'))?:App\Classes\Lang::getDefault();
         $blocks = (array) json_decode($post->{'longread_' . $locale});
-        $blocks = new App\Classes\Longread($blocks, $post->id);
+        $blocks = new App\Classes\Longread($blocks, $post->id, $this->blog->backendNamespace);
 
         $latest_posts = $this->blog->getPublishedPosts(['limit' => 3, 'is_main' => false]);
         $banner = $this->blog->getPublishedPosts(['limit' => 1, 'is_main' => true]);

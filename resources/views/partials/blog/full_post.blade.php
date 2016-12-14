@@ -1,31 +1,30 @@
-<div class="c-blog__main-new">
-
-    <div class="sb-new-card sb-new-card--big-card">
-        <a href="{{ route('page.blog.post', ['slug' => $post->slug]) }}" class="sb-new-card__img">
-            <img src="{{ $post->photo() }}" width="870" height="460">
-        </a>
-        <div class="sb-new-card__content-wrap">
-
-            <div class="sb-new-card__row">
-                <a href="#{{ $post->author->slug }}" class="sb-new-card__author">{{ $post->author->full_name }}</a>
-                <ul class="sb-new-card__tags-list">
-                    @foreach($post->tags as $tag)
-                        <li><a href="#{{ $tag->slug }}">{{ $tag->name }}</a></li>
-                    @endforeach
-                </ul>
+<div class="sb-new-header" style="background-color: #e55166;">
+    <div class="sb-new-header__bg" style="background-image: url('{{ $post->photo() }}');"></div>
+    <div class="sb-new-header__content">
+        <div class="sb-new-header__row">
+            <div class="sb-new-header__author-wrap">
+                <img src="{{ $post->author->photo() }}" width="80" height="80">
+                <h3>{{ $post->author->full_name }}</h3>
             </div>
-
-            <div class="sb-new-card__row">
-                <h2><a href="{{ route('page.blog.post', ['slug' => $post->slug]) }}">{{ $post->title }}</a></h2>
-                <h3>{!! $post->full_description !!}</h3>
-            </div>
-
-            <div class="sb-new-card__row">
-                <div class="sb-new-card__date">@datetime($post->published_at)</div>
-                <a href="#" class="sb-new-card__comments"></a>
-            </div>
-
         </div>
+        <div class="sb-new-header__row">
+            <h2>{{ $post->title }}</h2>
+        </div>
+        <div class="sb-new-header__row sb-new-header__row--date-comments">
+            <div class="sb-new-header__date">@datetime($post->published_at)</div>
+            <a href="#" class="sb-new-header__comments">0</a>
+        </div>
+        <div class="sb-new-header__row sb-new-header__row--tags">
+            <ul class="sb-new-header__tags-list">
+                @foreach($post->tags as $tag)
+                    <li><a href="{{ route('page.blog.by_tag', ['slug' => $tag->slug ]) }}">{{ $tag->name }}</a></li>
+                @endforeach
+            </ul>
+        </div>
+        <!--
+        <div class="sb-new-header__row sb-new-header__row--tender-num">
+            <div class="sb-new-header__tender-num">Номер тендеру: 1233552  |  2244222</div>
+        </div>
+        -->
     </div>
-
 </div>

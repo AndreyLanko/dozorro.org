@@ -9,12 +9,9 @@
                 <div class="col-md-9">
                     <div class="c-blog__left">
 
-                        @foreach($posts as $post)
-                            @if($post->is_main)
-                                @include('partials.blog.post')
-                                @break
-                            @endif
-                        @endforeach
+                        @if($main)
+                            @include('partials.blog.post', ['post' => $main])
+                        @endif
 
                         <div class="c-blog__news-list">
 
@@ -24,15 +21,16 @@
                                 @endif
                             @endforeach
 
-                            <div class="c-blog__more-button">
-                                <div class="sb-more-button">@lang('blog.load_more')</div>
-                            </div>
+                        </div>
+
+                        <div class="c-blog__more-button">
+                            <div class="sb-more-button">@lang('blog.load_more')</div>
                         </div>
 
                     </div>
                 </div>
 
-                @include('partials.blog.sidebar', ['latest_posts' => $posts])
+                @include('partials.blog.sidebar', ['banner' => $main])
             </div>
         </div>
     </div>

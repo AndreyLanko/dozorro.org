@@ -42,12 +42,12 @@
                     @foreach($tenders AS $tender)
                     <div class="sb-list-item">
                         <div class="sb-list-item__row">
-                            <h2><a href="{{ route('page.tender_by_id', ['id' => $tender->get_format_data()->tenderID]) }}">{{ str_limit($tender->get_format_data()->title, 50) }}</a></h2>
-                            <h3>{{ str_limit($tender->get_format_data()->description, 50) }}</h3>
+                            <h2><a href="{{ route('page.tender_by_id', ['id' => $tender->get_format_data()->tenderID]) }}">{{ $tender->get_format_data()->title }}</a></h2>
+                            <h3>{{ $tender->get_format_data()->description }}</h3>
                         </div>
                         <div class="sb-list-item__row">
                             <a href="#" class="sb-list-item__stat">@lang('blog.qualification')</a>
-                            <a href="#" class="sb-list-item__comments">{{ '0' }}</a>
+                            <a href="#" class="sb-list-item__comments">0</a>
                         </div>
                     </div>
                     @endforeach
