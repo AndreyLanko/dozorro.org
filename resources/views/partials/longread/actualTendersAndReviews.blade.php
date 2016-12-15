@@ -1,10 +1,13 @@
-<div class="c-top-items">
+<div class="c-hot">
     <div class="container">
         <div class="row">
             @if(!empty($block->data['tenders']))
-                <div class="col-md-6 c-top-items__col c-top-items__col--right-padding">
-                    <h2>Актуальнi тендери</h2>
+                <div class="col-md-6">
+                    <div class="c-list-card">
+                        <div class="c-list-card__inner">
+                    <h3 class="c-list-card__header">Актуальнi тендери</h3>
                     @foreach($block->data['tenders'] as $item)
+
                         <div class="sb-top-item">
                             <h3><a href="/tender/{{ $item->data->tenderID }}/">{{ $item->data->title }}</a></h3>
                             <div class="sb-top-item__table">
@@ -35,11 +38,16 @@
                             </div>
                         </div>
                     @endforeach
+                    <div class="c-list-card__link-wrap">
+                        <a href="#">Всі тендери</a>
+                    </div>
+                </div>
+                    </div>
                 </div>
             @endif
 
             @if(!empty($block->data['reviews']))
-                <div class="col-md-6 c-top-items__col c-top-items__col--left-padding">
+                    <div class="col-md-6">
                     <h2>Обговорюванi тендери</h2>
                     @foreach($block->data['reviews'] as $item)
                         @if(isset($item->data))
@@ -70,6 +78,7 @@
                     @endforeach
                 </div>
             @endif
+
         </div>
     </div>
 </div>

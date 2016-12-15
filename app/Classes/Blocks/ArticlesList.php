@@ -9,7 +9,7 @@ use App\Models\Blog\Blog;
  * Class ActualTendersAndReviews
  * @package App\Classes\Blocks
  */
-class LatestArticles extends IBlock
+class ArticlesList extends IBlock
 {
     public $blog;
 
@@ -26,15 +26,6 @@ class LatestArticles extends IBlock
         return $articles;
     }
 
-    private function getMainArticle()
-    {
-        /**
-         * @var array $tenders
-         */
-        $article = $this->blog->getPublishedPosts(['limit' => 1, 'is_main' => true]);
-
-        return $article;
-    }
 
     /**
      * @return array
@@ -45,7 +36,6 @@ class LatestArticles extends IBlock
 
         return [
             'articles' => $this->getArticles(),
-            'main_article' => $this->getMainArticle(),
         ];
     }
 }

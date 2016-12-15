@@ -30,7 +30,7 @@ class BlogController extends BaseController
     {
         $posts = $this->blog->getPublishedPosts(['tag' => $tag, 'author' => $author, 'is_main' => false]);
         $main = $this->blog->getPublishedPosts(['limit' => 1, 'is_main' => true]);
-        $latest_posts = $this->blog->getPublishedPosts(['limit' => 3, 'is_main' => false]);
+        $latest_posts = $this->blog->getPublishedPosts(['limit' => 3]);
         $tenders = ActualTender::getAllActualTenders(['limit' => 3]);
 
         return $this->render('pages/blog/index', [
@@ -60,7 +60,7 @@ class BlogController extends BaseController
         $blocks = (array) json_decode($post->{'longread_' . $locale});
         $blocks = new App\Classes\Longread($blocks, $post->id, $this->blog->backendNamespace);
 
-        $latest_posts = $this->blog->getPublishedPosts(['limit' => 3, 'is_main' => false]);
+        $latest_posts = $this->blog->getPublishedPosts(['limit' => 3]);
         $banner = $this->blog->getPublishedPosts(['limit' => 1, 'is_main' => true]);
         $tenders = ActualTender::getAllActualTenders(['limit' => 3]);
 

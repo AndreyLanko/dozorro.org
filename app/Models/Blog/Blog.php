@@ -74,7 +74,7 @@ class Blog extends Model
     {
         if($limit > 1)
         {
-            return $query->take($limit)->get();
+            return $query->paginate($limit);
         }
         elseif($limit == 1)
         {

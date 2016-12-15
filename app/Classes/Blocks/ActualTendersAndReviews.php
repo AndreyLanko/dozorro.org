@@ -21,11 +21,11 @@ class ActualTendersAndReviews extends IBlock
         /**
          * @var array $tenders
          */
-        $tenders = ActualTender::limit($this->block->value->actual_tenders_limit)->orderBy('sort_order', 'asc')->get();
+        $tenders = ActualTender::orderBy('sort_order', 'asc')->limit($this->block->value->actual_tenders_limit);
         $tender_ids = [];
 
         foreach ($tenders as $tender) {
-            $tender->data = json_decode($tender->data);
+            $tender->data = current(json_decode($tender->data)->items);
 
             if(isset($tender->data)) {
                 array_push($tender_ids, $tender->data->id);
@@ -68,7 +68,7 @@ class ActualTendersAndReviews extends IBlock
     public function get()
     {
         return [
-            'reviews' => $this->getReviews(),
+            //'reviews' => $this->getReviews(),
             'tenders' => $this->getTenders(),
         ];
     }
