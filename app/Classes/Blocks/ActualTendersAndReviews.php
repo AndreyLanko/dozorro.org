@@ -68,7 +68,7 @@ class ActualTendersAndReviews extends IBlock
     public function get()
     {
         return [
-            //'reviews' => $this->getReviews(),
+            'reviews' => $this->getReviews(),
             'tenders' => $this->getTenders(),
         ];
     }
