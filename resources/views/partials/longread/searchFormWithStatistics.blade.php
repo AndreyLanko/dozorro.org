@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="col-md-3 clearfix">
-                <input id="btn-find" type="submit" value="@lang('search.search_something')">
+                <input id="btn-find" type="submit" value="@lang('search.search_something')" disabled>
             </div>
         </div>
     </form>
