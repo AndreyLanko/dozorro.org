@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="col-md-3 clearfix">
-                <input id="btn-find" type="submit" value="Знайти закупівлю" disabled="">
+                <input id="btn-find" type="submit" value="Знайти закупівлю">
             </div>
         </div>
     </form>
