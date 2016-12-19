@@ -861,6 +861,8 @@ body {
 /* c-blog */
 .c-blog {
 	background: #f4f7f8;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
 }
 .c-blog__left {
 	padding-bottom: 50px;
@@ -894,7 +896,7 @@ body {
 	padding-top: 20px;
 }
 .c-blog__right .c-list-card,
-.c-blog__right .sb-vert-banner {
+.c-blog__right .sb-v {
 	margin-bottom: 20px;
 }
 
@@ -971,7 +973,8 @@ body {
 .c-one-new__content h4,
 .c-one-new__content h5, 
 .c-one-new__content h6 {
-	font-family: 'ProximaNovaBold';
+	font-family: 'Roboto';
+	font-weight: 700;
 	margin: 0;
 	padding: 10px 30px;
 	padding-top: 20px;
@@ -1032,6 +1035,9 @@ body {
 }
 .c-b__left {
 	padding-right: 9px;
+}
+.c-b__left .c-list-card {
+	min-height: 360px;
 }
 .c-b__sb-b-wrap .sb-b {
 	left: 12px;
