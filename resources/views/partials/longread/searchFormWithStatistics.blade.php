@@ -1,6 +1,6 @@
 <div class="c-t">
     <div class="container">
-        <form class="sb-s" action="/tender/search/">
+        <form class="sb-s" action="/tender/search/" id="c-find-form" novalidate="novalidate">
             <div class="row">
                 <div class="col-md-3">
                     @if (!empty($data->search_form_title))
@@ -13,8 +13,9 @@
                         <div class="sb-s__or">@lang('search.or')</div>
                     </div>
                     <div class="sb-s__input sb-s__input--right">
-                        <input id="tender-customer" type="text" name="tcust" class="jsGetInputVal selectized" autocomplete="off" placeholder="@lang('search.customer')" tabindex="-1" value="" style="display: none;"><div class="selectize-control jsGetInputVal single"><div class="selectize-input items not-full"><input type="text" autocomplete="off" tabindex="" placeholder="Замовник" style="width: 75px;"></div><div class="selectize-dropdown single jsGetInputVal" style="display: none; width: 233px; top: 37px; left: 0px;"><div class="selectize-dropdown-content"></div></div></div>
+                        <input id="tender-customer" type="text" name="edrpou" class="jsGetInputVal" autocomplete="off" placeholder="@lang('search.customer')">
                     </div>
+                    <div id="errordiv"><label id="tender-number-error" class="error" for="tender-number" style="display: none;"></label></div>
                 </div>
                 <div class="col-md-3 clearfix">
                     <input id="btn-find" type="submit" value="@lang('search.search_something')" disabled="">
