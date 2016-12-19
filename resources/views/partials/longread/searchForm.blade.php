@@ -29,6 +29,40 @@
             </form>
         </div>
     </div>
+    <script>
+
+        $('.jsTenderTabs .tender-tabs__item').click(function() {
+            var index=$(this).index('.tender-tabs__item');
+            $('[tab-content]').hide();
+            $('[tab-content]').eq(index).show();
+            $('.jsTenderTabs .tender-tabs__item').removeClass('is-show');
+
+            $(this).addClass('is-show');
+        });
+
+        $('.tender-header__link').click(function( event ) {
+            event.preventDefault();
+            $('.add-review-form').popup({
+                transition: 'all 0.3s'
+            });
+        });
+
+        $('.jsGetInputVal').change(function() {
+
+            if($(this).val().length >= 1) {
+                $(this).addClass('with-text');
+            } else {
+                $(this).removeClass('with-text');
+            }
+        });
+
+        $(document).ready(function(){
+            $(".tender-header__review-button").sticky({topSpacing:20});
+            $(".tender-tabs-wrapper").sticky({topSpacing:0});
+        });
+
+    </script>
+
 @else
     <div class="search-form">
         <div class="main-search">
