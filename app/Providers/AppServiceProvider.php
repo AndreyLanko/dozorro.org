@@ -2,6 +2,7 @@
 
 use App\Area;
 use Illuminate\Support\ServiceProvider;
+use Blade;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -14,6 +15,14 @@ class AppServiceProvider extends ServiceProvider {
 	{
 		Area::created(function ($area) {
 		    $area->insertTranslations();
+        });
+
+        Blade::directive('datetime', function($expression) {
+            return "<?php echo with{$expression}->format('i:H d.m.Y'); ?>";
+        });
+
+        Blade::directive('date', function($expression) {
+            return "<?php echo with{$expression}->format('d.m.Y'); ?>";
         });
 	}
 

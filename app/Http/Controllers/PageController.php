@@ -25,7 +25,7 @@ class PageController extends BaseController
 
         foreach(app('App\Http\Controllers\FormController')->get_status_data() as $one)
             $dataStatus[$one['id']]=$one['name'];
-        
+
         return $this->render('pages/page', [
             'blocks' => $this->blocks->getBlocks(),
             'dataStatuses' => $dataStatus,
@@ -90,7 +90,14 @@ class PageController extends BaseController
         $result='';
 
         if(empty($query_array)) {
-            return redirect($request->fullUrl() . '?tid=&query=');
+            $data = [
+                'search_type' => $this->search_type,
+                'preselected_values' => json_encode($preselected_values, JSON_UNESCAPED_UNICODE),
+                'highlight' => json_encode($this->getSearchResultsHightlightArray(trim(Request::server('QUERY_STRING'), '&')), JSON_UNESCAPED_UNICODE),
+                'result' => [],
+            ];
+
+            return $this->render('pages/search', $data);
         }
 
         $FormController=app('App\Http\Controllers\FormController');

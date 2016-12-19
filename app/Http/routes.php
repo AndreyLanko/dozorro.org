@@ -15,9 +15,15 @@ foreach($locales as $language)
 
         Route::get('search', 'PageController@search_redirect');
         Route::get('{search}/search', 'PageController@search');
+        Route::get('edrpou', 'EdrpouController@results');
+        
         Route::get('plan/search/print/{print}', 'PrintController@plan_list')->where('print', '(html)');;
 
-        Route::get('tender/{id}', 'PageController@tender');
+        Route::get('/tender/{id}', [
+            'as' => 'page.tender_by_id',
+            'uses' => 'PageController@tender'
+        ]);
+
         Route::get('plan/{id}', 'PageController@plan');
 
         Route::post('form/data/{type}', 'FormController@data');
@@ -28,7 +34,6 @@ foreach($locales as $language)
         Route::get('tender/{id}/print/{type}/{print}', 'PrintController@one')->where('print', '(pdf|html)');
         Route::get('tender/{id}/print/{type}/{print}/{lot_id?}', 'PrintController@one')->where('print', '(pdf|html)');
 
-        #Route::get('{url}', 'ErrorController@notfound');
         Route::get('error/404', 'ErrorController@notfound');
         #Route::get('error/500', 'ErrorController@systemerror');
 
@@ -37,6 +42,26 @@ foreach($locales as $language)
         foreach ($pages as $page) {
             Route::get($page->url, 'PageController@page');
         }
+
+        Route::get('/blog', [
+            'as' => 'page.blog',
+            'uses' => 'BlogController@index'
+        ]);
+
+        Route::get('/blog/{slug}', [
+            'as' => 'page.blog.post',
+            'uses' => 'BlogController@show'
+        ]);
+
+        Route::get('/blog/tag/{slug}', [
+            'as' => 'page.blog.by_tag',
+            'uses' => 'BlogController@byTag'
+        ]);
+
+        Route::get('/blog/author/{slug}', [
+            'as' => 'page.blog.by_author',
+            'uses' => 'BlogController@byAuthor'
+        ]);
     });
 }
 

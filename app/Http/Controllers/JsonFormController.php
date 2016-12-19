@@ -97,6 +97,8 @@ class JsonFormController extends BaseController
                     $form->date=Carbon::now();
                     $form->payload=$this->getPayload($data);
                     $form->object_id=$this->hash_id($form->payload);
+                    $form->entity_id=!empty($tender->procuringEntity->identifier->id) ? $tender->procuringEntity->identifier->id : null;
+                    $form->tender_json=$this->getTenderJson($tender);
 
                     $form->save();
                 }
@@ -111,22 +113,38 @@ class JsonFormController extends BaseController
 
         return $response;
     }
+    
+    protected function getTenderJson($tender)
+    {
+        return json_encode([
+            'procuringEntity'=>[
+                'name' => (!empty($tender->procuringEntity->identifier->legalName) ? $tender->procuringEntity->identifier->legalName : $tender->procuringEntity->name),
+                'code' => $tender->procuringEntity->identifier->id,
+                'locality' => (!empty($tender->procuringEntity->address->locality) ? $tender->procuringEntity->address->locality : ''),
+            ],
+            'title' => $tender->title,
+            'description' => $tender->description,
+            'tenderID' => $tender->tenderID,
+            'enquiryPeriod' => $tender->enquiryPeriod,
+            'value' => $tender->value
+        ], $this->json_options);
+    }
 
 	protected function getPayload($formData)
 	{
-        	$user = User::data();
-        	
-        	$payload = [
-            	'author' => [
-                	'authBy' => 'internal',
-                	'name' => $user->full_name,
-                	'email' => $user->email,
-                	'social' => $user->social,
-                    'uniqueKey' => md5($user->email . $user->social),
-            	],
-            	'tender'=>Input::get('tender'),
-            	'userForm'=>$formData
-        	];
+    	$user = User::data();
+    	
+    	$payload = [
+        	'author' => [
+            	'authBy' => 'internal',
+            	'name' => $user->full_name,
+            	'email' => $user->email,
+            	'social' => $user->social,
+                'uniqueKey' => md5($user->email . $user->social),
+        	],
+        	'tender'=>Input::get('tender'),
+        	'userForm'=>$formData
+    	];
 
         $this->recursive_sort($payload);
 

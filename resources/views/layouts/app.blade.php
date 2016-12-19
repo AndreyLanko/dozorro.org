@@ -63,7 +63,7 @@
     </div>
 
     @include('partials.footer', [
-        'menu' => $main_menu
+        'menu' => $bottom_menu
     ])
     
     <script src="{{ elixir('assets/js/app.js') }}"></script>

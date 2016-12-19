@@ -66,14 +66,14 @@ class Helpers
     public static function getStoragePath($image)
     {
         $split=str_split($image, 3);
-        $path=self::storage();
-        
+        $path=env('STORAGE_URL').'/uploads/public';
+
         for($i=0;$i<3;$i++) {
             $path.='/'.$split[$i];
         }
 
         $path.='/'.$image;
-        
+
         return $path;        
     }
     
@@ -98,7 +98,7 @@ class Helpers
     {
         $split=str_split($image, 3);
         $path=self::storage();
-        
+
         for($i=0;$i<3;$i++) {
             $path.='/'.$split[$i];
         }

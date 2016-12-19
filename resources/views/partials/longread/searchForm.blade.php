@@ -1,34 +1,26 @@
 @if(!empty($data->search_is_short))
-    <div class="c-find-form">
-        <div class="container">
-            <form id="c-find-form" action="/tender/search/">
-                <div class="row">
-                    <div class="col-md-3">
-                        @if (!empty($data->search_form_title))
-                            <h2>{{ $data->search_form_title }}</h2>
-                        @endif
-                    </div>
-                    <div class="col-md-6">
-                        <div class="c-find-form__inputs-wrap" data-js="disableSearchButton">
-                            <div class="c-find-form__input-group">
-                                <input id="tender-number" type="text" name="tid" class="jsGetInputVal" autocomplete="off">
-                                <label for="tenderNumber">Номер тендеру</label>
-                            </div>
-                            <span class="c-find-form__or-word">або</span>
-                            <div class="c-find-form__input-group c-find-form__input-group-transp">
-                                <input id="tender-customer" type="text" name="edrpou" class="jsGetInputVal" autocomplete="off" data-js="customer_search">
-                                <label for="tenderCustomer">Замовник</label>
-                            </div>
-                            <div id="errordiv"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <input id="btn-find" type="submit" value="Шукати">
-                    </div>
+    <form class="sb-s" action="/tender/search/" id="c-find-form" novalidate="novalidate">
+        <div class="row">
+            <div class="col-md-3">
+                @if (!empty($data->search_form_title))
+                    <p class="sb-s__h">{{ $data->search_form_title }}</p>
+                @endif
+            </div>
+            <div class="col-md-6 clearfix" data-js="disableSearchButton">
+                <div class="sb-s__input sb-s__input--left">
+                    <input id="tender-number" type="text" name="tid" class="jsGetInputVal" autocomplete="off" placeholder="UA-2016-01-01-000001">
+                    <div class="sb-s__or">@lang('search.or')</div>
                 </div>
-            </form>
+                <div class="sb-s__input sb-s__input--right">
+                    <input id="tender-customer" type="text" name="tcust" class="jsGetInputVal" autocomplete="off" placeholder="@lang('search.customer')" data-js="customer_search">
+                </div>
+                <div id="errordiv" style="z-index: 9;color: black;"></div>
+            </div>
+            <div class="col-md-3 clearfix">
+                <input id="btn-find" type="submit" value="@lang('search.search_something')" disabled="">
+            </div>
         </div>
-    </div>
+    </form>
 @else
     <div class="search-form">
         <div class="main-search">
