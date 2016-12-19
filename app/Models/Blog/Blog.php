@@ -106,8 +106,8 @@ class Blog extends Model
 
     public function getPublishedPosts($params = [])
     {
-        return self::
-            isEnabled()
+        return self::select($this->table.'.*')
+            ->isEnabled()
             ->isMain(@$params['is_main'])
             ->byTag(@$params['tag'])
             ->byAuthor(@$params['author'])
@@ -116,8 +116,8 @@ class Blog extends Model
 
     public function findBySLug($slug)
     {
-        return self::
-            where('slug', $slug)
+        return self::select($this->table.'.*')
+            ->where('slug', $slug)
             ->first();
     }
 }
