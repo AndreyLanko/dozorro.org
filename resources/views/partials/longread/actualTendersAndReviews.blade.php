@@ -3,17 +3,18 @@
     <div class="container">
         <div class="row">
 
-            @if(isset($block->data['tenders']->items) && !empty($block->data['tenders']->items))
+            @if(isset($block->data['tenders']) && !empty($block->data['tenders']))
             <div class="col-md-6">
                 <div class="c-list-card">
                     <div class="c-list-card__inner">
                         <h3 class="c-list-card__header">Актуальнi тендери</h3>
-                        @foreach($block->data['tenders'] as $item)
-                            @if(isset($item->data) && $item->data)
+                        @foreach($block->data['tenders'] as $tender)
+                            <?php $item = $tender->get_format_data(); ?>
+                            @if($item)
                             <div class="sb-list-item">
                                 <div class="sb-list-item__row">
-                                    <h2><a href="/tender/{{ $item->data->tenderID }}/">{{ $item->data->title }}</a></h2>
-                                    <h3>{{ $item->data->description }}</h3>
+                                    <h2><a href="/tender/{{ $item->tenderID }}/">{{ $item->title }}</a></h2>
+                                    <h3>{{ $item->description }}</h3>
                                 </div>
                                 <div class="sb-list-item__row">
                                     <a href="#" class="sb-list-item__stat">Кваліфікація переможця</a>

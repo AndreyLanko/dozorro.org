@@ -10,16 +10,15 @@ class ActualTender extends Model
 
     public function get_format_data()
     {
-        $items = json_decode($this->data)->items;
+        if(isset($this->data)) {
+            $items = json_decode($this->data);
 
-        if(is_array($items) && !empty($items)) {
+            if (isset($items->items) && !empty($items->items)) {
+                return current($items->items);
+            }
+        }
 
-            return current($items);
-        }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     public function scopeLimit($query, $limit)

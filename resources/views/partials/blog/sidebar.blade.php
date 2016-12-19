@@ -43,11 +43,12 @@
                 <div class="c-list-card__cards">
 
                     @foreach($tenders AS $tender)
-                        @if($tender->get_format_data())
+                        <?php $tender = $tender->get_format_data(); ?>
+                        @if($tender)
                             <div class="sb-list-item">
                                 <div class="sb-list-item__row">
-                                    <h2><a href="{{ route('page.tender_by_id', ['id' => $tender->get_format_data()->tenderID]) }}">{{ $tender->get_format_data()->title }}</a></h2>
-                                    <h3>{{ $tender->get_format_data()->description }}</h3>
+                                    <h2><a href="{{ route('page.tender_by_id', ['id' => $tender->tenderID]) }}">{{ $tender->title }}</a></h2>
+                                    <h3>{{ $tender->description }}</h3>
                                 </div>
                                 <div class="sb-list-item__row">
                                     <a href="#" class="sb-list-item__stat">@lang('blog.qualification')</a>

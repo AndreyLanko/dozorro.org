@@ -33,7 +33,7 @@ class LatestArticles extends IBlock
          */
         $article = $this->blog->getPublishedPosts(['limit' => 1, 'is_main' => true]);
 
-        return $article;
+        return (isset($article->id) ? $article : false);
     }
 
     /**

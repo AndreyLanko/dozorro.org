@@ -10,6 +10,7 @@
                         <div class="c-list-card__cards">
 
                             @foreach($block->data['articles'] as $item)
+                                @if($item)
                                 <div class="sb-list-item">
                                     <div class="sb-list-item__row">
                                         <h2><a href="{{ route('page.blog.post', ['slug' => $item->slug]) }}">{{ $item->title }}</a></h2>
@@ -18,6 +19,7 @@
                                         <div class="sb-list-item__date">@datetime($item->published_at)</div>
                                     </div>
                                 </div>
+                                @endif
                             @endforeach
 
                         </div>

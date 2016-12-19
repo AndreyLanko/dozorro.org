@@ -26,20 +26,13 @@ class ActualTendersAndReviews extends IBlock
 
         foreach ($tenders as $k => $tender) {
 
-            $items = json_decode($tender->data)->items;
-
-            if(is_array($items) && !empty($items)) {
-                $tender->data = current($items);
+            if(isset($tender->data->id)) {
                 array_push($tender_ids, $tender->data->id);
-            }
-            else
-            {
-                unset($tenders[$k]);
             }
         }
         
         $forms = JsonForm::whereIn('tender', $tender_ids)->get();
-        
+
         foreach ($tenders as $tender) {
             $tender->reviews=array_where($forms, function($key, $form) use ($tender){
                 return $form->tender==$tender->data->id;
