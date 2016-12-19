@@ -3,6 +3,7 @@
 namespace App\Models\BLog;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Helpers;
 use App\File;
 
 /**
@@ -29,7 +30,7 @@ class Author extends Model
 
         if($file)
         {
-            return $file = env('BACKEND_URL') . $file->getPath();
+            return $file = Helpers::getStoragePath($file->disk_name);
         }
         else
         {

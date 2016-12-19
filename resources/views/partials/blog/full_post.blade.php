@@ -6,7 +6,7 @@
             <div class="sb-new-header__author-wrap">
                 <?php $author_photo = $post->author->photo(); ?>
                 @if($author_photo)
-                <img src="{{ $post->author->photo() }}" width="80" height="80">
+                    <img src="{{ $post->author->photo() }}" width="80" height="80">
                 @endif
                 <h3>{{ $post->author->full_name }}</h3>
             </div>
