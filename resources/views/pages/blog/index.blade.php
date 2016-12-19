@@ -34,9 +34,9 @@
                     </div>
                 </div>
 
-                @if($main)
+
                     @include('partials.blog.sidebar', ['banner' => $main])
-                @endif
+
             </div>
         </div>
     </div>

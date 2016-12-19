@@ -65,8 +65,8 @@ class BlogController extends BaseController
         $tenders = ActualTender::getAllActualTenders(['limit' => 3]);
 
         return $this->render('pages/blog/show', [
-            'post' => $post,
-            'banner' => $banner,
+            'post' => (isset($post->id) ? $post : false),
+            'banner' => (isset($banner->id) ? $banner : false),
             'latest_posts' => $latest_posts,
             'blocks' => $blocks->getBlocks(),
             'tenders' => $tenders,
