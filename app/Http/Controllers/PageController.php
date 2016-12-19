@@ -25,7 +25,7 @@ class PageController extends BaseController
 
         foreach(app('App\Http\Controllers\FormController')->get_status_data() as $one)
             $dataStatus[$one['id']]=$one['name'];
-        
+
         return $this->render('pages/page', [
             'blocks' => $this->blocks->getBlocks(),
             'dataStatuses' => $dataStatus,
