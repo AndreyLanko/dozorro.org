@@ -34,22 +34,25 @@
         </a>
         @endif
 
+        @if($tenders)
         <div class="c-list-card">
             <div class="c-list-card__inner">
                 <h3 class="c-list-card__header">@lang('blog.active_tenders')</h3>
                 <div class="c-list-card__cards">
 
                     @foreach($tenders AS $tender)
-                    <div class="sb-list-item">
-                        <div class="sb-list-item__row">
-                            <h2><a href="{{ route('page.tender_by_id', ['id' => $tender->get_format_data()->tenderID]) }}">{{ $tender->get_format_data()->title }}</a></h2>
-                            <h3>{{ $tender->get_format_data()->description }}</h3>
-                        </div>
-                        <div class="sb-list-item__row">
-                            <a href="#" class="sb-list-item__stat">@lang('blog.qualification')</a>
-                            <a href="#" class="sb-list-item__comments">0</a>
-                        </div>
-                    </div>
+                        @if($tender->get_format_data())
+                            <div class="sb-list-item">
+                                <div class="sb-list-item__row">
+                                    <h2><a href="{{ route('page.tender_by_id', ['id' => $tender->get_format_data()->tenderID]) }}">{{ $tender->get_format_data()->title }}</a></h2>
+                                    <h3>{{ $tender->get_format_data()->description }}</h3>
+                                </div>
+                                <div class="sb-list-item__row">
+                                    <a href="#" class="sb-list-item__stat">@lang('blog.qualification')</a>
+                                    <a href="#" class="sb-list-item__comments">0</a>
+                                </div>
+                            </div>
+                        @endif
                     @endforeach
 
                 </div>
@@ -58,6 +61,6 @@
                 </div>
             </div>
         </div>
-
+        @endif
     </div>
 </div>
