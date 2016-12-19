@@ -7,15 +7,15 @@
                         <p class="sb-s__h">{{ $data->search_form_title }}</p>
                     @endif
                 </div>
-                <div class="col-md-6 clearfix">
+                <div class="col-md-6 clearfix" data-js="disableSearchButton">
                     <div class="sb-s__input sb-s__input--left">
-                        <input id="tender-number" type="text" name="tid" class="jsGetInputVal" autocomplete="off" placeholder="23552556">
+                        <input id="tender-number" type="text" name="tid" class="jsGetInputVal" autocomplete="off" placeholder="UA-2016-01-01-000001">
                         <div class="sb-s__or">@lang('search.or')</div>
                     </div>
                     <div class="sb-s__input sb-s__input--right">
-                        <input id="tender-customer" type="text" name="edrpou" class="jsGetInputVal" autocomplete="off" placeholder="@lang('search.customer')">
+                        <input id="tender-customer" type="text" name="tcust" class="jsGetInputVal" autocomplete="off" placeholder="@lang('search.customer')" data-js="customer_search">
                     </div>
-                    <div id="errordiv"><label id="tender-number-error" class="error" for="tender-number" style="display: none;"></label></div>
+                    <div id="errordiv" style="z-index: 9;color: black;"></div>
                 </div>
                 <div class="col-md-3 clearfix">
                     <input id="btn-find" type="submit" value="@lang('search.search_something')" disabled="">
