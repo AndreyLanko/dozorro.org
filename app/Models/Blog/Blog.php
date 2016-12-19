@@ -70,11 +70,11 @@ class Blog extends Model
         }
     }
 
-    public function scopeLimit($query, $limit)
+    public function scopebyLimit($query, $limit)
     {
         if($limit > 1)
         {
-            return $query->paginate($limit);
+            return $query->orderBy('created_at', 'desc')->paginate($limit);
         }
         elseif($limit == 1)
         {
@@ -82,7 +82,7 @@ class Blog extends Model
         }
         elseif(!$limit)
         {
-            return $query->get();
+            return $query->orderBy('created_at', 'desc')->get();
         }
     }
 
@@ -106,19 +106,18 @@ class Blog extends Model
 
     public function getPublishedPosts($params = [])
     {
-        return self::select($this->table . '.*')
-            ->isEnabled()
+        return self::
+            isEnabled()
             ->isMain(@$params['is_main'])
             ->byTag(@$params['tag'])
             ->byAuthor(@$params['author'])
-            ->orderBy('created_at', 'desc')
-            ->limit(@$params['limit']);
+            ->byLimit(@$params['limit']);
     }
 
     public function findBySLug($slug)
     {
-        return self::select('*')
-            ->where('slug', $slug)
+        return self::
+            where('slug', $slug)
             ->first();
     }
 }

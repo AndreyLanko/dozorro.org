@@ -1,3 +1,4 @@
+@if($post)
 <div class="sb-new-header" style="background-color: #e55166;">
     <div class="sb-new-header__bg" style="background-image: url('{{ $post->photo() }}');"></div>
     <div class="sb-new-header__content">
@@ -31,3 +32,4 @@
         -->
     </div>
 </div>
+@endif

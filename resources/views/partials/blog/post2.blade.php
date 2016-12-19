@@ -1,3 +1,4 @@
+@if($article)
 <div class="c-n__item">
 
     <div class="sb-new-card">
@@ -27,3 +28,4 @@
     </div>
 
 </div>
+@endif

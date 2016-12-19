@@ -1,3 +1,4 @@
+@if($post)
 <div class="c-blog__news-item">
     <div class="sb-new-card">
         <a href="{{ route('page.blog.post', ['slug' => $post->slug]) }}" class="sb-new-card__img">
@@ -23,3 +24,4 @@
         </div>
     </div>
 </div>
+@endif

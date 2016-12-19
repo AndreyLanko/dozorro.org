@@ -1,6 +1,7 @@
 <div class="col-md-3">
     <div class="c-blog__right">
 
+        @if(is_array($latest_posts) && !empty($latest_posts))
         <div class="c-list-card">
             <div class="c-list-card__inner">
                 <h3 class="c-list-card__header">@lang('blog.latest_news')</h3>
@@ -25,6 +26,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         @if($banner)
         <a href="{{ route('page.blog.post', ['slug' => $banner->slug]) }}" class="sb-vert-banner">

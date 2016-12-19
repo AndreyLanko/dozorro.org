@@ -35,7 +35,7 @@ class BlogController extends BaseController
 
         return $this->render('pages/blog/index', [
             'posts' => $posts,
-            'main' => $main,
+            'main' => (isset($main->id) ? $main : false),
             'tenders' => $tenders,
             'latest_posts' => $latest_posts,
         ]);

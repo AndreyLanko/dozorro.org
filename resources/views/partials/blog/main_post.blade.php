@@ -1,3 +1,4 @@
+@if($post)
 <div class="c-blog__main-new">
     <div class="sb-new-card sb-new-card--big-card">
 
@@ -33,3 +34,4 @@
     </div>
 
 </div>
+@endif
