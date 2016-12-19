@@ -3,13 +3,13 @@
     <div class="container">
         <div class="row">
 
-            @if(!empty($block->data['tenders']))
+            @if(isset($block->data['tenders']->items) && !empty($block->data['tenders']->items))
             <div class="col-md-6">
                 <div class="c-list-card">
                     <div class="c-list-card__inner">
                         <h3 class="c-list-card__header">Актуальнi тендери</h3>
                         @foreach($block->data['tenders'] as $item)
-                            @if(isset($item->data))
+                            @if(isset($item->data) && $item->data)
                             <div class="sb-list-item">
                                 <div class="sb-list-item__row">
                                     <h2><a href="/tender/{{ $item->data->tenderID }}/">{{ $item->data->title }}</a></h2>
@@ -30,13 +30,13 @@
             </div>
             @endif
 
-            @if(!empty($block->data['reviews']))
+            @if(is_array($block->data['reviews']) && !empty($block->data['reviews']))
             <div class="col-md-6">
                 <div class="c-list-card">
                     <div class="c-list-card__inner">
                         <h3 class="c-list-card__header">Обговорюванi тендери</h3>
                         @foreach($block->data['reviews'] as $item)
-                            @if(isset($item->data))
+                            @if(isset($item->data) && $item->data)
                                 <div class="sb-list-item">
                                     <div class="sb-list-item__row">
                                         <h2><a href="/tender/{{ $item->data->tenderID }}/">{{ $item->data->title }}</a></h2>
