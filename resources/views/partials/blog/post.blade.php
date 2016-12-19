@@ -2,8 +2,8 @@
 <div class="c-blog__news-item">
     <div class="sb-new-card">
         <a href="{{ route('page.blog.post', ['slug' => $post->slug]) }}" class="sb-new-card__img">
-            <img src="{{ $post->photo() }}" width="430" height="225">
-        </a>
+			<div class="sb-new-card__img-bg" style="background-image: url('{{ $post->photo() }}');"></div>
+		</a>
         <div class="sb-new-card__content-wrap">
             <div class="sb-new-card__row">
                 <a href="{{ route('page.blog.by_author', ['slug' => $post->author->slug]) }}" class="sb-new-card__author">{{ $post->author->full_name }}</a>
@@ -19,7 +19,7 @@
             </div>
             <div class="sb-new-card__row">
                 <div class="sb-new-card__date">@datetime($post->published_at)</div>
-                <a href="#" class="sb-new-card__comments">0</a>
+                {{--<a href="#" class="sb-new-card__comments">0</a>--}}
             </div>
         </div>
     </div>
