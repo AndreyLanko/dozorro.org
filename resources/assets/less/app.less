@@ -9,28 +9,37 @@
 
 			&.parent {
 				position: relative;
-				& > a {
+				a{
+
+					&:before {
+						content: "";
+						height: 5px;
+						width: 2px;
+						position: absolute;
+						right: 15px;
+						top: 54px;
+						background: #000;
+						transform: rotate(-45deg);
+					}
 					&:after {
 						content: "";
 						height: 5px;
-						width: 5px;
+						width: 2px;
 						position: absolute;
-						right: 17px;
-					    top: 30px;
-					    transform: rotate(-45deg);
-						border-left: 2px solid black;
-						border-bottom: 2px solid black;
-						background: transparent;
+						right: 12px;
+						top: 54px;
+						background: #000;
+						transform: rotate(45deg);
 					}
 				}
 				&:hover{
-					a {
+					a{
 						color: @main-color;
 						text-decoration: none;
 						border-top: 5px solid rgba(229, 81, 102, 1);
 						transition: all 0.3s;
-						&:after{
-							background: transparent;
+						&:before, &:after{
+							background: @main-color;
 						}
 					}
 					.drop-menu{
@@ -40,7 +49,7 @@
 				.drop-menu {
 					display: none;
 					position: absolute;
-					top: 70px;
+					top: 80px;
 					left: 0;
 					width: 100%;
 					background: @main-color;
