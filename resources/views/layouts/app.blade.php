@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="{{ elixir('assets/css/app.css') }}">
     <link rel="stylesheet" href="{{ elixir('assets/css/site.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    @stack('styles')
     <!--[if lt IE 9]>
         <script src="/assets/js/legacy/html5shiv.min.js"></script>
         <script src="/assets/js/legacy/respond.min.js"></script>
     <![endif]-->
     <link rel='shortcut icon' type='image/x-icon' href='/assets/images/favicon.ico' />
     @include('partials.seo')
-
     @yield('head')
 </head>
 <body>
@@ -106,6 +106,6 @@ $(document).ready(function(){
 });
 
 </script>
-
+    @stack('scripts')
 </body>
 </html>
