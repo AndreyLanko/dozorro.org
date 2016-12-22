@@ -1,10 +1,9 @@
 @if($post)
 <div class="c-blog__main-new">
     <div class="sb-new-card sb-new-card--big-card">
-
         <a href="{{ route('page.blog.post', ['slug' => $post->slug]) }}" class="sb-new-card__img">
-            <img src="{{ $post->photo() }}" width="870" height="460">
-            @if($post->group)<a href="#top" class="sb-b__tag" style="z-index: 1;">{{ $post->group }}</a>@endif
+            <div class="sb-b__bgimg" style="background-image: url('{{ $post->photo() }}');"></div>
+            @if($post->group)<a href="javascript:;" class="sb-b__tag" style="z-index: 1;">{{ $post->group }}</a>@endif
         </a>
         <div class="sb-new-card__content-wrap">
             <div class="sb-new-card__row">
@@ -28,10 +27,9 @@
             </div>
             <div class="sb-new-card__row">
                 <div class="sb-new-card__date">@datetime($post->published_at)</div>
-                <a href="#" class="sb-new-card__comments">0</a>
+                {{--<a href="#" class="sb-new-card__comments">0</a>--}}
             </div>
         </div>
     </div>
-
 </div>
 @endif

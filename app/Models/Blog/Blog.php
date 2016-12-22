@@ -4,6 +4,7 @@ namespace App\Models\Blog;
 
 use Illuminate\Database\Eloquent\Model;
 use App\File;
+use App\Helpers;
 
 /**
  * Class Blog
@@ -96,7 +97,7 @@ class Blog extends Model
 
         if($file)
         {
-            return $file = env('BACKEND_URL') . $file->getPath();
+            return $file = Helpers::getStoragePath($file->disk_name);
         }
         else
         {
