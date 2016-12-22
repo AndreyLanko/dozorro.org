@@ -121,4 +121,14 @@ class Blog extends Model
             ->where('slug', $slug)
             ->first();
     }
+
+    public function clear_title()
+    {
+        return htmlentities(strip_tags($this->title), ENT_QUOTES);
+    }
+
+    public function clear_short_description()
+    {
+        return htmlentities(strip_tags($this->short_description), ENT_QUOTES);
+    }
 }
