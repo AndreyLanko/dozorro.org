@@ -1,16 +1,22 @@
 @extends('layouts/app')
 
 @section('head')
-    <meta property="og:type"               content="article" />
-    <meta property="og:title"              content="{{ $post->clear_title() }}" />
-    <meta property="og:description"        content="{{ $post->clear_short_description() }}" />
-    <meta property="og:image"              content="{{ $post->photo() }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{{ $post->clear_title() }}" />
+    <meta property="og:image" content="{{ $post->photo() }}" />
+    @foreach($blocks as $block)
+        @if($block->alias=='text')
+            <meta property="og:description" content="{{ $post->clear_short_description($block->value->text_text) }}" />
+            <?php break; ?>
+        @endif
+    @endforeach
+
 @endsection
 
 @section('content')
 
     @push('styles')
-    <link href="https://unpkg.com/ilyabirman-likely@2/release/likely.css" rel="stylesheet">
+        <link href="https://unpkg.com/ilyabirman-likely@2/release/likely.css" rel="stylesheet">
     @endpush
 
     <div class="c-blog">

@@ -127,8 +127,8 @@ class Blog extends Model
         return htmlentities(strip_tags($this->title), ENT_QUOTES);
     }
 
-    public function clear_short_description()
+    public function clear_short_description($value)
     {
-        return htmlentities(strip_tags($this->short_description), ENT_QUOTES);
+        return str_limit(trim(htmlentities(strip_tags($value?$value:$this->short_description), ENT_QUOTES)), 300);
     }
 }
