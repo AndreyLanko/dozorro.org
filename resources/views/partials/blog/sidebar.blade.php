@@ -48,11 +48,10 @@
                             <div class="sb-list-item">
                                 <div class="sb-list-item__row">
                                     <h2><a href="{{ route('page.tender_by_id', ['id' => $tender->tenderID]) }}">{{ $tender->title }}</a></h2>
-                                    <h3>{{ $tender->description }}</h3>
                                 </div>
                                 <div class="sb-list-item__row">
-                                    <a href="#" class="sb-list-item__stat">@lang('tender.lot_status.' . $tender->status)</a>
-                                    <a href="#" class="sb-list-item__comments">{{ $_tender->comments }}</a>
+                                    <a href="{{ route('page.tender_by_id', ['id' => $tender->tenderID]) }}" class="sb-list-item__stat">{{ $tender->status }}</a>
+                                    <a href="{{ route('page.tender_by_id', ['id' => $tender->tenderID]) }}" class="sb-list-item__comments">{{ $_tender->comments }}</a>
                                 </div>
                             </div>
                         @endif
@@ -60,7 +59,7 @@
 
                 </div>
                 <div class="c-list-card__link-wrap">
-                    <a href="/tender/search">@lang('blog.all_tenders')</a>
+                    <a href="/tender/search/">@lang('blog.all_tenders')</a>
                 </div>
             </div>
         </div>

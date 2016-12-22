@@ -37,11 +37,11 @@
                                 <div class="sb-t__c">{{ $block->data['stats']->tenders_sum }}<div class="sb-t__ca">{{ $block->data['stats']->tenders_sum_text }}</div></div>
                             </div>
                             <div class="sb-t__row">
-                                <div class="sb-t__d">@lang('search.tenders_sum')</div>
+                                <div class="sb-t__d">Ризикуємо втратити</div>
                             </div>
-                            <div class="sb-t__row">
+                            {{--<div class="sb-t__row">
                                 <a href="#" class="sb-t__button">@lang('search.best_company')</a>
-                            </div>
+                            </div>--}}
                         </div>
                     </div>
                 @endif
@@ -57,11 +57,11 @@
                                 <div class="sb-t__c">{{ $block->data['stats']->violation_sum }}<div class="sb-t__ca">{{ $block->data['stats']->violation_sum_text }}</div></div>
                             </div>
                             <div class="sb-t__row">
-                                <div class="sb-t__d">@lang('search.violation_sum')</div>
+                                <div class="sb-t__d">Сумнівних тендерів</div>
                             </div>
-                            <div class="sb-t__row">
+                            {{--<div class="sb-t__row">
                                 <a href="#" class="sb-t__button">@lang('search.bad_company')</a>
-                            </div>
+                            </div>--}}
                         </div>
                     </div>
                 @endif
@@ -79,9 +79,9 @@
                             <div class="sb-t__row">
                                 <div class="sb-t__d">@lang('search.comments')</div>
                             </div>
-                            <div class="sb-t__row">
+                            {{--<div class="sb-t__row">
                                 <a href="#" class="sb-t__button">@lang('search.more_comments')</a>
-                            </div>
+                            </div>--}}
                         </div>
                     </div>
                 @endif
@@ -99,9 +99,9 @@
                             <div class="sb-t__row">
                                 <div class="sb-t__d">@lang('search.reviews')</div>
                             </div>
-                            <div class="sb-t__row">
+                            {{--<div class="sb-t__row">
                                 <a href="#" class="sb-t__button">@lang('search.popular_tenders')</a>
-                            </div>
+                            </div>--}}
                         </div>
                     </div>
                 @endif
