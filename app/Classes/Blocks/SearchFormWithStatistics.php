@@ -2,6 +2,7 @@
 
 namespace App\Classes\Blocks;
 
+use App\JsonForm;
 use DB;
 use App\TenderStatistic;
 
@@ -20,6 +21,20 @@ class SearchFormWithStatistics extends IBlock
          * @var array $tenders
          */
         $data = TenderStatistic::first();
+
+        $ar = ['comments', 'reviews', 'tenders_sum', 'tenders_sum_text', 'violation_sum', 'violation_sum_text'];
+
+        foreach($ar AS $field)
+        {
+            if(stripos($data->{$field}, '{COMMENTS}') !== FALSE)
+            {
+                $data->{$field} = preg_replace('/{COMMENTS}/', JsonForm::getCommentsCount(), $data->{$field});
+            }
+            elseif(stripos($data->{$field}, '{REVIEWS}') !== FALSE)
+            {
+                $data->{$field} = preg_replace('/{REVIEWS}/', JsonForm::getReviewsCount(), $data->{$field});
+            }
+        }
 
         return $data;
     }
