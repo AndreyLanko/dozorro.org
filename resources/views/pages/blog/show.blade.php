@@ -2,8 +2,8 @@
 
 @section('head')
     <meta property="og:type"               content="article" />
-    <meta property="og:title"              content="{{ $post->title }}" />
-    <meta property="og:description"        content="{{ $post->short_description }}" />
+    <meta property="og:title"              content="{{ $post->clear_title() }}" />
+    <meta property="og:description"        content="{{ $post->clear_short_description() }}" />
     <meta property="og:image"              content="{{ $post->photo() }}" />
 @endsection
 
