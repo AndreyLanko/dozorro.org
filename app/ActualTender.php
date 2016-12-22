@@ -39,7 +39,34 @@ class ActualTender extends Model
 
     public static function getAllActualTenders($params = [])
     {
-        return self::limit(@$params['limit']);
+        $tenders = self::orderBy('sort_order', 'asc')->limit(@$params['limit']);
+
+        $tender_ids = [];
+
+        foreach ($tenders as $k => $tender) {
+            $item = $tender->get_format_data();
+
+            if(isset($item->id)) {
+                array_push($tender_ids, $item->id);
+            }
+        }
+
+        //$forms = JsonForm::whereIn('tender', $tender_ids)->get();
+
+        foreach ($tenders as $k => $tender) {
+
+            /*
+            $tender =array_where($forms, function($key, $form) use ($tender){
+
+                return $form->tender==$tender->data->id;
+            });
+            */
+
+            $tenders[$k]->comments = JsonForm::getCommentsCount(['ids' => $tender_ids]);
+
+        }
+
+        return $tenders;
     }
 
 }

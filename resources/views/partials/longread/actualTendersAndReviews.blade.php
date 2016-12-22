@@ -17,8 +17,8 @@
                                     <h3>{{ $item->description }}</h3>
                                 </div>
                                 <div class="sb-list-item__row">
-                                    <a href="#" class="sb-list-item__stat">Кваліфікація переможця</a>
-                                    <a href="#" class="sb-list-item__comments">0</a>
+                                    <a href="#" class="sb-list-item__stat">@lang('tender.lot_status.' . $item->status)</a>
+                                    <a href="#" class="sb-list-item__comments">{{ $tender->comments }}</a>
                                 </div>
                             </div>
                             @endif
@@ -44,7 +44,7 @@
                                         @if(isset($item->data->description))<h3>{{ $item->data->description }}</h3>@endif
                                     </div>
                                     <div class="sb-list-item__row">
-                                        <a href="#" class="sb-list-item__stat">Кваліфікація переможця</a>
+                                        <a href="#" class="sb-list-item__stat">@lang('tender.lot_status.' . $item->data->status)</a>
                                         <a href="#" class="sb-list-item__comments">{{ $item->data->total_reviews }}</a>
                                     </div>
                                 </div>

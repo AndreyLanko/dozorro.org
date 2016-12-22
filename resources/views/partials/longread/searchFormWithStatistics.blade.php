@@ -23,9 +23,9 @@
             </div>
         </form>
 
-        @if(!empty($block->data['stats']) && ($block->data['stats']->tenders_sum || $block->data['stats']->violation_sum || $block->data['stats']->comments || $block->data['stats']->reviews))
+        @if(!empty($block->data['stats']) && ($block->data['stats']->tenders_sum !== '' || $block->data['stats']->violation_sum  !== '' || $block->data['stats']->comments !== '' || $block->data['stats']->reviews !== ''))
             <div class="row c-t__cards">
-                @if($block->data['stats']->tenders_sum)
+                @if($block->data['stats']->tenders_sum !== '')
                     <div class="col-md-3">
                         <div class="sb-t">
                             <div class="sb-t__row">
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                 @endif
-                @if($block->data['stats']->violation_sum)
+                @if($block->data['stats']->violation_sum !== '')
                     <div class="col-md-3">
                         <div class="sb-t">
                             <div class="sb-t__row">
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                 @endif
-                @if($block->data['stats']->comments)
+                @if($block->data['stats']->comments !== '')
                     <div class="col-md-3">
                         <div class="sb-t">
                             <div class="sb-t__row">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 @endif
-                @if($block->data['stats']->reviews)
+                @if($block->data['stats']->reviews !== '')
                     <div class="col-md-3">
                         <div class="sb-t">
                             <div class="sb-t__row">
