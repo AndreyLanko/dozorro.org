@@ -1,7 +1,6 @@
 @extends('layouts/app')
 
 @section('head')
-    <meta property="og:url"                content="{{ route('page.blog.post', ['slug' => $post->slug]) }}" />
     <meta property="og:type"               content="article" />
     <meta property="og:title"              content="{{ $post->title }}" />
     <meta property="og:description"        content="{{ $post->short_description }}" />
