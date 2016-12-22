@@ -13,7 +13,7 @@
                         <div class="sb-s__or">@lang('search.or')</div>
                     </div>
                     <div class="sb-s__input sb-s__input--right">
-                        <input id="tender-customer" type="text" name="tcust" class="jsGetInputVal" autocomplete="off" placeholder="@lang('search.customer')" data-js="customer_search">
+                        <input id="tender-customer" type="text" name="edrpou" class="jsGetInputVal" autocomplete="off" placeholder="@lang('search.customer')" data-js="customer_search">
                     </div>
                     <div id="errordiv" style="z-index: 9;color: black;"></div>
                 </div>
