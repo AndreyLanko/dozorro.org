@@ -21,23 +21,7 @@ class ActualTendersAndReviews extends IBlock
         /**
          * @var array $tenders
          */
-        $tenders = ActualTender::orderBy('sort_order', 'asc')->limit($this->block->value->actual_tenders_limit);
-        $tender_ids = [];
-
-        foreach ($tenders as $k => $tender) {
-
-            if(isset($tender->data->id)) {
-                array_push($tender_ids, $tender->data->id);
-            }
-        }
-        
-        $forms = JsonForm::whereIn('tender', $tender_ids)->get();
-
-        foreach ($tenders as $tender) {
-            $tender->reviews=array_where($forms, function($key, $form) use ($tender){
-                return $form->tender==$tender->data->id;
-            });
-        }
+        $tenders = ActualTender::getAllActualTenders(['limit' => $this->block->value->actual_tenders_limit]);
 
         return $tenders;
     }

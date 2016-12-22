@@ -42,8 +42,8 @@
                 <h3 class="c-list-card__header">@lang('blog.active_tenders')</h3>
                 <div class="c-list-card__cards">
 
-                    @foreach($tenders AS $tender)
-                        <?php $tender = $tender->get_format_data(); ?>
+                    @foreach($tenders AS $_tender)
+                        <?php $tender = $_tender->get_format_data(); ?>
                         @if($tender)
                             <div class="sb-list-item">
                                 <div class="sb-list-item__row">
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="sb-list-item__row">
                                     <a href="#" class="sb-list-item__stat">@lang('blog.qualification')</a>
-                                    {{--<a href="#" class="sb-list-item__comments">0</a>--}}
+                                    <a href="#" class="sb-list-item__comments">{{ $_tender->comments }}</a>
                                 </div>
                             </div>
                         @endif

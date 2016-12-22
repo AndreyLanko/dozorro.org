@@ -18,7 +18,7 @@
                                 </div>
                                 <div class="sb-list-item__row">
                                     <a href="#" class="sb-list-item__stat">Кваліфікація переможця</a>
-                                    <a href="#" class="sb-list-item__comments">0</a>
+                                    <a href="#" class="sb-list-item__comments">{{ $tender->comments }}</a>
                                 </div>
                             </div>
                             @endif
