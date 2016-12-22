@@ -22,13 +22,18 @@ class SearchFormWithStatistics extends IBlock
          */
         $data = TenderStatistic::first();
 
-        if($data->comments == '{COMMENTS}')
+        $ar = ['comments', 'reviews', 'tenders_sum', 'tenders_sum_text', 'violation_sum', 'violation_sum_text'];
+
+        foreach($ar AS $field)
         {
-            $data->comments = JsonForm::getCommentsCount();
-        }
-        if($data->reviews == '{REVIEWS}')
-        {
-            $data->reviews = JsonForm::getReviewsCount();
+            if(stripos($data->{$field}, '{COMMENTS}') !== FALSE)
+            {
+                $data->{$field} = preg_replace('/{COMMENTS}/', JsonForm::getCommentsCount(), $data->{$field});
+            }
+            elseif(stripos($data->{$field}, '{REVIEWS}') !== FALSE)
+            {
+                $data->{$field} = preg_replace('/{REVIEWS}/', JsonForm::getReviewsCount(), $data->{$field});
+            }
         }
 
         return $data;

@@ -51,7 +51,7 @@
                                     <h3>{{ $tender->description }}</h3>
                                 </div>
                                 <div class="sb-list-item__row">
-                                    <a href="#" class="sb-list-item__stat">@lang('blog.qualification')</a>
+                                    <a href="#" class="sb-list-item__stat">@lang('tender.lot_status.' . $tender->status)</a>
                                     <a href="#" class="sb-list-item__comments">{{ $_tender->comments }}</a>
                                 </div>
                             </div>
