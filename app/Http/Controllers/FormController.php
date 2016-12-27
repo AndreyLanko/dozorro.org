@@ -122,6 +122,10 @@ class FormController extends BaseController
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
+        if(env('API_LOGIN') && env('API_PASSWORD')){
+            curl_setopt($ch, CURLOPT_USERPWD, env('API_LOGIN') . ":" . env('API_PASSWORD'));
+        }
+
         foreach($query as $k=>$q)
         {
             if(starts_with($q, ['procedure_t', 'procedure_p']))

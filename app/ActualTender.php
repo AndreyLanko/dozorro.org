@@ -58,19 +58,15 @@ class ActualTender extends Model
             }
         }
 
-        //$forms = JsonForm::whereIn('tender', $tender_ids)->get();
+        $forms = JsonForm::whereIn('tender', $tender_ids)->get();
 
         foreach ($tenders as $k => $tender) {
+            $tenders[$k]->comments = sizeof(array_where($forms, function($key, $form) use ($tender){
+                if(!empty($tender->data))
+                    $json=json_decode($tender->data);
 
-            /*
-            $tender =array_where($forms, function($key, $form) use ($tender){
-
-                return $form->tender==$tender->data->id;
-            });
-            */
-
-            $tenders[$k]->comments = JsonForm::getCommentsCount(['ids' => $tender_ids]);
-
+                return !empty($json) && $form->tender==$json->id;
+            }));
         }
 
         return $tenders;

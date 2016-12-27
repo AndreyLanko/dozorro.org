@@ -573,24 +573,28 @@ class PageController extends BaseController
 
         $header=get_headers($url)[0];
 
-        if(strpos($header, '200 OK')!==false)
-        {
+        //if(strpos($header, '200 OK')!==false)
+        //{
             $ch=curl_init();
     
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_URL, $url);
-    
+
+            if(env('API_LOGIN') && env('API_PASSWORD')){
+                curl_setopt($ch, CURLOPT_USERPWD, env('API_LOGIN') . ":" . env('API_PASSWORD'));
+            }
+
             $result=curl_exec($ch);
     
             curl_close($ch);
-        }
-        else
-        {
-            $result=json_encode([
-                'error' => $header
-            ], JSON_UNESCAPED_UNICODE);
-        }
+        //}
+        //else
+        //{
+        //    $result=json_encode([
+        //        'error' => $header
+        //    ], JSON_UNESCAPED_UNICODE);
+        //}
 
         if(isset($_GET['api']) && getenv('APP_ENV')=='local')
             dd(json_decode($result));

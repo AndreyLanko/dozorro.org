@@ -123,7 +123,7 @@ class JsonFormController extends BaseController
                 'locality' => (!empty($tender->procuringEntity->address->locality) ? $tender->procuringEntity->address->locality : ''),
             ],
             'title' => $tender->title,
-            'description' => $tender->description,
+            'description' => !empty($tender->description) ? $tender->description : '',
             'tenderID' => $tender->tenderID,
             'enquiryPeriod' => $tender->enquiryPeriod,
             'value' => $tender->value
