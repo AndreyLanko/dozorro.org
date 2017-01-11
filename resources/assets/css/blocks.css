@@ -571,7 +571,7 @@ body {
 .c-text .container > table,
 .c-text .container > blockquote {
 	width: 100%;
-	max-width: 800px;
+	max-width: 100%;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: left;
@@ -650,7 +650,7 @@ body {
 }
 .c-text table td:first-child,
 .c-text table th:first-child {
-	padding-left: 0;
+	/*padding-left: 0;*/
 	width: 140px;
 }
 .c-text table td:last-child,

@@ -30,7 +30,7 @@
                 <?php $main_article = $block->data['main_article']; ?>
     
                 @if($main_article)
-                    <div class="col-md-8 c-b__absolute-col c-b__sb-b-wrap">
+                    <div class="col-md-8 c-height c-b__sb-b-wrap">
                         <div class="sb-b">
                             <div class="sb-b__bgimg" style="background-image: url('{{ $main_article->photo() }}');"></div>
                             <a href="{{ route('page.blog.post', ['slug' => $main_article->slug]) }}" class="sb-b__link"></a>
