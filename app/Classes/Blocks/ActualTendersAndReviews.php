@@ -21,24 +21,7 @@ class ActualTendersAndReviews extends IBlock
         /**
          * @var array $tenders
          */
-        $tenders = ActualTender::limit($this->block->value->actual_tenders_limit)->orderBy('sort_order', 'asc')->get();
-        $tender_ids = [];
-
-        foreach ($tenders as $tender) {
-            $tender->data = json_decode($tender->data);
-
-            if(isset($tender->data)) {
-                array_push($tender_ids, $tender->data->id);
-            }
-        }
-        
-        $forms = JsonForm::whereIn('tender', $tender_ids)->get();
-        
-        foreach ($tenders as $tender) {
-            $tender->reviews=array_where($forms, function($key, $form) use ($tender){
-                return $form->tender==$tender->data->id;
-            });
-        }
+        $tenders = ActualTender::getAllActualTenders(['limit' => $this->block->value->actual_tenders_limit]);
 
         return $tenders;
     }
@@ -53,10 +36,21 @@ class ActualTendersAndReviews extends IBlock
          */
         $reviews = DB::table('perevorot_dozorro_review_rating')->limit($this->block->value->last_reviews_limit)->get();
         Carbon::setLocale('uk');
-        
-        foreach ($reviews as $review) {
+
+        $status=json_decode(file_get_contents('./sources/ua/status.json'), true);
+
+        foreach ($reviews as $k => $review) {
+
             $review->data = json_decode($review->data);
-            $review->data->last_review_date=new Carbon($review->data->last_review_date);
+            $review->data->status=!empty($status[$review->data->status]) ? $status[$review->data->status] : $review->data->status;
+
+            if(is_object($review->data) && isset($review->data->last_review_date)) {
+                $review->data->last_review_date = new Carbon($review->data->last_review_date);
+            }
+            else
+            {
+                unset($reviews[$k]);
+            }
         }
 
         return $reviews;

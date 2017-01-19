@@ -106,4 +106,28 @@ class JsonForm extends Model
     
         return array_get($data, 'properties.userForm.form.1.items.0.titleMap.' . $key);
     }
+
+    public static function getCommentsCount($params = [])
+    {
+        return JsonForm::
+            where('model', '=', 'comment')
+            ->byTenderIds(@$params['ids'])
+            ->count();
+    }
+
+    public static function getReviewsCount($params = [])
+    {
+        return JsonForm::
+            where('model', '!=', 'comment')
+            ->byTenderIds(@$params['ids'])
+            ->count();
+    }
+
+    public function scopebyTenderIds($query, $data)
+    {
+        if($data)
+        {
+            return $query->whereIn('tender', $data);
+        }
+    }
 }
