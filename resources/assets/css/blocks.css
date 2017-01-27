@@ -715,6 +715,9 @@ body {
 	line-height: 1.75;
 	color: rgba(0, 0, 0, 0.3);
 }
+body.index-page .c-text p {
+    max-width: 100%;
+}
 /* END c-text */
 
 /* c-twoc */

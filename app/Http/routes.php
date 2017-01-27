@@ -40,7 +40,10 @@ foreach($locales as $language)
         $pages = \App\Page::where('is_disabled', false)->get();
 
         foreach ($pages as $page) {
-            Route::get($page->url, 'PageController@page');
+            Route::get($page->url, [
+                'as' => $page->url=='/'?'homepage':'inside',
+                'uses' => 'PageController@page'
+            ]);
         }
 
         Route::get('/blog', [
