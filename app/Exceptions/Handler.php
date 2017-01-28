@@ -29,6 +29,8 @@ class Handler extends ExceptionHandler {
 	 */
 	public function report(Exception $e)
 	{
+    	return parent::report($e);
+
         $url=Request::url();
 
         Log::info(Request::method().' '.$url);
@@ -47,8 +49,6 @@ class Handler extends ExceptionHandler {
             
         Log::info($file.' ('.$line.')');
         Log::info($e->getMessage());
-
-		//return parent::report($e);
 	}
 
 	/**
