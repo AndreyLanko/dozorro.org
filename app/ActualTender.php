@@ -13,7 +13,7 @@ class ActualTender extends Model
         if(isset($this->data)) {
             $status=json_decode(file_get_contents('./sources/ua/status.json'), true);
 
-            $data=json_decode($this->data);
+            $data=json_decode($this->data)->items[0];
             $data->status=$status[$data->status];
             
             return $data;

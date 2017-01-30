@@ -42,6 +42,7 @@
   font-style:   normal;
   font-weight:  400;
 } 
+
 @font-face {
   font-family: 'ProximaNovaLight';
   src: url('/assets/fonts/proxima-nova-light/Proxima-Nova-Light.eot'); /* IE9 Compat Modes */
