@@ -1094,15 +1094,18 @@ body.index-page .c-text p {
 .c-a {
 	background-color: #f4f7f8;
 	padding-bottom: 60px;
+	padding-top: 10px;
 }
 .c-a h2 {
 	font-size: 18px;
 	margin: 0;
 	font-family: 'ProximaNovaBold';
 	padding-bottom: 10px;
+	color: #000
 }
 .c-a p {
 	font-size: 14px;
 	margin: 0;
 	padding: 10px 0;
+	color: #000;
 }
