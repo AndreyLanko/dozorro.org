@@ -1180,3 +1180,10 @@ $('body').click(function() {
         $('.c-find-form__input-group-transp').removeClass('is-focus');
     }
 });
+
+
+$(document).ready(function(){
+    $(".js-menu").on('click', function () {
+        $(this).next(".menu-header").slideToggle();
+    });
+});

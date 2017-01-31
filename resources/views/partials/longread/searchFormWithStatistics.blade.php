@@ -26,7 +26,7 @@
         @if(!empty($block->data['stats']) && ($block->data['stats']->tenders_sum !== '' || $block->data['stats']->violation_sum  !== '' || $block->data['stats']->comments !== '' || $block->data['stats']->reviews !== ''))
             <div class="row c-t__cards">
                 @if($block->data['stats']->tenders_sum !== '')
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-xs-6">
                         <div class="sb-t">
                             <div class="sb-t__row">
                                 <div class="sb-t__img">
@@ -46,7 +46,7 @@
                     </div>
                 @endif
                 @if($block->data['stats']->violation_sum !== '')
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-xs-6">
                         <div class="sb-t">
                             <div class="sb-t__row">
                                 <div class="sb-t__img">
@@ -66,7 +66,7 @@
                     </div>
                 @endif
                 @if($block->data['stats']->comments !== '')
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-xs-6">
                         <div class="sb-t">
                             <div class="sb-t__row">
                                 <div class="sb-t__img">
@@ -86,7 +86,7 @@
                     </div>
                 @endif
                 @if($block->data['stats']->reviews !== '')
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-xs-6">
                         <div class="sb-t">
                             <div class="sb-t__row">
                                 <div class="sb-t__img">

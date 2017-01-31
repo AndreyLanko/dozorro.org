@@ -50,6 +50,9 @@
                 @endif
 
                 <div class="c-header__nav-wrap nav-header">
+                    <div class="js-menu menu-icon">
+                        <span></span>
+                    </div>
                     @include('partials.menu', [
                         'menu' => $main_menu,
                         'depth' => 0,
