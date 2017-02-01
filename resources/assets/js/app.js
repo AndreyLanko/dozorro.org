@@ -1184,6 +1184,6 @@ $('body').click(function() {
 
 $(document).ready(function(){
     $(".js-menu").on('click', function () {
-        $(this).next(".menu-header").slideToggle();
+        $(this).toggleClass('open').next(".menu-header").slideToggle();
     });
 });
