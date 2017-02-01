@@ -158,8 +158,8 @@ textarea{
 
 .c-header .menu-icon {
 	cursor: pointer;
-	width: 28px;
-	height: 16px;
+	width: 40px;
+	height: 30px;
 	display: none;
 	position: relative;
 	float: right;
@@ -213,16 +213,18 @@ textarea{
 		content: "";
 		position: absolute;
 		left: 0;
-		background: #374048;
+		background: #e55166;
 		display: block;
-		width: 28px;
-		height: 3px;
-		border-radius: 3px;
+		width: 40px;
+		height: 2px;
+
 	}
 
 }
 
-
+.tender-tabs-wrapper{
+	z-index: 7!important;
+}
 
 @media screen and (max-width: 1200px) {
 	.container{
@@ -251,8 +253,11 @@ textarea{
 
 	.c-header .menu-icon{
 		display: block;
+		margin: 15px 15px 15px 0;
 		+ .menu-header{
 			display: none;
+			clear: both;
+
 		}
 	}
 
@@ -264,6 +269,49 @@ textarea{
 			}
 		}
 	}
+
+	.c-header .c-header__logo{
+
+		margin: 10px 0;
+		float: none;
+		display: block;
+		position: relative;
+		z-index: 10;
+	}
+
+	.c-header .c-header__nav-wrap{
+		float: none;
+		position: absolute;
+		width: 100%;
+		padding: 15px 0;
+		top: 0;
+		right: 0;
+		background: #fff;
+		z-index: 9;
+
+	}
+
+	.c-header{
+		position: relative;
+		border-bottom: 1px solid #ececec;
+		.container{
+
+		}
+		.c-header__nav-list li{
+			display: block;
+			padding: 0;
+			text-align: center;
+			border-bottom: 1px solid #ececec;
+			a{
+				display: inline-block;
+				padding: 15px 0 20px 0;
+			}
+
+		}
+	}
+
+
+
 }
 
 @media screen and (max-width: 959px) {
@@ -282,6 +330,13 @@ textarea{
 	}
 
 
+	.popup_wrapper{
+		width: calc(~"100vw - 40px")!important;
+		height: 400px!important;
+		.container{
+			width: auto;
+		}
+	}
 }
 
 @media screen and (max-width: 600px) {
@@ -326,5 +381,32 @@ textarea{
 		.c-blog__news-item{
 			width: 100%;
 		}
+	}
+
+	.reviews__item{
+		.reviews__footer{
+			> div{
+				float: none!important;
+				margin-bottom: 15px;
+				a{
+					display: inline-block;
+				}
+			}
+			> a{
+				float: none!important;
+
+			}
+		}
+
+		&.reviews__item--deep-2{
+			padding-left: 30px;
+		}
+	}
+}
+
+
+@media screen and (max-width: 400px){
+	.wrapper-main .tender-tabs__buttons li span{
+		padding: 15px 8px;
 	}
 }
