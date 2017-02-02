@@ -13,69 +13,72 @@
                 <p class="table-date">{{trans('tender.bids_open_time')}}: {{date('d.m.Y H:i', strtotime($item->tenderPeriod->endDate))}}</p>
             @endif
 
-            <table class="table table-striped margin-bottom small-text">
-                <thead>
-                    <tr>
-                        <th>{{trans('tender.bids_participant')}}</th>
-                        <th>{{trans('tender.bids_start_bid')}}</th>
-                        <th>{{trans('tender.bids_last_bid')}}</th>
-                        @if($item->__features_price<1)
-                            <th>{{trans('tender.bids_coef')}}</th>
-                            <th>{{trans('tender.bids_price')}}</th>
-                        @endif
-                        <th>{{trans('tender.bids_documents')}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($item->__bids as $k=>$bid)
+            <div class="overflow-table">
+
+                <table class="table table-striped margin-bottom small-text">
+                    <thead>
                         <tr>
-                            <td>
-                                @if(!empty($bid->tenderers[0]->identifier->legalName))
-                                    {{$bid->tenderers[0]->identifier->legalName}}
-                                @elseif(!empty($bid->tenderers[0]->name))
-                                    {{$bid->tenderers[0]->name}}
-                                @else
-                                    Учасник
-                                @endif
-                            </td>
-                            <td>
-                                @if(!empty($item->__initial_bids[$bid->id]))
-                                    {{str_replace('.00', '', number_format($item->__initial_bids[$bid->id], 2, '.', ' '))}}
-                                    <div class="td-small grey-light">{{$bid->value->currency}}{{$bid->value->valueAddedTaxIncluded?trans('tender.vat'):''}}</div>                                            
-                                @elseif(!empty($bid->value))
-                                    {{str_replace('.00', '', number_format($bid->value->amount, 2, '.', ' '))}} 
-                                    <div class="td-small grey-light">{{$bid->value->currency}}{{$bid->value->valueAddedTaxIncluded?trans('tender.vat'):''}}</div>                                            
-                                @elseif(!empty($item->bids_values[$k]->value))
-                                    {{str_replace('.00', '', number_format($item->bids_values[$k]->value->amount, 2, '.', ' '))}} 
-                                    <div class="td-small grey-light">{{$item->bids_values[$k]->value->currency}}{{$item->bids_values[$k]->value->valueAddedTaxIncluded?trans('tender.vat'):''}}</div>                                            
-                                @else
-                                    — 
-                                @endif
-                            </td>
-                            <td>
-                                @if(!empty($bid->value))
-                                    {{str_replace('.00', '', number_format($bid->value->amount, 2, '.', ' '))}} 
-                                    <div class="td-small grey-light">{{$bid->value->currency}}{{$bid->value->valueAddedTaxIncluded?trans('tender.vat'):''}}</div>
-                                @elseif(!empty($item->bids_values[$k]->value))
-                                    {{str_replace('.00', '', number_format($item->bids_values[$k]->value->amount, 2, '.', ' '))}} 
-                                    <div class="td-small grey-light">{{$item->bids_values[$k]->value->currency}}{{$item->bids_values[$k]->value->valueAddedTaxIncluded?trans('tender.vat'):''}}</div>                                            
-                                @endif
-                            </td>
+                            <th>{{trans('tender.bids_participant')}}</th>
+                            <th>{{trans('tender.bids_start_bid')}}</th>
+                            <th>{{trans('tender.bids_last_bid')}}</th>
                             @if($item->__features_price<1)
-                                <td>{{$bid->__featured_coef}}</td>
-                                <td class="1">{{$bid->__featured_price}}</td>
+                                <th>{{trans('tender.bids_coef')}}</th>
+                                <th>{{trans('tender.bids_price')}}</th>
                             @endif
-                            <td>
-                                @if(!empty($bid->documents))
-                                    <a href="" class="document-link" data-id="{{$bid->id}}">{{trans('tender.bids_documents')}}</a>
-                                @else
-                                    {{trans('tender.no_documents')}}
-                                @endif
-                            </td>
+                            <th>{{trans('tender.bids_documents')}}</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($item->__bids as $k=>$bid)
+                            <tr>
+                                <td>
+                                    @if(!empty($bid->tenderers[0]->identifier->legalName))
+                                        {{$bid->tenderers[0]->identifier->legalName}}
+                                    @elseif(!empty($bid->tenderers[0]->name))
+                                        {{$bid->tenderers[0]->name}}
+                                    @else
+                                        Учасник
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(!empty($item->__initial_bids[$bid->id]))
+                                        {{str_replace('.00', '', number_format($item->__initial_bids[$bid->id], 2, '.', ' '))}}
+                                        <div class="td-small grey-light">{{$bid->value->currency}}{{$bid->value->valueAddedTaxIncluded?trans('tender.vat'):''}}</div>
+                                    @elseif(!empty($bid->value))
+                                        {{str_replace('.00', '', number_format($bid->value->amount, 2, '.', ' '))}}
+                                        <div class="td-small grey-light">{{$bid->value->currency}}{{$bid->value->valueAddedTaxIncluded?trans('tender.vat'):''}}</div>
+                                    @elseif(!empty($item->bids_values[$k]->value))
+                                        {{str_replace('.00', '', number_format($item->bids_values[$k]->value->amount, 2, '.', ' '))}}
+                                        <div class="td-small grey-light">{{$item->bids_values[$k]->value->currency}}{{$item->bids_values[$k]->value->valueAddedTaxIncluded?trans('tender.vat'):''}}</div>
+                                    @else
+                                        —
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(!empty($bid->value))
+                                        {{str_replace('.00', '', number_format($bid->value->amount, 2, '.', ' '))}}
+                                        <div class="td-small grey-light">{{$bid->value->currency}}{{$bid->value->valueAddedTaxIncluded?trans('tender.vat'):''}}</div>
+                                    @elseif(!empty($item->bids_values[$k]->value))
+                                        {{str_replace('.00', '', number_format($item->bids_values[$k]->value->amount, 2, '.', ' '))}}
+                                        <div class="td-small grey-light">{{$item->bids_values[$k]->value->currency}}{{$item->bids_values[$k]->value->valueAddedTaxIncluded?trans('tender.vat'):''}}</div>
+                                    @endif
+                                </td>
+                                @if($item->__features_price<1)
+                                    <td>{{$bid->__featured_coef}}</td>
+                                    <td class="1">{{$bid->__featured_price}}</td>
+                                @endif
+                                <td>
+                                    @if(!empty($bid->documents))
+                                        <a href="" class="document-link" data-id="{{$bid->id}}">{{trans('tender.bids_documents')}}</a>
+                                    @else
+                                        {{trans('tender.no_documents')}}
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             <div class="overlay overlay-documents">
                 <div class="overlay-close overlay-close-layout"></div>
                 <div class="overlay-box">

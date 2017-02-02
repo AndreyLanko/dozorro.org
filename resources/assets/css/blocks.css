@@ -23,10 +23,11 @@ body {
 }
 .c-header__nav-list {
 	margin: 0;
+	padding-left: 20px;
 }
 .c-header__nav-list li {
 	display: inline-block;
-	padding: 0 33px;
+	padding: 0 10px;
 }
 .c-header__nav-list li a {
 	font-size: 14px;

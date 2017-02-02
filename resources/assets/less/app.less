@@ -162,7 +162,7 @@ textarea{
 	height: 30px;
 	display: none;
 	position: relative;
-	float: right;
+	float: left;
 	transition: 0.3s;
 
 	&.open{
@@ -226,6 +226,26 @@ textarea{
 	z-index: 7!important;
 }
 
+
+.c-header .user-name{
+	font-size: 14px;
+	color: #e55166;
+	font-family: 'ProximaNovaBold';
+	text-transform: uppercase;
+	padding: 25px 0;
+	float: right;
+
+}
+
+.tab-content {
+	display: none;
+	width: 100%;
+	&.active{
+		display: block;
+	}
+}
+
+
 @media screen and (max-width: 1200px) {
 	.container{
 		.sb-v h2{
@@ -253,13 +273,16 @@ textarea{
 
 	.c-header .menu-icon{
 		display: block;
-		margin: 15px 15px 15px 0;
+		margin: 15px 0 15px 15px;
 		+ .menu-header{
 			display: none;
 			clear: both;
 
+
 		}
 	}
+
+
 
 	.sb-s .row{
 		>div{
@@ -273,8 +296,13 @@ textarea{
 	.c-header .c-header__logo{
 
 		margin: 10px 0;
-		float: none;
+		//float: none;
 		display: block;
+		position: relative;
+		z-index: 101;
+	}
+
+	.c-header .user-name{
 		position: relative;
 		z-index: 101;
 	}
@@ -283,7 +311,7 @@ textarea{
 		float: none;
 		position: absolute;
 		width: 100%;
-		padding: 15px 0;
+		//padding: 15px 0;
 		top: 0;
 		right: 0;
 		background: #fff;
@@ -307,7 +335,21 @@ textarea{
 				padding: 15px 0 20px 0;
 			}
 
+			&.parent {
+				> a:after{
+					top: 22px;
+				}
+				.drop-menu{
+					display: block;
+					position: relative;
+					top: inherit;
+				}
+
+			}
+
 		}
+
+
 	}
 
 	.tender-header__review-button{
@@ -343,7 +385,11 @@ textarea{
 		}
 	}
 }
-
+@media screen and (max-width: 850px){
+	.c-header .c-header__logo{
+		margin-left: 40px;
+	}
+}
 @media screen and (max-width: 600px) {
 	.container{
 		.sb-s .row{
@@ -409,7 +455,24 @@ textarea{
 	}
 }
 
+@media screen and (max-width: 450px){
+	.c-header {
+		.c-header__logo{
+			margin: 10px auto;
+			float: none;
+		}
+		.user-name{
+			float: none;
+			padding: 0 0 10px;
+			text-align: center;
+		}
 
+		.menu-header{
+			padding: 20px 0;
+		}
+
+	}
+}
 @media screen and (max-width: 400px){
 	.wrapper-main .tender-tabs__buttons li span{
 		padding: 15px 8px;

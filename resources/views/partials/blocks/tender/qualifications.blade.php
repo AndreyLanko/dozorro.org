@@ -7,43 +7,45 @@
                 <div style="margin-top:-10px;margin-bottom:40px">Друкувати реєстр отриманих тендерних пропозицій <a href="{{('tender/'.$item->tenderID.'/print/qualifications/pdf')}}" target="_blank">PDF</a> ● <a href="{{('tender/'.$item->tenderID.'/print/qualifications/html')}}" target="_blank">HTML</a></div>
             @endif
 
-            <table class="table table-striped margin-bottom small-text">
-                <thead>
-                    <tr>
-                        <th>{{trans('tender.bids_participant')}}</th>
-                        <th>Документи</th>
-                        <th>Рішення</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($item->__qualifications as $qualification)
+            <div class="overflow-table">
+                <table class="table table-striped margin-bottom small-text">
+                    <thead>
                         <tr>
-                            <td>{{$qualification->__name}}</td>
-                            <td>
-                                @if(!empty($qualification->__bid_documents_public) || !empty($qualification->__bid_documents_confident))
-                                    <a href="" class="document-link" data-id="{{$qualification->id}}-bid">{{trans('tender.bids_documents')}}</a>
-                                @endif
-                            </td>
-                            <td>
-                                <div>
-                                    @if($item->status=='cancelled')
-                                        @if($qualification->eligible && $qualification->qualified)
-                                            Допущено до аукціону
-                                        @else
-                                            Відхилено
-                                        @endif
-                                    @else
-                                        {{trans('tender.qualification_status.'.$qualification->status)}}
-                                    @endif
-                                </div>
-                                @if(!empty($qualification->documents))
-                                    <a href="" class="document-link" data-id="{{$qualification->id}}-status">{{trans('tender.bids_documents')}}</a>
-                                @endif
-                            </td>
+                            <th>{{trans('tender.bids_participant')}}</th>
+                            <th>Документи</th>
+                            <th>Рішення</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($item->__qualifications as $qualification)
+                            <tr>
+                                <td>{{$qualification->__name}}</td>
+                                <td>
+                                    @if(!empty($qualification->__bid_documents_public) || !empty($qualification->__bid_documents_confident))
+                                        <a href="" class="document-link" data-id="{{$qualification->id}}-bid">{{trans('tender.bids_documents')}}</a>
+                                    @endif
+                                </td>
+                                <td>
+                                    <div>
+                                        @if($item->status=='cancelled')
+                                            @if($qualification->eligible && $qualification->qualified)
+                                                Допущено до аукціону
+                                            @else
+                                                Відхилено
+                                            @endif
+                                        @else
+                                            {{trans('tender.qualification_status.'.$qualification->status)}}
+                                        @endif
+                                    </div>
+                                    @if(!empty($qualification->documents))
+                                        <a href="" class="document-link" data-id="{{$qualification->id}}-status">{{trans('tender.bids_documents')}}</a>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             <div class="overlay overlay-documents">
                 <div class="overlay-close overlay-close-layout"></div>
                 <div class="overlay-box">

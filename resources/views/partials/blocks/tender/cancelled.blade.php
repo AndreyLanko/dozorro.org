@@ -1,5 +1,5 @@
 @if(in_array($item->status, ['cancelled', 'unsuccessful']))
-    <div class="row">
+    <div class="">
         <div class="container margin-bottom-xl">
             <div class="col-sm-9">
                 <h3>Інформація про відміну</h3>
