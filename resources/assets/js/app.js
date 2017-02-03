@@ -1186,4 +1186,8 @@ $(document).ready(function(){
     $(".js-menu").on('click', function () {
         $(this).toggleClass('open').next(".menu-header").slideToggle();
     });
+    $(".js-more").on('click', function () {
+        $(this).closest('tr').addClass('open');
+    });
+    
 });
