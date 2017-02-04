@@ -68,6 +68,9 @@ foreach($locales as $language)
     });
 }
 
+Route::get('/api/tender/{id}', 'ApiController@tender');
+
+
 Route::get('auth/{provider}', 'AuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'AuthController@handleProviderCallback');
 
