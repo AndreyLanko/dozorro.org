@@ -12,7 +12,7 @@
     @endforeach
 
 
-
+    {{--
     <div class="c-b">
         <div class="container">
             <div class="tender_customer">
@@ -284,6 +284,6 @@
         <div class="link_pagination">Завантажити ще 20</div>
 
     </div>
-
+    --}}
 
 @endsection

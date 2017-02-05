@@ -19,12 +19,15 @@ class ApiController extends Controller
                 'found'=>true,
                 'id'=>$id,
                 'tenderID'=>$json->tenderID,
+                'dozorro'=>[]
             ];
             
             foreach($db as $row)
             {
-                $data[$row->model.'Count']=$row->total;
-                $data['last'.ucfirst($row->model).'Date']=$row->date;
+                $date=new \Datetime($row->date);
+
+                $data['dozorro'][$row->model.'Count']=$row->total;
+                $data['dozorro']['last'.ucfirst($row->model).'Date']=$date->format(\DateTime::ATOM);
             }
         }
         else
