@@ -1189,5 +1189,9 @@ $(document).ready(function(){
     $(".js-more").on('click', function () {
         $(this).closest('tr').addClass('open');
     });
+
+    $(".js-filter-tender").on('click', function () {
+        $(this).next('form').slideToggle();
+    });
     
 });
