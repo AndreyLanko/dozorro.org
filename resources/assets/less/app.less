@@ -294,6 +294,9 @@ textarea{
 	.img-holder{
 		vertical-align: middle;
 		width: 200px;
+		&.mobile{
+			display: none;
+		}
 		img{
 
 			width: 100%;
@@ -309,6 +312,9 @@ textarea{
 	padding-top: 25px;
 	margin-bottom: 20px;
 	border-radius: 2px;
+	&.mobile{
+		display: none;
+	}
 	h4{
 		text-transform: uppercase;
 		margin-bottom: 15px;
@@ -497,6 +503,8 @@ textarea{
 			width: 170px;
 			padding: 0 12px;
 			box-sizing: border-box;
+
+			background: #fff;
 		}
 		#number_company{
 			width: 280px;
@@ -542,7 +550,10 @@ textarea{
 			border: 1px solid #c2c2c2;
 			background:  rgba(255, 255, 255, 0);
 			width: 170px;
-			padding: 7px 0 7px 10px;
+			padding: 7px 25px 7px 10px;
+			background: url('/assets/images/select.png') no-repeat calc(~'100% - 12px') center #fff;
+			background-size: 10px auto;
+			appearance: none;
 
 		}
 		#status_tender{
@@ -567,6 +578,22 @@ textarea{
 
 	.last{
 		display: none;
+	}
+
+	.filter_tender .form-group{
+		margin-right: 20px;
+		&:nth-child(3){
+			margin-right: 0;
+		}
+		&:nth-child(4){
+			margin-right: 20px;
+		}
+		select{
+			width: 200px;
+		}
+		#status_tender{
+			width: 170px;
+		}
 	}
 
 }
@@ -667,6 +694,58 @@ textarea{
 		right: inherit!important;
 	}
 
+
+
+	.filter_tender .form-group{
+		margin: 0 auto 30px;
+		display: block;
+		width: 100%;
+
+		span{
+			padding: 0 14px;
+		}
+
+		#number_company,
+		.input_number_tender input[type="text"],
+		input[type="text"], select, #status_tender,
+		button{
+			width: 100%;
+
+		}
+		.input_price_from,
+		.input_price_before {
+			width: calc(~"(100% - 40px)/2");
+		}
+	}
+
+	.tender_customer {
+		.info_tender_customer{
+			width: 100%;
+			display: block;
+		}
+		.img-holder{
+			display: none;
+			&.mobile{
+				display: block;
+				margin-bottom: 30px;
+
+			}
+		}
+
+	}
+
+	.list_tender_company{
+		display: none;
+		&.mobile{
+			display: block;
+			margin: 0 -15px 30px;
+			padding-top: 0;
+			table{
+				width: 100%;
+			}
+		}
+	}
+
 }
 
 @media screen and (max-width: 959px) {
@@ -695,9 +774,38 @@ textarea{
 }
 @media screen and (max-width: 850px){
 	.c-header .c-header__logo{
-		margin-left: 40px;
+		margin-left: 60px;
 	}
 }
+
+
+@media screen and (max-width: 768px){
+	.filter_tender{
+		background: none;
+		padding: 35px 0;
+		margin-bottom: 0;
+		border-radius: 0;
+		h4{
+			margin-top: 0;
+			margin-bottom: 0;
+			padding-right: 40px;
+			background: url('/assets/images/select.png') no-repeat calc(~'100% - 12px') center ;
+			background-size: 10px auto;
+			cursor: pointer;
+			span{
+				display: inline-block;
+				//padding-bottom: 5px;
+				border-bottom: 1px dotted #000;
+			}
+		}
+		form{
+			padding-top: 35px;
+			display: none;
+		}
+	}
+}
+
+
 @media screen and (max-width: 600px) {
 	.container{
 		.sb-s .row{

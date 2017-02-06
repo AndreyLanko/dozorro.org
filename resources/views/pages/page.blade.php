@@ -12,11 +12,14 @@
     @endforeach
 
 
-    {{--
+
     <div class="c-b">
         <div class="container">
             <div class="tender_customer">
                 <div class="inline-layout">
+                    <div class="img-holder mobile">
+                        <img src="assets/images/t-logo.svg" alt="title">
+                    </div>
                     <div class="info_tender_customer">
                         <h3>Центр обслуговування підрозділів Національної поліції України</h3>
                         <div class="info_customer">
@@ -42,7 +45,7 @@
 
 
             <div class="filter_tender">
-                <h4>ПОШУК ЗА ПАРАМЕТРАМИ</h4>
+                <h4 class="js-filter-tender"><span>ПОШУК ЗА ПАРАМЕТРАМИ</span></h4>
                 <form class="inline-layout">
 
                     <div class="form-group">
@@ -279,11 +282,76 @@
 
 
             </div>
+            <div class="list_tender_company mobile">
+
+                    <table>
+                        <tr>
+                            <th>Останній відгук</th>
+                            <th width="80%"><a class="order_up" href="#">ID тендера</a></th>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                5.02.17
+                            </td>
+                            <td>
+                                <a href="#">UA-2017-01-11-000511-b</a>
+                                <p>Апаратура електрична для проводового</p>
+                                <div class="link-more js-more">детальніше</div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                5.02.17
+                            </td>
+                            <td>
+                                <a href="#">UA-2017-01-11-000511-b</a>
+                                <p>Апаратура електрична для проводового</p>
+                                <div class="link-more js-more">детальніше</div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                5.02.17
+                            </td>
+                            <td>
+                                <a href="#">UA-2017-01-11-000511-b</a>
+                                <p>Апаратура електрична для проводового</p>
+                                <div class="link-more js-more">детальніше</div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                5.02.17
+                            </td>
+                            <td>
+                                <a href="#">UA-2017-01-11-000511-b</a>
+                                <p>Апаратура електрична для проводового</p>
+                                <div class="link-more js-more">детальніше</div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                5.02.17
+                            </td>
+                            <td>
+                                <a href="#">UA-2017-01-11-000511-b</a>
+                                <p>Апаратура електрична</p>
+                            </td>
+
+                        </tr>
+                    </table>
+
+            </div>
         </div>
 
         <div class="link_pagination">Завантажити ще 20</div>
 
     </div>
-    --}}
+
 
 @endsection
