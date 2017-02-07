@@ -68,6 +68,7 @@ foreach($locales as $language)
     });
 }
 
+Route::get('/api/tender', 'ApiController@tender_index');
 Route::get('/api/tender/{id}', 'ApiController@tender');
 
 
