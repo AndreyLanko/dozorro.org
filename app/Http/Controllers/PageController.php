@@ -262,7 +262,43 @@ class PageController extends BaseController
             $item->__is_first_month=date('j', $date)==1 ? Lang::get('months.'.date('n', $date)).', '.date('Y', $date) : false;
         }   
     }
-    
+
+    public function tenders(\Illuminate\Http\Request $request) {
+
+        $query = new App\JsonForm();
+
+        if($request->has('tid'))
+        {
+            $query = $query->where('tender_json', 'like', '%"tenderID":"'.$request->get('tid').'"%');
+        }
+        if($request->has('status'))
+        {
+            $query = $query->where('tender_json', 'like', '%"status":"'.$request->get('status').'"%');
+        }
+        if($request->has('customer'))
+        {
+            $query = $query->where('tender_json', 'like', '%"name":"'.$request->get('customerе ').'"%');
+        }
+
+        $tenders = $query
+            ->where('model', '=', 'form')
+            ->orderBy('date', 'DESC')
+            ->get();
+
+        $FormController=app('App\Http\Controllers\FormController');
+        $dataStatus=[];
+
+        foreach($FormController->get_status_data() as $one)
+            $dataStatus[$one['id']]=$one['name'];
+
+        $data = [
+            'tenders' => $tenders,
+            'dataStatus' => $dataStatus,
+        ];
+
+        return $this->render('pages/tenders', $data);
+    }
+
     public function tender($id)
     {
         $dataStatus=[];

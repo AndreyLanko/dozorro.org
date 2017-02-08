@@ -126,7 +126,8 @@ class JsonFormController extends BaseController
             'description' => !empty($tender->description) ? $tender->description : '',
             'tenderID' => $tender->tenderID,
             'enquiryPeriod' => $tender->enquiryPeriod,
-            'value' => $tender->value
+            'value' => $tender->value,
+            'status' => $tender->status,
         ], $this->json_options);
     }
 
