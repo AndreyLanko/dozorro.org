@@ -27,7 +27,9 @@
         5
     </td>
     <td>
-        {{ !empty($dataStatus[$item->status]) ? $dataStatus[$item->status] : $item->status }}
+        @if(isset($item->status))
+            {{ !empty($dataStatus[$item->status]) ? $dataStatus[$item->status] : $item->status }}
+        @endif
     </td>
     <td>
         <span>-</span>
