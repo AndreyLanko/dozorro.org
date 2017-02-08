@@ -24,6 +24,11 @@ foreach($locales as $language)
             'uses' => 'PageController@tender'
         ]);
 
+        Route::get('/tenders', [
+            'as' => 'page.tenders',
+            'uses' => 'PageController@tenders'
+        ]);
+
         Route::get('plan/{id}', 'PageController@plan');
 
         Route::post('form/data/{type}', 'FormController@data');

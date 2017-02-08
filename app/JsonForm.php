@@ -33,6 +33,17 @@ class JsonForm extends Model
      */
     private $comments = [];
 
+    public function get_tender_json()
+    {
+        if($this->tender_json) {
+            if($tender = json_decode($this->tender_json)) {
+                return !empty((array)$tender) ? $tender : null;
+            }
+        }
+
+        return null;
+    }
+
     /**
      * @return object
      */

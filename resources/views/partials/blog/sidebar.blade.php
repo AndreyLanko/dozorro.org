@@ -44,7 +44,7 @@
 
                     @foreach($tenders AS $_tender)
                         <?php $tender = $_tender->get_format_data(); ?>
-                        @if($tender)
+                        @if(isset($tender->tenderID))
                             <div class="sb-list-item">
                                 <div class="sb-list-item__row">
                                     <h2><a href="{{ route('page.tender_by_id', ['id' => $tender->tenderID]) }}">{{ $tender->title }}</a></h2>
