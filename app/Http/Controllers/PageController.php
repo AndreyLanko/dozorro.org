@@ -292,19 +292,22 @@ class PageController extends BaseController
         {
             $_cpv = $request->get('cpv');
 
-            if(is_numeric(str_replace('-', '', $_cpv))) {
-                $query = $query->where('cpv', 'like', '%'.$_cpv.'%');
-            } else {
+            if(!is_numeric(str_replace('-', '', $_cpv))) {
 
                 $CController = app('App\Http\Controllers\FormController');
-                $cpvs = json_decode($CController->get_cpv_data());
+                $cpvs = $CController->getCpv();
 
-                $cpv = array_where($cpvs, function($key, $name) use($_cpv){
-                    return $name == $_cpv || $key == $_cpv;
+                $cpv = array_where($cpvs, function($key, $ar) use($_cpv){
+                    return $ar['id'] == $_cpv || $ar['name'] == $_cpv;
                 });
 
-                $query = $query->where('cpv', 'like', '%'.current($cpv).'%');
+                if(!empty($cpv))
+                {
+                    $_cpv = current($cpv)['id'];
+                }
             }
+
+            $query = $query->where('cpv', 'like', '%'.$_cpv.'%');
         }
 
         $tenders = $query
