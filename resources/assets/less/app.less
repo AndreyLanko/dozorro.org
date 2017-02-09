@@ -1,6 +1,27 @@
 @import "vendor/bootstrap/bootstrap";
 @main-color: #e55166;
 
+@font-face {
+	font-family: "Gilroy-ExtraBold";
+	src: url("/assets/fonts/Gilroy-ExtraBold/Gilroy-ExtraBold.eot");
+	src: url("/assets/fonts/Gilroy-ExtraBold/Gilroy-ExtraBold.eot?#iefix") format("embedded-opentype"),
+	url("/assets/fonts/Gilroy-ExtraBold/Gilroy-ExtraBold.woff") format("woff"),
+	url("/assets/fonts/Gilroy-ExtraBold/Gilroy-ExtraBold.svg") format("svg"),
+	url("/assets/fonts/Gilroy-ExtraBold/Gilroy-ExtraBold.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: "Roboto-Regular";
+	src: url("/assets/fonts/Roboto-Regular/Roboto-Regular.eot");
+	src: url("/assets/fonts/Roboto-Regular/Roboto-Regular.eot?#iefix") format("embedded-opentype"),
+	url("/assets/fonts/Roboto-Regular/Roboto-Regular.woff") format("woff"),
+	url("/assets/fonts/Gilroy-ExtraBold/Gilroy-ExtraBold.svg") format("svg"),
+	url("/assets/fonts/Gilroy-ExtraBold/Gilroy-ExtraBold.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+}
 
 .nav-header {
 
@@ -257,6 +278,11 @@ textarea{
 		line-height: 1.42857143;
 	}
 
+	&.col-2{
+		> *{
+			width: 50%;
+		}
+	}
 
 
 }
@@ -562,7 +588,34 @@ textarea{
 	}
 }
 
-
+.block_customers_logo{
+	margin-top: 2px;
+	margin-bottom: 14px;
+	background: white;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	.title_block{
+		margin-bottom: 20px;
+	}
+	.all_customers{
+		text-align: right;
+		vertical-align: middle;
+		width: 20%;
+		font-family: "Roboto-Regular", sans-serif;
+	}
+	h3{
+		text-transform: uppercase;
+		color: #000;
+		font-size: 18px;
+		margin-bottom: 0;
+		line-height: 1em;
+		font-weight: 700;
+		font-family: "Gilroy-ExtraBold", sans-serif;
+		margin-top: 0;
+		vertical-align: middle;
+		width: 80%;
+	}
+}
 
 
 @media screen and (max-width: 1200px) {
@@ -740,6 +793,7 @@ textarea{
 			display: block;
 			margin: 0 -15px 30px;
 			padding-top: 0;
+
 			table{
 				width: 100%;
 			}
