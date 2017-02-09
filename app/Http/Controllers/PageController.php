@@ -266,24 +266,53 @@ class PageController extends BaseController
     public function tenders(\Illuminate\Http\Request $request) {
 
         $query = new App\JsonForm();
+        $query = $query
+            ->select('*', DB::raw('(Select COUNT(forms.id) from perevorot_dozorro_json_forms as forms where forms.tender = perevorot_dozorro_json_forms.tender) as reviews'))
+            ->where('model', '=', 'form');
 
+        if($request->has('price_from'))
+        {
+            $query = $query->where('price', '>=', $request->get('price_from'));
+        }
+        if($request->has('price_to'))
+        {
+            $query = $query->where('price', '<=', $request->get('price_to'));
+        }
         if($request->has('tid'))
         {
-            $query = $query->where('tender_json', 'like', '%"tenderID":"'.$request->get('tid').'"%');
+            $query = $query->where('tender_id', $request->get('tid'));
         }
-        if($request->has('status'))
+        if($request->has('edrpou'))
         {
-            $query = $query->where('tender_json', 'like', '%"status":"'.$request->get('status').'"%');
+            $query = $query->where('entity_id', $request->get('edrpou'));
+            $CController=app('App\Http\Controllers\CustomerController');
+            $customer = $CController->search($request);
         }
-        if($request->has('customer'))
+        if($request->has('cpv'))
         {
-            $query = $query->where('tender_json', 'like', '%"name":"'.$request->get('customerе ').'"%');
+            $_cpv = $request->get('cpv');
+
+            if(is_numeric(str_replace('-', '', $_cpv))) {
+                $query = $query->where('cpv', 'like', '%'.$_cpv.'%');
+            } else {
+
+                $CController = app('App\Http\Controllers\FormController');
+                $cpvs = json_decode($CController->get_cpv_data());
+
+                $cpv = array_where($cpvs, function($key, $name) use($_cpv){
+                    return $name == $_cpv || $key == $_cpv;
+                });
+
+                $query = $query->where('cpv', 'like', '%'.current($cpv).'%');
+            }
         }
 
         $tenders = $query
-            ->where('model', '=', 'form')
             ->orderBy('date', 'DESC')
+            ->groupBy('tender')
             ->get();
+
+        //dd($tenders);
 
         $FormController=app('App\Http\Controllers\FormController');
         $dataStatus=[];
@@ -294,6 +323,7 @@ class PageController extends BaseController
         $data = [
             'tenders' => $tenders,
             'dataStatus' => $dataStatus,
+            'customer' => isset($customer) ? $customer : false,
         ];
 
         return $this->render('pages/tenders', $data);

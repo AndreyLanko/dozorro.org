@@ -99,6 +99,20 @@ class JsonFormController extends BaseController
                     $form->object_id=$this->hash_id($form->payload);
                     $form->entity_id=!empty($tender->procuringEntity->identifier->id) ? $tender->procuringEntity->identifier->id : null;
                     $form->tender_json=$this->getTenderJson($tender);
+                    $form->price = $tender->value->amount;
+
+                    if(isset($tender->items) && !empty($tender->items)) {
+
+                        $cpvs = [];
+
+                        foreach ($tender->items AS $item) {
+                            $cpvs[] = $item->classification->id;
+                        }
+
+                        if(!empty($cpvs)) {
+                            $form->cpv = implode(',', $cpvs);
+                        }
+                    }
 
                     $form->save();
                 }
