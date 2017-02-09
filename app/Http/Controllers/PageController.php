@@ -284,9 +284,17 @@ class PageController extends BaseController
         }
         if($request->has('edrpou'))
         {
-            $query = $query->where('entity_id', $request->get('edrpou'));
-            $CController=app('App\Http\Controllers\CustomerController');
+            $CController = app('App\Http\Controllers\CustomerController');
             $customer = $CController->search($request);
+
+            $edrpos[] = $request->get('edrpou');
+
+            if($_es = App\Customer::where('title', current($customer))->first()) {
+                $_es = explode("\n", str_replace("\r", '', trim($_es->edrpou)));
+                $edrpos = array_merge($edrpos, $_es);
+            }
+
+            $query = $query->whereIn('entity_id', $edrpos);
         }
         if($request->has('cpv'))
         {
