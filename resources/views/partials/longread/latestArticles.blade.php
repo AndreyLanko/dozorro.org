@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                             <div class="sb-b__bottom-row">
-                                <div class="sb-b__date">@datetime($main_article->published_at)</div>{{--<a href="#comments" class="sb-b__commtents">0</a>--}}
+                                <div class="sb-b__date">@datetime($main_article->published_at)</div><span class="sb-b__commtents">0</span>
                             </div>
                         </div>
                     </div>
