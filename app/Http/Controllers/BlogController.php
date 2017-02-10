@@ -28,9 +28,9 @@ class BlogController extends BaseController
 
     public function index($tag = null, $author = null)
     {
-        $posts = $this->blog->getPublishedPosts(['tag' => $tag, 'author' => $author, 'is_main' => false]);
+        $posts = $this->blog->getPublishedPosts(['tag' => $tag, 'author' => $author, 'is_main' => false, 'type' => Blog::TYPE_BLOG]);
         $main = $this->blog->getPublishedPosts(['limit' => 1, 'is_main' => true]);
-        $latest_posts = $this->blog->getPublishedPosts(['limit' => 3]);
+        $latest_posts = $this->blog->getPublishedPosts(['limit' => 3, 'type' => Blog::TYPE_NEWS]);
         $tenders = ActualTender::getAllActualTenders(['limit' => 3]);
 
         return $this->render('pages/blog/index', [
@@ -60,7 +60,7 @@ class BlogController extends BaseController
         $blocks = (array) json_decode($post->{'longread_' . $locale});
         $blocks = new App\Classes\Longread($blocks, $post->id, $this->blog->backendNamespace);
 
-        $latest_posts = $this->blog->getPublishedPosts(['limit' => 3]);
+        $latest_posts = $this->blog->getPublishedPosts(['limit' => 3, 'type' => Blog::TYPE_NEWS]);
         $banner = $this->blog->getPublishedPosts(['limit' => 1, 'is_main' => true]);
         $tenders = ActualTender::getAllActualTenders(['limit' => 3]);
 

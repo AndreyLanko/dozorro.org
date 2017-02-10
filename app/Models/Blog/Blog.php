@@ -12,6 +12,9 @@ use App\Helpers;
  */
 class Blog extends Model
 {
+    CONST TYPE_BLOG = 1;
+    CONST TYPE_NEWS = 2;
+
     /**
      * @var string
      */
@@ -40,6 +43,14 @@ class Blog extends Model
     public function scopeIsEnabled($query)
     {
         return $query->where($this->table . '.is_enabled', true);
+    }
+
+    public function scopebyType($query, $data)
+    {
+        if($data)
+        {
+            return $query->where($this->table . '.type', $data);
+        }
     }
 
     public function scopeIsMain($query, $data)
@@ -111,6 +122,7 @@ class Blog extends Model
             ->isEnabled()
             ->isMain(@$params['is_main'])
             ->byTag(@$params['tag'])
+            ->byType(@$params['type'])
             ->byAuthor(@$params['author'])
             ->byLimit(@$params['limit']);
     }

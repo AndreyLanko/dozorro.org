@@ -21,7 +21,7 @@ class LatestArticles extends IBlock
         /**
          * @var array $tenders
          */
-        $articles = $this->blog->getPublishedPosts(['limit' => $this->block->value->articles_limit]);
+        $articles = $this->blog->getPublishedPosts(['limit' => $this->block->value->articles_limit, 'type' => Blog::TYPE_NEWS]);
 
         return $articles;
     }
