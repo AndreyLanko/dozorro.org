@@ -19,7 +19,17 @@ class CustomerController extends Controller
         $result = array();
 
         foreach ($customers as $key => $customer){
-            if(stripos($customer, $request->get('query')) === false || count($result) === 20){
+
+            if($request->has('edrpou')) {
+                if($request->get('edrpou') != $key) {
+                    continue;
+                } else {
+                    return [
+                        'value' => $customer,
+                        'key' => $key,
+                    ];
+                }
+            } else if (stripos($customer, $request->get('query')) === false || count($result) === 20) {
                 continue;
             }
 

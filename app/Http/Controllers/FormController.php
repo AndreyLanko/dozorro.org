@@ -255,6 +255,11 @@ class FormController extends BaseController
         ], JSON_UNESCAPED_UNICODE);
     }
 
+    public function getCpv()
+    {
+        return $this->get_cpv_data();
+    }
+
     public function data($type=false)
     {
         $out=false;

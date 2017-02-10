@@ -3,7 +3,7 @@
         @tenderdate($tender->date)
     </td>
     <td>
-        <a href="#">{{ $item->tenderID }}</a>
+        <a href="/tender/{{ $item->tenderID }}">{{ $item->tenderID }}</a>
         <p>{{ $item->title }}</p>
         @if(mb_strlen($item->title) > 50)
             <div class="link-more js-more">@lang('tenders.result.show_all_text')</div>
@@ -24,7 +24,7 @@
         {{ number_format($item->value->amount, 0, '', ' ') . ' ' . $item->value->currency }}
     </td>
     <td>
-        5
+        {{ $tender->reviews }}
     </td>
     <td>
         @if(isset($item->status))
