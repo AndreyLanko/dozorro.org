@@ -17,7 +17,10 @@
                     <h2><a href="{{ route('page.blog.post', ['slug' => $article->slug]) }}">{{ $article->title }}</a></h2>
                 </div>
                 <div class="sb-new-card__row">
-                    <div class="sb-new-card__date">@datetime($article->published_at)?</div>
+                    <div class="sb-new-card__date">@datetime($article->published_at)</div>
+                    <span class="sb-new-card__comments">5</span>
+                    <span class="sb-new-card__like">+821</span>
+                    {{--<span class="sb-new-card__dislike">-30</span>--}}
                 </div>
             </div>
         </div>

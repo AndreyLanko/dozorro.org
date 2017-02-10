@@ -1,5 +1,5 @@
 body {
-	font-family: 'ProximaNova';
+	font-family: "Roboto-Regular", sans-serif;
 }
 /* c-header */
 .c-header { 
@@ -7,8 +7,8 @@ body {
 }
 .c-header__logo {
 	display: block;
-    width: 160px;
-    height: 40px;
+    width: 158px;
+    height: 34px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -19,7 +19,7 @@ body {
 }
 .c-header__nav-wrap {
 	float: right;
-	padding-right: 20px;
+	/*padding-right: 20px;*/
 }
 .c-header__nav-list {
 	margin: 0;
@@ -30,25 +30,25 @@ body {
 	padding: 0 10px;
 }
 .c-header__nav-list li a {
-	font-size: 14px;
-	color: black;
-	font-family: 'ProximaNovaBold';
-	text-transform: uppercase;
+	font-size: 16px;
+	color: #000;
+	font-family: "Roboto-Regular", sans-serif;
+	/*text-transform: uppercase;*/
 	/* padding: 43px 0 48px 0; */
 	padding: 20px 0 25px 0;
 	display: block;
-	border-top: 5px solid rgba(229, 81, 102, 0);
+	border-top: 4px solid rgba(229, 81, 102, 0);
 	box-sizing: border-box;
 	transition: all 0.1s;
 }
 .c-header__nav-list li a.is-active {
-	border-top: 5px solid rgba(229, 81, 102, 1);
-	color: rgba(0, 0, 0, 0.3);
+	border-top: 4px solid rgba(229, 81, 102, 1);
+	/*color: rgba(0, 0, 0, 0.3);*/
 }
 .c-header__nav-list li a:hover {
 	text-decoration: none;
-	border-top: 5px solid rgba(229, 81, 102, 1);
-	color: rgba(0, 0, 0, 0.7);
+	border-top: 4px solid rgba(229, 81, 102, 1);
+	/*color: rgba(0, 0, 0, 0.7);*/
 	transition: all 0.3s;
 }
 .c-header__nav-list li a:active,.c-header__nav-list li a:focus {
@@ -921,11 +921,12 @@ body.index-page .c-text p {
     padding-right: 25px;
 }
 .c-list-card__header {
-	margin: 0;
+	margin-top: 0;
 	text-transform: uppercase;
 	font-size: 18px;
-	font-family: 'ProximaNovaBold';
-	margin-bottom: 8px;
+	font-family: "Gilroy-ExtraBold", sans-serif;
+	margin-bottom: 20px;
+	color: #000;
 }
 .c-list-card__link-wrap {
 	padding-top: 8px;
@@ -1100,7 +1101,7 @@ body.index-page .c-text p {
 .c-a h2 {
 	font-size: 18px;
 	margin: 0;
-	font-family: 'ProximaNovaBold';
+	font-family: "Roboto-Medium", sans-serif;
 	padding-bottom: 10px;
 	color: #000
 }

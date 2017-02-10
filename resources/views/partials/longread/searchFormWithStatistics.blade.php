@@ -23,90 +23,104 @@
             </div>
         </form>
 
-        @if(!empty($block->data['stats']) && ($block->data['stats']->tenders_sum !== '' || $block->data['stats']->violation_sum  !== '' || $block->data['stats']->comments !== '' || $block->data['stats']->reviews !== ''))
-            <div class="row c-t__cards">
-                @if($block->data['stats']->tenders_sum !== '')
-                    <div class="col-md-3 col-xs-6">
-                        <div class="sb-t">
-                            <div class="sb-t__row">
-                                <div class="sb-t__img">
-                                    <img src="/assets/images/c-t/d/c-t-a.png">
-                                </div>
-                            </div>
-                            <div class="sb-t__row">
-                                <div class="sb-t__c">{{ $block->data['stats']->tenders_sum }}<div class="sb-t__ca">{{ $block->data['stats']->tenders_sum_text }}</div></div>
-                            </div>
-                            <div class="sb-t__row">
-                                <div class="sb-t__d">Ризикуємо втратити</div>
-                            </div>
-                            {{--<div class="sb-t__row">
-                                <a href="#" class="sb-t__button">@lang('search.best_company')</a>
-                            </div>--}}
-                        </div>
-                    </div>
-                @endif
-                @if($block->data['stats']->violation_sum !== '')
-                    <div class="col-md-3 col-xs-6">
-                        <div class="sb-t">
-                            <div class="sb-t__row">
-                                <div class="sb-t__img">
-                                    <img src="/assets/images/c-t/d/c-t-b.png">
-                                </div>
-                            </div>
-                            <div class="sb-t__row">
-                                <div class="sb-t__c">{{ $block->data['stats']->violation_sum }}<div class="sb-t__ca">{{ $block->data['stats']->violation_sum_text }}</div></div>
-                            </div>
-                            <div class="sb-t__row">
-                                <div class="sb-t__d">Сумнівних тендерів</div>
-                            </div>
-                            {{--<div class="sb-t__row">
-                                <a href="#" class="sb-t__button">@lang('search.bad_company')</a>
-                            </div>--}}
-                        </div>
-                    </div>
-                @endif
-                @if($block->data['stats']->comments !== '')
-                    <div class="col-md-3 col-xs-6">
-                        <div class="sb-t">
-                            <div class="sb-t__row">
-                                <div class="sb-t__img">
-                                    <img src="/assets/images/c-t/d/c-t-c.png">
-                                </div>
-                            </div>
-                            <div class="sb-t__row">
-                                <div class="sb-t__c">{{ $block->data['stats']->comments }}</div>
-                            </div>
-                            <div class="sb-t__row">
-                                <div class="sb-t__d">@lang('search.comments')</div>
-                            </div>
-                            {{--<div class="sb-t__row">
-                                <a href="#" class="sb-t__button">@lang('search.more_comments')</a>
-                            </div>--}}
-                        </div>
-                    </div>
-                @endif
-                @if($block->data['stats']->reviews !== '')
-                    <div class="col-md-3 col-xs-6">
-                        <div class="sb-t">
-                            <div class="sb-t__row">
-                                <div class="sb-t__img">
-                                    <img src="/assets/images/c-t/d/c-t-d.png">
-                                </div>
-                            </div>
-                            <div class="sb-t__row">
-                                <div class="sb-t__c">{{ $block->data['stats']->reviews }}</div>
-                            </div>
-                            <div class="sb-t__row">
-                                <div class="sb-t__d">@lang('search.reviews')</div>
-                            </div>
-                            {{--<div class="sb-t__row">
-                                <a href="#" class="sb-t__button">@lang('search.popular_tenders')</a>
-                            </div>--}}
-                        </div>
-                    </div>
-                @endif
-            </div>
-        @endif
+
     </div>
     <div class="c-t__bgimg" style="background-image: url('/assets/images/c-t/c/c-t-bgimg.jpg');"></div>
 </div>
+
+
+
+
+@if(!empty($block->data['stats']) && ($block->data['stats']->tenders_sum !== '' || $block->data['stats']->violation_sum  !== '' || $block->data['stats']->comments !== '' || $block->data['stats']->reviews !== ''))
+    <div class="block_statistic">
+        <div class="container">
+            <div class="row ">
+                @if($block->data['stats']->tenders_sum !== '')
+                    <div class="col-md-3 col-xs-6 item">
+
+                            <div class="img-holder">
+                                <img src="/assets/images/icon/icon-statistic1.png">
+                            </div>
+                            <div class="text_statistic">
+                                <div class="number_statistic">
+                                    <span>{{ $block->data['stats']->tenders_sum }}</span>
+                                    @if($block->data['stats']->tenders_sum_text !== '')
+                                        <span class="comment_statistic">{{ $block->data['stats']->tenders_sum_text }}</span>
+                                    @endif
+                                </div>
+
+                                <div class="name_statistic">Ризикуємо втратити</div>
+                            </div>
+
+
+                            {{--<div class="sb-t__row">
+                                <a href="#" class="sb-t__button">@lang('search.best_company')</a>
+                            </div>--}}
+
+                    </div>
+                @endif
+                @if($block->data['stats']->violation_sum !== '')
+                    <div class="col-md-3 col-xs-6 item">
+
+                        <div class="img-holder">
+                            <img src="/assets/images/icon/icon-statistic2.png">
+                        </div>
+                        <div class="text_statistic">
+                            <div class="number_statistic">
+                                <span>{{ $block->data['stats']->violation_sum }}</span>
+                                @if($block->data['stats']->violation_sum_text !== '')
+                                    <span class="comment_statistic">{{ $block->data['stats']->violation_sum_text }}</span>
+                                @endif
+                            </div>
+
+                            <div class="name_statistic">Ризикуємо втратити</div>
+                        </div>
+
+                        {{--<div class="sb-t__row">
+                            <a href="#" class="sb-t__button">@lang('search.best_company')</a>
+                        </div>--}}
+
+                    </div>
+                @endif
+                @if($block->data['stats']->comments !== '')
+                    <div class="col-md-3 col-xs-6 item">
+
+                        <div class="img-holder">
+                            <img src="/assets/images/icon/icon-statistic3.png">
+                        </div>
+                        <div class="text_statistic">
+                            <div class="number_statistic">
+                                <span>{{ $block->data['stats']->comments }}</span>
+                            </div>
+
+                            <div class="name_statistic">@lang('search.comments')</div>
+                        </div>
+                        {{--<div class="sb-t__row">
+                            <a href="#" class="sb-t__button">@lang('search.best_company')</a>
+                        </div>--}}
+
+                    </div>
+                @endif
+                @if($block->data['stats']->reviews !== '')
+                    <div class="col-md-3 col-xs-6 item">
+
+                        <div class="img-holder">
+                            <img src="/assets/images/icon/icon-statistic4.png">
+                        </div>
+                        <div class="text_statistic">
+                            <div class="number_statistic">
+                                <span>{{ $block->data['stats']->reviews }}</span>
+                            </div>
+
+                            <div class="name_statistic">@lang('search.reviews')</div>
+                        </div>
+                        {{--<div class="sb-t__row">
+                            <a href="#" class="sb-t__button">@lang('search.best_company')</a>
+                        </div>--}}
+
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+@endif
