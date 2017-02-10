@@ -21,7 +21,7 @@ class ArticlesList extends IBlock
         /**
          * @var array $tenders
          */
-        $articles = $this->blog->getPublishedPosts(['limit' => $this->block->value->articles_limit]);
+        $articles = $this->blog->getPublishedPosts(['limit' => $this->block->value->articles_limit, 'type' => Blog::TYPE_BLOG]);
 
         return $articles;
     }
