@@ -39,21 +39,21 @@
 
                 <div class="form-group">
                     <label for="number_tender">@lang('tenders.form.number')</label>
-                    <div class="input_number_tender"><input type="text" id="number_tender" name="tid" placeholder="@lang('tenders.number_placeholder')"></div>
+                    <div class="input_number_tender"><input value="{{ app('request')->input('tid') }}" type="text" id="number_tender" name="tid" placeholder="@lang('tenders.number_placeholder')"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="">@lang('tenders.form.sum')</label>
                     <div class="inline-layout">
-                        <div class="input_price_from"><input type="text" id="price_from" name="price_from" placeholder=""></div>
+                        <div class="input_price_from"><input value="{{ app('request')->input('price_from') }}" type="text" id="price_from" name="price_from" placeholder=""></div>
                         <span>—</span>
-                        <div class="input_price_before"><input type="text" id="price_before" name="price_before" placeholder=""></div>
+                        <div class="input_price_before"><input value="{{ app('request')->input('price_to') }}" type="text" id="price_before" name="price_to" placeholder=""></div>
                     </div>
 
                 </div>
                 <div class="form-group">
-                    <label for="number_company">@lang('tenders.form.customer')</label>
-                    <input type="text" id="number_company" name="customer" placeholder="@lang('tenders.form.customer_placeholder')">
+                    <label for="tender-customer">@lang('tenders.form.customer')</label>
+                    <input value="{{ $customer ? $customer['value'] : '' }}" id="tender-customer" type="text" name="edrpou" class="jsGetInputVal" autocomplete="off" placeholder="@lang('tenders.form.customer_placeholder')" data-js="customer_search">
                 </div>
                 <div class="form-group">
                     <label for="">@lang('tenders.form.violation')</label>
@@ -68,14 +68,14 @@
                     <select id="status_tender" name="status">
                         <option value="">@lang('tenders.form.status_choose')</option>
                         @foreach($dataStatus as $id => $status)
-                            <option value="{{ $id }}">{{ $status }}</option>
+                            <option @if(app('request')->input('status') == $id) selected @endif value="{{ $id }}">{{ $status }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="object_tender">@lang('tenders.form.subject')</label>
-                    <input type="text" id="object_tender" name="object_tender" placeholder="">
+                    <input value="{{ app('request')->input('cpv') }}" type="text" id="object_tender" name="cpv" placeholder="">
                 </div>
                 <div class="form-group">
                     <button>@lang('tenders.form.submit')</button>
